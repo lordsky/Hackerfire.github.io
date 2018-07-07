@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/STRIDE.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/DEREAD.PNG">
-<meta property="og:updated_time" content="2018-07-07T02:34:59.676Z">
+<meta property="og:updated_time" content="2018-07-07T02:46:42.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web安全观">
 <meta name="twitter:description" content="安全学习如同武学修行，思维同于心法，技术似于招式，攻防方法层出不穷，千变万化，唯安全本质不离其宗，如何深刻理解安全，以何种思维去思索，看待安全问题，似乎是一次无止境的探索旅行，追随前辈的步伐，于古卷秘笈中窥知一二">
@@ -371,57 +371,48 @@
 <p>安全学习如同武学修行，思维同于心法，技术似于招式，攻防方法层出不穷，千变万化，唯安全本质不离其宗，如何深刻理解安全，以何种思维去思索，看待安全问题，似乎是一次无止境的探索旅行，追随前辈的步伐，于古卷秘笈中窥知一二<br><a id="more"></a></p>
 </blockquote>
 <hr>
-<h2 id="0x01-信息安全速览"><a href="#0x01-信息安全速览" class="headerlink" title="0x01 信息安全速览"></a>0x01 信息安全速览</h2><h3 id="关于安全的定义"><a href="#关于安全的定义" class="headerlink" title="关于安全的定义"></a>关于安全的定义</h3><ul>
-<li><strong>理想化定义</strong></li>
-</ul>
-<p>如果系统能按照既定的方式完成任务，不做额外的事情，那这套系统就是安全的&lt;现实中似乎无法实现&gt;</p>
+<h2 id="0x01-信息安全速览"><a href="#0x01-信息安全速览" class="headerlink" title="0x01 信息安全速览"></a>0x01 信息安全速览</h2><h3 id="关于安全的定义"><a href="#关于安全的定义" class="headerlink" title="关于安全的定义"></a>关于安全的定义</h3><p><strong>理想化定义</strong></p>
 <ul>
-<li><p><strong>Bell-La padula security model</strong></p>
-<p>当且仅当系统开始于安全的状态，而且一直不会落入非安全状态，它才是安全的&lt;学术界知名规范，现实工程世界依旧无法实现&gt;</p>
-</li>
-<li><p><strong>真实世界状况</strong></p>
-</li>
+<li>如果系统能按照既定的方式完成任务，不做额外的事情，那这套系统就是安全的&lt;现实中似乎无法实现&gt;</li>
 </ul>
+<p><strong>Bell-La padula security model</strong></p>
+<ul>
+<li>当且仅当系统开始于安全的状态，而且一直不会落入非安全状态，它才是安全的&lt;学术界知名规范，现实工程世界依旧无法实现&gt;</li>
+</ul>
+<p><strong>真实世界状况</strong></p>
 <p>（1）对一个足够复杂的计算机系统来说，没有办法定义什么是正确的行为</p>
 <p>（2）美好的想法无法自动转化成规范的约束条件</p>
 <p>（3）很难令人信服地分析软件的行为</p>
+<p><strong>Naval Research Lab定义</strong></p>
 <ul>
-<li><strong>Naval Research Lab定义</strong></li>
+<li>如果系统在处理信息时恰当地保护了数据，使其不会产生为授权的泄露，未授权的篡改以及能抵抗未授权的大规模压力，那系统就是安全的</li>
 </ul>
-<p>  如果系统在处理信息时恰当地保护了数据，使其不会产生为授权的泄露，未授权的篡改以及能抵抗未授权的大规模压力，那系统就是安全的</p>
+<p><strong>结论思索</strong></p>
 <ul>
-<li><p><strong>结论思索</strong></p>
-<p>似乎无论如何去定义，总是很难系统而全面地理解和评估现实世界中的软件安全性，安全是一个动态的，发展的，不断变化的过程，只要存在于真实世界中，就会出现问题，就会存在漏洞，唯一不变的就是变化，如何预见，应对变化比安全问题本身重要而更有价值<strong>-&gt;进入风险管理</strong></p>
-</li>
+<li>似乎无论如何去定义，总是很难系统而全面地理解和评估现实世界中的软件安全性，安全是一个动态的，发展的，不断变化的过程，只要存在于真实世界中，就会出现问题，就会存在漏洞，唯一不变的就是变化，如何预见，应对变化比安全问题本身重要而更有价值<strong>-&gt;进入风险管理</strong></li>
 </ul>
-<h3 id="进入风险管理"><a href="#进入风险管理" class="headerlink" title="进入风险管理"></a>进入风险管理</h3><ul>
-<li><p><strong>引用背景</strong></p>
-<p>漏洞必然存在，根据目标安排优先级，试图以数字量化真实世界安全问题的代价</p>
-</li>
-<li><p><strong>风险 = 出现问题的可能性 X 最大损失</strong></p>
-</li>
-<li><p><strong>认识误区</strong></p>
-<p>不到位的措施只要被条理化了就能变得更合理，不足的金钱投入再加上风险管理，就能和充足的安全投入达到相似的安全成效</p>
-</li>
-<li><p><strong>正确认识</strong></p>
-</li>
+<h3 id="进入风险管理"><a href="#进入风险管理" class="headerlink" title="进入风险管理"></a>进入风险管理</h3><p><strong>引用背景</strong></p>
+<ul>
+<li>漏洞必然存在，根据目标安排优先级，试图以数字量化真实世界安全问题的代价</li>
 </ul>
+<p><strong>风险 = 出现问题的可能性 X 最大损失</strong></p>
+<p><strong>认识误区</strong></p>
+<ul>
+<li>不到位的措施只要被条理化了就能变得更合理，不足的金钱投入再加上风险管理，就能和充足的安全投入达到相似的安全成效</li>
+</ul>
+<p><strong>正确认识</strong></p>
 <p>（1）在互联网的系统里，损失是没有上限的，范围也不会只固定在单个设备上</p>
 <p>（2）健康系统的贡献实际上弥补不了系统被入侵后的非经济损失</p>
 <p>（3）现有的数据对日后的风险也许完全没有意义</p>
 <p>（4）基于统计数据的预测对独立事件来说并不值得</p>
-<h3 id="分类学的启发"><a href="#分类学的启发" class="headerlink" title="分类学的启发"></a>分类学的启发</h3><ul>
-<li><strong>上述思想学派相通之处</strong></li>
-</ul>
-<p>把安全问题分解为若干可计算的目标，由此得到一套统一的安全体系理论或一套能接受的风险管理模型，进而抽象出一些经过优化的底层行为，然后借此设计出完美的应用</p>
+<h3 id="分类学的启发"><a href="#分类学的启发" class="headerlink" title="分类学的启发"></a>分类学的启发</h3><p><strong>上述思想学派相通之处</strong></p>
 <ul>
-<li><strong>CWE理念-自然科学运用</strong></li>
+<li>把安全问题分解为若干可计算的目标，由此得到一套统一的安全体系理论或一套能接受的风险管理模型，进而抽象出一些经过优化的底层行为，然后借此设计出完美的应用</li>
 </ul>
+<p><strong>CWE-自然科学运用</strong></p>
 <p>（1）通过收集足够多的实验数据进行底层抽象，对日益复杂的规律进行观察，重组和记录，以期获得某种安全运算的统一模型</p>
 <p>（2）创建一套统一的漏洞理论，以改进对软件缺陷的研究，建模和分类；提供一套通用对话语言，以便于讨论，挖掘和处理软件安全漏洞的成因</p>
-<ul>
-<li><strong>CVSS流派</strong></li>
-</ul>
+<p><strong>CVSS-自然科学运用</strong></p>
 <p>（1）用一套只有机器能读懂的基本参数，精确量化已知的安全问题</p>
 <p>（2）通过多项评估因子，根据不同的应用场景，严谨地对潜在漏洞的重要程度打分，精确量化已知的安全问题</p>
 <h3 id="实际解决之道"><a href="#实际解决之道" class="headerlink" title="实际解决之道"></a>实际解决之道</h3><ul>
@@ -440,16 +431,17 @@
 <li>客户端与服务器界限的日益模糊</li>
 </ul>
 <hr>
-<h2 id="0x04-安全三要素（CIA）"><a href="#0x04-安全三要素（CIA）" class="headerlink" title="0x04 安全三要素（CIA）"></a>0x04 安全三要素（CIA）</h2><ul>
-<li><p><strong>机密性（Confidentiality）</strong></p>
-<p>保护数据不能泄露，加密是实现机密性要求的常见手段</p>
-</li>
-<li><p><strong>完整性（Inetgrity）</strong> </p>
-<p>保护数据内容是否完整，没有被篡改，常见保证完整性的手段是数字签名</p>
-</li>
-<li><p><strong>可用性（Availability）</strong></p>
-<p>保护资源是“随需而得”</p>
-</li>
+<h2 id="0x04-安全三要素（CIA）"><a href="#0x04-安全三要素（CIA）" class="headerlink" title="0x04 安全三要素（CIA）"></a>0x04 安全三要素（CIA）</h2><p><strong>机密性（Confidentiality）</strong></p>
+<ul>
+<li>保护数据不能泄露，加密是实现机密性要求的常见手段</li>
+</ul>
+<p><strong>完整性（Inetgrity）</strong> </p>
+<ul>
+<li>保护数据内容是否完整，没有被篡改，常见保证完整性的手段是数字签名</li>
+</ul>
+<p><strong>可用性（Availability）</strong></p>
+<ul>
+<li>保护资源是“随需而得”</li>
 </ul>
 <hr>
 <h2 id="0x05-安全评估流程"><a href="#0x05-安全评估流程" class="headerlink" title="0x05 安全评估流程"></a>0x05 安全评估流程</h2><p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0%E6%B5%81%E7%A8%8B.png" alt="评估"></p>
@@ -465,16 +457,14 @@
 <h2 id="0x06-安全防御原则"><a href="#0x06-安全防御原则" class="headerlink" title="0x06 安全防御原则"></a>0x06 安全防御原则</h2><h3 id="（1）Secure-By-Default原则-lt-总则-gt"><a href="#（1）Secure-By-Default原则-lt-总则-gt" class="headerlink" title="（1）Secure By Default原则&lt;总则&gt;"></a><strong>（1）Secure By Default原则&lt;总则&gt;</strong></h3><blockquote>
 <p>默认情况下，在软件中，安全性意味着默认配置设置是最安全的设置，不一定是最友好的用户设置,在许多情况下，基于风险分析和可用性测试来评估安全性和用户友好性</p>
 </blockquote>
+<p><strong>白名单/黑名单</strong></p>
 <ul>
-<li><strong>白名单/黑名单</strong><ul>
 <li>这个规范的制定，也可以选择白名单的思想来实现。按照白名单的思想，应该根据业务需求，列出一个允许使用的软件以及软件版本的清单，在此清单外的软件则禁止使用</li>
 <li>通配符<em>，</em>代表来自任意域的Flash都能访问本域的数据，因此就造成了安全隐患。所以在选择使用白名单时，需要注意避免出现类似通配符<em>的问题 </em></li>
 </ul>
-</li>
-<li><strong>最小权限原则</strong><ul>
+<p><strong>最小权限原则</strong></p>
+<ul>
 <li>最小权限原则要求系统只授予主体必要的权限，而不要过度授权，这样能有效地减少系统、网络、应用、数据库出错的机会</li>
-</ul>
-</li>
 </ul>
 <h3 id="（2）纵深防御原则-lt-全面正确看待问题-gt"><a href="#（2）纵深防御原则-lt-全面正确看待问题-gt" class="headerlink" title="（2）纵深防御原则&lt;全面正确看待问题&gt;"></a><strong>（2）纵深防御原则&lt;全面正确看待问题&gt;</strong></h3><blockquote>
 <p>两层含义:首先，要在各个不同层面，不同方面试试安全方案，避免出现疏漏，不同方案之间需要相互配合；其次，要在正确的地方做正确的事情，在解决根本问题的地方实施针对性的安全方案</p>
