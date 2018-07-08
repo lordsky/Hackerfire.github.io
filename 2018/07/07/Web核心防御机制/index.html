@@ -95,7 +95,7 @@
 <meta property="og:description" content="Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6.png">
-<meta property="og:updated_time" content="2018-07-08T13:05:07.578Z">
+<meta property="og:updated_time" content="2018-07-08T13:41:50.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web核心防御机制">
 <meta name="twitter:description" content="Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制">
@@ -399,7 +399,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="处理用户访问"><a href="#处理用户访问" class="headerlink" title="处理用户访问"></a>处理用户访问</h2><h4 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h4><ul>
+<h2 id="处理用户访问"><a href="#处理用户访问" class="headerlink" title="处理用户访问"></a>处理用户访问</h2><h3 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h3><ul>
 <li><p><strong>概念：</strong>身份验证机制是应用程序处理用户访问的最基本机制，验证用户是指确认用户的真实身份</p>
 </li>
 <li><p><strong>传统模型：</strong>用户提交用户名和密码，再由应用程序对其进行核实，确认其合法性</p>
@@ -411,7 +411,7 @@
 <li><p><strong>机制缺陷：</strong>如攻击者能够确定其他用户的用户名，推测其密码；可利用逻辑缺陷完全避开登录功能；存在的缺陷往往允许攻击者非法访问敏感数据与功能</p>
 </li>
 </ul>
-<h4 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h4><ul>
+<h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><ul>
 <li><p><strong>概述：</strong>处理用户访问的下一项逻辑任务是管理通过验证用户的会话。成功登录应用程序后，用户会访问各种页面和功能，从浏览器提出一系列HTTP请求；与此同时应用程序还会收到各类用户发出的无数请求，为实施有效的访问控制，应用程序需要识别并处理每一名用户提交的各种请求</p>
 </li>
 <li><p><strong>会话机制：</strong>Web应用程序为每一名用户建立一个会话，并向用户发布一个标识会话的令牌。<strong>会话</strong>是一组保存在服务器上的数据结构，用于追踪用户与应用程序的交互状态。<strong>令牌</strong>是一个唯一的字符串，应用程序将其映射到会话中，当用户收到一个令牌时，浏览器会在随后的HTTP请求中将它返回给服务器，帮助应用程序将请求与该用户联系起来。</p>
@@ -426,7 +426,7 @@
 <li>处理用户访问的最后一个逻辑步骤是做出并实施正确的决策，决定允许或拒绝每一个请求。在前面机制正常运作的基础上，应用程序需要决定是否授权用户执行其请求的操作或访问相关数据。访问控制一般需要实现某种精心设计的逻辑，并考虑各种相关应用程序领域与不同类型的功能</li>
 </ul>
 <hr>
-<h2 id="处理用户的输入"><a href="#处理用户的输入" class="headerlink" title="处理用户的输入"></a>处理用户的输入</h2><h4 id="拒绝已知的不良输入"><a href="#拒绝已知的不良输入" class="headerlink" title="拒绝已知的不良输入"></a>拒绝已知的不良输入</h4>
+<h2 id="处理用户的输入"><a href="#处理用户的输入" class="headerlink" title="处理用户的输入"></a>处理用户的输入</h2><h3 id="拒绝已知的不良输入"><a href="#拒绝已知的不良输入" class="headerlink" title="拒绝已知的不良输入"></a>拒绝已知的不良输入</h3>
       
     </div>
     
@@ -602,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#防御机制简述"><span class="nav-number">1.</span> <span class="nav-text">防御机制简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户访问"><span class="nav-number">2.</span> <span class="nav-text">处理用户访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#身份验证"><span class="nav-number">2.0.1.</span> <span class="nav-text">身份验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#会话管理"><span class="nav-number">2.0.2.</span> <span class="nav-text">会话管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户的输入"><span class="nav-number">3.</span> <span class="nav-text">处理用户的输入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#拒绝已知的不良输入"><span class="nav-number">3.0.1.</span> <span class="nav-text">拒绝已知的不良输入</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#防御机制简述"><span class="nav-number">1.</span> <span class="nav-text">防御机制简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户访问"><span class="nav-number">2.</span> <span class="nav-text">处理用户访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#身份验证"><span class="nav-number">2.1.</span> <span class="nav-text">身份验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">2.2.</span> <span class="nav-text">会话管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户的输入"><span class="nav-number">3.</span> <span class="nav-text">处理用户的输入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拒绝已知的不良输入"><span class="nav-number">3.1.</span> <span class="nav-text">拒绝已知的不良输入</span></a></li></ol></li></ol></div>
             
 
           </div>
