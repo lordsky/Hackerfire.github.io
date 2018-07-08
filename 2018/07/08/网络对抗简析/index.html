@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web-Security," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网络对抗原理知识点简要归纳">
+<meta name="keywords" content="Web-Security">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络对抗简析">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/网络对抗简析/index.html">
+<meta property="og:site_name" content="Firehacker">
+<meta property="og:description" content="网络对抗原理知识点简要归纳">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pb2h7gmlc.bkt.clouddn.com/%E6%B8%97%E9%80%8F%E5%9C%BA%E6%99%AF.PNG">
+<meta property="og:image" content="http://pb2h7gmlc.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%9F.PNG">
+<meta property="og:updated_time" content="2018-07-08T13:55:51.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络对抗简析">
+<meta name="twitter:description" content="网络对抗原理知识点简要归纳">
+<meta name="twitter:image" content="http://pb2h7gmlc.bkt.clouddn.com/%E6%B8%97%E9%80%8F%E5%9C%BA%E6%99%AF.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/08/网络对抗简析/"/>
+
+
+
+
+
+  <title>网络对抗简析 | Firehacker</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Firehacker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            links
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/网络对抗简析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Firehacker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Firehacker">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络对抗简析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-08T21:50:26+08:00">
+                2018-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/" itemprop="url" rel="index">
+                    <span itemprop="name">安全技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>网络对抗原理知识点简要归纳</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="0x01-渗透场景"><a href="#0x01-渗透场景" class="headerlink" title="0x01 渗透场景"></a>0x01 渗透场景</h2><p><img src="http://pb2h7gmlc.bkt.clouddn.com/%E6%B8%97%E9%80%8F%E5%9C%BA%E6%99%AF.PNG" alt="pentest"></p>
+<hr>
+<h2 id="0x02-扫描"><a href="#0x02-扫描" class="headerlink" title="0x02 扫描"></a>0x02 扫描</h2><ul>
+<li>信息收集目标<ul>
+<li>域名</li>
+<li>站点</li>
+<li>IP</li>
+<li>接口</li>
+<li>OS</li>
+<li>业务</li>
+<li>端口</li>
+<li>第三方</li>
+<li>服务</li>
+<li>数据</li>
+</ul>
+</li>
+<li>域名收集（业务承载）<ul>
+<li>访问 + 抓包</li>
+<li>Google，github</li>
+<li>遍历 + 暴力破解</li>
+<li>利用DNS服务器配置缺陷</li>
+<li>从公司获得</li>
+</ul>
+</li>
+<li>收集IP（目标基本粒度之一）<ul>
+<li>域名</li>
+<li>IP段反推</li>
+<li>特征</li>
+<li>从公司获得</li>
+</ul>
+</li>
+<li>端口扫描（缺陷基本粒度之一）<ul>
+<li>端口号</li>
+<li>类型</li>
+<li>服务版本</li>
+</ul>
+</li>
+<li>扫描工具<ul>
+<li>Nmap（原理）</li>
+<li>NSE（框架）<ul>
+<li><a href="https://blog.csdn.net/aspirationflow/article/details/7956928" target="_blank" rel="noopener">NSE BLOG</a></li>
+</ul>
+</li>
+<li>ping/hping<ul>
+<li><a href="https://blog.csdn.net/zhuying_linux/article/details/6770730" target="_blank" rel="noopener">ping原理</a></li>
+</ul>
+</li>
+<li>telnet</li>
+</ul>
+</li>
+<li>扫描过程（发，收，判断特征，结论）<ul>
+<li>准备工作</li>
+<li>目标调度</li>
+<li>IP存活检查</li>
+<li>端口扫描</li>
+<li>版本探测</li>
+<li>OS检测</li>
+<li>进一步探测</li>
+<li>结果整理</li>
+</ul>
+</li>
+<li>主机存活<ul>
+<li>Ping 　　　　　-PE</li>
+<li>Other ICMP  　-PP -PM</li>
+<li>TCP SYN　　　 -PS</li>
+<li>TCP ACK  　　　-PA</li>
+<li>UDP  　　　　　-PU</li>
+<li>不判断  　　　　-P0 -Pn</li>
+</ul>
+</li>
+<li>端口扫描（端口状态）<ul>
+<li>open</li>
+<li>close</li>
+<li>filtered</li>
+<li>组合</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x03-嗅探（网络流量数据分析）"><a href="#0x03-嗅探（网络流量数据分析）" class="headerlink" title="0x03 嗅探（网络流量数据分析）"></a>0x03 嗅探（网络流量数据分析）</h2><ul>
+<li>狭义嗅探<ul>
+<li>混杂模式</li>
+<li>libpcap</li>
+</ul>
+</li>
+<li>应用场景<ul>
+<li>嗅探未加密的敏感信息</li>
+<li>被动探测/收集信息</li>
+<li>逆向</li>
+<li>排查故障</li>
+</ul>
+</li>
+<li>BPF语法<ul>
+<li>Berkeley Packet Filter</li>
+</ul>
+</li>
+<li>嗅探工具<ul>
+<li>wireshark（GUI抓包/分析工具-本地）</li>
+<li>tcpdump（CLI抓包工具-目标服务器）</li>
+</ul>
+</li>
+<li>广义抓包（上层/细节/限制）<ul>
+<li>tcpflow</li>
+<li>代理抓包（Paros,ZAP,Fildder）</li>
+<li>浏览器抓包工具/插件（FireBug，Chrome,HTTP Watch）</li>
+<li>手机抓包（真机配代理，模拟器配代理，AP抓包）</li>
+</ul>
+</li>
+<li>发包<ul>
+<li>图形化HTTP发包工具</li>
+<li>curl</li>
+<li>ping telnet nc</li>
+<li>Nmap NSE</li>
+<li>scapy</li>
+</ul>
+</li>
+<li>流还原（发包++）<ul>
+<li>tcpreplay（tcpprep,tcprewrite）</li>
+<li>tcpcopy</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x04-漏洞"><a href="#0x04-漏洞" class="headerlink" title="0x04 漏洞"></a>0x04 漏洞</h2><h3 id="1-DDoS与抗D"><a href="#1-DDoS与抗D" class="headerlink" title="1. DDoS与抗D"></a>1. DDoS与抗D</h3><ul>
+<li>含义<ul>
+<li>分布式</li>
+<li>拒绝服务</li>
+<li>攻击</li>
+</ul>
+</li>
+<li>动机（趋向现实）<ul>
+<li>研究，挑战，炫耀</li>
+<li>打击对手</li>
+<li>勒索</li>
+<li>商务拓展</li>
+</ul>
+</li>
+<li>攻击途径<ul>
+<li>直接崩溃</li>
+<li>大流量阻塞</li>
+<li>耗尽计算资源</li>
+</ul>
+</li>
+<li>流量放大<ul>
+<li>条件<ul>
+<li>不检验来源</li>
+<li>返回比请求大</li>
+</ul>
+</li>
+<li>实例<ul>
+<li>DNS</li>
+<li>NTP</li>
+<li>BT</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>攻击源（僵尸网络为主）<ul>
+<li>肉鸡，僵尸网络</li>
+<li>恶意插件</li>
+<li>自建机房</li>
+</ul>
+</li>
+<li>攻击类型<ul>
+<li>和缺陷相关的攻击</li>
+<li>CC攻击</li>
+<li>流量攻击</li>
+</ul>
+</li>
+<li>CC/过量访问（低于带宽，高于处理能力）<ul>
+<li>单机qps测试与优化 -RD</li>
+<li>业务估算与集群容量规划 -OPS</li>
+<li>限流保障 -SA</li>
+<li>限流规则优化 -SEC</li>
+</ul>
+</li>
+<li>流量清洗<ul>
+<li>带宽储备-&gt;清洗-&gt;回源</li>
+<li>四层清洗<ul>
+<li>支持非HTTP流量</li>
+<li>不需要SSL证书</li>
+</ul>
+</li>
+<li>七层清洗<ul>
+<li>支持防 CC</li>
+<li>细粒度清洗</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>防御方案<ul>
+<li>准备备用 IP（回源IP）</li>
+<li>配置回源 IP ACL,白名单</li>
+<li>配置供应商高防IP与回源策略</li>
+<li>测试真实IP透传</li>
+<li>制定预案和响应策略</li>
+<li>演练</li>
+<li>供应商选择与商务谈判</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-漏洞"><a href="#2-漏洞" class="headerlink" title="2. 漏洞"></a>2. 漏洞</h3><ul>
+<li>概念<ul>
+<li>软件漏洞 vs 缺陷</li>
+<li>配置缺陷 vs 设计缺陷</li>
+<li>通用软件漏洞 vs 应用漏洞</li>
+</ul>
+</li>
+<li>OWASP TOP 10（13版）<ul>
+<li>注入</li>
+<li>失效的身份认证和会话管理</li>
+<li>跨站脚本（XSS）</li>
+<li>不安全的直接对象引用</li>
+<li>安全配置错误</li>
+<li>敏感信息泄露</li>
+<li>功能级访问控制缺失</li>
+<li>跨站请求伪造（CSRF）</li>
+<li>使用含有已知漏洞的组件</li>
+<li>未验证的重定向和转发</li>
+</ul>
+</li>
+<li>注入<ul>
+<li>缓冲区溢出</li>
+<li>命令行注入</li>
+<li>Struts2的一系列OGNL注入</li>
+<li>SQL注入</li>
+<li>针对NoSQL的注入</li>
+</ul>
+</li>
+<li>SQL注入<ul>
+<li>攻击向量<ul>
+<li>闭合部分</li>
+<li>注入部分</li>
+<li>封闭部分</li>
+</ul>
+</li>
+<li>注入技术<ul>
+<li>Union query</li>
+<li>boolean based</li>
+<li>time base</li>
+</ul>
+</li>
+<li>预防/避免<ul>
+<li>过滤 / 转义</li>
+<li>参数化 / Object Relation Mapping</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>NoSQL注入<ul>
+<li>结构溢出</li>
+</ul>
+</li>
+<li>命令行注入<ul>
+<li>与SQL注入类似</li>
+</ul>
+</li>
+<li>缓冲区溢出</li>
+<li>Struts2 OGNL<ul>
+<li>直接从string到命令</li>
+</ul>
+</li>
+<li>XSS<ul>
+<li>类型<ul>
+<li>反射型</li>
+<li>存储型</li>
+<li>DOM Based XSS</li>
+</ul>
+</li>
+<li>限制<ul>
+<li>http_only</li>
+<li>客户端限制</li>
+<li>上下游的限制与弱化</li>
+</ul>
+</li>
+<li>避免<ul>
+<li>waf vs 代码</li>
+<li>过滤 vs 转义</li>
+<li>处理时 vs 展示时</li>
+<li>拼 HTML 片段 vs 框架</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>URL任意跳转（钓鱼）<ul>
+<li>白名单 VS 黑名单</li>
+<li>绕过方法</li>
+</ul>
+</li>
+<li>未验证的转发（突破内网边界）<ul>
+<li>SSRF<ul>
+<li>翻译 &amp; 解码</li>
+<li>代理</li>
+<li>服务路由</li>
+</ul>
+</li>
+<li>任意文件读取</li>
+<li>XXE</li>
+</ul>
+</li>
+<li>CSRF（跨站请求伪造）<ul>
+<li>投票刷票</li>
+<li>转钱，蠕虫</li>
+<li>不盗号而到达目的</li>
+</ul>
+</li>
+<li>水平权限漏洞<ul>
+<li>认为用户不会修改请求</li>
+<li>修改密码</li>
+<li>1元订单</li>
+<li>测试利用简单，难以统一避免</li>
+</ul>
+</li>
+<li>访问控制缺失<ul>
+<li>把钥匙藏在窗台下</li>
+<li>未知路径</li>
+<li>未知请求格式</li>
+<li>各种空密码</li>
+<li>开放目录访问</li>
+</ul>
+</li>
+<li>失效的身份认证和会话管理<ul>
+<li>被盗号</li>
+<li>弱密码</li>
+<li>无防爆破限制</li>
+<li>Session伪造</li>
+<li>Session泄露</li>
+</ul>
+</li>
+<li>其他安全问题<ul>
+<li>安全配置错误</li>
+<li>使用含有已知漏洞的伪造</li>
+</ul>
+</li>
+<li>新型安全漏洞（TOP 10）<ul>
+<li><a href="https://www.owasp.org/images/d/dc/OWASP_Top_10_2017_%E4%B8%AD%E6%96%87%E7%89%88v1.3.pdf" target="_blank" rel="noopener">2017 版</a></li>
+<li>XXE（XML外部实体）</li>
+<li>不安全的反序列化</li>
+<li>不足的日志记录和监控</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x05-防御体系"><a href="#0x05-防御体系" class="headerlink" title="0x05 防御体系"></a>0x05 防御体系</h2><ul>
+<li>安全含义<ul>
+<li>Security vs Safety</li>
+<li>Security vs Secrecy</li>
+<li>Security vs Audit</li>
+</ul>
+</li>
+<li>两个维度<ul>
+<li>弱点<ul>
+<li>漏洞</li>
+<li>漏洞挖掘</li>
+<li>配置不当</li>
+<li>SDL</li>
+<li>设计缺陷</li>
+<li>ACL</li>
+<li>防篡改</li>
+</ul>
+</li>
+<li>攻击<ul>
+<li>扫描</li>
+<li>入侵检测</li>
+<li>渗透</li>
+<li>应急响应</li>
+<li>DDoS / Anti-DDoS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>防御者优势<ul>
+<li>输出大，量不足</li>
+<li>更全更细致的信息</li>
+<li>更强的控制权</li>
+<li>改变系统 / 制定流程</li>
+<li>专职工程师</li>
+</ul>
+</li>
+<li>防御体系构建<ul>
+<li>扬长避短</li>
+<li>让系统更规范</li>
+<li>加强对信息的掌握</li>
+<li>安全评估</li>
+<li>入侵检测</li>
+<li>及时响应</li>
+</ul>
+</li>
+<li>企业架构<ul>
+<li>人员角色</li>
+<li>网络架构与思维</li>
+<li>应用架构与研发过程</li>
+<li>业务与运营</li>
+</ul>
+</li>
+<li>威胁梳理<ul>
+<li>资产梳理</li>
+<li>威胁建模</li>
+</ul>
+</li>
+<li>渗透路径的启示<ul>
+<li>网络访问的隔离与限制</li>
+<li>漏洞的挖掘与利用</li>
+<li>账号与权限</li>
+</ul>
+</li>
+<li>安全技术栈<ul>
+<li>客户端安全</li>
+<li>网络与系统安全</li>
+<li>应用安全</li>
+<li>业务安全</li>
+<li>数据安全</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x06-网络安全域隔离与划分"><a href="#0x06-网络安全域隔离与划分" class="headerlink" title="0x06 网络安全域隔离与划分"></a>0x06 网络安全域隔离与划分</h2><ul>
+<li>网络与系统安全<ul>
+<li>安全域的隔离与划分</li>
+<li>认证，授权与审计</li>
+<li>边界入侵检测</li>
+<li>主机安全与配置</li>
+</ul>
+</li>
+<li>安全域的划分与隔离<br><img src="http://pb2h7gmlc.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%9F.PNG" alt="安全域"></li>
+<li>ACL与防火墙<ul>
+<li>五元组，N元组</li>
+<li>包过滤防火墙与状态检测防火墙</li>
+<li>黑名单与白名单</li>
+<li>UTM 与 NGFW</li>
+<li>四层负载均衡与Firewall</li>
+</ul>
+</li>
+<li>端口管理<ul>
+<li>规范-权限最小原则</li>
+<li>端口扫描，配置梳理</li>
+<li>维护和整改</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x07-AAA与认证"><a href="#0x07-AAA与认证" class="headerlink" title="0x07 AAA与认证"></a>0x07 AAA与认证</h2><ul>
+<li>AAA概念（城门的守卫者）<ul>
+<li>认证（Authentication）</li>
+<li>授权（Authorization）</li>
+<li>计费（Accounting）</li>
+<li>审计（Audit）</li>
+</ul>
+</li>
+<li>应用场合（登陆，验证）<ul>
+<li>网络准入-有线，无限，VPN</li>
+<li>服务器防伪</li>
+<li>服务器访问</li>
+<li>网站登录</li>
+<li>远程服务器认证与登陆</li>
+<li>设备使用</li>
+<li>重要操作鉴权</li>
+</ul>
+</li>
+<li>认证<ul>
+<li>基于口令 </li>
+<li>基于凭证</li>
+<li>基于生物特征</li>
+</ul>
+</li>
+<li>口令（以哈希的形式存储在各种地方）<ul>
+<li>文本</li>
+<li>数据库</li>
+<li>Unix / Windows</li>
+<li>LDAP / AD</li>
+</ul>
+</li>
+<li>凭证（没有口令的缺点，易丢失）<ul>
+<li>证书</li>
+<li>Token</li>
+<li>手机短信</li>
+<li>邮箱</li>
+<li>IP / MAC</li>
+</ul>
+</li>
+<li>生物特征（难以伪造，随身携带）<ul>
+<li>指纹</li>
+<li>虹膜</li>
+<li>人脸</li>
+<li>习惯</li>
+<li>步态</li>
+</ul>
+</li>
+<li>认证模式<ul>
+<li>PAP</li>
+<li>CHAP</li>
+</ul>
+</li>
+<li>Kerberos认证协议<ul>
+<li>认证</li>
+<li>凭据</li>
+<li>密钥交换</li>
+</ul>
+</li>
+<li>PKI（身份与公钥的绑定）<ul>
+<li>CA</li>
+<li>RA</li>
+<li>证书库</li>
+<li>CRL</li>
+</ul>
+</li>
+<li>EAP（可扩展认证协议） <ul>
+<li>MD5</li>
+<li>TLS</li>
+<li>TTLS</li>
+<li>PEAP</li>
+<li>LEAP</li>
+</ul>
+</li>
+<li>RADIUS（认证方式的集成协议与服务）<ul>
+<li>File</li>
+<li>Unix</li>
+<li>LDAP</li>
+<li>OTP</li>
+<li>EAP</li>
+<li>TACACS</li>
+</ul>
+</li>
+<li>工具和软件<ul>
+<li>OpenSSL</li>
+<li>OpenLDAP</li>
+<li>FreeRadius</li>
+</ul>
+</li>
+<li>双因子认证<ul>
+<li>口令+</li>
+<li>不同场合，不同选择与组合方式</li>
+<li>双因子认证 vs 二次认证</li>
+</ul>
+</li>
+<li>认证典型场合<ul>
+<li>网络准入<ul>
+<li>有线，无线，VPN</li>
+<li>EAP</li>
+<li>LDAP / AD</li>
+<li>RADIUS</li>
+<li>AC，交换机</li>
+<li>WEP / WPA / WPA2</li>
+</ul>
+</li>
+<li>SSH<ul>
+<li>认证方式<ul>
+<li>口令</li>
+<li>PAM</li>
+<li>证书</li>
+<li>GSSAPI / Kerberos<ul>
+<li>跳板机与堡垒机</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网站登陆<ul>
+<li>登陆验证</li>
+<li>OPENID / OAUTH</li>
+<li>SSO</li>
+<li>Session共享</li>
+</ul>
+</li>
+<li>二次认证<ul>
+<li>业务安全</li>
+<li>策略与应用场景</li>
+<li>认证技术与方案</li>
+<li>框架</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>口令相关的攻防<ul>
+<li>弱密码/暴力破解/刷库/钓鱼</li>
+<li>防机器人 - 验证码</li>
+<li>围绕次数做的限制</li>
+<li>分析与检测</li>
+<li>口令的存储与传输</li>
+</ul>
+</li>
+<li>验证码缺陷<ul>
+<li>OCR</li>
+<li>熵不够</li>
+<li>触发时更新 vs 验证时更新</li>
+<li>答案外泄</li>
+<li>绑定session vs 绑定事物</li>
+<li>使用错误导致验证码不起作用</li>
+</ul>
+</li>
+<li>鉴权<ul>
+<li>映射：账号-&gt;操作-&gt;Action</li>
+<li>基于账号 vs 基于群组 / 角色</li>
+</ul>
+</li>
+<li>审计（发现 &amp; 追溯）<ul>
+<li>事前：风险评估，资格评估</li>
+<li>事中：入侵检测</li>
+<li>事后：追溯 + 制度</li>
+</ul>
+</li>
+<li>日志记录<ul>
+<li>认证记录</li>
+<li>鉴权记录</li>
+<li>应用层 / 业务记录</li>
+<li>异常记录</li>
+</ul>
+</li>
+<li>常见日志（配置/读取） <ul>
+<li>syslog（syslog-ng,rsyslog）</li>
+<li>audit（auditd）</li>
+<li>access log / error log</li>
+<li>应用日志：log4j</li>
+</ul>
+</li>
+<li>文本日志分析<ul>
+<li>awk</li>
+<li>sed</li>
+<li>grep</li>
+<li>sort</li>
+<li>uniq</li>
+<li>wc</li>
+</ul>
+</li>
+<li>日志收集与预处理（收集，切割，格式化）<ul>
+<li>Flume</li>
+<li>Logstash</li>
+</ul>
+</li>
+<li>日志分析（查找，统计）<ul>
+<li>ElasticSearch Logstash Kibana</li>
+<li>Splunk</li>
+<li>Hadoop + Hive</li>
+<li>Storm</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="0x08-入侵检测"><a href="#0x08-入侵检测" class="headerlink" title="0x08 入侵检测"></a>0x08 入侵检测</h2><ul>
+<li>入侵检测（识别 &amp; 发现）<ul>
+<li>攻击</li>
+<li>潜在威胁</li>
+</ul>
+</li>
+<li>与安全体系的关系（受益 &amp; 补充）<ul>
+<li>收敛</li>
+<li>规范</li>
+</ul>
+</li>
+<li>部署位置<ul>
+<li>流量汇聚处</li>
+<li>AAA</li>
+<li>主机</li>
+<li>日志汇聚处</li>
+</ul>
+</li>
+<li>检测方式（黑白名单）<ul>
+<li>误用检测 - 黑明白</li>
+<li>异常检测 - 白名单</li>
+</ul>
+</li>
+<li>检测技术<ul>
+<li>规则 - 经验转化，专家系统</li>
+<li>模型 - 科学与玄学</li>
+</ul>
+</li>
+<li>实时性（权衡与妥协）<ul>
+<li>实时</li>
+<li>准实时</li>
+<li>事后</li>
+</ul>
+</li>
+<li>响应<ul>
+<li>联动</li>
+<li>告警（工单，线索）</li>
+</ul>
+</li>
+<li>实例（典型与广义的）<ul>
+<li>Snort</li>
+<li>WAF - Modsecurity Lua</li>
+<li>Agent - OSSEC</li>
+<li>日志分析系统</li>
+</ul>
+</li>
+<li>ModSecurity<ul>
+<li>5个阶段<ul>
+<li>Phase Request Headers</li>
+<li>Phase Request Body</li>
+<li>Phase Response Headers</li>
+<li>Phase Response Body</li>
+<li>Phase Logging</li>
+</ul>
+</li>
+<li>手册和CRS<ul>
+<li>Configuration Directives</li>
+<li>Variables</li>
+<li>Transformation functions</li>
+<li>Operators</li>
+<li>Actions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OSSEC<ul>
+<li>安全Agent HIDS</li>
+<li>配置手册<ul>
+<li>Log monitoring/analysis</li>
+<li>Syscheck</li>
+<li>Rootcheck manual</li>
+<li>Rules and Decoders</li>
+<li>Active Response</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>蜜罐（另辟蹊径）<ul>
+<li>与狭义IDS的区别<ul>
+<li>谁迷惑谁</li>
+<li>自带关键信息量</li>
+</ul>
+</li>
+<li>面临问题<ul>
+<li>部署</li>
+<li>灵活性</li>
+<li>响应</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web-Security/" rel="tag"><i class="fa fa-tag"></i> Web-Security</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/08/HTTP协议详解/" rel="next" title="HTTP协议详解">
+                <i class="fa fa-chevron-left"></i> HTTP协议详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Firehacker</p>
+              <p class="site-description motion-element" itemprop="description">安全思维，技术，实践，分享</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-渗透场景"><span class="nav-number">1.</span> <span class="nav-text">0x01 渗透场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-扫描"><span class="nav-number">2.</span> <span class="nav-text">0x02 扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-嗅探（网络流量数据分析）"><span class="nav-number">3.</span> <span class="nav-text">0x03 嗅探（网络流量数据分析）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-漏洞"><span class="nav-number">4.</span> <span class="nav-text">0x04 漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS与抗D"><span class="nav-number">4.1.</span> <span class="nav-text">1. DDoS与抗D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-漏洞"><span class="nav-number">4.2.</span> <span class="nav-text">2. 漏洞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-防御体系"><span class="nav-number">5.</span> <span class="nav-text">0x05 防御体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-网络安全域隔离与划分"><span class="nav-number">6.</span> <span class="nav-text">0x06 网络安全域隔离与划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-AAA与认证"><span class="nav-number">7.</span> <span class="nav-text">0x07 AAA与认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-入侵检测"><span class="nav-number">8.</span> <span class="nav-text">0x08 入侵检测</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Firehacker</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
