@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pb2h7gmlc.bkt.clouddn.com/%E6%B8%97%E9%80%8F%E5%9C%BA%E6%99%AF.PNG">
 <meta property="og:image" content="http://pb2h7gmlc.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%9F.PNG">
-<meta property="og:updated_time" content="2018-07-08T13:55:51.387Z">
+<meta property="og:updated_time" content="2018-07-09T03:48:33.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络对抗简析">
 <meta name="twitter:description" content="网络对抗原理知识点简要归纳">
@@ -389,8 +389,7 @@
 <a id="more"></a>
 <h2 id="0x01-渗透场景"><a href="#0x01-渗透场景" class="headerlink" title="0x01 渗透场景"></a>0x01 渗透场景</h2><p><img src="http://pb2h7gmlc.bkt.clouddn.com/%E6%B8%97%E9%80%8F%E5%9C%BA%E6%99%AF.PNG" alt="pentest"></p>
 <hr>
-<h2 id="0x02-扫描"><a href="#0x02-扫描" class="headerlink" title="0x02 扫描"></a>0x02 扫描</h2><ul>
-<li>信息收集目标<ul>
+<h2 id="0x02-扫描"><a href="#0x02-扫描" class="headerlink" title="0x02 扫描"></a>0x02 扫描</h2><h3 id="信息收集目标"><a href="#信息收集目标" class="headerlink" title="信息收集目标"></a>信息收集目标</h3><ul>
 <li>域名</li>
 <li>站点</li>
 <li>IP</li>
@@ -400,31 +399,19 @@
 <li>端口</li>
 <li>第三方</li>
 <li>服务</li>
-<li>数据</li>
-</ul>
-</li>
-<li>域名收集（业务承载）<ul>
+<li>数据<h3 id="域名收集（业务承载）"><a href="#域名收集（业务承载）" class="headerlink" title="域名收集（业务承载）"></a>域名收集（业务承载）</h3></li>
 <li>访问 + 抓包</li>
 <li>Google，github</li>
 <li>遍历 + 暴力破解</li>
 <li>利用DNS服务器配置缺陷</li>
-<li>从公司获得</li>
-</ul>
-</li>
-<li>收集IP（目标基本粒度之一）<ul>
+<li>从公司获得<h3 id="收集IP（目标基本粒度之一）"><a href="#收集IP（目标基本粒度之一）" class="headerlink" title="收集IP（目标基本粒度之一）"></a>收集IP（目标基本粒度之一）</h3></li>
 <li>域名</li>
 <li>IP段反推</li>
 <li>特征</li>
-<li>从公司获得</li>
-</ul>
-</li>
-<li>端口扫描（缺陷基本粒度之一）<ul>
+<li>从公司获得<h3 id="端口扫描（缺陷基本粒度之一）"><a href="#端口扫描（缺陷基本粒度之一）" class="headerlink" title="端口扫描（缺陷基本粒度之一）"></a>端口扫描（缺陷基本粒度之一）</h3></li>
 <li>端口号</li>
 <li>类型</li>
-<li>服务版本</li>
-</ul>
-</li>
-<li>扫描工具<ul>
+<li>服务版本<h3 id="扫描工具"><a href="#扫描工具" class="headerlink" title="扫描工具"></a>扫描工具</h3></li>
 <li>Nmap（原理）</li>
 <li>NSE（框架）<ul>
 <li><a href="https://blog.csdn.net/aspirationflow/article/details/7956928" target="_blank" rel="noopener">NSE BLOG</a></li>
@@ -434,10 +421,7 @@
 <li><a href="https://blog.csdn.net/zhuying_linux/article/details/6770730" target="_blank" rel="noopener">ping原理</a></li>
 </ul>
 </li>
-<li>telnet</li>
-</ul>
-</li>
-<li>扫描过程（发，收，判断特征，结论）<ul>
+<li>telnet<h3 id="扫描过程（发，收，判断特征，结论）"><a href="#扫描过程（发，收，判断特征，结论）" class="headerlink" title="扫描过程（发，收，判断特征，结论）"></a>扫描过程（发，收，判断特征，结论）</h3></li>
 <li>准备工作</li>
 <li>目标调度</li>
 <li>IP存活检查</li>
@@ -445,92 +429,53 @@
 <li>版本探测</li>
 <li>OS检测</li>
 <li>进一步探测</li>
-<li>结果整理</li>
-</ul>
-</li>
-<li>主机存活<ul>
-<li>Ping 　　　　　-PE</li>
+<li>结果整理<h3 id="主机存活"><a href="#主机存活" class="headerlink" title="主机存活"></a>主机存活</h3></li>
+<li>Ping 　　　　-PE</li>
 <li>Other ICMP  　-PP -PM</li>
 <li>TCP SYN　　　 -PS</li>
-<li>TCP ACK  　　　-PA</li>
+<li>TCP ACK  　　-PA</li>
 <li>UDP  　　　　　-PU</li>
-<li>不判断  　　　　-P0 -Pn</li>
-</ul>
-</li>
-<li>端口扫描（端口状态）<ul>
+<li>不判断  　　　　-P0 -Pn<h3 id="端口扫描（端口状态）"><a href="#端口扫描（端口状态）" class="headerlink" title="端口扫描（端口状态）"></a>端口扫描（端口状态）</h3></li>
 <li>open</li>
 <li>close</li>
 <li>filtered</li>
 <li>组合</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x03-嗅探（网络流量数据分析）"><a href="#0x03-嗅探（网络流量数据分析）" class="headerlink" title="0x03 嗅探（网络流量数据分析）"></a>0x03 嗅探（网络流量数据分析）</h2><ul>
-<li>狭义嗅探<ul>
+<h2 id="0x03-嗅探（网络流量数据分析）"><a href="#0x03-嗅探（网络流量数据分析）" class="headerlink" title="0x03 嗅探（网络流量数据分析）"></a>0x03 嗅探（网络流量数据分析）</h2><h3 id="狭义嗅探"><a href="#狭义嗅探" class="headerlink" title="狭义嗅探"></a>狭义嗅探</h3><ul>
 <li>混杂模式</li>
-<li>libpcap</li>
-</ul>
-</li>
-<li>应用场景<ul>
+<li>libpcap<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3></li>
 <li>嗅探未加密的敏感信息</li>
 <li>被动探测/收集信息</li>
 <li>逆向</li>
-<li>排查故障</li>
-</ul>
-</li>
-<li>BPF语法<ul>
-<li>Berkeley Packet Filter</li>
-</ul>
-</li>
-<li>嗅探工具<ul>
+<li>排查故障<h3 id="BPF语法"><a href="#BPF语法" class="headerlink" title="BPF语法"></a>BPF语法</h3></li>
+<li>Berkeley Packet Filter<h3 id="嗅探工具"><a href="#嗅探工具" class="headerlink" title="嗅探工具"></a>嗅探工具</h3></li>
 <li>wireshark（GUI抓包/分析工具-本地）</li>
-<li>tcpdump（CLI抓包工具-目标服务器）</li>
-</ul>
-</li>
-<li>广义抓包（上层/细节/限制）<ul>
+<li>tcpdump（CLI抓包工具-目标服务器）<h3 id="广义抓包（上层-细节-限制）"><a href="#广义抓包（上层-细节-限制）" class="headerlink" title="广义抓包（上层/细节/限制）"></a>广义抓包（上层/细节/限制）</h3></li>
 <li>tcpflow</li>
 <li>代理抓包（Paros,ZAP,Fildder）</li>
 <li>浏览器抓包工具/插件（FireBug，Chrome,HTTP Watch）</li>
-<li>手机抓包（真机配代理，模拟器配代理，AP抓包）</li>
-</ul>
-</li>
-<li>发包<ul>
+<li>手机抓包（真机配代理，模拟器配代理，AP抓包）<h3 id="发包"><a href="#发包" class="headerlink" title="发包"></a>发包</h3></li>
 <li>图形化HTTP发包工具</li>
 <li>curl</li>
 <li>ping telnet nc</li>
 <li>Nmap NSE</li>
-<li>scapy</li>
-</ul>
-</li>
-<li>流还原（发包++）<ul>
+<li>scapy<h3 id="流还原（发包-）"><a href="#流还原（发包-）" class="headerlink" title="流还原（发包++）"></a>流还原（发包++）</h3></li>
 <li>tcpreplay（tcpprep,tcprewrite）</li>
 <li>tcpcopy</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x04-漏洞"><a href="#0x04-漏洞" class="headerlink" title="0x04 漏洞"></a>0x04 漏洞</h2><h3 id="1-DDoS与抗D"><a href="#1-DDoS与抗D" class="headerlink" title="1. DDoS与抗D"></a>1. DDoS与抗D</h3><ul>
-<li>含义<ul>
+<h2 id="0x04-漏洞"><a href="#0x04-漏洞" class="headerlink" title="0x04 漏洞"></a>0x04 漏洞</h2><h3 id="1-DDoS与抗D"><a href="#1-DDoS与抗D" class="headerlink" title="1. DDoS与抗D"></a>1. DDoS与抗D</h3><h4 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h4><ul>
 <li>分布式</li>
 <li>拒绝服务</li>
-<li>攻击</li>
-</ul>
-</li>
-<li>动机（趋向现实）<ul>
+<li>攻击<h4 id="动机（趋向现实）"><a href="#动机（趋向现实）" class="headerlink" title="动机（趋向现实）"></a>动机（趋向现实）</h4></li>
 <li>研究，挑战，炫耀</li>
 <li>打击对手</li>
 <li>勒索</li>
-<li>商务拓展</li>
-</ul>
-</li>
-<li>攻击途径<ul>
+<li>商务拓展<h4 id="攻击途径"><a href="#攻击途径" class="headerlink" title="攻击途径"></a>攻击途径</h4></li>
 <li>直接崩溃</li>
 <li>大流量阻塞</li>
-<li>耗尽计算资源</li>
-</ul>
-</li>
-<li>流量放大<ul>
+<li>耗尽计算资源<h4 id="流量放大"><a href="#流量放大" class="headerlink" title="流量放大"></a>流量放大</h4></li>
 <li>条件<ul>
 <li>不检验来源</li>
 <li>返回比请求大</li>
@@ -539,31 +484,19 @@
 <li>实例<ul>
 <li>DNS</li>
 <li>NTP</li>
-<li>BT</li>
+<li>BT<h4 id="攻击源（僵尸网络为主）"><a href="#攻击源（僵尸网络为主）" class="headerlink" title="攻击源（僵尸网络为主）"></a>攻击源（僵尸网络为主）</h4></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>攻击源（僵尸网络为主）<ul>
 <li>肉鸡，僵尸网络</li>
 <li>恶意插件</li>
-<li>自建机房</li>
-</ul>
-</li>
-<li>攻击类型<ul>
+<li>自建机房<h4 id="攻击类型"><a href="#攻击类型" class="headerlink" title="攻击类型"></a>攻击类型</h4></li>
 <li>和缺陷相关的攻击</li>
 <li>CC攻击</li>
-<li>流量攻击</li>
-</ul>
-</li>
-<li>CC/过量访问（低于带宽，高于处理能力）<ul>
+<li>流量攻击<h4 id="CC-过量访问（低于带宽，高于处理能力）"><a href="#CC-过量访问（低于带宽，高于处理能力）" class="headerlink" title="CC/过量访问（低于带宽，高于处理能力）"></a>CC/过量访问（低于带宽，高于处理能力）</h4></li>
 <li>单机qps测试与优化 -RD</li>
 <li>业务估算与集群容量规划 -OPS</li>
 <li>限流保障 -SA</li>
-<li>限流规则优化 -SEC</li>
-</ul>
-</li>
-<li>流量清洗<ul>
+<li>限流规则优化 -SEC<h4 id="流量清洗"><a href="#流量清洗" class="headerlink" title="流量清洗"></a>流量清洗</h4></li>
 <li>带宽储备-&gt;清洗-&gt;回源</li>
 <li>四层清洗<ul>
 <li>支持非HTTP流量</li>
@@ -572,12 +505,9 @@
 </li>
 <li>七层清洗<ul>
 <li>支持防 CC</li>
-<li>细粒度清洗</li>
+<li>细粒度清洗<h4 id="防御方案"><a href="#防御方案" class="headerlink" title="防御方案"></a>防御方案</h4></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>防御方案<ul>
 <li>准备备用 IP（回源IP）</li>
 <li>配置回源 IP ACL,白名单</li>
 <li>配置供应商高防IP与回源策略</li>
@@ -586,16 +516,10 @@
 <li>演练</li>
 <li>供应商选择与商务谈判</li>
 </ul>
-</li>
-</ul>
-<h3 id="2-漏洞"><a href="#2-漏洞" class="headerlink" title="2. 漏洞"></a>2. 漏洞</h3><ul>
-<li>概念<ul>
+<h3 id="2-漏洞"><a href="#2-漏洞" class="headerlink" title="2. 漏洞"></a>2. 漏洞</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
 <li>软件漏洞 vs 缺陷</li>
 <li>配置缺陷 vs 设计缺陷</li>
-<li>通用软件漏洞 vs 应用漏洞</li>
-</ul>
-</li>
-<li>OWASP TOP 10（13版）<ul>
+<li>通用软件漏洞 vs 应用漏洞<h4 id="OWASP-TOP-10（13版）"><a href="#OWASP-TOP-10（13版）" class="headerlink" title="OWASP TOP 10（13版）"></a>OWASP TOP 10（13版）</h4></li>
 <li>注入</li>
 <li>失效的身份认证和会话管理</li>
 <li>跨站脚本（XSS）</li>
@@ -605,18 +529,12 @@
 <li>功能级访问控制缺失</li>
 <li>跨站请求伪造（CSRF）</li>
 <li>使用含有已知漏洞的组件</li>
-<li>未验证的重定向和转发</li>
-</ul>
-</li>
-<li>注入<ul>
+<li>未验证的重定向和转发<h4 id="注入"><a href="#注入" class="headerlink" title="注入"></a>注入</h4></li>
 <li>缓冲区溢出</li>
 <li>命令行注入</li>
 <li>Struts2的一系列OGNL注入</li>
 <li>SQL注入</li>
-<li>针对NoSQL的注入</li>
-</ul>
-</li>
-<li>SQL注入<ul>
+<li>针对NoSQL的注入<h4 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h4></li>
 <li>攻击向量<ul>
 <li>闭合部分</li>
 <li>注入部分</li>
@@ -631,25 +549,19 @@
 </li>
 <li>预防/避免<ul>
 <li>过滤 / 转义</li>
-<li>参数化 / Object Relation Mapping</li>
+<li>参数化 / Object Relation Mapping<h4 id="NoSQL注入"><a href="#NoSQL注入" class="headerlink" title="NoSQL注入"></a>NoSQL注入</h4></li>
 </ul>
 </li>
+<li>结构溢出<ul>
+<li>命令行注入</li>
 </ul>
 </li>
-<li>NoSQL注入<ul>
-<li>结构溢出</li>
-</ul>
-</li>
-<li>命令行注入<ul>
-<li>与SQL注入类似</li>
-</ul>
-</li>
+<li>与SQL注入类似<ul>
 <li>缓冲区溢出</li>
-<li>Struts2 OGNL<ul>
-<li>直接从string到命令</li>
+<li>Struts2 OGNL</li>
 </ul>
 </li>
-<li>XSS<ul>
+<li>直接从string到命令<h4 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h4></li>
 <li>类型<ul>
 <li>反射型</li>
 <li>存储型</li>
@@ -666,17 +578,11 @@
 <li>waf vs 代码</li>
 <li>过滤 vs 转义</li>
 <li>处理时 vs 展示时</li>
-<li>拼 HTML 片段 vs 框架</li>
+<li>拼 HTML 片段 vs 框架<h4 id="URL任意跳转（钓鱼）"><a href="#URL任意跳转（钓鱼）" class="headerlink" title="URL任意跳转（钓鱼）"></a>URL任意跳转（钓鱼）</h4></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>URL任意跳转（钓鱼）<ul>
 <li>白名单 VS 黑名单</li>
-<li>绕过方法</li>
-</ul>
-</li>
-<li>未验证的转发（突破内网边界）<ul>
+<li>绕过方法<h4 id="未验证的转发（突破内网边界）"><a href="#未验证的转发（突破内网边界）" class="headerlink" title="未验证的转发（突破内网边界）"></a>未验证的转发（突破内网边界）</h4></li>
 <li>SSRF<ul>
 <li>翻译 &amp; 解码</li>
 <li>代理</li>
@@ -684,60 +590,36 @@
 </ul>
 </li>
 <li>任意文件读取</li>
-<li>XXE</li>
-</ul>
-</li>
-<li>CSRF（跨站请求伪造）<ul>
+<li>XXE<h4 id="CSRF（跨站请求伪造）"><a href="#CSRF（跨站请求伪造）" class="headerlink" title="CSRF（跨站请求伪造）"></a>CSRF（跨站请求伪造）</h4></li>
 <li>投票刷票</li>
 <li>转钱，蠕虫</li>
-<li>不盗号而到达目的</li>
-</ul>
-</li>
-<li>水平权限漏洞<ul>
+<li>不盗号而到达目的<h4 id="水平权限漏洞"><a href="#水平权限漏洞" class="headerlink" title="水平权限漏洞"></a>水平权限漏洞</h4></li>
 <li>认为用户不会修改请求</li>
 <li>修改密码</li>
 <li>1元订单</li>
-<li>测试利用简单，难以统一避免</li>
-</ul>
-</li>
-<li>访问控制缺失<ul>
+<li>测试利用简单，难以统一避免<h4 id="访问控制缺失"><a href="#访问控制缺失" class="headerlink" title="访问控制缺失"></a>访问控制缺失</h4></li>
 <li>把钥匙藏在窗台下</li>
 <li>未知路径</li>
 <li>未知请求格式</li>
 <li>各种空密码</li>
-<li>开放目录访问</li>
-</ul>
-</li>
-<li>失效的身份认证和会话管理<ul>
+<li>开放目录访问<h4 id="失效的身份认证和会话管理"><a href="#失效的身份认证和会话管理" class="headerlink" title="失效的身份认证和会话管理"></a>失效的身份认证和会话管理</h4></li>
 <li>被盗号</li>
 <li>弱密码</li>
 <li>无防爆破限制</li>
 <li>Session伪造</li>
-<li>Session泄露</li>
-</ul>
-</li>
-<li>其他安全问题<ul>
+<li>Session泄露<h4 id="其他安全问题"><a href="#其他安全问题" class="headerlink" title="其他安全问题"></a>其他安全问题</h4></li>
 <li>安全配置错误</li>
-<li>使用含有已知漏洞的伪造</li>
-</ul>
-</li>
-<li>新型安全漏洞（TOP 10）<ul>
+<li>使用含有已知漏洞的伪造<h4 id="新型安全漏洞（TOP-10）"><a href="#新型安全漏洞（TOP-10）" class="headerlink" title="新型安全漏洞（TOP 10）"></a>新型安全漏洞（TOP 10）</h4></li>
 <li><a href="https://www.owasp.org/images/d/dc/OWASP_Top_10_2017_%E4%B8%AD%E6%96%87%E7%89%88v1.3.pdf" target="_blank" rel="noopener">2017 版</a></li>
 <li>XXE（XML外部实体）</li>
 <li>不安全的反序列化</li>
 <li>不足的日志记录和监控</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x05-防御体系"><a href="#0x05-防御体系" class="headerlink" title="0x05 防御体系"></a>0x05 防御体系</h2><ul>
-<li>安全含义<ul>
+<h2 id="0x05-防御体系"><a href="#0x05-防御体系" class="headerlink" title="0x05 防御体系"></a>0x05 防御体系</h2><h3 id="安全含义"><a href="#安全含义" class="headerlink" title="安全含义"></a>安全含义</h3><ul>
 <li>Security vs Safety</li>
 <li>Security vs Secrecy</li>
-<li>Security vs Audit</li>
-</ul>
-</li>
-<li>两个维度<ul>
+<li>Security vs Audit<h3 id="两个维度"><a href="#两个维度" class="headerlink" title="两个维度"></a>两个维度</h3></li>
 <li>弱点<ul>
 <li>漏洞</li>
 <li>漏洞挖掘</li>
@@ -753,176 +635,106 @@
 <li>入侵检测</li>
 <li>渗透</li>
 <li>应急响应</li>
-<li>DDoS / Anti-DDoS</li>
+<li>DDoS / Anti-DDoS<h3 id="防御者优势"><a href="#防御者优势" class="headerlink" title="防御者优势"></a>防御者优势</h3></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>防御者优势<ul>
 <li>输出大，量不足</li>
 <li>更全更细致的信息</li>
 <li>更强的控制权</li>
 <li>改变系统 / 制定流程</li>
-<li>专职工程师</li>
-</ul>
-</li>
-<li>防御体系构建<ul>
+<li>专职工程师<h3 id="防御体系构建"><a href="#防御体系构建" class="headerlink" title="防御体系构建"></a>防御体系构建</h3></li>
 <li>扬长避短</li>
 <li>让系统更规范</li>
 <li>加强对信息的掌握</li>
 <li>安全评估</li>
 <li>入侵检测</li>
-<li>及时响应</li>
-</ul>
-</li>
-<li>企业架构<ul>
+<li>及时响应<h3 id="企业架构"><a href="#企业架构" class="headerlink" title="企业架构"></a>企业架构</h3></li>
 <li>人员角色</li>
 <li>网络架构与思维</li>
 <li>应用架构与研发过程</li>
-<li>业务与运营</li>
-</ul>
-</li>
-<li>威胁梳理<ul>
+<li>业务与运营<h3 id="威胁梳理"><a href="#威胁梳理" class="headerlink" title="威胁梳理"></a>威胁梳理</h3></li>
 <li>资产梳理</li>
-<li>威胁建模</li>
-</ul>
-</li>
-<li>渗透路径的启示<ul>
+<li>威胁建模<h3 id="渗透路径的启示"><a href="#渗透路径的启示" class="headerlink" title="渗透路径的启示"></a>渗透路径的启示</h3></li>
 <li>网络访问的隔离与限制</li>
 <li>漏洞的挖掘与利用</li>
-<li>账号与权限</li>
-</ul>
-</li>
-<li>安全技术栈<ul>
+<li>账号与权限<h3 id="安全技术栈"><a href="#安全技术栈" class="headerlink" title="安全技术栈"></a>安全技术栈</h3></li>
 <li>客户端安全</li>
 <li>网络与系统安全</li>
 <li>应用安全</li>
 <li>业务安全</li>
 <li>数据安全</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x06-网络安全域隔离与划分"><a href="#0x06-网络安全域隔离与划分" class="headerlink" title="0x06 网络安全域隔离与划分"></a>0x06 网络安全域隔离与划分</h2><ul>
-<li>网络与系统安全<ul>
+<h2 id="0x06-网络安全域隔离与划分"><a href="#0x06-网络安全域隔离与划分" class="headerlink" title="0x06 网络安全域隔离与划分"></a>0x06 网络安全域隔离与划分</h2><h3 id="网络与系统安全"><a href="#网络与系统安全" class="headerlink" title="网络与系统安全"></a>网络与系统安全</h3><ul>
 <li>安全域的隔离与划分</li>
 <li>认证，授权与审计</li>
 <li>边界入侵检测</li>
-<li>主机安全与配置</li>
-</ul>
-</li>
-<li>安全域的划分与隔离<br><img src="http://pb2h7gmlc.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%9F.PNG" alt="安全域"></li>
-<li>ACL与防火墙<ul>
+<li>主机安全与配置<h3 id="安全域的划分与隔离"><a href="#安全域的划分与隔离" class="headerlink" title="安全域的划分与隔离"></a>安全域的划分与隔离</h3><img src="http://pb2h7gmlc.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E5%9F%9F.PNG" alt="安全域"><h3 id="ACL与防火墙"><a href="#ACL与防火墙" class="headerlink" title="ACL与防火墙"></a>ACL与防火墙</h3></li>
 <li>五元组，N元组</li>
 <li>包过滤防火墙与状态检测防火墙</li>
 <li>黑名单与白名单</li>
 <li>UTM 与 NGFW</li>
-<li>四层负载均衡与Firewall</li>
-</ul>
-</li>
-<li>端口管理<ul>
+<li>四层负载均衡与Firewall<h3 id="端口管理"><a href="#端口管理" class="headerlink" title="端口管理"></a>端口管理</h3></li>
 <li>规范-权限最小原则</li>
 <li>端口扫描，配置梳理</li>
 <li>维护和整改</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x07-AAA与认证"><a href="#0x07-AAA与认证" class="headerlink" title="0x07 AAA与认证"></a>0x07 AAA与认证</h2><ul>
-<li>AAA概念（城门的守卫者）<ul>
+<h2 id="0x07-AAA与认证"><a href="#0x07-AAA与认证" class="headerlink" title="0x07 AAA与认证"></a>0x07 AAA与认证</h2><h3 id="AAA概念（城门的守卫者）"><a href="#AAA概念（城门的守卫者）" class="headerlink" title="AAA概念（城门的守卫者）"></a>AAA概念（城门的守卫者）</h3><ul>
 <li>认证（Authentication）</li>
 <li>授权（Authorization）</li>
 <li>计费（Accounting）</li>
-<li>审计（Audit）</li>
-</ul>
-</li>
-<li>应用场合（登陆，验证）<ul>
+<li>审计（Audit）<h3 id="应用场合（登陆，验证）"><a href="#应用场合（登陆，验证）" class="headerlink" title="应用场合（登陆，验证）"></a>应用场合（登陆，验证）</h3></li>
 <li>网络准入-有线，无限，VPN</li>
 <li>服务器防伪</li>
 <li>服务器访问</li>
 <li>网站登录</li>
 <li>远程服务器认证与登陆</li>
 <li>设备使用</li>
-<li>重要操作鉴权</li>
-</ul>
-</li>
-<li>认证<ul>
+<li>重要操作鉴权<h3 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h3></li>
 <li>基于口令 </li>
 <li>基于凭证</li>
-<li>基于生物特征</li>
-</ul>
-</li>
-<li>口令（以哈希的形式存储在各种地方）<ul>
+<li>基于生物特征<h3 id="口令（以哈希的形式存储在各种地方）"><a href="#口令（以哈希的形式存储在各种地方）" class="headerlink" title="口令（以哈希的形式存储在各种地方）"></a>口令（以哈希的形式存储在各种地方）</h3></li>
 <li>文本</li>
 <li>数据库</li>
 <li>Unix / Windows</li>
-<li>LDAP / AD</li>
-</ul>
-</li>
-<li>凭证（没有口令的缺点，易丢失）<ul>
+<li>LDAP / AD<h3 id="凭证（没有口令的缺点，易丢失）"><a href="#凭证（没有口令的缺点，易丢失）" class="headerlink" title="凭证（没有口令的缺点，易丢失）"></a>凭证（没有口令的缺点，易丢失）</h3></li>
 <li>证书</li>
 <li>Token</li>
 <li>手机短信</li>
 <li>邮箱</li>
-<li>IP / MAC</li>
-</ul>
-</li>
-<li>生物特征（难以伪造，随身携带）<ul>
+<li>IP / MAC<h3 id="生物特征（难以伪造，随身携带）"><a href="#生物特征（难以伪造，随身携带）" class="headerlink" title="生物特征（难以伪造，随身携带）"></a>生物特征（难以伪造，随身携带）</h3></li>
 <li>指纹</li>
 <li>虹膜</li>
 <li>人脸</li>
 <li>习惯</li>
-<li>步态</li>
-</ul>
-</li>
-<li>认证模式<ul>
+<li>步态<h3 id="认证模式"><a href="#认证模式" class="headerlink" title="认证模式"></a>认证模式</h3></li>
 <li>PAP</li>
-<li>CHAP</li>
-</ul>
-</li>
-<li>Kerberos认证协议<ul>
+<li>CHAP<h3 id="Kerberos认证协议"><a href="#Kerberos认证协议" class="headerlink" title="Kerberos认证协议"></a>Kerberos认证协议</h3></li>
 <li>认证</li>
 <li>凭据</li>
-<li>密钥交换</li>
-</ul>
-</li>
-<li>PKI（身份与公钥的绑定）<ul>
+<li>密钥交换<h3 id="PKI（身份与公钥的绑定）"><a href="#PKI（身份与公钥的绑定）" class="headerlink" title="PKI（身份与公钥的绑定）"></a>PKI（身份与公钥的绑定）</h3></li>
 <li>CA</li>
 <li>RA</li>
 <li>证书库</li>
-<li>CRL</li>
-</ul>
-</li>
-<li>EAP（可扩展认证协议） <ul>
+<li>CRL<h3 id="EAP（可扩展认证协议）"><a href="#EAP（可扩展认证协议）" class="headerlink" title="EAP（可扩展认证协议）"></a>EAP（可扩展认证协议）</h3></li>
 <li>MD5</li>
 <li>TLS</li>
 <li>TTLS</li>
 <li>PEAP</li>
-<li>LEAP</li>
-</ul>
-</li>
-<li>RADIUS（认证方式的集成协议与服务）<ul>
+<li>LEAP<h3 id="RADIUS（认证方式的集成协议与服务）"><a href="#RADIUS（认证方式的集成协议与服务）" class="headerlink" title="RADIUS（认证方式的集成协议与服务）"></a>RADIUS（认证方式的集成协议与服务）</h3></li>
 <li>File</li>
 <li>Unix</li>
 <li>LDAP</li>
 <li>OTP</li>
 <li>EAP</li>
-<li>TACACS</li>
-</ul>
-</li>
-<li>工具和软件<ul>
+<li>TACACS<h3 id="工具和软件"><a href="#工具和软件" class="headerlink" title="工具和软件"></a>工具和软件</h3></li>
 <li>OpenSSL</li>
 <li>OpenLDAP</li>
-<li>FreeRadius</li>
-</ul>
-</li>
-<li>双因子认证<ul>
+<li>FreeRadius<h3 id="双因子认证"><a href="#双因子认证" class="headerlink" title="双因子认证"></a>双因子认证</h3></li>
 <li>口令+</li>
 <li>不同场合，不同选择与组合方式</li>
-<li>双因子认证 vs 二次认证</li>
-</ul>
-</li>
-<li>认证典型场合<ul>
+<li>双因子认证 vs 二次认证<h3 id="认证典型场合"><a href="#认证典型场合" class="headerlink" title="认证典型场合"></a>认证典型场合</h3></li>
 <li>网络准入<ul>
 <li>有线，无线，VPN</li>
 <li>EAP</li>
@@ -954,125 +766,71 @@
 <li>业务安全</li>
 <li>策略与应用场景</li>
 <li>认证技术与方案</li>
-<li>框架</li>
+<li>框架<h3 id="口令相关的攻防"><a href="#口令相关的攻防" class="headerlink" title="口令相关的攻防"></a>口令相关的攻防</h3></li>
 </ul>
 </li>
 </ul>
 </li>
-</ul>
-</li>
-<li>口令相关的攻防<ul>
 <li>弱密码/暴力破解/刷库/钓鱼</li>
 <li>防机器人 - 验证码</li>
 <li>围绕次数做的限制</li>
 <li>分析与检测</li>
-<li>口令的存储与传输</li>
-</ul>
-</li>
-<li>验证码缺陷<ul>
+<li>口令的存储与传输<h3 id="验证码缺陷"><a href="#验证码缺陷" class="headerlink" title="验证码缺陷"></a>验证码缺陷</h3></li>
 <li>OCR</li>
 <li>熵不够</li>
 <li>触发时更新 vs 验证时更新</li>
 <li>答案外泄</li>
 <li>绑定session vs 绑定事物</li>
-<li>使用错误导致验证码不起作用</li>
-</ul>
-</li>
-<li>鉴权<ul>
+<li>使用错误导致验证码不起作用<h3 id="鉴权"><a href="#鉴权" class="headerlink" title="鉴权"></a>鉴权</h3></li>
 <li>映射：账号-&gt;操作-&gt;Action</li>
-<li>基于账号 vs 基于群组 / 角色</li>
-</ul>
-</li>
-<li>审计（发现 &amp; 追溯）<ul>
+<li>基于账号 vs 基于群组 / 角色<h3 id="审计（发现-amp-追溯）"><a href="#审计（发现-amp-追溯）" class="headerlink" title="审计（发现 &amp; 追溯）"></a>审计（发现 &amp; 追溯）</h3></li>
 <li>事前：风险评估，资格评估</li>
 <li>事中：入侵检测</li>
-<li>事后：追溯 + 制度</li>
-</ul>
-</li>
-<li>日志记录<ul>
+<li>事后：追溯 + 制度<h3 id="日志记录"><a href="#日志记录" class="headerlink" title="日志记录"></a>日志记录</h3></li>
 <li>认证记录</li>
 <li>鉴权记录</li>
 <li>应用层 / 业务记录</li>
-<li>异常记录</li>
-</ul>
-</li>
-<li>常见日志（配置/读取） <ul>
+<li>异常记录<h3 id="常见日志（配置-读取）"><a href="#常见日志（配置-读取）" class="headerlink" title="常见日志（配置/读取）"></a>常见日志（配置/读取）</h3></li>
 <li>syslog（syslog-ng,rsyslog）</li>
 <li>audit（auditd）</li>
 <li>access log / error log</li>
-<li>应用日志：log4j</li>
-</ul>
-</li>
-<li>文本日志分析<ul>
+<li>应用日志：log4j<h3 id="文本日志分析"><a href="#文本日志分析" class="headerlink" title="文本日志分析"></a>文本日志分析</h3></li>
 <li>awk</li>
 <li>sed</li>
 <li>grep</li>
 <li>sort</li>
 <li>uniq</li>
-<li>wc</li>
-</ul>
-</li>
-<li>日志收集与预处理（收集，切割，格式化）<ul>
+<li>wc<h3 id="日志收集与预处理（收集，切割，格式化）"><a href="#日志收集与预处理（收集，切割，格式化）" class="headerlink" title="日志收集与预处理（收集，切割，格式化）"></a>日志收集与预处理（收集，切割，格式化）</h3></li>
 <li>Flume</li>
-<li>Logstash</li>
-</ul>
-</li>
-<li>日志分析（查找，统计）<ul>
+<li>Logstash<h3 id="日志分析（查找，统计）"><a href="#日志分析（查找，统计）" class="headerlink" title="日志分析（查找，统计）"></a>日志分析（查找，统计）</h3></li>
 <li>ElasticSearch Logstash Kibana</li>
 <li>Splunk</li>
 <li>Hadoop + Hive</li>
 <li>Storm</li>
 </ul>
-</li>
-</ul>
 <hr>
-<h2 id="0x08-入侵检测"><a href="#0x08-入侵检测" class="headerlink" title="0x08 入侵检测"></a>0x08 入侵检测</h2><ul>
-<li>入侵检测（识别 &amp; 发现）<ul>
+<h2 id="0x08-入侵检测"><a href="#0x08-入侵检测" class="headerlink" title="0x08 入侵检测"></a>0x08 入侵检测</h2><h3 id="入侵检测（识别-amp-发现）"><a href="#入侵检测（识别-amp-发现）" class="headerlink" title="入侵检测（识别 &amp; 发现）"></a>入侵检测（识别 &amp; 发现）</h3><ul>
 <li>攻击</li>
-<li>潜在威胁</li>
-</ul>
-</li>
-<li>与安全体系的关系（受益 &amp; 补充）<ul>
+<li>潜在威胁<h3 id="与安全体系的关系（受益-amp-补充）"><a href="#与安全体系的关系（受益-amp-补充）" class="headerlink" title="与安全体系的关系（受益 &amp; 补充）"></a>与安全体系的关系（受益 &amp; 补充）</h3></li>
 <li>收敛</li>
-<li>规范</li>
-</ul>
-</li>
-<li>部署位置<ul>
+<li>规范<h3 id="部署位置"><a href="#部署位置" class="headerlink" title="部署位置"></a>部署位置</h3></li>
 <li>流量汇聚处</li>
 <li>AAA</li>
 <li>主机</li>
-<li>日志汇聚处</li>
-</ul>
-</li>
-<li>检测方式（黑白名单）<ul>
+<li>日志汇聚处<h3 id="检测方式（黑白名单）"><a href="#检测方式（黑白名单）" class="headerlink" title="检测方式（黑白名单）"></a>检测方式（黑白名单）</h3></li>
 <li>误用检测 - 黑明白</li>
-<li>异常检测 - 白名单</li>
-</ul>
-</li>
-<li>检测技术<ul>
+<li>异常检测 - 白名单<h3 id="检测技术"><a href="#检测技术" class="headerlink" title="检测技术"></a>检测技术</h3></li>
 <li>规则 - 经验转化，专家系统</li>
-<li>模型 - 科学与玄学</li>
-</ul>
-</li>
-<li>实时性（权衡与妥协）<ul>
+<li>模型 - 科学与玄学<h3 id="实时性（权衡与妥协）"><a href="#实时性（权衡与妥协）" class="headerlink" title="实时性（权衡与妥协）"></a>实时性（权衡与妥协）</h3></li>
 <li>实时</li>
 <li>准实时</li>
-<li>事后</li>
-</ul>
-</li>
-<li>响应<ul>
+<li>事后<h3 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h3></li>
 <li>联动</li>
-<li>告警（工单，线索）</li>
-</ul>
-</li>
-<li>实例（典型与广义的）<ul>
+<li>告警（工单，线索）<h3 id="实例（典型与广义的）"><a href="#实例（典型与广义的）" class="headerlink" title="实例（典型与广义的）"></a>实例（典型与广义的）</h3></li>
 <li>Snort</li>
 <li>WAF - Modsecurity Lua</li>
 <li>Agent - OSSEC</li>
-<li>日志分析系统</li>
-</ul>
-</li>
-<li>ModSecurity<ul>
+<li>日志分析系统<h3 id="ModSecurity"><a href="#ModSecurity" class="headerlink" title="ModSecurity"></a>ModSecurity</h3></li>
 <li>5个阶段<ul>
 <li>Phase Request Headers</li>
 <li>Phase Request Body</li>
@@ -1086,24 +844,18 @@
 <li>Variables</li>
 <li>Transformation functions</li>
 <li>Operators</li>
-<li>Actions</li>
+<li>Actions<h3 id="OSSEC"><a href="#OSSEC" class="headerlink" title="OSSEC"></a>OSSEC</h3></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>OSSEC<ul>
 <li>安全Agent HIDS</li>
 <li>配置手册<ul>
 <li>Log monitoring/analysis</li>
 <li>Syscheck</li>
 <li>Rootcheck manual</li>
 <li>Rules and Decoders</li>
-<li>Active Response</li>
+<li>Active Response<br>-<h3 id="蜜罐（另辟蹊径）"><a href="#蜜罐（另辟蹊径）" class="headerlink" title="蜜罐（另辟蹊径）"></a>蜜罐（另辟蹊径）</h3></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>蜜罐（另辟蹊径）<ul>
 <li>与狭义IDS的区别<ul>
 <li>谁迷惑谁</li>
 <li>自带关键信息量</li>
@@ -1116,7 +868,205 @@
 </ul>
 </li>
 </ul>
+<hr>
+<h2 id="0x09-数据安全"><a href="#0x09-数据安全" class="headerlink" title="0x09 数据安全"></a>0x09 数据安全</h2><h3 id="问题现状"><a href="#问题现状" class="headerlink" title="问题现状"></a>问题现状</h3><ul>
+<li>业务数据泄露<ul>
+<li>投诉</li>
+<li>案件</li>
+<li>公关事件</li>
+</ul>
 </li>
+<li>公司机密泄露<ul>
+<li>员工通信录</li>
+<li>内部邮件，论坛</li>
+<li>战略机密，谈判底线，高管行踪</li>
+</ul>
+</li>
+</ul>
+<h3 id="解决（堵住缺口）"><a href="#解决（堵住缺口）" class="headerlink" title="解决（堵住缺口）"></a>解决（堵住缺口）</h3><ul>
+<li>放渗透/防入侵</li>
+<li>加密存储</li>
+<li>增强AAA</li>
+<li>水印</li>
+<li>保密制度</li>
+</ul>
+<h3 id="实际情况"><a href="#实际情况" class="headerlink" title="实际情况"></a>实际情况</h3><h4 id="问题发生时"><a href="#问题发生时" class="headerlink" title="问题发生时"></a>问题发生时</h4><ul>
+<li>猜疑</li>
+<li>碰运气</li>
+<li>抓垫背，波脏水</li>
+<li>被动解释</li>
+</ul>
+<h4 id="问题发生前"><a href="#问题发生前" class="headerlink" title="问题发生前"></a>问题发生前</h4><ul>
+<li>过度自信</li>
+<li>过度保守</li>
+<li>不愿意付出代价</li>
+<li>拍脑袋，想当然</li>
+</ul>
+<h4 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h4><ul>
+<li>不科学，不系统，不清晰</li>
+<li>有什么数据？</li>
+<li>数据的意义价值？</li>
+<li>如何保护数据？</li>
+<li>现有的安全措施和保护数据之间的关系？</li>
+<li>必要性和代价？</li>
+</ul>
+<h4 id="特点和难点"><a href="#特点和难点" class="headerlink" title="特点和难点"></a>特点和难点</h4><ul>
+<li>纵深防御</li>
+<li>没有独当一面</li>
+<li>没有立竿见影</li>
+<li>大部分不是技术的坑</li>
+<li>主要目标不是外部而是内部</li>
+<li>建立在已有防御体系之上</li>
+<li>独立于已有防御技术和手段</li>
+</ul>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><ul>
+<li>数据梳理</li>
+<li>数据定级/打标</li>
+<li>针对数据级别的安全规范矩阵</li>
+<li>针对规则，控制增量</li>
+<li>实例评估，整改，消化存量</li>
+</ul>
+<h4 id="数据级别（抽象数据划分）"><a href="#数据级别（抽象数据划分）" class="headerlink" title="数据级别（抽象数据划分）"></a>数据级别（抽象数据划分）</h4><ul>
+<li>类型维度<ul>
+<li>公司数据（B）</li>
+<li>用户数据（C）</li>
+</ul>
+</li>
+<li>级别维度<ul>
+<li>公开（1）</li>
+<li>共享（2）</li>
+<li>秘密（3）</li>
+<li>机密（4）</li>
+</ul>
+</li>
+<li>数据生命周期<ul>
+<li>生成/采集</li>
+<li>传输</li>
+<li>存储</li>
+<li>读取</li>
+<li>展示</li>
+<li>转移</li>
+<li>销毁</li>
+</ul>
+</li>
+<li>典型场景<ul>
+<li>用户机密数据不能存储</li>
+<li>用户机密信息的采集必须加密</li>
+<li>用户秘密数据不能在前台展示</li>
+<li>用户机密数据不能在后台展示</li>
+<li>用户秘密数据必须通过认证和授权后才能被用户自己访问</li>
+<li>用户共享信息必须经过用户授权才能共享给其他用户</li>
+<li>公司秘密信息必须经过认证和授权才能访问 , 且必须有记录</li>
+<li>公司秘密信息的转移必须经过审批</li>
+<li>公司共享信息在展示时要加水印</li>
+<li>公司秘密数据不得存储在公司以外的网络或介质中</li>
+<li>公司贡献数据必须经过审批才能对外公开    </li>
+</ul>
+</li>
+</ul>
+<h4 id="处置方式"><a href="#处置方式" class="headerlink" title="处置方式"></a>处置方式</h4><ul>
+<li>手段<ul>
+<li>明文，加密</li>
+<li>哈希</li>
+<li>水印</li>
+<li>AAA</li>
+</ul>
+</li>
+<li>级别变化<ul>
+<li>打星，脱敏</li>
+<li>聚合</li>
+</ul>
+</li>
+</ul>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ul>
+<li>避免在具体细节处纠缠—— 自上而下推动</li>
+<li>避免描述和现状不一致—— 控制权</li>
+<li>考虑现状和可行性—— 不给自己挖坑  </li>
+</ul>
+<hr>
+<h2 id="0x10-应用安全"><a href="#0x10-应用安全" class="headerlink" title="0x10 应用安全"></a>0x10 应用安全</h2><h3 id="应用开发（代码）"><a href="#应用开发（代码）" class="headerlink" title="应用开发（代码）"></a>应用开发（代码）</h3><ul>
+<li>MVC<ul>
+<li>View Controller Modle</li>
+</ul>
+</li>
+<li>RESTful<ul>
+<li>前端渲染</li>
+</ul>
+</li>
+<li>J2EE<ul>
+<li>客户层 表示层 业务逻辑层 数据层</li>
+</ul>
+</li>
+</ul>
+<h3 id="容器与Filter-安全逻辑点"><a href="#容器与Filter-安全逻辑点" class="headerlink" title="容器与Filter(安全逻辑点)"></a>容器与Filter(安全逻辑点)</h3><ul>
+<li>http 服务器 - Module<ul>
+<li>Apache 、 Nginx</li>
+</ul>
+</li>
+<li>容器 - 容器 Filter<ul>
+<li>JBoss 、 Tomcat 、 Jetty</li>
+</ul>
+</li>
+<li>开发框架 Filter 、 Servlet Filter</li>
+</ul>
+<h3 id="其它关键点（针对性）"><a href="#其它关键点（针对性）" class="headerlink" title="其它关键点（针对性）"></a>其它关键点（针对性）</h3><ul>
+<li>Web层渲染时</li>
+<li>AJAX 请求生成，JSON结果生成</li>
+<li>数据层 ORM</li>
+</ul>
+<h3 id="中间件（大型网站架构）"><a href="#中间件（大型网站架构）" class="headerlink" title="中间件（大型网站架构）"></a>中间件（大型网站架构）</h3><ul>
+<li>远程同步调用</li>
+<li>异步通知 、消息总线</li>
+<li>分布式缓存</li>
+<li>分布式数据库</li>
+<li>集中配置管理</li>
+<li>统一的应用日志采集方案</li>
+<li>数据分析平台</li>
+</ul>
+<h3 id="开发框架（决定应用安全难度）"><a href="#开发框架（决定应用安全难度）" class="headerlink" title="开发框架（决定应用安全难度）"></a>开发框架（决定应用安全难度）</h3><ul>
+<li>有的地方有、有的地方没有</li>
+<li>有的就弄清楚</li>
+<li>没有的要联合架构师来推动（然而 … ）</li>
+<li>读懂框架，便于白盒检查和应急</li>
+<li>将安全措施融入到框架中</li>
+</ul>
+<h3 id="常见框架-软件"><a href="#常见框架-软件" class="headerlink" title="常见框架/软件"></a>常见框架/软件</h3><ul>
+<li>pring Struts Hibernate</li>
+<li>Spring MVC</li>
+<li>ASP.NET</li>
+<li>Django</li>
+<li>ThinkPHP 等一众PHP框架</li>
+<li>AngularJS 等一众前端</li>
+</ul>
+<h3 id="漏洞挖掘（多信息）"><a href="#漏洞挖掘（多信息）" class="headerlink" title="漏洞挖掘（多信息）"></a>漏洞挖掘（多信息）</h3><ul>
+<li>目标系统</li>
+<li>文档</li>
+<li>代码</li>
+<li>测试环境</li>
+<li>人</li>
+<li>日志</li>
+<li>攻击者提供的线索</li>
+</ul>
+<h3 id="Fuzz-替换为攻击向量"><a href="#Fuzz-替换为攻击向量" class="headerlink" title="Fuzz(替换为攻击向量)"></a>Fuzz(替换为攻击向量)</h3><ul>
+<li>代理抓包</li>
+<li>日志</li>
+<li>测试代理</li>
+</ul>
+<h3 id="安全开发"><a href="#安全开发" class="headerlink" title="安全开发"></a>安全开发</h3><ul>
+<li>安全框架 - 告诉开发该怎么做</li>
+<li>安全编码规范 - 告诉开发必须这么做</li>
+<li>白盒审计 - 找出不这么做的</li>
+</ul>
+<h3 id="SDL（软件开发周期）"><a href="#SDL（软件开发周期）" class="headerlink" title="SDL（软件开发周期）"></a>SDL（软件开发周期）</h3><ul>
+<li>需求评审</li>
+<li>设计评审</li>
+<li>技术评审</li>
+<li>测试用例评审</li>
+<li>开发阶段</li>
+<li>测试阶段</li>
+<li>上线阶段</li>
+<li>运维运营阶段</li>
+<li>下线</li>
 </ul>
 
       
@@ -1288,7 +1238,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-渗透场景"><span class="nav-number">1.</span> <span class="nav-text">0x01 渗透场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-扫描"><span class="nav-number">2.</span> <span class="nav-text">0x02 扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-嗅探（网络流量数据分析）"><span class="nav-number">3.</span> <span class="nav-text">0x03 嗅探（网络流量数据分析）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-漏洞"><span class="nav-number">4.</span> <span class="nav-text">0x04 漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS与抗D"><span class="nav-number">4.1.</span> <span class="nav-text">1. DDoS与抗D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-漏洞"><span class="nav-number">4.2.</span> <span class="nav-text">2. 漏洞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-防御体系"><span class="nav-number">5.</span> <span class="nav-text">0x05 防御体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-网络安全域隔离与划分"><span class="nav-number">6.</span> <span class="nav-text">0x06 网络安全域隔离与划分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-AAA与认证"><span class="nav-number">7.</span> <span class="nav-text">0x07 AAA与认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-入侵检测"><span class="nav-number">8.</span> <span class="nav-text">0x08 入侵检测</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-渗透场景"><span class="nav-number">1.</span> <span class="nav-text">0x01 渗透场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-扫描"><span class="nav-number">2.</span> <span class="nav-text">0x02 扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集目标"><span class="nav-number">2.1.</span> <span class="nav-text">信息收集目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#域名收集（业务承载）"><span class="nav-number">2.2.</span> <span class="nav-text">域名收集（业务承载）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收集IP（目标基本粒度之一）"><span class="nav-number">2.3.</span> <span class="nav-text">收集IP（目标基本粒度之一）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口扫描（缺陷基本粒度之一）"><span class="nav-number">2.4.</span> <span class="nav-text">端口扫描（缺陷基本粒度之一）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描工具"><span class="nav-number">2.5.</span> <span class="nav-text">扫描工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描过程（发，收，判断特征，结论）"><span class="nav-number">2.6.</span> <span class="nav-text">扫描过程（发，收，判断特征，结论）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主机存活"><span class="nav-number">2.7.</span> <span class="nav-text">主机存活</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口扫描（端口状态）"><span class="nav-number">2.8.</span> <span class="nav-text">端口扫描（端口状态）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-嗅探（网络流量数据分析）"><span class="nav-number">3.</span> <span class="nav-text">0x03 嗅探（网络流量数据分析）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#狭义嗅探"><span class="nav-number">3.1.</span> <span class="nav-text">狭义嗅探</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">3.2.</span> <span class="nav-text">应用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BPF语法"><span class="nav-number">3.3.</span> <span class="nav-text">BPF语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嗅探工具"><span class="nav-number">3.4.</span> <span class="nav-text">嗅探工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广义抓包（上层-细节-限制）"><span class="nav-number">3.5.</span> <span class="nav-text">广义抓包（上层/细节/限制）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发包"><span class="nav-number">3.6.</span> <span class="nav-text">发包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流还原（发包-）"><span class="nav-number">3.7.</span> <span class="nav-text">流还原（发包++）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-漏洞"><span class="nav-number">4.</span> <span class="nav-text">0x04 漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS与抗D"><span class="nav-number">4.1.</span> <span class="nav-text">1. DDoS与抗D</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#含义"><span class="nav-number">4.1.1.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#动机（趋向现实）"><span class="nav-number">4.1.2.</span> <span class="nav-text">动机（趋向现实）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击途径"><span class="nav-number">4.1.3.</span> <span class="nav-text">攻击途径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量放大"><span class="nav-number">4.1.4.</span> <span class="nav-text">流量放大</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击源（僵尸网络为主）"><span class="nav-number">4.1.5.</span> <span class="nav-text">攻击源（僵尸网络为主）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#攻击类型"><span class="nav-number">4.1.6.</span> <span class="nav-text">攻击类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CC-过量访问（低于带宽，高于处理能力）"><span class="nav-number">4.1.7.</span> <span class="nav-text">CC/过量访问（低于带宽，高于处理能力）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量清洗"><span class="nav-number">4.1.8.</span> <span class="nav-text">流量清洗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案"><span class="nav-number">4.1.9.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-漏洞"><span class="nav-number">4.2.</span> <span class="nav-text">2. 漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">4.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OWASP-TOP-10（13版）"><span class="nav-number">4.2.2.</span> <span class="nav-text">OWASP TOP 10（13版）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注入"><span class="nav-number">4.2.3.</span> <span class="nav-text">注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL注入"><span class="nav-number">4.2.4.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NoSQL注入"><span class="nav-number">4.2.5.</span> <span class="nav-text">NoSQL注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XSS"><span class="nav-number">4.2.6.</span> <span class="nav-text">XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URL任意跳转（钓鱼）"><span class="nav-number">4.2.7.</span> <span class="nav-text">URL任意跳转（钓鱼）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#未验证的转发（突破内网边界）"><span class="nav-number">4.2.8.</span> <span class="nav-text">未验证的转发（突破内网边界）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSRF（跨站请求伪造）"><span class="nav-number">4.2.9.</span> <span class="nav-text">CSRF（跨站请求伪造）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#水平权限漏洞"><span class="nav-number">4.2.10.</span> <span class="nav-text">水平权限漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问控制缺失"><span class="nav-number">4.2.11.</span> <span class="nav-text">访问控制缺失</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#失效的身份认证和会话管理"><span class="nav-number">4.2.12.</span> <span class="nav-text">失效的身份认证和会话管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他安全问题"><span class="nav-number">4.2.13.</span> <span class="nav-text">其他安全问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新型安全漏洞（TOP-10）"><span class="nav-number">4.2.14.</span> <span class="nav-text">新型安全漏洞（TOP 10）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-防御体系"><span class="nav-number">5.</span> <span class="nav-text">0x05 防御体系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全含义"><span class="nav-number">5.1.</span> <span class="nav-text">安全含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个维度"><span class="nav-number">5.2.</span> <span class="nav-text">两个维度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防御者优势"><span class="nav-number">5.3.</span> <span class="nav-text">防御者优势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#防御体系构建"><span class="nav-number">5.4.</span> <span class="nav-text">防御体系构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#企业架构"><span class="nav-number">5.5.</span> <span class="nav-text">企业架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#威胁梳理"><span class="nav-number">5.6.</span> <span class="nav-text">威胁梳理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渗透路径的启示"><span class="nav-number">5.7.</span> <span class="nav-text">渗透路径的启示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全技术栈"><span class="nav-number">5.8.</span> <span class="nav-text">安全技术栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-网络安全域隔离与划分"><span class="nav-number">6.</span> <span class="nav-text">0x06 网络安全域隔离与划分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络与系统安全"><span class="nav-number">6.1.</span> <span class="nav-text">网络与系统安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全域的划分与隔离"><span class="nav-number">6.2.</span> <span class="nav-text">安全域的划分与隔离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACL与防火墙"><span class="nav-number">6.3.</span> <span class="nav-text">ACL与防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口管理"><span class="nav-number">6.4.</span> <span class="nav-text">端口管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-AAA与认证"><span class="nav-number">7.</span> <span class="nav-text">0x07 AAA与认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AAA概念（城门的守卫者）"><span class="nav-number">7.1.</span> <span class="nav-text">AAA概念（城门的守卫者）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场合（登陆，验证）"><span class="nav-number">7.2.</span> <span class="nav-text">应用场合（登陆，验证）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认证"><span class="nav-number">7.3.</span> <span class="nav-text">认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#口令（以哈希的形式存储在各种地方）"><span class="nav-number">7.4.</span> <span class="nav-text">口令（以哈希的形式存储在各种地方）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#凭证（没有口令的缺点，易丢失）"><span class="nav-number">7.5.</span> <span class="nav-text">凭证（没有口令的缺点，易丢失）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生物特征（难以伪造，随身携带）"><span class="nav-number">7.6.</span> <span class="nav-text">生物特征（难以伪造，随身携带）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认证模式"><span class="nav-number">7.7.</span> <span class="nav-text">认证模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kerberos认证协议"><span class="nav-number">7.8.</span> <span class="nav-text">Kerberos认证协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PKI（身份与公钥的绑定）"><span class="nav-number">7.9.</span> <span class="nav-text">PKI（身份与公钥的绑定）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#EAP（可扩展认证协议）"><span class="nav-number">7.10.</span> <span class="nav-text">EAP（可扩展认证协议）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RADIUS（认证方式的集成协议与服务）"><span class="nav-number">7.11.</span> <span class="nav-text">RADIUS（认证方式的集成协议与服务）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具和软件"><span class="nav-number">7.12.</span> <span class="nav-text">工具和软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双因子认证"><span class="nav-number">7.13.</span> <span class="nav-text">双因子认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认证典型场合"><span class="nav-number">7.14.</span> <span class="nav-text">认证典型场合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#口令相关的攻防"><span class="nav-number">7.15.</span> <span class="nav-text">口令相关的攻防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证码缺陷"><span class="nav-number">7.16.</span> <span class="nav-text">验证码缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#鉴权"><span class="nav-number">7.17.</span> <span class="nav-text">鉴权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#审计（发现-amp-追溯）"><span class="nav-number">7.18.</span> <span class="nav-text">审计（发现 &amp; 追溯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志记录"><span class="nav-number">7.19.</span> <span class="nav-text">日志记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见日志（配置-读取）"><span class="nav-number">7.20.</span> <span class="nav-text">常见日志（配置/读取）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本日志分析"><span class="nav-number">7.21.</span> <span class="nav-text">文本日志分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志收集与预处理（收集，切割，格式化）"><span class="nav-number">7.22.</span> <span class="nav-text">日志收集与预处理（收集，切割，格式化）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志分析（查找，统计）"><span class="nav-number">7.23.</span> <span class="nav-text">日志分析（查找，统计）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-入侵检测"><span class="nav-number">8.</span> <span class="nav-text">0x08 入侵检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入侵检测（识别-amp-发现）"><span class="nav-number">8.1.</span> <span class="nav-text">入侵检测（识别 &amp; 发现）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与安全体系的关系（受益-amp-补充）"><span class="nav-number">8.2.</span> <span class="nav-text">与安全体系的关系（受益 &amp; 补充）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署位置"><span class="nav-number">8.3.</span> <span class="nav-text">部署位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测方式（黑白名单）"><span class="nav-number">8.4.</span> <span class="nav-text">检测方式（黑白名单）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测技术"><span class="nav-number">8.5.</span> <span class="nav-text">检测技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实时性（权衡与妥协）"><span class="nav-number">8.6.</span> <span class="nav-text">实时性（权衡与妥协）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应"><span class="nav-number">8.7.</span> <span class="nav-text">响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例（典型与广义的）"><span class="nav-number">8.8.</span> <span class="nav-text">实例（典型与广义的）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ModSecurity"><span class="nav-number">8.9.</span> <span class="nav-text">ModSecurity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSSEC"><span class="nav-number">8.10.</span> <span class="nav-text">OSSEC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#蜜罐（另辟蹊径）"><span class="nav-number">8.11.</span> <span class="nav-text">蜜罐（另辟蹊径）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-数据安全"><span class="nav-number">9.</span> <span class="nav-text">0x09 数据安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题现状"><span class="nav-number">9.1.</span> <span class="nav-text">问题现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决（堵住缺口）"><span class="nav-number">9.2.</span> <span class="nav-text">解决（堵住缺口）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际情况"><span class="nav-number">9.3.</span> <span class="nav-text">实际情况</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题发生时"><span class="nav-number">9.3.1.</span> <span class="nav-text">问题发生时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题发生前"><span class="nav-number">9.3.2.</span> <span class="nav-text">问题发生前</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题原因"><span class="nav-number">9.3.3.</span> <span class="nav-text">问题原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特点和难点"><span class="nav-number">9.3.4.</span> <span class="nav-text">特点和难点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方法"><span class="nav-number">9.3.5.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据级别（抽象数据划分）"><span class="nav-number">9.3.6.</span> <span class="nav-text">数据级别（抽象数据划分）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处置方式"><span class="nav-number">9.3.7.</span> <span class="nav-text">处置方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意事项"><span class="nav-number">9.3.8.</span> <span class="nav-text">注意事项</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x10-应用安全"><span class="nav-number">10.</span> <span class="nav-text">0x10 应用安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用开发（代码）"><span class="nav-number">10.1.</span> <span class="nav-text">应用开发（代码）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器与Filter-安全逻辑点"><span class="nav-number">10.2.</span> <span class="nav-text">容器与Filter(安全逻辑点)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它关键点（针对性）"><span class="nav-number">10.3.</span> <span class="nav-text">其它关键点（针对性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中间件（大型网站架构）"><span class="nav-number">10.4.</span> <span class="nav-text">中间件（大型网站架构）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发框架（决定应用安全难度）"><span class="nav-number">10.5.</span> <span class="nav-text">开发框架（决定应用安全难度）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见框架-软件"><span class="nav-number">10.6.</span> <span class="nav-text">常见框架/软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞挖掘（多信息）"><span class="nav-number">10.7.</span> <span class="nav-text">漏洞挖掘（多信息）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fuzz-替换为攻击向量"><span class="nav-number">10.8.</span> <span class="nav-text">Fuzz(替换为攻击向量)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全开发"><span class="nav-number">10.9.</span> <span class="nav-text">安全开发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SDL（软件开发周期）"><span class="nav-number">10.10.</span> <span class="nav-text">SDL（软件开发周期）</span></a></li></ol></li></ol></div>
             
 
           </div>
