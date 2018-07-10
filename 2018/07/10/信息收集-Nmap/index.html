@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-10T09:20:55.776Z">
+<meta property="og:updated_time" content="2018-07-10T10:09:21.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="信息收集-Nmap">
 <meta name="twitter:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
@@ -641,14 +641,355 @@
 <p><strong>-b <ftp relay="" host=""> (FTP弹跳扫描)</ftp></strong></p>
 <p>FTP协议的一个有趣特征(RFC 959) 是支持所谓代理ftp连接。它允许用户连接到一台FTP服务器，然后要求文件送到一台第三方服务器。 这个特性在很多层次上被滥用，所以许多服务器已经停止支持它了。其中一种就是导致FTP服务器对其它主机端口扫描。 只要请求FTP服务器轮流发送一个文件到目标主机上的所感兴趣的端口。 错误消息会描述端口是开放还是关闭的。 这是绕过防火墙的好方法，因为FTP服务器常常被置于可以访问比Web主机更多其它内部主机的位置。 Nmap用-b选项支持ftp弹跳扫描。参数格式是 <username>:<password>@<server>:<port>。 <server> 是某个脆弱的FTP服务器的名字或者IP地址。 您也许可以省略<username>:<password>， 如果服务器上开放了匿名用户(user:anonymous password:-wwwuser@)。 端口号(以及前面的冒号) 也可以省略，如果<server>使用默认的FTP端口(21)。</server></password></username></server></port></server></password></username></p>
 <p>当Nmap1997年发布时，这个弱点被广泛利用，但现在大部分已经被fix了。 脆弱的服务器仍然存在，所以如果其它都失败了，这也值得一试。 如果您的目标是绕过防火墙，扫描目标网络上的开放的21端口(或者 甚至任何ftp服务，如果您用版本探测扫描所有端口)， 然后对每个尝试弹跳扫描。Nmap会告诉您该主机脆弱与否。 如果您只是试着玩Nmap，您不必(事实上，不应该)限制您自己。 在您随机地在互联网上寻找脆弱的FTP服务器时，考虑一下系统管理员不太喜欢您这样滥用他们的服务器</p>
+<h3 id="扫描说明及顺序"><a href="#扫描说明及顺序" class="headerlink" title="扫描说明及顺序"></a>扫描说明及顺序</h3><p><strong>概述</strong></p>
+<ul>
+<li>除了所有前面讨论的扫描方法， Nmap提供选项说明那些端口被扫描以及扫描是随机还是顺序进行。 默认情况下，Nmap用指定的协议对端口1到1024以及nmap-services 文件中列出的更高的端口在扫描</li>
+</ul>
+<p><strong>选项</strong></p>
+<p><strong>-p <port ranges=""> (只扫描指定的端口)</port></strong></p>
+<ul>
+<li>该选项指明您想扫描的端口，覆盖默认值。 单个端口和用连字符表示的端口范围(如 1-1023)都可以。 范围的开始以及/或者结束值可以被省略， 分别导致Nmap使用1和65535。所以您可以指定 -p-从端口1扫描到65535。 如果您特别指定，也可以扫描端口0。 对于IP协议扫描(-sO)，该选项指定您希望扫描的协议号 (0-255)。</li>
+</ul>
+<ul>
+<li>当既扫描TCP端口又扫描UDP端口时，您可以通过在端口号前加上T: 或者U:指定协议。 协议限定符一直有效您直到指定另一个。 例如，参数 -p U:53，111，137，T:21-25，80，139，8080 将扫描UDP 端口53，111，和137，同时扫描列出的TCP端口。注意，要既扫描 UDP又扫描TCP，您必须指定 -sU ，以及至少一个TCP扫描类型(如 -sS，-sF，或者 -sT)。如果没有给定协议限定符， 端口号会被加到所有协议列表。</li>
+</ul>
+<p><strong>-F (快速 (有限的端口) 扫描)</strong></p>
+<ul>
+<li>在nmap的nmap-services 文件中(对于-sO，是协议文件)指定您想要扫描的端口。 这比扫描所有65535个端口快得多。 因为该列表包含如此多的TCP端口(1200多)，这和默认的TCP扫描 scan (大约1600个端口)速度差别不是很大。如果您用–datadir选项指定您自己的 小小的nmap-services文件 ，差别会很惊人。</li>
+</ul>
+<p><strong>-r (不要按随机顺序扫描端口)</strong></p>
+<ul>
+<li>默认情况下，Nmap按随机顺序扫描端口 (除了出于效率的考虑，常用的端口前移)。这种随机化通常都是受欢迎的， 但您也可以指定-r来顺序端口扫描</li>
+</ul>
 <hr>
-<h2 id="0x05-服务和版本探测"><a href="#0x05-服务和版本探测" class="headerlink" title="0x05 服务和版本探测"></a>0x05 服务和版本探测</h2><hr>
-<h2 id="0x06-操作系统探测"><a href="#0x06-操作系统探测" class="headerlink" title="0x06 操作系统探测"></a>0x06 操作系统探测</h2><hr>
-<h2 id="0x07-时间和性能"><a href="#0x07-时间和性能" class="headerlink" title="0x07 时间和性能"></a>0x07 时间和性能</h2><hr>
-<h2 id="0x08-防火墙-IDS躲避和哄骗"><a href="#0x08-防火墙-IDS躲避和哄骗" class="headerlink" title="0x08 防火墙/IDS躲避和哄骗"></a>0x08 防火墙/IDS躲避和哄骗</h2><hr>
-<h2 id="0x09-输出"><a href="#0x09-输出" class="headerlink" title="0x09 输出"></a>0x09 输出</h2><hr>
-<h2 id="0x0A-其他选项"><a href="#0x0A-其他选项" class="headerlink" title="0x0A 其他选项"></a>0x0A 其他选项</h2><hr>
-<h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2>
+<h2 id="0x05-服务和版本探测"><a href="#0x05-服务和版本探测" class="headerlink" title="0x05 服务和版本探测"></a>0x05 服务和版本探测</h2><p><strong>概述</strong></p>
+<ul>
+<li><p>把Nmap指向一个远程机器，它可能告诉您 端口25/tcp，80/tcp，和53/udp是开放的。使用包含大约2,200个著名的服务的 nmap-services数据库， Nmap可以报告那些端口可能分别对应于一个邮件服务器 (SMTP)，web服务器(HTTP)，和域名服务器(DNS)。 这种查询通常是正确的 – 事实上，绝大多数在TCP端口25监听的守护进程是邮件 服务器。然而，您不应该把赌注押在这上面! 人们完全可以在一些奇怪的端口上运行服务。</p>
+</li>
+<li><p>即使Nmap是对的，假设运行服务的确实是 SMTP，HTTP和DNS，那也不是特别多的信息。 当为您的公司或者客户作安全评估(或者甚至简单的网络明细清单)时， 您确实想知道正在运行什么邮件和域名服务器以及它们的版本。 有一个精确的版本号对了解服务器有什么漏洞有巨大帮助。 版本探测可以帮您获得该信息。</p>
+</li>
+<li><p>在用某种其它类型的扫描方法发现TCP 和/或者UDP端口后， 版本探测会询问这些端口，确定到底什么服务正在运行。 nmap-service-probes 数据库包含查询不同服务的探测报文 和解析识别响应的匹配表达式。 Nmap试图确定服务协议 (如 ftp，ssh，telnet，http)，应用程序名(如ISC Bind，Apache httpd，Solaris telnetd)，版本号， 主机名，设备类型(如 打印机，路由器)，操作系统家族 (如Windows，Linux)以及其它的细节，如 如是否可以连接X server，SSH协议版本 ，或者KaZaA用户名)。当然，并非所有服务都提供所有这些信息。 如果Nmap被编译成支持OpenSSL， 它将连接到SSL服务器，推测什么服务在加密层后面监听。 当发现RPC服务时， Nmap RPC grinder (-sR)会自动被用于确定RPC程序和它的版本号。 如果在扫描某个UDP端口后仍然无法确定该端口是开放的还是被过滤的，那么该端口状态就 被标记为open|filtered。 版本探测将试图从这些端口引发一个响应(就像它对开放端口做的一样)， 如果成功，就把状态改为开放。 open|filtered TCP端口用同样的方法对待。 注意Nmap -A选项在其它情况下打开版本探测。 有一篇关于版本探测的原理，使用和定制的文章在 <a href="http://www.insecure.org/nmap/vscan/。" target="_blank" rel="noopener">http://www.insecure.org/nmap/vscan/。</a></p>
+</li>
+<li><p>当Nmap从某个服务收到响应，但不能在数据库中找到匹配时， 它就打印一个特殊的fingerprint和一个URL给您提交，如果您确实知道什么服务运行在端口。 请花两分钟提交您的发现，让每个人受益。由于这些提交， Nmap有350种以上协议如smtp，ftp，http等的大约3，000条模式匹配</p>
+</li>
+</ul>
+<p><strong>常用选项</strong></p>
+<p><strong>-sV (版本探测)</strong></p>
+<ul>
+<li>打开版本探测。 您也可以用-A同时打开操作系统探测和版本探测。</li>
+</ul>
+<p><strong>–allports (不为版本探测排除任何端口)</strong></p>
+<ul>
+<li>默认情况下，Nmap版本探测会跳过9100 TCP端口，因为一些打印机简单地打印送到该端口的 任何数据，这回导致数十页HTTP get请求，二进制 SSL会话请求等等被打印出来。这一行为可以通过修改或删除nmap-service-probes 中的Exclude指示符改变， 您也可以不理会任何Exclude指示符，指定–allports扫描所有端口</li>
+</ul>
+<p><strong>–version-intensity <intensity> (设置版本扫描强度)</intensity></strong></p>
+<ul>
+<li>当进行版本扫描(-sV)时，nmap发送一系列探测报文 ，每个报文都被赋予一个1到9之间的值。 被赋予较低值的探测报文对大范围的常见服务有效，而被赋予较高值的报文 一般没什么用。强度水平说明了应该使用哪些探测报文。数值越高， 服务越有可能被正确识别。 然而，高强度扫描花更多时间。强度值必须在0和9之间。 默认是7。当探测报文通过nmap-service-probes ports指示符 注册到目标端口时，无论什么强度水平，探测报文都会被尝试。这保证了DNS 探测将永远在任何开放的53端口尝试， SSL探测将在443端口尝试，等等。</li>
+</ul>
+<p><strong>–version-light (打开轻量级模式)</strong></p>
+<ul>
+<li>这是 –version-intensity 2的方便的别名。轻量级模式使 版本扫描快许多，但它识别服务的可能性也略微小一点。</li>
+</ul>
+<p><strong>–version-all (尝试每个探测)</strong></p>
+<ul>
+<li>–version-intensity 9的别名， 保证对每个端口尝试每个探测报文。</li>
+</ul>
+<p>–version-trace (跟踪版本扫描活动)<br>这导致Nmap打印出详细的关于正在进行的扫描的调试信息。 它是您用–packet-trace所得到的信息的子集。</p>
+<p><strong>-sR (RPC扫描)</strong></p>
+<ul>
+<li>这种方法和许多端口扫描方法联合使用。 它对所有被发现开放的TCP/UDP端口执行SunRPC程序NULL命令，来试图 确定它们是否RPC端口，如果是， 是什么程序和版本号。因此您可以有效地获得和rpcinfo -p一样的信息， 即使目标的端口映射在防火墙后面(或者被TCP包装器保护)。Decoys目前不能和RPC scan一起工作。 这作为版本扫描(-sV)的一部分自动打开。 由于版本探测包括它并且全面得多，-sR很少被需要</li>
+</ul>
+<hr>
+<h2 id="0x06-操作系统探测"><a href="#0x06-操作系统探测" class="headerlink" title="0x06 操作系统探测"></a>0x06 操作系统探测</h2><p><strong>概述</strong></p>
+<ul>
+<li><p>Nmap最著名的功能之一是用TCP/IP协议栈fingerprinting进行远程操作系统探测。 Nmap发送一系列TCP和UDP报文到远程主机，检查响应中的每一个比特。 在进行一打测试如TCP ISN采样，TCP选项支持和排序，IPID采样，和初始窗口大小检查之后， Nmap把结果和数据库nmap-os-fingerprints中超过 1500个已知的操作系统的fingerprints进行比较，如果有匹配，就打印出操作系统的详细信息。 每个fingerprint包括一个自由格式的关于OS的描述文本， 和一个分类信息，它提供供应商名称(如Sun)，下面的操作系统(如Solaris)，OS版本(如10)， 和设备类型(通用设备，路由器，switch，游戏控制台， 等)。</p>
+</li>
+<li><p>如果Nmap不能猜出操作系统，并且有些好的已知条件(如 至少发现了一个开放端口和一个关闭端口)，Nmap会提供一个 URL，如果您确知运行的操作系统，您可以把fingerprint提交到那个URL。 这样您就扩大了Nmap的操作系统知识库，从而让每个Nmap用户都受益。</p>
+</li>
+<li><p>操作系统检测可以进行其它一些测试，这些测试可以利用处理 过程中收集到的信息。例如运行时间检测，使用TCP时间戳选项(RFC 1323) 来估计主机上次重启的时间，这仅适用于提供这类信息的主机。另一种 是TCP序列号预测分类，用于测试针对远程主机建立一个伪造的TCP连接 的可能难度。这对于利用基于源IP地址的可信关系(rlogin，防火墙过滤等) 或者隐含源地址的攻击非常重要。这一类哄骗攻击现在很少见，但一些 主机仍然存在这方面的漏洞。实际的难度值基于统计采样，因此可能会有 一些波动。通常采用英国的分类较好，如“worthy challenge”或者 “trivial joke”。在详细模式(-v)下只以 普通的方式输出，如果同时使用-O，还报告IPID序列产生号。 很多主机的序列号是“增加”类别，即在每个发送包的IP头中 增加ID域值， 这对一些先进的信息收集和哄骗攻击来说是个漏洞</p>
+</li>
+</ul>
+<p><strong>常用选项</strong></p>
+<p><strong>-O (启用操作系统检测)</strong></p>
+<ul>
+<li>也可以使用-A来同时启用操作系统检测和版本检测。</li>
+</ul>
+<p><strong>–osscan-limit (针对指定的目标进行操作系统检测)</strong></p>
+<ul>
+<li>如果发现一个打开和关闭的TCP端口时，操作系统检测会更有效。 采用这个选项，Nmap只对满足这个条件的主机进行操作系统检测，这样可以 节约时间，特别在使用-P0扫描多个主机时。这个选项仅在使用 -O或-A 进行操作系统检测时起作用。</li>
+</ul>
+<p><strong>–osscan-guess; –fuzzy (推测操作系统检测结果)</strong></p>
+<ul>
+<li>当Nmap无法确定所检测的操作系统时，会尽可能地提供最相近的匹配，Nmap默认 进行这种匹配，使用上述任一个选项使得Nmap的推测更加有效</li>
+</ul>
+<hr>
+<h2 id="0x07-时间和性能"><a href="#0x07-时间和性能" class="headerlink" title="0x07 时间和性能"></a>0x07 时间和性能</h2><p><strong>概述</strong></p>
+<ul>
+<li><p>Nmap开发的最高优先级是性能。在本地网络对一个主机的默认扫描(nmap <hostname>)需要1/5秒。而仅仅眨眼的 时间，就需要扫描上万甚至几十万的主机。此外，一些特定的扫描选项会明显增 加扫描时间，如UDP扫描和版本检测。同样，防火墙配置以及特殊的响应速度限制也会 增加时间。Nmap使用了并行算法和许多先进的算法来加速扫描，用户对Nmap如何 工作有最终的控制权。高级用户可以仔细地调整Nmap命令，在满足时间要求的同时获得他们所关心的信息。</hostname></p>
+</li>
+<li><p>改善扫描时间的技术有：忽略非关键的检测、升级最新版本的Nmap(性能增强不断改善)</p>
+</li>
+</ul>
+<p><strong>常用选项</strong></p>
+<p><strong>–min-hostgroup <milliseconds>; –max-hostgroup <milliseconds> (调整并行扫描组的大小)</milliseconds></milliseconds></strong></p>
+<ul>
+<li><p>Nmap具有并行扫描多主机端口或版本的能力，Nmap将多个目标IP地址 空间分成组，然后在同一时间对一个组进行扫描。通常，大的组更有效。缺 点是只有当整个组扫描结束后才会提供主机的扫描结果。如果组的大小定义 为50，则只有当前50个主机扫描结束后才能得到报告(详细模式中的补充信息 除外)。</p>
+</li>
+<li><p>默认方式下，Nmap采取折衷的方法。开始扫描时的组较小， 最小为5，这样便于尽快产生结果；随后增长组的大小，最大为1024。确切的 大小依赖于所给定的选项。为保证效率，针对UDP或少量端口的TCP扫描，Nmap 使用大的组。</p>
+</li>
+<li><p>–max-hostgroup选项用于说明使用最大的组，Nmap不 会超出这个大小。–min-hostgroup选项说明最小的组，Nmap 会保持组大于这个值。如果在指定的接口上没有足够的目标主机来满足所 指定的最小值，Nmap可能会采用比所指定的值小的组。这两个参数虽然很少使用， 但都用于保持组的大小在一个指定的范围之内。</p>
+</li>
+<li><p>这些选项的主要用途是说明一个最小组的大小，使得整个扫描更加快速。通常 选择256来扫描C类网段。对于端口数较多的扫描，超出该值没有意义。对于 端口数较少的扫描，2048或更大的组大小是有帮助的。</p>
+</li>
+</ul>
+<p><strong>–min-parallelism <milliseconds>; –max-parallelism <milliseconds> (调整探测报文的并行度)</milliseconds></milliseconds></strong></p>
+<ul>
+<li><p>这些选项控制用于主机组的探测报文数量，可用于端口扫描和主机发现。默认状态下， Nmap基于网络性能计算一个理想的并行度，这个值经常改变。如果报文被丢弃， Nmap降低速度，探测报文数量减少。随着网络性能的改善，理想的探测报文数量会缓慢增加。 这些选项确定这个变量的大小范围。默认状态下，当网络不可靠时，理想的并行度值 可能为1，在好的条件下，可能会增长至几百。</p>
+</li>
+<li><p>最常见的应用是–min-parallelism值大于1，以加快 性能不佳的主机或网络的扫描。这个选项具有风险，如果过高则影响准确度，同时 也会降低Nmap基于网络条件动态控制并行度的能力。这个值设为10较为合适， 这个值的调整往往作为最后的手段。</p>
+</li>
+<li><p>–max-parallelism选项通常设为1，以防止Nmap在同一时间 向主机发送多个探测报文，和选择–scan-delay同时使用非常有用，虽然 这个选项本身的用途已经很好。</p>
+</li>
+</ul>
+<p><strong>–min-rtt-timeout <milliseconds>， –max-rtt-timeout <milliseconds>， –initial-rtt-timeout <milliseconds> (调整探测报文超时)</milliseconds></milliseconds></milliseconds></strong></p>
+<ul>
+<li><p>Nmap使用一个运行超时值来确定等待探测报文响应的时间，随后会放弃或重新 发送探测报文。Nmap基于上一个探测报文的响应时间来计算超时值，如果网络延迟比较显著 和不定，这个超时值会增加几秒。初始值的比较保守(高)，而当Nmap扫描无响应 的主机时，这个保守值会保持一段时间。</p>
+</li>
+<li><p>这些选项以毫秒为单位，采用小的–max-rtt-timeout值，使 –initial-rtt-timeout值大于默认值可以明显减少扫描时间，特别 是对不能ping通的扫描(-P0)以及具有严格过滤的网络。如果使用太 小的值，使得很多探测报文超时从而重新发送，而此时可能响应消息正在发送，这使得整个扫描的时 间会增加。</p>
+</li>
+<li><p>如果所有的主机都在本地网络，对于–max-rtt-timeout值来 说，100毫秒比较合适。如果存在路由，首先使用ICMP ping工具ping主机，或使用其 它报文工具如hpings，可以更好地穿透防火墙。查看大约10个包的最大往返时间，然后将 –initial-rtt-timeout设成这个时间的2倍，–max-rtt-timeout 可设成这个时间值的3倍或4倍。通常，不管ping的时间是多少，最大的rtt值不得小于100ms， 不能超过1000ms。</p>
+</li>
+<li><p>–min-rtt-timeout这个选项很少使用，当网络不可靠时， Nmap的默认值也显得过于强烈，这时这个选项可起作用。当网络看起来不可靠时，Nmap仅将 超时时间降至最小值，这个情况是不正常的，需要向nmap-dev邮件列表报告bug。</p>
+</li>
+</ul>
+<p><strong>–host-timeout <milliseconds> (放弃低速目标主机)</milliseconds></strong></p>
+<ul>
+<li>由于性能较差或不可靠的网络硬件或软件、带宽限制、严格的防火墙等原因， 一些主机需要很长的时间扫描。这些极少数的主机扫描往往占 据了大部分的扫描时间。因此，最好的办法是减少时间消耗并且忽略这些主机，使用 –host-timeout选项来说明等待的时间(毫秒)。通常使用1800000 来保证Nmap不会在单个主机上使用超过半小时的时间。需要注意的是，Nmap在这半小时中可以 同时扫描其它主机，因此并不是完全放弃扫描。超时的主机被忽略，因此也没有针对该主机的 端口表、操作系统检测或版本检测结果的输出。</li>
+</ul>
+<p><strong>–scan-delay <milliseconds>; –max-scan-delay <milliseconds> (调整探测报文的时间间隔)</milliseconds></milliseconds></strong></p>
+<ul>
+<li><p>这个选项用于Nmap控制针对一个主机发送探测报文的等待时间(毫秒)，在带宽 控制的情况下这个选项非常有效。Solaris主机在响应UDP扫描探测报文报文时，每秒 只发送一个ICMP消息，因此Nmap发送的很多数探测报文是浪费的。–scan-delay 设为1000，使Nmap低速运行。Nmap尝试检测带宽控制并相应地调整扫描的延迟，但 并不影响明确说明何种速度工作最佳。</p>
+</li>
+<li><p>–scan-delay的另一个用途是躲闭基于阈值的入侵检测和预防 系统(IDS/IPS)。</p>
+</li>
+</ul>
+<p><strong>-T &lt;Paranoid|Sneaky|Polite|Normal|Aggressive|Insane&gt; (设置时间模板)</strong></p>
+<ul>
+<li><p>上述优化时间控制选项的功能很强大也很有效，但有些用户会被迷惑。此外， 往往选择合适参数的时间超过了所需优化的扫描时间。因此，Nmap提供了一些简单的 方法，使用6个时间模板，使用时采用-T选项及数字(0 - 5) 或名称。模板名称有paranoid (0)、sneaky (1)、polite (2)、normal(3)、 aggressive (4)和insane (5)。前两种模式用于IDS躲避，Polite模式降低了扫描 速度以使用更少的带宽和目标主机资源。默认模式为Normal，因此-T3 实际上是未做任何优化。Aggressive模式假设用户具有合适及可靠的网络从而加速 扫描。Insane模式假设用户具有特别快的网络或者愿意为获得速度而牺牲准确性。</p>
+</li>
+<li><p>用户可以根据自己的需要选择不同的模板，由Nmap负责选择实际的时间值。 模板也会针对其它的优化控制选项进行速度微调。例如，-T4 针对TCP端口禁止动态扫描延迟超过10ms，-T5对应的值为5ms。 模板可以和优化调整控制选项组合使用，但模板必须首先指定，否则模板的标准值 会覆盖用户指定的值。建议在扫描可靠的网络时使用 -T4，即使 在自己要增加优化控制选项时也使用(在命令行的开始)，从而从这些额外的较小的优化 中获益。</p>
+</li>
+<li><p>如果用于有足够的带宽或以太网连接，仍然建议使用-T4选项。 有些用户喜欢-T5选项，但这个过于强烈。有时用户考虑到避免使主机 崩溃或者希望更礼貌一些会采用-T2选项。他们并没意识到-T Polite选项是如何的慢，这种模式的扫描比默认方式实际上要多花10倍的时间。默认时间 选项(-T3)很少有主机崩溃和带宽问题，比较适合于谨慎的用户。不进行 版本检测比进行时间调整能更有效地解决这些问题。</p>
+</li>
+<li><p>虽然-T0和-T1选项可能有助于避免IDS告警，但 在进行上千个主机或端口扫描时，会显著增加时间。对于这种长时间的扫描，宁可设定确切的时间 值，而不要去依赖封装的-T0和-T1选项。</p>
+</li>
+<li><p>T0选项的主要影响是对于连续扫描，在一个时间只能扫描一个端口， 每个探测报文的发送间隔为5分钟。T1和T2选项比较类似， 探测报文间隔分别为15秒和0.4秒。T3是Nmap的默认选项，包含了并行扫描。 T4选项与 –max-rtt-timeout 1250 –initial-rtt-timeout 500 等价，最大TCP扫描延迟为10ms。T5等价于 –max-rtt-timeout 300 –min-rtt-timeout 50 –initial-rtt-timeout 250 –host-timeout 900000，最大TCP扫描延迟为5ms</p>
+</li>
+</ul>
+<hr>
+<h2 id="0x08-防火墙-IDS躲避和哄骗"><a href="#0x08-防火墙-IDS躲避和哄骗" class="headerlink" title="0x08 防火墙/IDS躲避和哄骗"></a>0x08 防火墙/IDS躲避和哄骗</h2><p><strong>概述</strong></p>
+<ul>
+<li><p>很多Internet先驱们设想了一个全球开放的网络，使用全局的IP 地址空间，使得任何两个节点之间都有虚拟连接。这使得主机间可以作为真 正的对等体，相互间提供服务和获取信息。人们可以在工作时访问家里所 有的系统、调节空调温度、为提前到来的客人开门。随后，这些全球连接的设想 受到了地址空间短缺和安全考虑的限制。在90年代早期，各种机构开始部 署防火墙来实现减少连接的目的，大型网络通过代理、NAT和包过滤器与未 过滤的Internet隔离。不受限的信息流被严格控制的可信通信通道信息流所替代。</p>
+</li>
+<li><p>类似防火墙的网络隔离使得对网络的搜索更加困难，随意的搜 索变得不再简单。然而，Nmap提供了很多特性用于理解这些复杂的网 络，并且检验这些过滤器是否正常工作。此外，Nmap提供了绕过某些较弱的 防范机制的手段。检验网络安全状态最有效的方法之一是尝试哄骗网络，将 自己想象成一个攻击者，使用本节提供的技术来攻击自己的网络。如使用FTP bounce扫描、Idle扫描、分片攻击或尝试穿透自己的代理。</p>
+</li>
+<li><p>除限止网络的行为外，使用入侵检测系统(IDS)的公司也不断增加。由于Nmap 常用于攻击前期的扫描，因此所有主流的IDS都包含了检测Nmap扫描的规则。 现在，这些产品变形为入侵预防系统(IPS)，可以主 动地阻止可疑的恶意行为。不幸的是，网络管理员和IDS厂商通过分析报文 来检测恶意行为是一个艰苦的工作，有耐心和技术的攻击者，在特定Nmap选项 的帮助下，常常可以不被IDS检测到。同时，管理员必须应付大量的误报结果， 正常的行为被误判而被改变或阻止。</p>
+</li>
+<li><p>有时，人们建议Nmap不应该提供躲闭防火墙规则或哄骗IDS的功能， 这些功能可能会被攻击者滥用，然而管理员却可以利用这些功能来增强安全性。 实际上，攻击的方法仍可被攻击者利用，他们可以发现其它工具或Nmap的补丁程 序。同时，管理员发现攻击者的工作更加困难，相比较采取措施来预防执 行FTP Bounce攻击的工具而言，部署先进的、打过补丁的FTP服务器更 加有效</p>
+</li>
+</ul>
+<p><strong>常用选项</strong></p>
+<p><strong>-f (报文分段); –mtu (使用指定的MTU)</strong></p>
+<ul>
+<li>-f选项要求扫描时(包挺ping扫描)使用 小的IP包分段。其思路是将TCP头分段在几个包中，使得包过滤器、 IDS以及其它工具的检测更加困难。必须小心使用这个选项，有些系 统在处理这些小包时存在问题，例如旧的网络嗅探器Sniffit在接收 到第一个分段时会立刻出现分段错误。该选项使用一次，Nmap在IP 头后将包分成8个字节或更小。因此，一个20字节的TCP头会被分成3个 包，其中2个包分别有TCP头的8个字节，另1个包有TCP头的剩下4个字 节。当然，每个包都有一个IP头。再次使用-f可使用 16字节的分段(减少分段数量)。使用–mtu选项可 以自定义偏移的大小，使用时不需要-f，偏移量必须 是8的倍数。包过滤器和防火墙对所有的IP分段排队，如Linux核心中的 CONFIG-IP-ALWAYS-DEFRAG配置项，分段包不会直接使用。一些网络无法 承受这样所带来的性能冲击，会将这个配置禁止。其它禁止的原因有分段 包会通过不同的路由进入网络。一些源系统在内核中对发送的报文进行 分段，使用iptables连接跟踪模块的Linux就是一个例子。当使用类似Ethereal 的嗅探器时，扫描必须保证发送的报文要分段。如果主机操作系统会产 生问题，尝试使用–send-eth选项以避开IP层而直接 发送原始的以太网帧。</li>
+</ul>
+<p><strong>-D <decoy1 [，decoy2][，me]，...=""> (使用诱饵隐蔽扫描)</decoy1></strong></p>
+<ul>
+<li><p>为使诱饵扫描起作用，需要使远程主机认为是诱饵在扫描目标网络。 IDS可能会报个某个IP的5-10个端口扫描，但并不知道哪个IP在扫描以及 哪些不是诱饵。但这种方式可以通过路由跟踪、响应丢弃以及其它主动 机制在解决。这是一种常用的隐藏自身IP地址的有效技术。</p>
+</li>
+<li><p>使用逗号分隔每个诱饵主机，也可用自己的真实IP作为诱饵，这时可使用 ME选项说明。如果在第6个位置或 更后的位置使用ME选项，一些常用 端口扫描检测器(如Solar Designer’s excellent scanlogd)就不会报告 这个真实IP。如果不使用ME选项，Nmap 将真实IP放在一个随机的位置</p>
+</li>
+<li><p>注意，作为诱饵的主机须在工作状态，否则会导致目标主机的SYN洪水攻击。 如果在网络中只有一个主机在工作，那就很容易确定哪个主机在扫描。也可 使用IP地址代替主机名(被诱骗的网络就不可能在名字服务器日志中发现)。</p>
+</li>
+<li><p>诱饵可用在初始的ping扫描(ICMP、SYN、ACK等)阶段或真正的端口扫描 阶段。诱饵也可以用于远程操作系统检测(-O)。在进行版 本检测或TCP连接扫描时，诱饵无效。</p>
+</li>
+<li><p>使用过多的诱饵没有任何价值，反而导致扫描变慢并且结果不准确。 此外，一些ISP会过滤哄骗的报文，但很多对欺骗IP包没有任何限制。</p>
+</li>
+</ul>
+<p><strong>-S &lt;IP_Address&gt; (源地址哄骗)</strong></p>
+<ul>
+<li><p>在某些情况下，Nmap可能无法确定你的源地址(如果这样，Nmap会给出 提示)。此时，使用-S选项并说明所需发送包的接口IP地址。</p>
+</li>
+<li><p>这个标志的另一个用处是哄骗性的扫描，使得目标认为是另 一个地址在进行扫描。可以想象某一个竞争对手在不断扫描某个公司！ -e选项常在这种情况下使用，也可采用-P0选项。</p>
+</li>
+</ul>
+<p><strong>-e <interface> (使用指定的接口)</interface></strong></p>
+<ul>
+<li>告诉Nmap使用哪个接口发送和接收报文，Nmap可以进行自动检测， 如果检测不出会给出提示。</li>
+</ul>
+<p><strong>–source-port (portnumber); -g (portnumber) (源端口哄骗)</strong></p>
+<ul>
+<li><p>仅依赖于源端口号就信任数据流是一种常见的错误配置，这个问题非常 好理解。例如一个管理员部署了一个新的防火墙，但招来了很多用户的不满，因为 他们的应用停止工作了。可能是由于外部的UDP DNS服务器响应无法进入网络，而导致 DNS的崩溃。FTP是另一个常见的例子，在FTP传输时，远程服务器尝试和内部用 建立连接以传输数据。</p>
+</li>
+<li><p>对这些问题有安全解决方案，通常是应用级代理或协议分析防火墙模块。 但也存在一些不安全的方案。注意到DNS响应来自于53端口，FTP连接 来自于20端口，很多管理员会掉入一个陷阱，即允许来自于这些端口的数据进入 网络。他们认为这些端口里不会有值得注意的攻击和漏洞利用。此外，管理员 或许认为这是一个短期的措施，直至他们采取更安全的方案。但他们忽视了安全的 升级。</p>
+</li>
+<li><p>不仅仅是工作量过多的网络管理员掉入这种陷阱，很多产品本身也会有这类 不安全的隐患，甚至是微软的产品。Windows 2000和Windows XP中包含的IPsec过滤 器也包含了一些隐含规则，允许所有来自88端口(Kerberos)的TCP和UDP数据流。另 一个常见的例子是Zone Alarm个人防火墙到2.1.25版本仍然允许源端口53(DNS)或 67(DHCP)的UDP包进入。</p>
+</li>
+<li><p>Nmap提供了-g和–source-port选项(它们是 等价的)，用于利用上述弱点。只需要提供一个端口号，Nmap就可以从这些 端口发送数据。为使特定的操作系统正常工作，Nmap必须使用不同的端口号。 DNS请求会忽略–source-port选项，这是因为Nmap依靠系 统库来处理。大部分TCP扫描，包括SYN扫描，可以完全支持这些选项，UDP扫 描同样如此。</p>
+</li>
+</ul>
+<p><strong>–data-length (number) (发送报文时 附加随机数据)</strong></p>
+<ul>
+<li>正常情况下，Nmap发送最少的报文，只含一个包头。因此TCP包通常 是40字节，ICMP ECHO请求只有28字节。这个选项告诉Nmap在发送的报文上 附加指定数量的随机字节。操作系统检测(-O)包不受影响， 但大部分ping和端口扫描包受影响，这会使处理变慢，但对扫描的影响较小。</li>
+</ul>
+<p><strong>–ttl <value> (设置IP time-to-live域)</value></strong></p>
+<ul>
+<li>设置IPv4报文的time-to-live域为指定的值。</li>
+</ul>
+<p><strong>–randomize-hosts (对目标主机的顺序随机排列)</strong></p>
+<ul>
+<li>告诉Nmap在扫描主机前对每个组中的主机随机排列，最多可达 8096个主机。这会使得扫描针对不同的网络监控系统来说变得不是很 明显，特别是配合值较小的时间选项时更有效。如果需要对一个较大 的组进行随机排列，需要增大nmap.h文件中 PING-GROUP-SZ的值，并重新编译。另一种方法是使用列表扫描 (-sL -n -oN <filename>)，产生目标IP的列表， 使用Perl脚本进行随机化，然后使用-iL提供给Nmap。</filename></li>
+</ul>
+<p><strong>–spoof-mac <mac address，prefix，or="" vendor="" name=""> (MAC地址哄骗)</mac></strong></p>
+<ul>
+<li>要求Nmap在发送原以太网帧时使用指定的MAC地址，这个选项隐含了 –send-eth选项，以保证Nmap真正发送以太网包。MAC地址有几 种格式。如果简单地使用字符串“0”，Nmap选择一个完全随机的MAC 地址。如果给定的字符品是一个16进制偶数(使用:分隔)，Nmap将使用这个MAC地址。 如果是小于12的16进制数字，Nmap会随机填充剩下的6个字节。如果参数不是0或16进 制字符串，Nmap将通过nmap-mac-prefixes查找 厂商的名称(大小写区分)，如果找到匹配，Nmap将使用厂商的OUI(3字节前缀)，然后 随机填充剩余的3个节字。正确的–spoof-mac参数有， Apple， 0，01:02:03:04:05:06， deadbeefcafe，0020F2， 和Cisco</li>
+</ul>
+<hr>
+<h2 id="0x09-输出"><a href="#0x09-输出" class="headerlink" title="0x09 输出"></a>0x09 输出</h2><p><strong>概述</strong></p>
+<ul>
+<li><p>任何安全工具只有在输出结果时才是有价值的，如果没有通过组织和 易于理解的方式来表达，复杂的测试和算法几乎没有意义。Nmap提供了一些 方式供用户和其它软件使用，实际上，没有一种方式可以使所有人满意。 因此Nmap提供了一些格式，包含了方便直接查看的交互方式和方便软件处理 的XML格式。</p>
+</li>
+<li><p>除了提供输出格式外，Nmap还提供了选项来控制输出的细节以及调试 信息。输出内容可发送给标准输出或命名文件，可以追加或覆盖。输出文件还可 被用于继续中断的扫描。</p>
+</li>
+<li><p>Nmap提供5种不同的输出格式。默认的方式是interactive output， 发送给标准输出(stdout)。normal output方式类似于 interactive，但显示较少的运行时间信息 和告警信息，这是由于这些信息是在扫描完全结束后用于分析，而不是交互式的。</p>
+</li>
+<li><p>XML输出是最重要的输出类型，可被转换成HTML，对于程序处理非常方便， 如用于Nmap图形用户接口或导入数据库。</p>
+</li>
+<li><p>另两种输出类型比较简单，grepable output格式，在一行中包含目标主机最多的信息；sCRiPt KiDDi3 0utPUt 格式，用于考虑自己的用户 |&lt;-r4d。</p>
+</li>
+<li><p>交互式输出是默认方式，没有相应的命令行选项，其它四种格式选项 使用相同的语法，采用一个参数，即存放结果的文件名。多种格式可同时 使用，但一种格式只能使用一次。例如，在标准输出用于查看的同时，可将结 果保存到XML文件用于程序分析，这时可以使用选项-oX myscan.xml -oN myscan.nmap。 为便于描述的简化，本章使用类似于myscan.xml的简单文件名， 建议采用更具有描述性的文件名。文件名的选择与个人喜好有关，建议增加 扫描日期以及一到两个单词来描述，并放置于一个目录中。</p>
+</li>
+<li><p>在将结果输出到文件的同时，Nmap仍将结果发送给标准输出。例如， 命令nmap -oX myscan.xml target将 输出XML至myscan.xml，并在stdout 上打印相同的交互式结果，而此时-oX选项没有采用。可以 使用连字符作为选项来改变，这使得Nmap禁止交互式输出，而是将结果打印到 所指定的标准输出流中。因此，命令nmap -oX - target只 输出XML至标准输出stdout。严重错误仍然是输出到标准错误流stderr中。</p>
+</li>
+<li><p>与其它Nmap参数不同，日志文件选项的空格(如-oX)和 文件名或连字符是必需的。如果省略了标记，例如-oG-或 -oXscan.xml，Nmap的向后兼容特点将建立 标准格式的输出文件，相应的文件名为G-和 Xscan.xml。</p>
+</li>
+<li><p>Nmap还提供了控制扫描细节以及输出文件的添加或覆盖的选项</p>
+</li>
+</ul>
+<p><strong>Nmap输出格式</strong></p>
+<p><strong>-oN <filespec> (标准输出)</filespec></strong></p>
+<p>要求将标准输出直接写入指定 的文件。如上所述，这个格式与交互式输出 略有不同。</p>
+<p><strong>-oX <filespec> (XML输出)</filespec></strong></p>
+<ul>
+<li><p>要求XML输出直接写入指定 的文件。Nmap包含了一个文档类型定义(DTD)，使XML解析器有效地 进行XML输出。这主要是为了程序应用，同时也可以协助人工解释 Nmap的XML输出。DTD定义了合法的格式元素，列举可使用的属性和 值。最新的版本可在 <a href="http://www.insecure.org/nmap/data/nmap.dtd获取。" target="_blank" rel="noopener">http://www.insecure.org/nmap/data/nmap.dtd获取。</a></p>
+</li>
+<li><p>XML提供了可供软件解析的稳定格式输出，主要的计算机 语言都提供了免费的XML解析器，如C/C++，Perl，Python和Java。 针对这些语言有一些捆绑代码用于处理Nmap的输出和特定的执行程序。 例如perl CPAN中的Nmap::Scanner 和Nmap::Parser。 对几乎所有与Nmap有接口的主要应用来说，XML是首选的格式。</p>
+</li>
+<li><p>XML输出引用了一个XSL样式表，用于格式化输出结果，类似于 HTML。最方便的方法是将XML输出加载到一个Web浏览器，如Firefox 或IE。由于nmap.xsl文件的绝对 路径，因此通常只能在运行了Nmap的机器上工作(或类似配置的机器)。 类似于任何支持Web机器的HTML文件，–stylesheet 选项可用于建立可移植的XML文件。</p>
+</li>
+</ul>
+<p><strong>-oS <filespec> (ScRipT KIdd|3 oUTpuT)</filespec></strong></p>
+<ul>
+<li>脚本小子输出类似于交互工具输出，这是一个事后处理，适合于 ‘l33t HaXXorZ， 由于原来全都是大写的Nmap输出。这个选项和脚本小子开了玩笑，看上去似乎是为了 “帮助他们”。</li>
+</ul>
+<p><strong>-oG <filespec> (Grep输出)</filespec></strong></p>
+<ul>
+<li><p>这种方式最后介绍，因为不建议使用。XML输格式很强大，便于有经验 的用户使用。XML是一种标准，由许多解析器构成，而Grep输届更简化。XML 是可扩展的，以支持新发布的Nmap特点。使用Grep输出的目的是忽略这些 特点，因为没有足够的空间。</p>
+</li>
+<li><p>然面，Grep输出仍然很常使用。它是一种简单格式，每行一个主机，可以 通过UNIX工具(如grep、awk、cut、sed、diff)和Perl方便地查找和分解。常可 用于在命令行上进行一次性测式。查找ssh端口打开或运行Sloaris的主机，只需 要一个简单的grep主机说明，使用通道并通过awk或cut命令打印所需的域。</p>
+</li>
+<li><p>Grep输出可以包含注释(每行由#号开始)。每行由6个标记的域组成，由制表符及 冒号分隔。这些域有主机，端口， 协议，忽略状态， 操作系统，序列号， IPID和状态。</p>
+</li>
+<li><p>这些域中最重要的是Ports，它提供 了所关注的端口的细节，端口项由逗号分隔。每个端口项代表一个所关注的端口， 每个子域由/分隔。这些子域有：端口号， 状态，协议， 拥有者，服务， SunRPCinfo和版本信息。</p>
+</li>
+<li><p>对于XML输出，本手册无法列举所有的格式，有关Nmap Grep输出的更详细信息可 查阅<a href="http://www.unspecific.com/nmap-oG-output。" target="_blank" rel="noopener">http://www.unspecific.com/nmap-oG-output。</a></p>
+</li>
+</ul>
+<p><strong>-oA <basename> (输出至所有格式)</basename></strong></p>
+<ul>
+<li>为使用方便，利用-oA<basename>选项 可将扫描结果以标准格式、XML格式和Grep格式一次性输出。分别存放在 <basename>.nmap，<basename>.xml和 <basename>.gnmap文件中。也可以在文件名前 指定目录名，如在UNIX中，使用~/nmaplogs/foocorp/， 在Window中，使用c:\hacking\sco on Windows</basename></basename></basename></basename></li>
+</ul>
+<p><strong>细节和调试选项</strong></p>
+<p><strong>-v (提高输出信息的详细度)</strong></p>
+<ul>
+<li><p>通过提高详细度，Nmap可以输出扫描过程的更多信息。 输出发现的打开端口，若Nmap认为扫描需要更多时间会显示估计 的结束时间。这个选项使用两次，会提供更详细的信息。这个选 项使用两次以上不起作用。</p>
+</li>
+<li><p>大部分的变化仅影响交互式输出，也有一些影响标准和脚本 小子输出。其它输出类型由机器处理，此时Nmap默认提供详细的信 息，不需要人工干预。然而，其它模式也会有一些变化，省略一些 细节可以减小输出大小。例如，Grep输出中的注释行提供所有扫描 端口列表，但由于这些信息过长，因此只能在细节模式中输出。</p>
+</li>
+</ul>
+<p><strong>-d [level] (提高或设置调试级别)</strong></p>
+<ul>
+<li><p>当详细模式也不能为用户提供足够的数据时，使用调试可以得到更 多的信息。使用细节选项(-v)时，可启用命令行参数 (-d)，多次使用可提高调试级别。也可在-d 后面使用参数设置调试级别。例如，-d9设定级别9。这是 最高的级别，将会产生上千行的输出，除非只对很少的端口和目标进行简单扫描。</p>
+</li>
+<li><p>如果Nmap因为Bug而挂起或者对Nmap的工作及原理有疑问，调试输出 非常有效。主要是开发人员用这个选项，调试行不具备自我解释的特点。 例如，Timeoutvals: srtt: -1 rttvar: -1 to: 1000000 delta 14987 ==&gt; srtt: 14987 rttvar: 14987 to: 100000。如果对某行输出不明白， 可以忽略、查看源代码或向开发列表(nmap-dev)求助。有些输出行会有自 我解释的特点，但随着调试级别的升高，会越来越含糊。</p>
+</li>
+</ul>
+<p><strong>–packet-trace (跟踪发送和接收的报文)</strong></p>
+<ul>
+<li>要求Nmap打印发送和接收的每个报文的摘要，通常用于 调试，有助于新用户更好地理解Nmap的真正工作。为避免输出过 多的行，可以限制扫描的端口数，如-p20-30。 如果只需进行版本检测，使用–version-trace。</li>
+</ul>
+<p><strong>–iflist (列举接口和路由)</strong></p>
+<ul>
+<li>输出Nmap检测到的接口列表和系统路由，用于调试路由 问题或设备描述失误(如Nmap把PPP连接当作以太网对待)</li>
+</ul>
+<p><strong>其它输出选项</strong></p>
+<p><strong>–append-output (在输出文件中添加)</strong></p>
+<ul>
+<li>当使用文件作为输出格式，如-oX或-oN， 默认该文件被覆盖。如果希望文件保留现有内容，将结果添加在现 有文件后面，使用–append-output选项。所有指 定的输出文件都被添加。但对于XML(-oX)扫描输出 文件无效，无法正常解析，需要手工修改。</li>
+</ul>
+<p><strong>–resume <filename> (继续中断的扫描)</filename></strong></p>
+<ul>
+<li>一些扩展的Nmap运行需要很长的时间 – 以天计算，这类扫描 往往不会结束。可以进行一些限制，禁止Nmap在工作时间运行，导致 网络中断、运行Nmap的主机计划或非计划地重启、或者Nmap自己中断。 运行Nmap的管理员可以因其它原因取消运行，按下ctrl-C 即可。从头开始启动扫描可能令人不快，幸运的是，如果标准扫描 (-oN)或Grep扫描(-oG)日志 被保留，用户可以要求Nmap恢复终止的扫描，只需要简单地使用选项 –resume并说明标准/Grep扫描输出文件，不允许 使用其它参数，Nmap会解析输出文件并使用原来的格式输出。使用方式 如nmap –resume <logfilename>。 Nmap将把新地结果添加到文件中，这种方式不支持XML输出格式，原因是 将两次运行结果合并至一个XML文件比较困难。</logfilename></li>
+</ul>
+<p><strong>–stylesheet <path or="" url=""></path> (设置XSL样式表，转换XML输出)</strong></p>
+<ul>
+<li>Nmap提从了XSL样式表nmap.xsl，用于查看 或转换XML输出至HTML。XML输出包含了一个xml-stylesheet， 直接指向nmap.xml文件， 该文件由Nmap安装(或位于Windows当前工作目录)。在Web浏览器 中打开Nmap的XML输出时，将会在文件系统中寻找nmap.xsl文件， 并使用它输出结果。如果希望使用不同的样式表，将它作为 –stylesheet的参数，必段指明完整的路 径或URL，常见的调用方式是–stylesheet <a href="http://www.insecure.org/nmap/data/nmap.xsl。" target="_blank" rel="noopener">http://www.insecure.org/nmap/data/nmap.xsl。</a> 这告诉浏览器从Insecire.Org中加载最新的样式表。这使得 没安装Nmap(和nmap.xsl) 的机器中可以方便地查看结果。因此，URL更方便使用，本地文件系统 的nmap.xsl用于默认方式。</li>
+</ul>
+<p><strong>–no-stylesheet (忽略XML声明的XSL样式表)</strong></p>
+<ul>
+<li>使用该选项禁止Nmap的XML输出关联任何XSL样式表。 xml-stylesheet指示被忽略</li>
+</ul>
+<hr>
+<h2 id="0x0A-其他选项"><a href="#0x0A-其他选项" class="headerlink" title="0x0A 其他选项"></a>0x0A 其他选项</h2><p><strong>-6 (启用IPv6扫描)</strong></p>
+<ul>
+<li><p>从2002年起，Nmap提供对IPv6的一些主要特征的支持。ping扫描(TCP-only)、 连接扫描以及版本检测都支持IPv6。除增加-6选项外， 其它命令语法相同。当然，必须使用IPv6地址来替换主机名，如 3ffe:7501:4819:2000:210:f3ff:fe03:14d0。 除“所关注的端口”行的地址部分为IPv6地址。</p>
+</li>
+<li><p>IPv6目前未在全球广泛采用，目前在一些国家(亚洲)应用较多， 一些高级操作系统支持IPv6。使用Nmap的IPv6功能，扫描的源和目 的都需要配置IPv6。如果ISP(大部分)不分配IPv6地址，Nmap可以采用 免费的隧道代理。一种较好的选择是BT Exact，位于<a href="https://tb.ipv6.btexact.com/。" target="_blank" rel="noopener">https://tb.ipv6.btexact.com/。</a> 此外，还有Hurricane Electric，位于<a href="http://ipv6tb.he.net/。6to4隧道是" target="_blank" rel="noopener">http://ipv6tb.he.net/。6to4隧道是</a> 另一种常用的免费方法。</p>
+</li>
+</ul>
+<p><strong>-A (激烈扫描模式选项)</strong></p>
+<ul>
+<li>这个选项启用额外的高级和高强度选项，目前还未确定代表 的内容。目前，这个选项启用了操作系统检测(-O) 和版本扫描(-sV)，以后会增加更多的功能。 目的是启用一个全面的扫描选项集合，不需要用户记忆大量的 选项。这个选项仅仅启用功能，不包含用于可能所需要的 时间选项(如-T4)或细节选项(-v)。</li>
+</ul>
+<p><strong>–datadir <directoryname> (说明用户Nmap数据文件位置)</directoryname></strong></p>
+<ul>
+<li>Nmap在运行时从文件中获得特殊的数据，这些文件有 nmap-service-probes， nmap-services， nmap-protocols， nmap-rpc， nmap-mac-prefixes和 nmap-os-fingerprints。Nmap首先 在–datadir选项说明的目录中查找这些文件。 未找到的文件，将在BMAPDIR环境变量说明的目录中查找。 接下来是用于真正和有效UID的~/.nmap 或Nmap可执行代码的位置(仅Win32)；然后是是编译位置， 如/usr/local/share/nmap 或/usr/share/nmap。 Nmap查找的最后一个位置是当前目录。</li>
+</ul>
+<p><strong>–send-eth (使用原以太网帧发送)</strong></p>
+<ul>
+<li>要求Nmap在以太网(数据链路)层而不是IP(网络层)发送 报文。默认方式下，Nmap选择最适合其运行平台的方式，原套接 字(IP层)是UNIX主机最有效的方式，而以太网帧最适合Windows操作 系统，因为Microsoft禁用了原套接字支持。在UNIX中，如果没有其 它选择(如无以太网连接)，不管是否有该选项，Nmap都使用原IP包。</li>
+</ul>
+<p><strong>–send-ip (在原IP层发送)</strong></p>
+<ul>
+<li>要求Nmap通过原IP套接字发送报文，而不是低层的以 太网帧。这是–send-eth选项的补充。</li>
+</ul>
+<p><strong>–privileged (假定用户具有全部权限)</strong></p>
+<ul>
+<li>告诉Nmap假定其具有足够的权限进行源套接字包发送、 报文捕获和类似UNIX系统中根用户操作的权限。默认状态下， 如果由getuid()请求的类似操作不为0，Nmap将退出。 –privileged在具有Linux内核性能的类似 系统中使用非常有效，这些系统配置允许非特权用户可以进行 原报文扫描。需要明确的是，在其它选项之前使用这些需要权 限的选项(SYN扫描、操作系统检测等)。Nmap-PRIVILEGED变量 设置等价于–privileged选项。</li>
+</ul>
+<p><strong>-V; –version (打印版本信息)</strong></p>
+<ul>
+<li>打印Nmap版本号并退出。</li>
+</ul>
+<p><strong>-h; –help (打印帮助摘要面)</strong></p>
+<ul>
+<li>打印一个短的帮助屏幕，列出大部分常用的 命令选项，这个功能与不带参数运行Nmap是相同的</li>
+</ul>
+<hr>
+<h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2><ul>
+<li><a href="https://nmap.org/book/toc.html" title="Nmap Network Scanning" target="_blank" rel="noopener">Nmap Network Scanning</a> 　— Nmap官方参考指南</li>
+</ul>
+
       
     </div>
     
@@ -820,7 +1161,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-选项概要"><span class="nav-number">1.</span> <span class="nav-text">0x01 选项概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-目标说明"><span class="nav-number">2.</span> <span class="nav-text">0x02 目标说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-主机发现"><span class="nav-number">3.</span> <span class="nav-text">0x03 主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-端口扫描"><span class="nav-number">4.</span> <span class="nav-text">0x04 端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口状态"><span class="nav-number">4.1.</span> <span class="nav-text">端口状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口扫描技术"><span class="nav-number">4.2.</span> <span class="nav-text">端口扫描技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-服务和版本探测"><span class="nav-number">5.</span> <span class="nav-text">0x05 服务和版本探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-操作系统探测"><span class="nav-number">6.</span> <span class="nav-text">0x06 操作系统探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-时间和性能"><span class="nav-number">7.</span> <span class="nav-text">0x07 时间和性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-防火墙-IDS躲避和哄骗"><span class="nav-number">8.</span> <span class="nav-text">0x08 防火墙/IDS躲避和哄骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-输出"><span class="nav-number">9.</span> <span class="nav-text">0x09 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0A-其他选项"><span class="nav-number">10.</span> <span class="nav-text">0x0A 其他选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">11.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-选项概要"><span class="nav-number">1.</span> <span class="nav-text">0x01 选项概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-目标说明"><span class="nav-number">2.</span> <span class="nav-text">0x02 目标说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-主机发现"><span class="nav-number">3.</span> <span class="nav-text">0x03 主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-端口扫描"><span class="nav-number">4.</span> <span class="nav-text">0x04 端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口状态"><span class="nav-number">4.1.</span> <span class="nav-text">端口状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口扫描技术"><span class="nav-number">4.2.</span> <span class="nav-text">端口扫描技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描说明及顺序"><span class="nav-number">4.3.</span> <span class="nav-text">扫描说明及顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-服务和版本探测"><span class="nav-number">5.</span> <span class="nav-text">0x05 服务和版本探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-操作系统探测"><span class="nav-number">6.</span> <span class="nav-text">0x06 操作系统探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-时间和性能"><span class="nav-number">7.</span> <span class="nav-text">0x07 时间和性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-防火墙-IDS躲避和哄骗"><span class="nav-number">8.</span> <span class="nav-text">0x08 防火墙/IDS躲避和哄骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-输出"><span class="nav-number">9.</span> <span class="nav-text">0x09 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0A-其他选项"><span class="nav-number">10.</span> <span class="nav-text">0x0A 其他选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">11.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
             
 
           </div>
