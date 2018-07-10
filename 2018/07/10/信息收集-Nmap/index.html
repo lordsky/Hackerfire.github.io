@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Web-Security,Defense," />
+  <meta name="keywords" content="Pentest,Nmap," />
 
 
 
@@ -86,20 +86,18 @@
 
 
 
-<meta name="description" content="Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制">
-<meta name="keywords" content="Web-Security,Defense">
+<meta name="description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源网络安全工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
+<meta name="keywords" content="Pentest,Nmap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Web核心防御机制">
-<meta property="og:url" content="http://yoursite.com/2018/07/07/Web核心防御机制/index.html">
+<meta property="og:title" content="信息收集-Nmap">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/信息收集-Nmap/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制">
+<meta property="og:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源网络安全工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6.png">
-<meta property="og:updated_time" content="2018-07-10T06:22:25.190Z">
+<meta property="og:updated_time" content="2018-07-10T08:20:27.487Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Web核心防御机制">
-<meta name="twitter:description" content="Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制">
-<meta name="twitter:image" content="http://pbegz2k88.bkt.clouddn.com/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6.png">
+<meta name="twitter:title" content="信息收集-Nmap">
+<meta name="twitter:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源网络安全工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/07/Web核心防御机制/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/信息收集-Nmap/"/>
 
 
 
 
 
-  <title>Web核心防御机制 | Firehacker</title>
+  <title>信息收集-Nmap | Firehacker</title>
   
 
 
@@ -282,7 +280,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/Web核心防御机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/信息收集-Nmap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Firehacker">
@@ -299,7 +297,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Web核心防御机制</h1>
+          <h1 class="post-title" itemprop="name headline">信息收集-Nmap</h1>
         
 
         <div class="post-meta">
@@ -311,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-07T15:04:26+08:00">
-                2018-07-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-10T15:23:14+08:00">
+                2018-07-10
               </time>
             
 
@@ -345,8 +343,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全技术/Web安全/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
+                  <a href="/categories/安全技术/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
                   </a>
                 </span>
 
@@ -383,48 +381,20 @@
 
       
         <blockquote>
-<p>Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制<br><a id="more"></a></p>
+<p><a href="https://nmap.org/" title="Nmap" target="_blank" rel="noopener">Nmap</a>（网络映射器）是一款用于网络发现和安全审计的开源网络安全工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自<a href="https://nmap.org/man/zh/index.html" title="Nmap参考指南" target="_blank" rel="noopener">Nmap参考指南</a>，kali 平台下键入<code>man nmap</code>亦可阅览）<br><a id="more"></a></p>
 </blockquote>
-<h2 id="防御机制简述"><a href="#防御机制简述" class="headerlink" title="防御机制简述"></a>防御机制简述</h2><p><img src="http://pbegz2k88.bkt.clouddn.com/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6.png" alt="防御"></p>
-<p><strong>核心因素</strong></p>
-<ul>
-<li><p>处理用户访问应用程序的数据与功能，防止用户获得未授权访问</p>
-</li>
-<li><p>处理用户对应用程序功能的输入，防止错误输入造成不良行为</p>
-</li>
-<li><p>防范攻击者，确保应用程序在成为直接攻击目标时能够正常运转，并采取适当的防御与攻击措施挫败攻击者</p>
-</li>
-<li><p>管理应用程序本身，帮助管理员监控器行为，配置其功能</p>
-</li>
-</ul>
 <hr>
-<h2 id="处理用户访问"><a href="#处理用户访问" class="headerlink" title="处理用户访问"></a>处理用户访问</h2><h3 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h3><ul>
-<li><p><strong>概念：</strong>身份验证机制是应用程序处理用户访问的最基本机制，验证用户是指确认用户的真实身份</p>
-</li>
-<li><p><strong>传统模型：</strong>用户提交用户名和密码，再由应用程序对其进行核实，确认其合法性</p>
-</li>
-<li><p><strong>安全性验证模型：</strong>使用其他证书与多阶段登录过程强化基本模型；基于客户端证书，智能卡，质询-响应令牌（challenge-response token）的身份验证模型</p>
-</li>
-<li><p><strong>功能支持：</strong>核心登录过程，自我注册，账户恢复，密码修改工具</p>
-</li>
-<li><p><strong>机制缺陷：</strong>如攻击者能够确定其他用户的用户名，推测其密码；可利用逻辑缺陷完全避开登录功能；存在的缺陷往往允许攻击者非法访问敏感数据与功能</p>
-</li>
-</ul>
-<h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><ul>
-<li><p><strong>概述：</strong>处理用户访问的下一项逻辑任务是管理通过验证用户的会话。成功登录应用程序后，用户会访问各种页面和功能，从浏览器提出一系列HTTP请求；与此同时应用程序还会收到各类用户发出的无数请求，为实施有效的访问控制，应用程序需要识别并处理每一名用户提交的各种请求</p>
-</li>
-<li><p><strong>会话机制：</strong>Web应用程序为每一名用户建立一个会话，并向用户发布一个标识会话的令牌。<strong>会话</strong>是一组保存在服务器上的数据结构，用于追踪用户与应用程序的交互状态。<strong>令牌</strong>是一个唯一的字符串，应用程序将其映射到会话中，当用户收到一个令牌时，浏览器会在随后的HTTP请求中将它返回给服务器，帮助应用程序将请求与该用户联系起来。</p>
-</li>
-<li><p><strong>会话令牌传送：</strong>HTTP cookie(常规方法)；使用隐藏表字段（hidden from field）；URL 查询字符串（query string）</p>
-</li>
-<li><p><strong>安全性：</strong>会话机制的安全性取决于其令牌的安全性，令牌被攻破，攻击者就可以伪装成被攻破的用户，冒充为通过验证的用户正常使用应用程序。令牌生成过程中存在的缺陷是主要的漏洞来源，使攻击者能够推测出发布给其他用户的令牌；随后，攻击者再利用令牌中的缺陷截获其他用户的令牌</p>
-</li>
-</ul>
-<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><ul>
-<li>处理用户访问的最后一个逻辑步骤是做出并实施正确的决策，决定允许或拒绝每一个请求。在前面机制正常运作的基础上，应用程序需要决定是否授权用户执行其请求的操作或访问相关数据。访问控制一般需要实现某种精心设计的逻辑，并考虑各种相关应用程序领域与不同类型的功能</li>
-</ul>
-<hr>
-<h2 id="处理用户的输入"><a href="#处理用户的输入" class="headerlink" title="处理用户的输入"></a>处理用户的输入</h2><h3 id="拒绝已知的不良输入"><a href="#拒绝已知的不良输入" class="headerlink" title="拒绝已知的不良输入"></a>拒绝已知的不良输入</h3>
+<h2 id="0x01-选项概要"><a href="#0x01-选项概要" class="headerlink" title="0x01 选项概要"></a>0x01 选项概要</h2><hr>
+<h2 id="0x02-目标说明"><a href="#0x02-目标说明" class="headerlink" title="0x02 目标说明"></a>0x02 目标说明</h2><hr>
+<h2 id="0x03-主机发现"><a href="#0x03-主机发现" class="headerlink" title="0x03 主机发现"></a>0x03 主机发现</h2><hr>
+<h2 id="0x04-端口扫描"><a href="#0x04-端口扫描" class="headerlink" title="0x04 端口扫描"></a>0x04 端口扫描</h2><hr>
+<h2 id="0x05-服务和版本探测"><a href="#0x05-服务和版本探测" class="headerlink" title="0x05 服务和版本探测"></a>0x05 服务和版本探测</h2><hr>
+<h2 id="0x06-操作系统探测"><a href="#0x06-操作系统探测" class="headerlink" title="0x06 操作系统探测"></a>0x06 操作系统探测</h2><hr>
+<h2 id="0x07-时间和性能"><a href="#0x07-时间和性能" class="headerlink" title="0x07 时间和性能"></a>0x07 时间和性能</h2><hr>
+<h2 id="0x08-防火墙-IDS躲避和哄骗"><a href="#0x08-防火墙-IDS躲避和哄骗" class="headerlink" title="0x08 防火墙/IDS躲避和哄骗"></a>0x08 防火墙/IDS躲避和哄骗</h2><hr>
+<h2 id="0x09-输出"><a href="#0x09-输出" class="headerlink" title="0x09 输出"></a>0x09 输出</h2><hr>
+<h2 id="0x0A-其他选项"><a href="#0x0A-其他选项" class="headerlink" title="0x0A 其他选项"></a>0x0A 其他选项</h2><hr>
+<h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2>
       
     </div>
     
@@ -441,9 +411,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Web-Security/" rel="tag"><i class="fa fa-tag"></i> Web-Security</a>
+            <a href="/tags/Pentest/" rel="tag"><i class="fa fa-tag"></i> Pentest</a>
           
-            <a href="/tags/Defense/" rel="tag"><i class="fa fa-tag"></i> Defense</a>
+            <a href="/tags/Nmap/" rel="tag"><i class="fa fa-tag"></i> Nmap</a>
           
         </div>
       
@@ -456,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/06/web安全观/" rel="next" title="Web安全观">
-                <i class="fa fa-chevron-left"></i> Web安全观
+              <a href="/2018/07/10/渗透测试标准/" rel="next" title="渗透测试标准">
+                <i class="fa fa-chevron-left"></i> 渗透测试标准
               </a>
             
           </div>
@@ -465,10 +435,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/08/HTTP协议详解/" rel="prev" title="HTTP协议详解">
-                HTTP协议详解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -600,7 +566,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#防御机制简述"><span class="nav-number">1.</span> <span class="nav-text">防御机制简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户访问"><span class="nav-number">2.</span> <span class="nav-text">处理用户访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#身份验证"><span class="nav-number">2.1.</span> <span class="nav-text">身份验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理"><span class="nav-number">2.2.</span> <span class="nav-text">会话管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">2.3.</span> <span class="nav-text">访问控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#处理用户的输入"><span class="nav-number">3.</span> <span class="nav-text">处理用户的输入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拒绝已知的不良输入"><span class="nav-number">3.1.</span> <span class="nav-text">拒绝已知的不良输入</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-选项概要"><span class="nav-number">1.</span> <span class="nav-text">0x01 选项概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-目标说明"><span class="nav-number">2.</span> <span class="nav-text">0x02 目标说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-主机发现"><span class="nav-number">3.</span> <span class="nav-text">0x03 主机发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-端口扫描"><span class="nav-number">4.</span> <span class="nav-text">0x04 端口扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-服务和版本探测"><span class="nav-number">5.</span> <span class="nav-text">0x05 服务和版本探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-操作系统探测"><span class="nav-number">6.</span> <span class="nav-text">0x06 操作系统探测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-时间和性能"><span class="nav-number">7.</span> <span class="nav-text">0x07 时间和性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-防火墙-IDS躲避和哄骗"><span class="nav-number">8.</span> <span class="nav-text">0x08 防火墙/IDS躲避和哄骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-输出"><span class="nav-number">9.</span> <span class="nav-text">0x09 输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0A-其他选项"><span class="nav-number">10.</span> <span class="nav-text">0x0A 其他选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">11.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
             
 
           </div>
