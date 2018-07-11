@@ -96,7 +96,10 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E6%95%B0%E6%8D%AE%E5%8C%85.png">
-<meta property="og:updated_time" content="2018-07-11T12:48:30.289Z">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/%E6%8E%A9%E7%A0%81.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/IP%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E5%A4%B4%E9%83%A8.png">
+<meta property="og:updated_time" content="2018-07-11T16:10:57.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嗅探-Wireshark">
 <meta name="twitter:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
@@ -405,16 +408,69 @@
 <p><strong>ARP响应：</strong>非此目的IP地址的设备将简单丢弃这个数据包，而拥有这个IP地址的设备将发送一个ARP响应，将MAC地址发送至传输计算机</p>
 <p>解析完成后，传输设备对这个设备MAC与IP对应关系的缓存惊醒更新，并开始传输数据</p>
 <h3 id="ARP数据包结构"><a href="#ARP数据包结构" class="headerlink" title="ARP数据包结构"></a>ARP数据包结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/ARP%E6%95%B0%E6%8D%AE%E5%8C%85.png" alt="ARP包"></p>
-<p><strong>硬件类型：</strong>数据链路层使用的类型数据，多数情况下是以太网（类型1）</p>
-<p><strong>协议类型：</strong>ARP请求正在使用的高层协议</p>
+<p><strong>硬件类型：</strong> 数据链路层使用的类型数据，多数情况下是以太网（类型1）</p>
+<p><strong>协议类型：</strong> ARP请求正在使用的高层协议</p>
 <p><strong>硬件地址长度：</strong>正在使用的硬件地址的长度（八位组/字节）</p>
 <p><strong>协议地址长度：</strong>对于制定协议类型所使用的逻辑地址的长度（八位组/字节）</p>
-<p><strong>操作：</strong>ARP数据包的功能：<strong>1</strong>表示请求，<strong>2</strong>表示响应</p>
+<p><strong>操作：</strong> ARP数据包的功能：<strong>1</strong>表示请求，<strong>2</strong>表示响应</p>
 <p><strong>发送方硬件地址：</strong>发送者的硬件地址</p>
 <p><strong>发送方协议地址：</strong>发送者的高层协议地址</p>
 <p><strong>目标硬件地址：</strong>目标接收方的硬件地址（ARP请求中为<strong>0</strong>）</p>
 <p><strong>目标协议地址：</strong>目标接收方的高层协议地址</p>
 <h3 id="数据包分析"><a href="#数据包分析" class="headerlink" title="数据包分析"></a>数据包分析</h3><p><strong>数据包 1：ARP请求</strong></p>
+<p><strong>数据包 2：ARP响应</strong></p>
+<p><strong>无偿的ARP</strong></p>
+<hr>
+<h2 id="0x02-IP协议分析"><a href="#0x02-IP协议分析" class="headerlink" title="0x02 IP协议分析"></a>0x02 IP协议分析</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>IP是TCP/IP协议族中最为核心的协议，所有的TCP、UDP、ICMP及IGMP数据都以IP数据报格式传输，IP提供<strong>不可靠</strong>、<strong>无连接</strong>的数据报传送服务</p>
+<p><strong>不可靠（unreliable）</strong>的意思是它不能保证IP数据报能成功地到达目的地。IP仅提供最好的传输服务。如果发生某种错误时，如某个路由器暂时用完了缓冲区，IP有一个简单的错误处理算法：丢弃该数据报，然后发送ICMP消息报给信源端。任何要求的可靠性必须由上层来提供（如TCP）</p>
+<p><strong>无连接（connectionless）</strong>这个术语的意思是IP并不维护任何关于后续数据报的状态信息。每个数据报的处理是相互独立的。这也说明，IP数据报可以不按发送顺序接收。如果一信源向相同的信宿发送两个连续的数据报（先是A，然后是B），每个数据报都是独立地进行路由选择，可能选择不同的路线，因此B可能在A到达之前先到达</p>
+<h3 id="IP地址"><a href="#IP地址" class="headerlink" title="IP地址"></a>IP地址</h3><p><strong>功能：</strong> IP地址是一个32位地址，用来唯一标识连接到网络的设备</p>
+<p><strong>表示：</strong> 点分十进制，以A.B.C.D的形式，构成IP地址的四组1和0分别转换为十进制0到255之间的数。</p>
+<p><strong>网络掩码：</strong> 每个IP地址都包含两个部分：网络地址和主机地址，网络地址用来标识设备所连接到的局域网，之际地址表示这个网络的设备本身。这由网路掩码的地址决定，网络掩码长32位，设为1的每一位标识IP地址对应部分属于网络地址，剩下设为0的部分标识主机地址</p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/%E6%8E%A9%E7%A0%81.png" alt="mask"></p>
+<p><strong>CIDR表示法：</strong> IP地址和网络掩码位简便起见，常被写成无类型域间路由（Classless Inter-Domain Routing，<strong>CIDR</strong>）的形式。完整IP地址后有一左斜杠（/），以及一个用来表示IP地址中网络部分位数的数字。如IP地址10.10.1.22和网络掩码225.225.0.0，在CIDR表示法下被写成10.10.1.22/16的形式</p>
+<h3 id="IP数据包结构"><a href="#IP数据包结构" class="headerlink" title="IP数据包结构"></a>IP数据包结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/IP%E6%8A%A5%E6%96%87.png" alt="IP"></p>
+<p><strong>版本号（Version）:</strong> IP所使用的版本</p>
+<p><strong>首部长度（Header Length）:</strong> IP头的长度</p>
+<p><strong>服务类型（Type of Service）:</strong> 优先级标志位和服务类型标志位，被路由器用来进行流量的优先排序</p>
+<p><strong>总长度（Total Length）:</strong> IP头与数据包中数据的长度</p>
+<p><strong>标识符（Identification）:</strong> 一个唯一的标识数字，用来标识一个数据包或者被分片数据包的次序</p>
+<p><strong>标记（Flags）:</strong>用来标记一个数据包是否是一组分片数据包的一部分</p>
+<p><strong>分片偏移（Fragment Offset）：</strong> 一个数据包就是一个分片，这个域中的值就会被用来将数据包以正确的形式重新组装</p>
+<p><strong>存活时间（Time to Live）:</strong> 用来定义数据包的生存周期，以经过路由器的跳数/秒数进行描述</p>
+<p><strong>协议（Protocol）:</strong> 用来标识在数据包系列中上层协议数据包的类型</p>
+<p><strong>首部校验和（Header Checksum）:</strong> 一个错误检测机制，用来确认IP头的内容没有被损坏或者篡改</p>
+<p><strong>源IP地址（Source IP Address）:</strong> 发出数据包的主机IP地址</p>
+<p><strong>目的IP地址（Destination IP Address）</strong> 数据包目的地的IP地址</p>
+<p><strong>选项（Options）:</strong> 保留为额外的IP选项，它包含着源站选路和时间戳的一些选项</p>
+<p><strong>数据（Data）:</strong> 使用IP传递的实际数据</p>
+<h3 id="存活时间分析"><a href="#存活时间分析" class="headerlink" title="存活时间分析"></a>存活时间分析</h3><p><strong>简述：</strong> 存活时间（TTL）值定义了在该数据包丢弃之前，所能经历的时间，或者能经过的最大的路由数目。TTL在数据包创建时被定义，通常在每次被发往一个路由器的时候减1，当TTL减为0时，如果这个数据包的最终目的地不再这个网络中，则此数据包将会被丢弃</p>
+<p><strong>实例分析</strong></p>
+<h3 id="IP分片分析"><a href="#IP分片分析" class="headerlink" title="IP分片分析"></a>IP分片分析</h3><p><strong>简述：</strong> 数据包分片是将一个数据流分为更小的片段，是IP解决跨域不同类型网络是可靠传输的一个特性。一个数据包的分片主要是基于第二层数据链路协议所使用的最大传输单元（Maximum Transmission Unit，<strong>MTU</strong>）的大小，以及使用这些第二层协议的设备配置情况。</p>
+<p><strong>MTU：</strong> 数据链路层协议多用以太网，<br>其默认MTU为1500，即以太网的网络上所能传输的最大数据包大小为1500字节（不包括14字节的以太网头本身）。MTU是基于接口进行设定，通常可以手工修改</p>
+<p><strong>分片原理：</strong> 当一个设备准备传输一个 IP数据包时，它会比较这个数据包的大小，以及将要把这个数据包传送出去的网络接口MTU，用于决定是否要将此数据包分片。如果数据包的大小大于MTU，那么这个数据包就会被分片</p>
+<p><strong>分片步骤</strong></p>
+<ol>
+<li>设备数据分为若干个可成功进行传输的数据包</li>
+<li>每个IP头的总长度域会被设置为每个分片的片段长度</li>
+<li>更多分片标志将会被数据流所有的数据包中设置为1，除了最后一个数据包</li>
+<li>IP头重分片部分的分片偏移将会被设置</li>
+<li>数据包被发送出去</li>
+</ol>
+<p><strong>实例分析</strong></p>
+<hr>
+<h2 id="0x03-TCP协议分析"><a href="#0x03-TCP协议分析" class="headerlink" title="0x03 TCP协议分析"></a>0x03 TCP协议分析</h2><h3 id="简述-1"><a href="#简述-1" class="headerlink" title="简述"></a>简述</h3><p>TCP提供一种<strong>面向连接的</strong>、<strong>可靠的</strong>字节流服务。面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接</p>
+<h3 id="TCP头部"><a href="#TCP头部" class="headerlink" title="TCP头部"></a>TCP头部</h3><p><img src="http://paivdtahr.bkt.clouddn.com/TCP%E5%A4%B4%E9%83%A8.png" alt="TCP头部"></p>
+<p><strong>源端口（Source Port）:</strong> 用于传输数据包的端口</p>
+<p><strong>目的端口（Destination Port）:</strong> 数据包将要被发送到的端口</p>
+<p><strong>序号（Sequence Number）:</strong> 用于表示一个TCP片段，这个域用来保证数据流中的部分没有缺失</p>
+<p><strong>确认号（Acknowledgement Number）:</strong> 此数字是通信中希望从另一个设备得到的下一个数据包的序号</p>
+<p><strong>标记（Flag）:</strong> URG,ACK,PSH,RST,SYN 和 FIN 标记都是用来表示所传输的TCP数据包的类型</p>
+<p><strong>窗口大小（Window Size）:</strong> TCP接收者缓冲的字节大小</p>
+<p><strong>校验和（Checksum）:</strong> 用来保证TCP头和数据的内容在抵达目的地时的完整性</p>
+<p><strong>紧急指针（Urgent Pointer）:</strong> 如果设置了URG位，这个域将被检查作为额外的指令，告诉CPU从数据包的哪里开始读取数据</p>
+<p><strong>选项（Options）:</strong> 各种可选的域，可以在TCP数据包中进行指定</p>
+<hr>
 <h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2><ul>
 <li><p><a href="https://wiki.wireshark.org/" title="Wireshark Wiki" target="_blank" rel="noopener">Wireshark Wiki</a></p>
 </li>
@@ -601,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议分析"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议概述"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APR解析过程"><span class="nav-number">1.2.</span> <span class="nav-text">APR解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP数据包结构"><span class="nav-number">1.3.</span> <span class="nav-text">ARP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据包分析"><span class="nav-number">1.4.</span> <span class="nav-text">数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">2.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议分析"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议概述"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APR解析过程"><span class="nav-number">1.2.</span> <span class="nav-text">APR解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP数据包结构"><span class="nav-number">1.3.</span> <span class="nav-text">ARP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据包分析"><span class="nav-number">1.4.</span> <span class="nav-text">数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-IP协议分析"><span class="nav-number">2.</span> <span class="nav-text">0x02 IP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">2.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址"><span class="nav-number">2.2.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据包结构"><span class="nav-number">2.3.</span> <span class="nav-text">IP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存活时间分析"><span class="nav-number">2.4.</span> <span class="nav-text">存活时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP分片分析"><span class="nav-number">2.5.</span> <span class="nav-text">IP分片分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-TCP协议分析"><span class="nav-number">3.</span> <span class="nav-text">0x03 TCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-1"><span class="nav-number">3.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP头部"><span class="nav-number">3.2.</span> <span class="nav-text">TCP头部</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">4.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
             
 
           </div>
