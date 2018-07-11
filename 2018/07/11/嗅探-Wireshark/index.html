@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据,Wireshark是目前全世界最广泛的网络数据包分析软件之一,以下是关于wireshark嗅探原理及基本用法的简要分析(参考自Wireshark User’s Guide)">
+<meta name="description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
 <meta name="keywords" content="Sec-Tools,Wireshark">
 <meta property="og:type" content="article">
 <meta property="og:title" content="嗅探-Wireshark">
 <meta property="og:url" content="http://yoursite.com/2018/07/11/嗅探-Wireshark/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据,Wireshark是目前全世界最广泛的网络数据包分析软件之一,以下是关于wireshark嗅探原理及基本用法的简要分析(参考自Wireshark User’s Guide)">
+<meta property="og:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-11T02:03:31.414Z">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E6%95%B0%E6%8D%AE%E5%8C%85.png">
+<meta property="og:updated_time" content="2018-07-11T12:48:30.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="嗅探-Wireshark">
-<meta name="twitter:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据,Wireshark是目前全世界最广泛的网络数据包分析软件之一,以下是关于wireshark嗅探原理及基本用法的简要分析(参考自Wireshark User’s Guide)">
+<meta name="twitter:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
+<meta name="twitter:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png">
 
 
 
@@ -381,20 +384,49 @@
 
       
         <blockquote>
-<p><a href="https://www.wireshark.org/" title="Wireshark" target="_blank" rel="noopener">Wireshark</a>（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据,Wireshark是目前全世界最广泛的网络数据包分析软件之一,以下是关于wireshark嗅探原理及基本用法的简要分析(参考自<a href="https://www.wireshark.org/docs/wsug_html_chunked/" title="Wireshark User’s Guide" target="_blank" rel="noopener">Wireshark User’s Guide</a>)<br><a id="more"></a></p>
+<p><a href="https://www.wireshark.org/" title="Wireshark" target="_blank" rel="noopener">Wireshark</a>（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力<br><a id="more"></a></p>
 </blockquote>
 <hr>
+<p>##0x00 分析基础</p>
+<p>正式使用Wireshark之前，需先对其基本用法以及TCP/IP常用协议有所了解，这些内容如果有所遗忘，先喝杯咖啡，顺便浏览下述文档，然后再继续后面的探索</p>
+<ul>
+<li><p><a href="https://www.wireshark.org/docs/wsug_html_chunked/" title="Wireshark User’s Guide" target="_blank" rel="noopener">Wireshark User’s Guide</a></p>
+</li>
+<li><p><a href="http://www.52im.net/topic-tcpipvol1.html" title="TCP/IP详解卷1：协议（网页版）" target="_blank" rel="noopener">TCP/IP详解 卷1：协议（网页版）</a></p>
+</li>
+</ul>
 <hr>
+<h2 id="0x01-ARP协议分析"><a href="#0x01-ARP协议分析" class="headerlink" title="0x01 ARP协议分析"></a>0x01 ARP协议分析</h2><h3 id="ARP协议概述"><a href="#ARP协议概述" class="headerlink" title="ARP协议概述"></a>ARP协议概述</h3><p><strong>逻辑地址：</strong>使不同网络以及没有直接相连的设备之间能够进行通信</p>
+<p><strong>物理地址：</strong>用来在单一网段中交换机直接连接的设备之间能够进行通信</p>
+<p><strong>MAC地址通信原理：</strong> 网络中用于连接各个设备的交换机使用了内容寻址寄存器（CAM），这个表列出了它在每一个端口的所有连接设备的MAC地址，当交换机收到一个指向特定MAC地址的流量，它就会使用这个表，来确定应该使用哪一个端口发送流量。如果目标的MAC地址是未知的，这个传输设备会首先在它的缓存中查找这个地址，如果没有找到，那么这个地址就需要在网络上额外的通信来进行解析</p>
+<h3 id="APR解析过程"><a href="#APR解析过程" class="headerlink" title="APR解析过程"></a>APR解析过程</h3><p>解析过程使用两种数据包：一个ARP请求，一个ARP响应</p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png" alt="ARP"></p>
+<p><strong>ARP请求：</strong>传输计算机发出ARP请求，发送源IP地址，源MAC地址，目的IP地址，将此数据包广播给网段中的所有设备，请求拥有目的IP对应的MAC地址</p>
+<p><strong>ARP响应：</strong>非此目的IP地址的设备将简单丢弃这个数据包，而拥有这个IP地址的设备将发送一个ARP响应，将MAC地址发送至传输计算机</p>
+<p>解析完成后，传输设备对这个设备MAC与IP对应关系的缓存惊醒更新，并开始传输数据</p>
+<h3 id="ARP数据包结构"><a href="#ARP数据包结构" class="headerlink" title="ARP数据包结构"></a>ARP数据包结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/ARP%E6%95%B0%E6%8D%AE%E5%8C%85.png" alt="ARP包"></p>
+<p><strong>硬件类型：</strong>数据链路层使用的类型数据，多数情况下是以太网（类型1）</p>
+<p><strong>协议类型：</strong>ARP请求正在使用的高层协议</p>
+<p><strong>硬件地址长度：</strong>正在使用的硬件地址的长度（八位组/字节）</p>
+<p><strong>协议地址长度：</strong>对于制定协议类型所使用的逻辑地址的长度（八位组/字节）</p>
+<p><strong>操作：</strong>ARP数据包的功能：<strong>1</strong>表示请求，<strong>2</strong>表示响应</p>
+<p><strong>发送方硬件地址：</strong>发送者的硬件地址</p>
+<p><strong>发送方协议地址：</strong>发送者的高层协议地址</p>
+<p><strong>目标硬件地址：</strong>目标接收方的硬件地址（ARP请求中为<strong>0</strong>）</p>
+<p><strong>目标协议地址：</strong>目标接收方的高层协议地址</p>
+<h3 id="数据包分析"><a href="#数据包分析" class="headerlink" title="数据包分析"></a>数据包分析</h3><p><strong>数据包 1：ARP请求</strong></p>
 <h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2><ul>
 <li><p><a href="https://wiki.wireshark.org/" title="Wireshark Wiki" target="_blank" rel="noopener">Wireshark Wiki</a></p>
 </li>
 <li><p><a href="https://www.wireshark.org/docs/wsdg_html_chunked/" title="Wireshark Developer’s Guide" target="_blank" rel="noopener">Wireshark Developer’s Guide</a></p>
 </li>
-<li><p><a href="https://pan.baidu.com/s/1MOLX3DfDgbaThxcEqFZPfg" title="Wireshark数据包分析实战" target="_blank" rel="noopener">Wireshark数据包分析实战</a></p>
+<li><p><a href="https://pan.baidu.com/s/1MOLX3DfDgbaThxcEqFZPfg" title="Wireshark数据包分析实战" target="_blank" rel="noopener">《Wireshark数据包分析实战》</a></p>
 </li>
-<li><p><a href="https://pan.baidu.com/s/1GwZsdiA2ChqNAdRvgF0obA" title="Wireshark网络分析的艺术" target="_blank" rel="noopener">Wireshark网络分析的艺术</a></p>
+<li><p><a href="https://pan.baidu.com/s/1GwZsdiA2ChqNAdRvgF0obA" title="Wireshark网络分析的艺术" target="_blank" rel="noopener">《Wireshark网络分析的艺术》</a></p>
 </li>
-<li><p><a href="https://pan.baidu.com/s/1A3ReN6ClR97oklL2aSa5jw" title="Wireshark 网络分析就这么简单" target="_blank" rel="noopener">Wireshark网络分析就这么简单</a></p>
+<li><p><a href="https://pan.baidu.com/s/1J7m75b3hFFvw9fKFXRE6cg" title="计算机网络：自顶向下方法" target="_blank" rel="noopener">《计算机网络：自顶向下方法》</a></p>
+</li>
+<li><p><a href="https://pan.baidu.com/s/1xxXjp8P2giFAYtXjt8uqMA" title="《数据通信与网络 第六版》" target="_blank" rel="noopener">《数据通信与网络 第六版》</a></p>
 </li>
 </ul>
 
@@ -569,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">1.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议分析"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议概述"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APR解析过程"><span class="nav-number">1.2.</span> <span class="nav-text">APR解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP数据包结构"><span class="nav-number">1.3.</span> <span class="nav-text">ARP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据包分析"><span class="nav-number">1.4.</span> <span class="nav-text">数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">2.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
             
 
           </div>
