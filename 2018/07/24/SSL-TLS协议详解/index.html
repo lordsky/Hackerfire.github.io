@@ -94,10 +94,24 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="传输层安全性（TLS)及其前身安全套接字层（SSL），通过计算机网络提供通信安全性的加密协议。广泛用于网页浏览，电子邮件，即时消息和IP语音（VoIP）之类的应用程序中。TLS协议主要旨在提供两个或更多通信计算机应用程序之间的隐私和数据完整性">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T11:02:02.922Z">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8D%8F%E8%AE%AE%E6%A0%88.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/MAC%E8%AE%A1%E7%AE%97.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8A%A0%E5%AF%86.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E8%AE%B0%E5%BD%95%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E8%AE%B0%E5%BD%95%E8%BD%BD%E8%8D%B7.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E5%AF%86%E7%A0%81%E5%8F%98%E6%9B%B4%E8%A7%84%E6%A0%BC.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%8A%A5%E8%AD%A6%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E8%87%B4%E5%91%BD%E8%AD%A6%E5%91%8A.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%8F%A1%E6%89%8B%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/finished.png">
+<meta property="og:updated_time" content="2018-07-24T15:05:03.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSL&#x2F;TLS协议详解">
 <meta name="twitter:description" content="传输层安全性（TLS)及其前身安全套接字层（SSL），通过计算机网络提供通信安全性的加密协议。广泛用于网页浏览，电子邮件，即时消息和IP语音（VoIP）之类的应用程序中。TLS协议主要旨在提供两个或更多通信计算机应用程序之间的隐私和数据完整性">
+<meta name="twitter:image" content="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8D%8F%E8%AE%AE%E6%A0%88.png">
 
 
 
@@ -384,6 +398,115 @@
 <p>传输层安全性（TLS)及其前身安全套接字层（SSL），通过计算机网络提供通信安全性的加密协议。广泛用于网页浏览，电子邮件，即时消息和IP语音（VoIP）之类的应用程序中。TLS协议主要旨在提供两个或更多通信计算机应用程序之间的隐私和数据完整性<br><a id="more"></a></p>
 </blockquote>
 <hr>
+<h2 id="SSL协议"><a href="#SSL协议" class="headerlink" title="SSL协议"></a>SSL协议</h2><h3 id="0x01-SSL体系结构"><a href="#0x01-SSL体系结构" class="headerlink" title="0x01 SSL体系结构"></a>0x01 SSL体系结构</h3><p><strong>1. SSL协议栈</strong></p>
+<p>SSL使用TCP提供一种可靠的端对端的安全服务，SSL不是单个协议，它由两层协议组成</p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8D%8F%E8%AE%AE%E6%A0%88.png" alt="SSL"></p>
+<p>SSL记录协议对各种更高层协议提供基本的安全服务。SSL中定义的三个较高层协议分别是：握手协议，密码变更规格协议，报警协议，这些SSL协议规范用于管理SSL的交换</p>
+<p><strong>2. 连接与会话</strong></p>
+<p><strong>连接(conection)：</strong>SSL连接是一种能够提供合适服务类型的传输。这种连接是点对点的关系而且短暂，每一条连接都与一个会话连接</p>
+<p><strong>会话(session)：</strong>SSL会话是客户端与服务器之间的一种关联。会话是通过握手协议来创建，所有会话都定义了密码安全参数集合，这些参数可以在多个安全之间共享。</p>
+<p><strong>会话状态参数</strong></p>
+<pre><code>会话标识符(session identifier)：由服务器产生的用于标识活动的或可恢复的会话状态的一个任意字节序列
+
+对等证书(peer certificate)：对等的X.509v3证书，此元素可为空
+
+压缩方法(compression method)：加密前用于压缩数据的算法
+
+密码规格(cipher spec)：包括大块数据加密算法(如空算法，AES算法等)规格和用于计算MAC的散列算法(如MD5,SHA-1算法等)规格。还定义一些密码属性，如散列值长度等
+
+主密钥(master secret)：客户端和服务器共享的48字节的会话密钥
+
+可恢复性(is resumable)：指明能否把会话用于创建新连接的标志比特
+</code></pre><p><strong>连接状态参数</strong></p>
+<pre><code>服务端和客户端随机数(server and client random)：由服务器和客户端为每个连接选定的字符串
+
+服务器写MAC密钥(server write MAC secret)：服务器发送数据时用于计算MAC值得密钥
+
+客户端写MAC密钥(client write MAC secret)：客户端发送数据时用于计算MAC值得密钥
+
+服务器写密钥(server write key)：服务器用于加密数据，客户端用于解密的传统加密密钥
+
+客户端写密钥(client write key)：客户端用于加密数据，服务器用于解密的传统加密密钥
+
+初始化向量(initialization vector)：当CBC模式中的数据块正在使用时，需要为每个密钥配置一个初始化向量(IV)。最初的IV由SSL握手协议初始化，之后的IV值为前一次分组密码算法的最后一个密文分组
+
+序列号(sequence number)：建立连接的各方为每条连接发送和接收的消息维护单独序列号。当一方发送或接收改变密码规格的消息时，相应序列号置零，序列号的值不能超过2^64-1
+</code></pre><h3 id="0x02-SSL记录协议"><a href="#0x02-SSL记录协议" class="headerlink" title="0x02 SSL记录协议"></a>0x02 SSL记录协议</h3><p><strong>1. 提供服务(连接)</strong></p>
+<p><strong>机密性(Confidentiality)：</strong>握手协议定义一个可用于SSL负载的传统加密共享密钥</p>
+<p><strong>消息完整性(Message Integrity)：</strong>握手协议还定义一个用于产生消息认证码(MAC)的共享密钥</p>
+<p><strong>2. 运行流程</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E6%B5%81%E7%A8%8B.png" alt="运行"></p>
+<p><strong>(1) 分段：</strong>将每个上层消息分给为不大于2^14字节的块</p>
+<p><strong>(2) 压缩：</strong>可选，压缩必须是无损并且对内容的长度不能产生多于1024字节的增量，SSLv3(TLS当前版本)中，未规定压缩算法，默认压缩算法为空算法</p>
+<p><strong>(3) 添加MAC，计算消息验证码</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/MAC%E8%AE%A1%E7%AE%97.png" alt="MAC"></p>
+<p>SSLv3中的两个填充是串接式的填充，HMAC中式是异或运算</p>
+<p><strong>(4) 加密(压缩后的消息及shiMAC)</strong></p>
+<p>使用对称加密算法进行加密，机密造成的块长度增量不超过1024字节，故块的总长度不超过2^14+2048字节</p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8A%A0%E5%AF%86.png" alt="加密"></p>
+<p><strong>流加密算法：</strong>MAC码在加密前计算得到，计算所得的MAC码连同明文或压缩后的明文一同被加密</p>
+<p><strong>分组加密算法：</strong>消息MAC码计算结束后，加密发生之前先填充一些填充数据。填充方式为：先进行一定数量的字节填充，然后在最后一个人填充字节上填入填充总长度</p>
+<p><strong>(5) 添加SSL记录头</strong></p>
+<p><strong>header 组成域</strong></p>
+<pre><code>内容类型(Content Type)：8比特，用于处理封闭分段的更高层协议
+
+主版本(Major Version)：8比特，表明应用的SSL版本主版本号,SSLv3.0该值为3
+
+副版本(Minor Version)：8比特，表明应用的SSL版本副版本号,SSLv3.0该值为0
+
+压缩后的长度(Compressed Length)：8比特，以字节为单位的明文块(使用压缩后则为压缩后的明文块)长度，最大值为2^14+2048
+</code></pre><p>内容类型被定义为密码变更规格(change_cipher_spec)，报警(alert)，握手(handshark)和应用数据(application_data)4种</p>
+<p><strong>3. SSL记录协议格式</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E8%AE%B0%E5%BD%95%E6%A0%BC%E5%BC%8F.png" alt="ssl格式"></p>
+<p><strong>4. SSL记录协议载荷</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E8%AE%B0%E5%BD%95%E8%BD%BD%E8%8D%B7.png" alt="SSL记录载荷"></p>
+<h3 id="0x03-密码变更规格协议"><a href="#0x03-密码变更规格协议" class="headerlink" title="0x03 密码变更规格协议"></a>0x03 密码变更规格协议</h3><p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E5%AF%86%E7%A0%81%E5%8F%98%E6%9B%B4%E8%A7%84%E6%A0%BC.png" alt="密码变更"></p>
+<p>密码变更规格协议是应用SSL记录协议的3个SSL规格协议之一，是最简单的一个协议。本协议只包含一条消息，有一个之为1的字节组成，此消息唯一功能是<strong>使得延迟状态改变为当前状态</strong>，该消息更新了在这一连接上应用的密码机制</p>
+<h3 id="0x04-报警协议"><a href="#0x04-报警协议" class="headerlink" title="0x04 报警协议"></a>0x04 报警协议</h3><p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E6%8A%A5%E8%AD%A6%E5%8D%8F%E8%AE%AE.png" alt="报警"></p>
+<p>报警协议用于将SSL相关的报警传达给对等实体，也按照当前状态的规格进行压缩和加密操作</p>
+<p>这一协议过程每一条消息由连个字节组成，其中第一个字节可取值为<strong>警告(1)</strong>或<strong>致命(2)</strong>以表示消息严重程度，严重程度为致命时，SSL将立即结束当前连接；第二个字节包括一种用于指明具体警告的编码</p>
+<p><strong>致命警告内容</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E8%87%B4%E5%91%BD%E8%AD%A6%E5%91%8A.png" alt="致命"></p>
+<h3 id="0x05-握手协议"><a href="#0x05-握手协议" class="headerlink" title="0x05 握手协议"></a>0x05 握手协议</h3><p><strong>1. 协议概述</strong></p>
+<p>SSL握手协议允许客户端和服务器相互认证，并协商加密和MAC算法，以及用于保护SSL记录中所发送数据加密密钥，握手协议在应用数据<strong>传输之前</strong>使用</p>
+<p><strong>2. 协议组成</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E6%8F%A1%E6%89%8B%E5%8D%8F%E8%AE%AE.png" alt="握手"></p>
+<p>握手协议有客户端和服务器之间的一系列消息交换组成，每条消息包括三个域</p>
+<pre><code>类型(Type)：1字节，表示预定义的10种消息类型之一
+
+长度(Length)：3字节，以字节为单位的消息长度
+
+内容(Content)：(&gt;=0字节)，相关参数如下所示
+</code></pre><p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B.png" alt="类型"></p>
+<p><strong>3. 握手协议过程</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.png" alt="过程"></p>
+<p><strong>(1) 第一阶段：客户端发起建立连接请求</strong></p>
+<p>此阶段主要是发起逻辑连接并建立与之关联的安全能力</p>
+<p>首先由客户端发送<strong>client_hello</strong>消息启动</p>
+<pre><code>版本(Version)：客户端的SSL最高版本
+
+随机数(Random)：由客户端产生的随机序列(32比特时间戳+安全随机数产生器产生的28字节随机数)，用于密钥过程中防止重放攻击
+
+会话ID(Session ID)：可变长度的会话标识符。非零值表示客户端希望更新现有连接的参数，零值表示客户端希望为此次会话建立一条新连接
+
+密码构件(CiperSuite)：该列表包括客户端支持的密码算法组合，以优先选用递减的顺序给出
+
+压缩方法(Compression Methon)：客户端支持的压缩方法列表
+</code></pre><p>发送完<code>client_hello</code>消息后，客户端等待<code>server_hello</code>消息，版本域包含客户端建议的较低版本和服务器建议的最高版本，服务器产生一个独立于客户端随机域的新随机数域。如果客户端会话ID域的值非零，则服务器取相同值；否则，服务器会话ID域包括一个新会话值</p>
+<p><strong>(2) 第二阶段：</strong>服务器认证和密钥交换</p>
+<p>如果需要认证，则这一阶段的开始以服务器发送其证书为标志，发送的消息包括一个X.509证书或一个X.509证书链。<code>Certificate</code>（证书）消息对于出匿名Diffie-Hellman密钥交换外事必需的；之后，如果必要，将发送一个<code>server_key_exchange</code>(服务器密钥交换)消息</p>
+<p>然后，如果服务器使用的不是匿名Diffie-Hellman算法，则服务器可以向客户端请求证书，<code>certificate_request</code>(证书请求)消息包括两个参数：<code>certificate_type</code>(证书类型)和<code>certificate_authorities</code>(证书机构)</p>
+<p>最后一条消息(必需)是<code>server_done</code>(服务器结束)消息，该消息有服务器发出并示意服务器的hello及相关消息已经结束，此次奥西没有参数，发送完后，服务器要等待客户的响应</p>
+<p><strong>(3) 第三阶段：</strong>客户端认证和密钥交换</p>
+<p>接收到<code>server_done</code>(服务器结束)消息后，如果需要，客户端应该验证服务器提供的证书是否有效，同时检查<code>server_hello</code>参数是否可接受，若条件均满足，客户端将返回一条或更多消息给服务器</p>
+<p>如果服务器已请求证书，则以客户端发送一条<code>certificate</code>消息为这一阶段的开始，如果没有合适的证书可用，那么客户端发送<code>no_ceritificate alert</code>(无证书警报)</p>
+<p>接下来是<code>client_key_exchange</code>(客户端密钥交换)消息，该消息必须在这一阶段发送</p>
+<p>最后，客户端可以发送<code>certificate_verify</code>(证书验证)消息，一边对客户端证书进行显示验证。仅当客户端证书具有签名功能时才会发送该消息</p>
+<p><strong>(4) 第四阶段：完成</strong></p>
+<p>这一阶段完成安全连接的建立，客户端发送一个<code>change_cipher_spec</code>(密码变更规格)消息，并把未定的密码规格复制到当前密码规格中，该消息不是握手协议的一部分。客户端在新算法，新密钥和新秘密值下立即发送<code>finished</code>(结束)消息，<code>finished</code>消息用于验证密钥交换和认证过程是否成功，<code>finished</code>消息是两个散列码的串接</p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/finished.png" alt="finished"></p>
+<p><code>Sender</code>是一个识别码，能够把作为发送者的客户端与<code>handshake_messages</code>区分开来</p>
+<p><code>handshake_message</code>包括从所有握手消息起到<code>Sender</code>码之前的所有数据，但不包括本条消息</p>
 
       
     </div>
@@ -476,8 +599,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -537,6 +669,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL协议"><span class="nav-number">1.</span> <span class="nav-text">SSL协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-SSL体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">0x01 SSL体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-SSL记录协议"><span class="nav-number">1.2.</span> <span class="nav-text">0x02 SSL记录协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-密码变更规格协议"><span class="nav-number">1.3.</span> <span class="nav-text">0x03 密码变更规格协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-报警协议"><span class="nav-number">1.4.</span> <span class="nav-text">0x04 报警协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x05-握手协议"><span class="nav-number">1.5.</span> <span class="nav-text">0x05 握手协议</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
