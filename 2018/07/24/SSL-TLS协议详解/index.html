@@ -107,7 +107,10 @@
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.png">
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/finished.png">
-<meta property="og:updated_time" content="2018-07-24T15:05:03.194Z">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/TLS%E5%8D%8F%E8%AE%AE%E6%A0%88.png">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/TLS%20MAC.png">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0.png">
+<meta property="og:updated_time" content="2018-07-25T03:20:40.415Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SSL&#x2F;TLS协议详解">
 <meta name="twitter:description" content="传输层安全性（TLS)及其前身安全套接字层（SSL），通过计算机网络提供通信安全性的加密协议。广泛用于网页浏览，电子邮件，即时消息和IP语音（VoIP）之类的应用程序中。TLS协议主要旨在提供两个或更多通信计算机应用程序之间的隐私和数据完整性">
@@ -440,8 +443,8 @@
 <p><strong>(2) 压缩：</strong>可选，压缩必须是无损并且对内容的长度不能产生多于1024字节的增量，SSLv3(TLS当前版本)中，未规定压缩算法，默认压缩算法为空算法</p>
 <p><strong>(3) 添加MAC，计算消息验证码</strong></p>
 <p><img src="http://pcdbq4c2i.bkt.clouddn.com/MAC%E8%AE%A1%E7%AE%97.png" alt="MAC"></p>
-<p>SSLv3中的两个填充是串接式的填充，HMAC中式是异或运算</p>
-<p><strong>(4) 加密(压缩后的消息及shiMAC)</strong></p>
+<p>SSLv3中的两个填充是串接式的填充，HMAC中是异或运算</p>
+<p><strong>(4) 加密(压缩后的消息及MAC)</strong></p>
 <p>使用对称加密算法进行加密，机密造成的块长度增量不超过1024字节，故块的总长度不超过2^14+2048字节</p>
 <p><img src="http://pcdbq4c2i.bkt.clouddn.com/SSL%E5%8A%A0%E5%AF%86.png" alt="加密"></p>
 <p><strong>流加密算法：</strong>MAC码在加密前计算得到，计算所得的MAC码连同明文或压缩后的明文一同被加密</p>
@@ -507,6 +510,25 @@
 <p><img src="http://pcdbq4c2i.bkt.clouddn.com/finished.png" alt="finished"></p>
 <p><code>Sender</code>是一个识别码，能够把作为发送者的客户端与<code>handshake_messages</code>区分开来</p>
 <p><code>handshake_message</code>包括从所有握手消息起到<code>Sender</code>码之前的所有数据，但不包括本条消息</p>
+<hr>
+<h2 id="TLS协议"><a href="#TLS协议" class="headerlink" title="TLS协议"></a>TLS协议</h2><h3 id="0x01-协议概述"><a href="#0x01-协议概述" class="headerlink" title="0x01 协议概述"></a>0x01 协议概述</h3><p>运行在传输层之上的最流行的安全协议是传输层安全(Transport Layer Security，TLS)，TLS用于保证Web通信以及其他流行协议的安全，比如POP，IMAP(使用TLS保护后，他们被称为POP3S与IMAPS)。TLS能够在应用程序内部或底部实现，而这些应用程序是运行于底层协议上来实现功能，TLS是SSL的互联网标准版本</p>
+<h3 id="0x02-TLS协议栈"><a href="#0x02-TLS协议栈" class="headerlink" title="0x02 TLS协议栈"></a>0x02 TLS协议栈</h3><p><img src="http://par628i4r.bkt.clouddn.com/TLS%E5%8D%8F%E8%AE%AE%E6%A0%88.png" alt="TLS"></p>
+<p>TLS协议“栈”包括位于底部的<strong>记录层</strong>以及上层协议(称为<strong>信息交换协议</strong>) 中的三个协议，第4个上层协议是使用TLS的应用协议。记录层提供分片、压缩、完整性保护以及加密功能</p>
+<p>TLS是一个客户端/ 服务器协议, 设计用于为两个应用程序的连接提供安全。<code>记录协议</code>提供<strong>分片、压缩、完整性保护</strong>以及对客户端与服务器之间所<strong>交换数据的加密服务</strong>。<code>信息交换(handshaking)协议</code>负责<strong>建立身份、进行认证、提示警报</strong>, 以及为用于每一条连接的记录协议提供唯一的<strong>密钥材料</strong>。信息交换协议包含了4 个特殊的协议: 握手协议、警告协议、密码变更协议以及应用数据协议</p>
+<h3 id="0x03-TLS-SSL协议对比"><a href="#0x03-TLS-SSL协议对比" class="headerlink" title="0x03 TLS/SSL协议对比"></a>0x03 TLS/SSL协议对比</h3><p><strong>1. 版本号</strong></p>
+<p>TLS记录格式与SSL记录格式完全相同，头部中各域的意义也完全相同；唯一不同的是版本号，TLS当前版本，主版本号是3，副版本号是1</p>
+<p><strong>2. 消息验证码</strong></p>
+<p>SSLv3与TLS MAC方案有两点不同：<strong>算法填充方式</strong>和<strong>MAC值计算范围</strong></p>
+<p>TLS使用HAMC算法，填充部分采用<strong>异或</strong>方式；SSLvs填充部分采用与<strong>密钥串接</strong>的方式，填充后的秘密密钥长度等于散列码长度</p>
+<p><img src="http://par628i4r.bkt.clouddn.com/TLS%20MAC.png" alt="MAC"></p>
+<p>TLS的MAC计算公式中，不仅包含了SSLv3的所有域，还包括TLSCompressed.version域，表示正在使用的协议版本号</p>
+<p><strong>3. 伪随机函数</strong></p>
+<p>TLS使用一个称为R<strong>PF的伪随机函数</strong>来扩展密钥以得到密钥产生和验证中的各种密钥块。采用伪随机函数的目的是使用相对较小的共享密钥值，通过某种不会受到针对散列函数和MAC攻击的方法生成较长的数据块</p>
+<p><img src="http://par628i4r.bkt.clouddn.com/%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0.png" alt="伪随机"></p>
+<p><strong>4. 报警码</strong></p>
+<p><strong>5. 密码构件</strong></p>
+<p><strong>6. 客户端证书类型</strong></p>
+<p><strong>7. certificate_verify 和 finished消息</strong></p>
 
       
     </div>
@@ -679,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL协议"><span class="nav-number">1.</span> <span class="nav-text">SSL协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-SSL体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">0x01 SSL体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-SSL记录协议"><span class="nav-number">1.2.</span> <span class="nav-text">0x02 SSL记录协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-密码变更规格协议"><span class="nav-number">1.3.</span> <span class="nav-text">0x03 密码变更规格协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-报警协议"><span class="nav-number">1.4.</span> <span class="nav-text">0x04 报警协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x05-握手协议"><span class="nav-number">1.5.</span> <span class="nav-text">0x05 握手协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL协议"><span class="nav-number">1.</span> <span class="nav-text">SSL协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-SSL体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">0x01 SSL体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-SSL记录协议"><span class="nav-number">1.2.</span> <span class="nav-text">0x02 SSL记录协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-密码变更规格协议"><span class="nav-number">1.3.</span> <span class="nav-text">0x03 密码变更规格协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-报警协议"><span class="nav-number">1.4.</span> <span class="nav-text">0x04 报警协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x05-握手协议"><span class="nav-number">1.5.</span> <span class="nav-text">0x05 握手协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS协议"><span class="nav-number">2.</span> <span class="nav-text">TLS协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-协议概述"><span class="nav-number">2.1.</span> <span class="nav-text">0x01 协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-TLS协议栈"><span class="nav-number">2.2.</span> <span class="nav-text">0x02 TLS协议栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-TLS-SSL协议对比"><span class="nav-number">2.3.</span> <span class="nav-text">0x03 TLS/SSL协议对比</span></a></li></ol></li></ol></div>
             
 
           </div>
