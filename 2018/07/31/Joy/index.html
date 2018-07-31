@@ -94,12 +94,13 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="Joy是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/joy.png">
 <meta property="og:image" content="http://par628i4r.bkt.clouddn.com/joy%E5%AE%89%E8%A3%85.png">
-<meta property="og:updated_time" content="2018-07-31T06:52:21.501Z">
+<meta property="og:updated_time" content="2018-07-31T06:55:40.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Joy-加密流量分析">
 <meta name="twitter:description" content="Joy是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据">
-<meta name="twitter:image" content="http://par628i4r.bkt.clouddn.com/joy%E5%AE%89%E8%A3%85.png">
+<meta name="twitter:image" content="http://par628i4r.bkt.clouddn.com/joy.png">
 
 
 
@@ -383,22 +384,22 @@
 
       
         <blockquote>
-<p><a href="https://github.com/cisco/joy/" title="Joy" target="_blank" rel="noopener">Joy</a>是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据<br><a id="more"></a></p>
+<p><img src="http://par628i4r.bkt.clouddn.com/joy.png" alt="joy"><br><a href="https://github.com/cisco/joy/" title="Joy" target="_blank" rel="noopener">Joy</a>是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据<br><a id="more"></a></p>
 </blockquote>
 <hr>
-<h2 id="0x01-简述"><a href="#0x01-简述" class="headerlink" title="0x01 简述"></a>0x01 简述</h2><h3 id="1-可获取信息类型"><a href="#1-可获取信息类型" class="headerlink" title="1. 可获取信息类型"></a>1. 可获取信息类型</h3><pre><code>IP数据包的长度以及到达时间；
+<h2 id="0x01-简述"><a href="#0x01-简述" class="headerlink" title="0x01 简述"></a>0x01 简述</h2><h3 id="1-可获取信息类型"><a href="#1-可获取信息类型" class="headerlink" title="1. 可获取信息类型"></a>1. 可获取信息类型</h3><pre><code>1. IP数据包的长度以及到达时间；
 
-数据流中特定数据的经验概率分布情况，以及相应的熵；
+2. 数据流中特定数据的经验概率分布情况，以及相应的熵；
 
-TLS记录的长度以及到达时间；
+3. TLS记录的长度以及到达时间；
 
-其他非加密的TLS数据，例如提供的加密套件列表、选择的加密套件、clientKeyExchange域的长度、以及服务器证书字符串等等；
+3. 其他非加密的TLS数据，例如提供的加密套件列表、选择的加密套件、clientKeyExchange域的长度、以及服务器证书字符串等等；
 
-DNS域名、地址以及TTLs；
+4. DNS域名、地址以及TTLs；
 
-HTTP头元素以及HTTP body的前八个字节；
+5. HTTP头元素以及HTTP body的前八个字节；
 
-与数据流有关的进程名称以及pcap文件
+6. 与数据流有关的进程名称以及pcap文件
 </code></pre><h3 id="2-适用范围"><a href="#2-适用范围" class="headerlink" title="2. 适用范围"></a>2. 适用范围</h3><p>Joy旨在用于<strong>安全研究</strong>，<strong>取证</strong>以及（小规模）<strong>网络监控</strong>，以检测漏​​洞，威胁和其他未经授权或不需要的行为。研究人员，管理员，渗透测试人员和安全运营团队可以充分利用这些信息，保护受监控的网络，并在漏洞的情况下，通过<strong>改善防御态势</strong>为更广泛的社区带来好处。对于攻击者来说，Joy同样可以帮助他们实现自己的目的，例如扫描目标网络中潜在的安全漏洞，或者窃取目标网络流数据</p>
 <h3 id="3-工具配置"><a href="#3-工具配置" class="headerlink" title="3. 工具配置"></a>3. 工具配置</h3><p><strong>(1) 解决依赖(Ubuntu)</strong></p>
 <pre><code>sudo apt-get install build-essential libssl-dev libpcap-dev libcurl4-openssl-dev
