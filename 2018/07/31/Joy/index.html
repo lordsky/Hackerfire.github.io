@@ -95,7 +95,7 @@
 <meta property="og:description" content="Joy是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://par628i4r.bkt.clouddn.com/joy%E5%AE%89%E8%A3%85.png">
-<meta property="og:updated_time" content="2018-07-31T08:00:32.218Z">
+<meta property="og:updated_time" content="2018-07-31T08:06:35.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Joy-加密流量分析">
 <meta name="twitter:description" content="Joy是一个BSD许可的基于libpcap的软件包，用于从实时网络流量或数据包捕获（pcap）文件中提取数据特征，使用类似于IPFIX或Netflow的面向流的模型，然后在JSON中表示这些数据特征。它还包含可应用于这些数据文件的分析工具,Joy可用于大规模探索数据，尤其是安全性和威胁相关数据">
@@ -460,33 +460,61 @@ make &amp;&amp; make install
 
 23. username=user                           If username=user is set, then drop privileges to username user after starting packet capture in online mode as root. Otherwise, the default username joy is used
 </code></pre><h3 id="2-Data-feature-options"><a href="#2-Data-feature-options" class="headerlink" title="2. Data feature options"></a>2. Data feature options</h3><pre><code>1. bpf=&quot;expression&quot;            only process packets matching BPF &quot;expression&quot;
+
 2. zeros=1                     include zero-length data (e.g. ACKs) in packet list
+
 3. retrans=1                   include TCP retransmissions in packet list
+
 4. bidir=1                     merge unidirectional flows into bidirectional ones
+
 5. dist=1                      include byte distribution array
+
 6. cdist=F                     include compact byte distribution array using the mapping file, F
+
 7. entropy=1                   include byte entropy
+
 8. http=1                      include HTTP data
+
 9. exe=1                       include information about host process associated with flow
+
 10. classify=1                 include results of post-collection classification
+
 11. num_pkts=N                 report on at most N packets per flow (0 &lt;= N &lt; 200)
+
 12. type=T                     select message type: 1=SPLT, 2=SALT
+
 13. idp=N                      report N bytes of the initial data packet of each flow
+
 14. label=L:F                  add label L to addresses that match the subnets in file F
+
 15. URLmodel=URL               URL to be used to retrieve classisifer updates
+
 16. model=F1:F2                change classifier parameters, SPLT in file F1 and SPLT+BD in file F2
+
 17. hd=1                       include header description
+
 18. URLlabel=URL               Full URL including filename to be used to retrieve label updates
+
 19. wht=1                      include walsh-hadamard transform
+
 20. example=1                  include example feature
+
 21. dns=1                      report DNS response information
+
 22. ssh=1                      report ssh information
+
 23. tls=1                      report TLS data (ciphersuites, record lengths and times, ...)
+
 24. dhcp=1                     report dhcp information
+
 25. http=1                     report http information
+
 27. ike=1                      report IKE information
+
 28. payload=N                  include N bytes of payload
+
 29. salt=1                     include salt feature
+
 30. ppi=1                      include per-packet info (ppi)
 </code></pre><hr>
 
