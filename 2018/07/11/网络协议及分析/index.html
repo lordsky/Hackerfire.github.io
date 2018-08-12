@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Sec-Tools,Wireshark," />
+  <meta name="keywords" content="Wireshark,TCP/IP," />
 
 
 
@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
-<meta name="keywords" content="Sec-Tools,Wireshark">
+<meta name="description" content="本文对常用TCP/IP网络协议进行简要总结，并用Wireshark——一个免费开源的网络数据包分析工具对其进行分析">
+<meta name="keywords" content="Wireshark,TCP&#x2F;IP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嗅探-Wireshark">
-<meta property="og:url" content="http://yoursite.com/2018/07/11/嗅探-Wireshark/index.html">
+<meta property="og:title" content="TCP&#x2F;IP网络协议及分析">
+<meta property="og:url" content="http://yoursite.com/2018/07/11/网络协议及分析/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
+<meta property="og:description" content="本文对常用TCP/IP网络协议进行简要总结，并用Wireshark——一个免费开源的网络数据包分析工具对其进行分析">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E6%95%B0%E6%8D%AE%E5%8C%85.png">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png">
-<meta property="og:updated_time" content="2018-07-31T06:00:16.559Z">
+<meta property="og:updated_time" content="2018-08-12T00:55:14.913Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="嗅探-Wireshark">
-<meta name="twitter:description" content="Wireshark（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力">
+<meta name="twitter:title" content="TCP&#x2F;IP网络协议及分析">
+<meta name="twitter:description" content="本文对常用TCP/IP网络协议进行简要总结，并用Wireshark——一个免费开源的网络数据包分析工具对其进行分析">
 <meta name="twitter:image" content="http://paivdtahr.bkt.clouddn.com/ARP%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B.png">
 
 
@@ -148,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/11/嗅探-Wireshark/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/11/网络协议及分析/"/>
 
 
 
 
 
-  <title>嗅探-Wireshark | Firehacker</title>
+  <title>TCP/IP网络协议及分析 | Firehacker</title>
   
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/嗅探-Wireshark/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/网络协议及分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Firehacker">
@@ -318,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">嗅探-Wireshark</h1>
+          <h1 class="post-title" itemprop="name headline">TCP/IP网络协议及分析</h1>
         
 
         <div class="post-meta">
@@ -353,8 +353,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全技术/" itemprop="url" rel="index">
-                    <span itemprop="name">安全技术</span>
+                  <a href="/categories/计算机技术/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机技术</span>
                   </a>
                 </span>
 
@@ -364,8 +364,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/安全技术/安全工具/" itemprop="url" rel="index">
-                    <span itemprop="name">安全工具</span>
+                  <a href="/categories/计算机技术/网络协议/" itemprop="url" rel="index">
+                    <span itemprop="name">网络协议</span>
                   </a>
                 </span>
 
@@ -402,16 +402,9 @@
 
       
         <blockquote>
-<p><a href="https://www.wireshark.org/" title="Wireshark" target="_blank" rel="noopener">Wireshark</a>（前称Ethereal）是一个免费开源的网络数据包分析软件,网络数据包分析软件的功能是截取网络数据包，并尽可能显示出最为详细的网络数据包数据。话不多说，让我们使用wireshark分析几个常见网络协议，一探全世界最广泛的网络数据包分析神器的魅力<br><a id="more"></a></p>
+<p>本文对常用TCP/IP网络协议进行简要总结，并用<a href="https://www.wireshark.org/" title="Wireshark" target="_blank" rel="noopener">Wireshark</a>——一个免费开源的网络数据包分析工具对其进行分析</p>
 </blockquote>
-<hr>
-<h2 id="0x00-分析基础"><a href="#0x00-分析基础" class="headerlink" title="0x00 分析基础"></a>0x00 分析基础</h2><p>正式使用Wireshark之前，需先对其基本用法以及TCP/IP常用协议有所了解，这些内容如果有所遗忘，先喝杯咖啡，顺便浏览下述文档，然后再继续后面的探索</p>
-<ul>
-<li><p><a href="https://www.wireshark.org/docs/wsug_html_chunked/" title="Wireshark User’s Guide" target="_blank" rel="noopener">Wireshark User’s Guide</a></p>
-</li>
-<li><p><a href="http://www.52im.net/topic-tcpipvol1.html" title="TCP/IP详解卷1：协议（网页版）" target="_blank" rel="noopener">TCP/IP详解 卷1：协议（网页版）</a></p>
-</li>
-</ul>
+<a id="more"></a>
 <hr>
 <h2 id="0x01-ARP协议分析"><a href="#0x01-ARP协议分析" class="headerlink" title="0x01 ARP协议分析"></a>0x01 ARP协议分析</h2><h3 id="ARP协议概述"><a href="#ARP协议概述" class="headerlink" title="ARP协议概述"></a>ARP协议概述</h3><p><strong>逻辑地址：</strong>使不同网络以及没有直接相连的设备之间能够进行通信</p>
 <p><strong>物理地址：</strong>用来在单一网段中交换机直接连接的设备之间能够进行通信</p>
@@ -596,19 +589,23 @@
 <h3 id="DNS递归分析"><a href="#DNS递归分析" class="headerlink" title="DNS递归分析"></a>DNS递归分析</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png" alt="递归"></p>
 <h3 id="DNS区域传送"><a href="#DNS区域传送" class="headerlink" title="DNS区域传送"></a>DNS区域传送</h3><hr>
 <h2 id="HTTP协议分析"><a href="#HTTP协议分析" class="headerlink" title="HTTP协议分析"></a>HTTP协议分析</h2><h3 id="使用HTTP浏览"><a href="#使用HTTP浏览" class="headerlink" title="使用HTTP浏览"></a>使用HTTP浏览</h3><h3 id="使用HTTP传送数据"><a href="#使用HTTP传送数据" class="headerlink" title="使用HTTP传送数据"></a>使用HTTP传送数据</h3><hr>
-<h2 id="0xFF-拓展学习"><a href="#0xFF-拓展学习" class="headerlink" title="0xFF 拓展学习"></a>0xFF 拓展学习</h2><ul>
+<h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
 <li><p><a href="https://wiki.wireshark.org/" title="Wireshark Wiki" target="_blank" rel="noopener">Wireshark Wiki</a></p>
 </li>
-<li><p><a href="https://www.wireshark.org/docs/wsdg_html_chunked/" title="Wireshark Developer’s Guide" target="_blank" rel="noopener">Wireshark Developer’s Guide</a></p>
+<li><p><a href="https://www.wireshark.org/docs/wsug_html_chunked/" title="Wireshark User’s Guide" target="_blank" rel="noopener">Wireshark User’s Guide</a></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://pan.baidu.com/s/1xxXjp8P2giFAYtXjt8uqMA" title="《数据通信与网络 第六版》" target="_blank" rel="noopener">《数据通信与网络 第六版》</a></li>
+</ul>
+<ul>
+<li><p><a href="https://pan.baidu.com/s/14-BMh0w6kF2QnAh_m7aIvg" title="《TCP/IP详解 卷一：协议》" target="_blank" rel="noopener">《TCP/IP详解 卷一：协议》</a></p>
 </li>
 <li><p><a href="https://pan.baidu.com/s/1MOLX3DfDgbaThxcEqFZPfg" title="Wireshark数据包分析实战" target="_blank" rel="noopener">《Wireshark数据包分析实战》</a></p>
 </li>
-<li><p><a href="https://pan.baidu.com/s/1GwZsdiA2ChqNAdRvgF0obA" title="Wireshark网络分析的艺术" target="_blank" rel="noopener">《Wireshark网络分析的艺术》</a></p>
-</li>
-<li><p><a href="https://pan.baidu.com/s/1J7m75b3hFFvw9fKFXRE6cg" title="计算机网络：自顶向下方法" target="_blank" rel="noopener">《计算机网络：自顶向下方法》</a></p>
-</li>
-<li><p><a href="https://pan.baidu.com/s/1xxXjp8P2giFAYtXjt8uqMA" title="《数据通信与网络 第六版》" target="_blank" rel="noopener">《数据通信与网络 第六版》</a></p>
-</li>
+</ul>
+<ul>
+<li><a href="https://pan.baidu.com/s/1pg7LUs4ndyXOWudnzWiscw" target="_blank" rel="noopener">《Wireshark数据包分析实战详解》</a></li>
 </ul>
 
       
@@ -627,9 +624,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Sec-Tools/" rel="tag"><i class="fa fa-tag"></i> Sec-Tools</a>
-          
             <a href="/tags/Wireshark/" rel="tag"><i class="fa fa-tag"></i> Wireshark</a>
+          
+            <a href="/tags/TCP-IP/" rel="tag"><i class="fa fa-tag"></i> TCP/IP</a>
           
         </div>
       
@@ -742,7 +739,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -753,7 +750,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -786,7 +783,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-分析基础"><span class="nav-number">1.</span> <span class="nav-text">0x00 分析基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议分析"><span class="nav-number">2.</span> <span class="nav-text">0x01 ARP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议概述"><span class="nav-number">2.1.</span> <span class="nav-text">ARP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APR解析过程"><span class="nav-number">2.2.</span> <span class="nav-text">APR解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP数据包结构"><span class="nav-number">2.3.</span> <span class="nav-text">ARP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据包分析"><span class="nav-number">2.4.</span> <span class="nav-text">数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-IP协议分析"><span class="nav-number">3.</span> <span class="nav-text">0x02 IP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">3.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址"><span class="nav-number">3.2.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据包结构"><span class="nav-number">3.3.</span> <span class="nav-text">IP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存活时间分析"><span class="nav-number">3.4.</span> <span class="nav-text">存活时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP分片分析"><span class="nav-number">3.5.</span> <span class="nav-text">IP分片分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ICMP协议分析"><span class="nav-number">4.</span> <span class="nav-text">0x03 ICMP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-1"><span class="nav-number">4.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP头"><span class="nav-number">4.2.</span> <span class="nav-text">ICMP头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP报文类型"><span class="nav-number">4.3.</span> <span class="nav-text">ICMP报文类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Echo请求与响应"><span class="nav-number">4.4.</span> <span class="nav-text">Echo请求与响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由跟踪"><span class="nav-number">4.5.</span> <span class="nav-text">路由跟踪</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-TCP协议分析"><span class="nav-number">5.</span> <span class="nav-text">0x04 TCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-2"><span class="nav-number">5.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP头部"><span class="nav-number">5.2.</span> <span class="nav-text">TCP头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP端口分析"><span class="nav-number">5.3.</span> <span class="nav-text">TCP端口分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手（建立连接）"><span class="nav-number">5.4.</span> <span class="nav-text">TCP三次握手（建立连接）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP四次握手（终止连接）"><span class="nav-number">5.5.</span> <span class="nav-text">TCP四次握手（终止连接）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-UDP协议分析"><span class="nav-number">6.</span> <span class="nav-text">0x05 UDP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-3"><span class="nav-number">6.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP头"><span class="nav-number">6.2.</span> <span class="nav-text">UDP头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例分析"><span class="nav-number">6.3.</span> <span class="nav-text">实例分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-DHCP协议分析"><span class="nav-number">7.</span> <span class="nav-text">0x06 DHCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-4"><span class="nav-number">7.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP头结构"><span class="nav-number">7.2.</span> <span class="nav-text">DHCP头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP续租过程"><span class="nav-number">7.3.</span> <span class="nav-text">DHCP续租过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项和消息类型"><span class="nav-number">7.4.</span> <span class="nav-text">选项和消息类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DNS分析"><span class="nav-number">8.</span> <span class="nav-text">0x07 DNS分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-5"><span class="nav-number">8.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS报文格式"><span class="nav-number">8.2.</span> <span class="nav-text">DNS报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单DNS查询"><span class="nav-number">8.3.</span> <span class="nav-text">简单DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录类型"><span class="nav-number">8.4.</span> <span class="nav-text">DNS记录类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS递归分析"><span class="nav-number">8.5.</span> <span class="nav-text">DNS递归分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS区域传送"><span class="nav-number">8.6.</span> <span class="nav-text">DNS区域传送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议分析"><span class="nav-number">9.</span> <span class="nav-text">HTTP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTTP浏览"><span class="nav-number">9.1.</span> <span class="nav-text">使用HTTP浏览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTTP传送数据"><span class="nav-number">9.2.</span> <span class="nav-text">使用HTTP传送数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-拓展学习"><span class="nav-number">10.</span> <span class="nav-text">0xFF 拓展学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议分析"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议概述"><span class="nav-number">1.1.</span> <span class="nav-text">ARP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#APR解析过程"><span class="nav-number">1.2.</span> <span class="nav-text">APR解析过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP数据包结构"><span class="nav-number">1.3.</span> <span class="nav-text">ARP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据包分析"><span class="nav-number">1.4.</span> <span class="nav-text">数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-IP协议分析"><span class="nav-number">2.</span> <span class="nav-text">0x02 IP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">2.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP地址"><span class="nav-number">2.2.</span> <span class="nav-text">IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据包结构"><span class="nav-number">2.3.</span> <span class="nav-text">IP数据包结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存活时间分析"><span class="nav-number">2.4.</span> <span class="nav-text">存活时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IP分片分析"><span class="nav-number">2.5.</span> <span class="nav-text">IP分片分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ICMP协议分析"><span class="nav-number">3.</span> <span class="nav-text">0x03 ICMP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-1"><span class="nav-number">3.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP头"><span class="nav-number">3.2.</span> <span class="nav-text">ICMP头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP报文类型"><span class="nav-number">3.3.</span> <span class="nav-text">ICMP报文类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Echo请求与响应"><span class="nav-number">3.4.</span> <span class="nav-text">Echo请求与响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由跟踪"><span class="nav-number">3.5.</span> <span class="nav-text">路由跟踪</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-TCP协议分析"><span class="nav-number">4.</span> <span class="nav-text">0x04 TCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-2"><span class="nav-number">4.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP头部"><span class="nav-number">4.2.</span> <span class="nav-text">TCP头部</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP端口分析"><span class="nav-number">4.3.</span> <span class="nav-text">TCP端口分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP三次握手（建立连接）"><span class="nav-number">4.4.</span> <span class="nav-text">TCP三次握手（建立连接）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP四次握手（终止连接）"><span class="nav-number">4.5.</span> <span class="nav-text">TCP四次握手（终止连接）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-UDP协议分析"><span class="nav-number">5.</span> <span class="nav-text">0x05 UDP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-3"><span class="nav-number">5.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP头"><span class="nav-number">5.2.</span> <span class="nav-text">UDP头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例分析"><span class="nav-number">5.3.</span> <span class="nav-text">实例分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-DHCP协议分析"><span class="nav-number">6.</span> <span class="nav-text">0x06 DHCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-4"><span class="nav-number">6.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP头结构"><span class="nav-number">6.2.</span> <span class="nav-text">DHCP头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP续租过程"><span class="nav-number">6.3.</span> <span class="nav-text">DHCP续租过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项和消息类型"><span class="nav-number">6.4.</span> <span class="nav-text">选项和消息类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DNS分析"><span class="nav-number">7.</span> <span class="nav-text">0x07 DNS分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-5"><span class="nav-number">7.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS报文格式"><span class="nav-number">7.2.</span> <span class="nav-text">DNS报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单DNS查询"><span class="nav-number">7.3.</span> <span class="nav-text">简单DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录类型"><span class="nav-number">7.4.</span> <span class="nav-text">DNS记录类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS递归分析"><span class="nav-number">7.5.</span> <span class="nav-text">DNS递归分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS区域传送"><span class="nav-number">7.6.</span> <span class="nav-text">DNS区域传送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP协议分析"><span class="nav-number">8.</span> <span class="nav-text">HTTP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTTP浏览"><span class="nav-number">8.1.</span> <span class="nav-text">使用HTTP浏览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用HTTP传送数据"><span class="nav-number">8.2.</span> <span class="nav-text">使用HTTP传送数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">9.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
             
 
           </div>
