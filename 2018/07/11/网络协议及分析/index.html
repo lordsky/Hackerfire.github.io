@@ -123,9 +123,17 @@
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E7%AB%AF%E5%8F%A3.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E6%8B%93%E6%89%91.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/fin-ack.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/syn.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/fin.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/TCP%E5%A4%B4%E9%83%A8.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/UDPhuanjing.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/QICQ.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/UDP.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/UDP%E6%95%B0%E6%8D%AE%E5%8C%85.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DHCP%E6%8A%A5%E6%96%87.png">
+<meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DHCP%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/%E5%8F%91%E7%8E%B0.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/%E6%8F%90%E4%BE%9B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/%E8%AF%B7%E6%B1%82.png">
@@ -134,7 +142,7 @@
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png">
-<meta property="og:updated_time" content="2018-08-12T15:19:19.591Z">
+<meta property="og:updated_time" content="2018-08-13T05:30:06.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP网络协议及分析">
 <meta name="twitter:description" content="本文对常用TCP/IP网络协议进行简要总结，并用Wireshark——一个免费开源的网络数据包分析工具对其进行分析">
@@ -570,7 +578,7 @@ arp -d 或 arp -d *
 目标硬件地址：目标接收方的硬件地址（ARP请求中为0）
 
 目标协议地址：目标接收方的高层协议地址
-</code></pre><h3 id="2-ARP协议包捕获及分析"><a href="#2-ARP协议包捕获及分析" class="headerlink" title="2. ARP协议包捕获及分析"></a>2. ARP协议包捕获及分析</h3><p><strong>(1) wireshark位置</strong></p>
+</code></pre><h3 id="2-ARP协议包捕获及分析"><a href="#2-ARP协议包捕获及分析" class="headerlink" title="2. ARP协议包捕获及分析"></a>2. ARP协议包捕获及分析</h3><p><strong>(1) 网络环境</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/wireshark%E4%BD%8D%E7%BD%AE.png" alt="ARP"></p>
 <p>可选择与路由器直接通信，也可使用两台PC通信来产生ARP数据包</p>
 <p><strong>(2) 使用捕获过滤器</strong></p>
@@ -609,7 +617,7 @@ arp -d 或 arp -d *
 3. 更多分片标志将会被数据流所有的数据包中设置为1，除了最后一个数据包
 4. IP头重分片部分的分片偏移将会被设置
 5. 数据包被发送出去
-</code></pre><h3 id="2-IP数据报捕获及分析"><a href="#2-IP数据报捕获及分析" class="headerlink" title="2. IP数据报捕获及分析"></a>2. IP数据报捕获及分析</h3><p><strong>(1) wireshark位置</strong></p>
+</code></pre><h3 id="2-IP数据报捕获及分析"><a href="#2-IP数据报捕获及分析" class="headerlink" title="2. IP数据报捕获及分析"></a>2. IP数据报捕获及分析</h3><p><strong>(1) 网络环境</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/wireshark.png" alt=""></p>
 <p>使用两个路由器(可证明TTL值的变化)，将三台主机分割为两个网段</p>
 <p><strong>(2) 捕获IP数据包</strong></p>
@@ -671,7 +679,7 @@ arp -d 或 arp -d *
 </code></pre><p><strong>(3) Echo请求与响应</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/echo.png" alt=""></p>
 <p>ping每次想一个设备发送一个数据包，并等待回复，以确定设备是否可连接；当主机A向主机B发送一个Echo Ping 请求包时，主机B就会向主机A发送一个Echo Ping 响应包</p>
-<h3 id="2-ICMP协议包捕获"><a href="#2-ICMP协议包捕获" class="headerlink" title="2. ICMP协议包捕获"></a>2. ICMP协议包捕获</h3><p><strong>(1) Wireshark位置</strong></p>
+<h3 id="2-ICMP协议包捕获"><a href="#2-ICMP协议包捕获" class="headerlink" title="2. ICMP协议包捕获"></a>2. ICMP协议包捕获</h3><p><strong>(1) 网络环境</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/ICMP-wire.png" alt=""></p>
 <p><strong>(2) 捕获正常ICMP数据包</strong></p>
 <pre><code>1. 启动wireshark工具，设置捕获过滤条件
@@ -757,7 +765,39 @@ arp -d 或 arp -d *
 <li><p><strong>第四阶段：</strong>Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手</p>
 </li>
 </ol>
-<h3 id="2-TCP数据包捕获"><a href="#2-TCP数据包捕获" class="headerlink" title="2. TCP数据包捕获"></a>2. TCP数据包捕获</h3><h3 id="3-TCP数据包分析"><a href="#3-TCP数据包分析" class="headerlink" title="3. TCP数据包分析"></a>3. TCP数据包分析</h3><p><strong>(1) TCP 首部</strong></p>
+<h3 id="2-TCP数据包捕获"><a href="#2-TCP数据包捕获" class="headerlink" title="2. TCP数据包捕获"></a>2. TCP数据包捕获</h3><p><strong>(1) 使用捕获过滤器</strong></p>
+<p><strong>网络环境</strong></p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/TCP%E6%8B%93%E6%89%91.png" alt=""></p>
+<p><strong>捕获过程</strong></p>
+<pre><code>1. 启动wireshark，选择Capture|Options，设置捕获条件，单击start开始捕获
+
+2. 访问web服务器以产生TCP协议的数据包
+
+3. 想要捕获TCP四次断开的数据包时，手动断开C-S连接，关闭web网页以捕获TCP四次断开的数据包
+</code></pre><p><img src="http://paivdtahr.bkt.clouddn.com/fin-ack.png" alt=""></p>
+<p>从该界面Info列中看到标志位<code>[FIN,ACK]</code>的包时，表示捕获到TCP四次断开的数据包</p>
+<p><strong>(2) 显示过滤器及着色</strong></p>
+<p><strong>三次握手过滤</strong></p>
+<p>使用TCP协议中的标志位对数据包进行过滤，过滤<code>SYN=1</code>的数据包(三次握手)，显示过滤器输入<code>tcp.flags.syn==1</code>，Info列数据包描述为<code>SYN</code>和<code>[SYN，ACK]</code>包</p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/syn.png" alt=""></p>
+<p><strong>三次握手着色</strong></p>
+<pre><code>1. 显示过滤器输入ip.addr==ip1 and ip.addr==ip2，将两台主机过滤
+
+2. 选择数据帧单击右键，选择Colorize Conversation|TCP|Color，进行高亮着色
+
+3. 可选择File|Export Specified Packets，指定范围到处捕获文件
+</code></pre><p><strong>四次握手过滤</strong></p>
+<p>若需要过滤<code>FIN=1</code>的数据包(四次断开)，使用<code>tcp.flags.fin==1</code>显示过滤器进行过滤，Info列数据包是<code>[FIN，ACK]</code>包</p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/fin.png" alt=""></p>
+<p><strong>四次握手显示及着色</strong></p>
+<pre><code>1. 打开捕获文件，使用tcp.flags.fin==1过滤TCP四次断开的数据包
+
+2. 显示过滤器输入ip.addr==ip1 and ip.addr==ip2，过滤特定主机间的数据包
+
+3. 选择标志位为[FIN，ACK] 的数据包进行着色，可高亮显示TCP断开连接的整个会话
+
+4. 选择特定数据帧，右键选择Mark Packet选项进行标记，再选择File|Export Specified Packets，在PAcket Range栏中选择Marked packet选项导出捕获文件
+</code></pre><h3 id="3-TCP数据包分析"><a href="#3-TCP数据包分析" class="headerlink" title="3. TCP数据包分析"></a>3. TCP数据包分析</h3><p><strong>(1) TCP 首部</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/TCP%E5%A4%B4%E9%83%A8.png" alt="TCP头部"></p>
 <pre><code>1. 源端口（Source Port）: 用于传输数据包的端口
 
@@ -789,17 +829,48 @@ arp -d 或 arp -d *
 
 5. SYN：表示同步序号，用来建立连接。SYN标志位和ACK标志位搭配使用，当连接请求的时候，SYN=1，ACK=0；连接被相应的时 候，SYN=1，ACK= 1；这个标志的数据包经常被用来进行端口扫描。扫描者发送一个只有SYN的数据包，如果对方主机响应了一个数据包回来，就表明这台主机存在这个端口；但是 由于这种扫描方式只是进行TCP三次握手的第一次握手，因此这种扫描的成功表示被扫描的机器不很安全，一台安全的主机将会强制要求一个连接严格的进行 TCP的三次握手
 
-6. FIN：表示发送端已经达到数据末尾，也就是说双方的数据传送完成，没有数据可以传送了，发送FIN标志位的TCP数据包后，连接将被断开。这个标志的数 据包也经常被用于进行端口扫描。当一个FIN标志的TCP数据包发送到一台计算机的特定端口，如果这台计算机响应了这个数据，并且反馈回来一个RST标志 的TCP包，就表明这台计算机上没有打开这个端口，但是这台计算机是存在的；如果这台计算机没有反馈回来任何数据包，这就表明，这台被扫描的计算机存在这 个端口
+6. FIN：表示发送端已经达到数据末尾，也就是说双方的数据传送完成，没有数据可以传送了，发送FIN标志位的TCP数据包后，连接将被断开。这个标志的数 据包也经常被用于进行端口扫描。当一个FIN标志的TCP数据包发送到一台计算机的特定端口，如果这台计算机响应了这个数据，并且反馈回来一个RST标志 的TCP包，就表明这台计算机上没有打开这个端口，但是这台计算机是存在的；如果这台计算机没有反馈回来任何数据包，这就表明，这台被扫描的计算机存在这个端口
 </code></pre><hr>
-<h2 id="0x05-UDP协议分析"><a href="#0x05-UDP协议分析" class="headerlink" title="0x05 UDP协议分析"></a>0x05 UDP协议分析</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>用户数据报协议（User Datagram Protocol,UDP）是一个简单的面向数据报的运输层协议，是一种尽力服务。UDP协议是无连接协议，不会正式地建立和结束主机之间的连接，也不存在握手和终止过程。UDP提供不可靠服务，主要是为了提供高速的传输，所以依赖于UDP的协议通常都会有其内置的可靠性服务，或者使用ICMP的一些功能来保证连接更可靠</p>
-<h3 id="UDP头"><a href="#UDP头" class="headerlink" title="UDP头"></a>UDP头</h3><p><img src="http://paivdtahr.bkt.clouddn.com/UDP.png" alt="UDP"></p>
-<p><strong>源端口：</strong>用来传输数据包的端口</p>
-<p><strong>目标端口：</strong>数据包将要被传输到的端口</p>
-<p><strong>数据包长度：</strong>数据包的字节长度</p>
-<p><strong>校验和：</strong>用来确保UDP头和数据到达时的完整性</p>
-<h3 id="实例分析"><a href="#实例分析" class="headerlink" title="实例分析"></a>实例分析</h3><hr>
-<h2 id="0x06-DHCP协议分析"><a href="#0x06-DHCP协议分析" class="headerlink" title="0x06 DHCP协议分析"></a>0x06 DHCP协议分析</h2><h3 id="简述-1"><a href="#简述-1" class="headerlink" title="简述"></a>简述</h3><p>动态主机配置协议DHCP（Dynamic Host Configuration Protocol）是一个应用层协议，能够让设备自动获取IP地址（以及其他重要网络资源，比如DNS服务器和路由网关的地址），大多数的DHCP服务器都向客户端提供一些其他的参数，比如网络上的默认网关和DNS服务器的地址。</p>
-<h3 id="DHCP头结构"><a href="#DHCP头结构" class="headerlink" title="DHCP头结构"></a>DHCP头结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DHCP%E6%8A%A5%E6%96%87.png" alt="DHCP"></p>
+<h2 id="0x05-UDP协议"><a href="#0x05-UDP协议" class="headerlink" title="0x05 UDP协议"></a>0x05 UDP协议</h2><h3 id="1-UDP协议概述"><a href="#1-UDP协议概述" class="headerlink" title="1. UDP协议概述"></a>1. UDP协议概述</h3><p>用户数据报协议（User Datagram Protocol,UDP）是一个简单的<strong>面向数据报</strong>的运输层协议，是一种尽力服务。UDP协议是<strong>无连接协议</strong>，不会正式地建立和结束主机之间的连接，也不存在握手和终止过程。UDP提供<strong>不可靠服务</strong>，主要是为了提供高速的传输，所以依赖于UDP的协议通常都会有其内置的可靠性服务，或者使用ICMP的一些功能来保证连接更可靠</p>
+<h3 id="2-UDP数据包捕获"><a href="#2-UDP数据包捕获" class="headerlink" title="2. UDP数据包捕获"></a>2. UDP数据包捕获</h3><p><strong>(1) 网络环境</strong></p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/UDPhuanjing.png" alt=""></p>
+<p><strong>(2) 捕获步骤</strong></p>
+<pre><code>1. 启动wireshark，设置捕获过滤条件，单击Start开始捕获
+
+2. 手动运行UDP协议程序(如QQ程序使用QICQ协议)，捕获UDP数据包
+</code></pre><p><img src="http://paivdtahr.bkt.clouddn.com/QICQ.png" alt=""></p>
+<h3 id="3-UDP数据包分析"><a href="#3-UDP数据包分析" class="headerlink" title="3. UDP数据包分析"></a>3. UDP数据包分析</h3><p><strong>(1) UDP首部格式</strong></p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/UDP.png" alt="UDP"></p>
+<pre><code>源端口：用来传输数据包的端口
+
+目标端口：数据包将要被传输到的端口
+
+数据包长度：数据包的字节长度
+
+校验和：用来确保UDP头和数据到达时的完整性
+
+数据：被UDP封装进去的数据，包括应用层协议头部和用户发出去的数据
+</code></pre><p><strong>(2) 分析UDP数据包</strong></p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/UDP%E6%95%B0%E6%8D%AE%E5%8C%85.png" alt=""></p>
+<hr>
+<h2 id="0x06-DHCP协议"><a href="#0x06-DHCP协议" class="headerlink" title="0x06 DHCP协议"></a>0x06 DHCP协议</h2><h3 id="1-DHCP协议简述"><a href="#1-DHCP协议简述" class="headerlink" title="1. DHCP协议简述"></a>1. DHCP协议简述</h3><p><strong>(1) DHCP 简述</strong></p>
+<p>动态主机配置协议DHCP（Dynamic Host Configuration Protocol）是一个局域网的网络协议，能够让设备<strong>自动获取IP地址</strong>，它使用UDP协议工作。DHCP有3个端口，其中UDP67和UDP68为正常的服务器端口，费别作为DHCP Server和DHCP Client的服务器端口；546号端口用于DHCPv6 Client，为DHCP failover服务</p>
+<p><strong>(2) DHCP作用</strong></p>
+<p>DHCP基于Client/Server模式，为互联网上主机提供地址和配置参数</p>
+<pre><code>1. 保证任何IP地址在同一时刻只能由一台DHCP客户机使用
+
+2. DHCP可以给用户分配永久固定的IP地址
+
+3. DHCP允许用其他方法获得IP地址的主机共存，如手动配置IP地址的主机
+
+4. DHCP服务器向现有的BOOTP客户端提供服务
+</code></pre><p><strong>(3) DHCP分配IP地址方式</strong></p>
+<pre><code>1. 自动分配(Automatic Allocation)：DHCP给客户端分配永久性的IP地址
+
+2. 动态分配(Dynamic Allocation)：DHCP给客户端分配的IP地址过一段时间会过期，客户端可主动释放该地址
+
+3. 手动配置(Manual Allocation)：由用户手动为客户端指定IP地址
+</code></pre><h3 id="DHCP头结构"><a href="#DHCP头结构" class="headerlink" title="DHCP头结构"></a>DHCP头结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DHCP%E6%8A%A5%E6%96%87.png" alt="DHCP"></p>
 <p><strong>操作代码（OpCode）：</strong>用来指出这个数据包时DHCP请求还是DHCP回复</p>
 <p><strong>硬件类型（Hardware Type）：</strong>硬件地址类型（10MB以太网，IEEE802，ATM以及其他）</p>
 <p><strong>跳数（Hops）：</strong>中继代理用来帮助寻找DHCP服务器</p>
@@ -814,23 +885,34 @@ arp -d 或 arp -d *
 <p><strong>服务器主机名（Server Host Name）：</strong>服务器主机名（可选）</p>
 <p><strong>启动文件（Boot File）：</strong>DHCP所使用的启动文件（可选）</p>
 <p><strong>选项（Options）：</strong>用来对DHCP数据包进行扩展，一提供更多功能</p>
-<h3 id="DHCP续租过程"><a href="#DHCP续租过程" class="headerlink" title="DHCP续租过程"></a>DHCP续租过程</h3><p>DHCP最主要的任务就是在续租过程中想客户端分配IP地址，续租过程在一个客户端与DHCP服务器之间进行。DHCP的续租过程通常被成为DORA过程，它使用了4种类型的DHCP数据包：发现（Dicover），提供（Offer），请求（Request）和确认（Acknowledgement）</p>
-<p>1 <strong>发现阶段</strong></p>
+<p><strong>(4) DHCP工作流程</strong></p>
+<p><img src="http://paivdtahr.bkt.clouddn.com/DHCP%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<p>DHCP最主要的任务就是在续租过程中向客户端分配IP地址，续租过程在一个客户端与DHCP服务器之间进行。DHCP的续租过程通常被成为DORA过程，它使用了4种类型的DHCP数据包：发现（Dicover），提供（Offer），请求（Request）和确认（Acknowledgement）</p>
+<ol>
+<li><strong>发现阶段</strong></li>
+</ol>
 <p>DHCP客户机寻找DHCP服务器的阶段。DHCP客户机以广播方式（因为DHCP服务器的IP地址对于客户机来说是未知的）发送DHCP discover发现信息来寻找DHCP服务器，即向地址255.255.255.255发送特定的广播信息。网络上每一台安装了TCP/IP协议的主机都会接收到这种广播信息，但只有DHCP服务器才会做出响应</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/%E5%8F%91%E7%8E%B0.png" alt="discover"></p>
-<p>2 <strong>提供阶段</strong></p>
+<ol start="2">
+<li><strong>提供阶段</strong></li>
+</ol>
 <p>DHCP服务器提供IP地址的阶段。在网络中接收到DHCP discover发现信息的DHCP服务器都会做出响应，它从尚未出租的IP地址中挑选一个分配给DHCP客户机，向DHCP客户机发送一个包含出租的IP地址和其他设置的DHCP offer提供信息</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/%E6%8F%90%E4%BE%9B.png" alt="提供"></p>
-<p>3 <strong>请求阶段</strong></p>
+<ol start="3">
+<li><strong>请求阶段</strong></li>
+</ol>
 <p>DHCP客户机选择某台DHCP服务器提供的IP地址的阶段。如果有多台DHCP服务器向DHCP客户机发来的DHCP offer提供信息，则DHCP客户机只接受第一个收到的DHCP offer提供信息，然后它就以广播方式回答一个DHCP request请求信息，该信息中包含向它所选定的DHCP服务器请求IP地址的内容。之所以要以广播方式回答，是为了通知所有的DHCP服务器，他将选择某台DHCP服务器所提供的IP地址</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/%E8%AF%B7%E6%B1%82.png" alt="请求"></p>
-<p>4 <strong>确认阶段</strong></p>
+<ol start="4">
+<li><strong>确认阶段</strong></li>
+</ol>
 <p>DHCP服务器确认所提供的IP地址的阶段。当DHCP服务器收到DHCP客户机回答的DHCP request请求信息之后，它便向DHCP客户机发送一个包含它所提供的IP地址和其他设置的DHCP ack确认信息，告诉DHCP客户机可以使用它所提供的IP地址。然后DHCP客户机便将其TCP/IP协议与网卡绑定，另外，除DHCP客户机选中的服务器外，其他的DHCP服务器都将收回曾提供的IP地址</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/%E7%A1%AE%E8%AE%A4.png" alt="ack"></p>
-<h3 id="选项和消息类型"><a href="#选项和消息类型" class="headerlink" title="选项和消息类型"></a>选项和消息类型</h3><p>DHCP依赖于其可选项来提供真正的灵活性，数据包的DHCP选项在大小和内容上都可以变化，数据包的整体大小则取决于其所使用的选项；所以DHCP数据包都需要唯一选项就是消息类型选项（选项53），这个选项标识着DHCP客户端或者服务器将如何处理数据包中的信息</p>
+<p><strong>(5) 选项和消息类型</strong></p>
+<p>DHCP依赖于其可选项来提供真正的灵活性，数据包的DHCP选项在大小和内容上都可以变化，数据包的整体大小则取决于其所使用的选项；所以DHCP数据包都需要唯一选项就是消息类型选项（选项53），这个选项标识着DHCP客户端或者服务器将如何处理数据包中的信息</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/%E6%B6%88%E6%81%AF%E7%B1%BB%E5%9E%8B.png" alt="消息"></p>
 <hr>
-<h2 id="0x07-DNS分析"><a href="#0x07-DNS分析" class="headerlink" title="0x07 DNS分析"></a>0x07 DNS分析</h2><h3 id="简述-2"><a href="#简述-2" class="headerlink" title="简述"></a>简述</h3><p>域名系统（DNS）是一种用于TCP/IP应用程序的分布式数据库，它提供主机名字和IP地址之间的转换及有关电子邮件的选路信息，DNS服务器存储了一个有着IP地址和DNS名字映射资源记录的数据库，并将其和客户端与其它DNS服务器共享</p>
+<h2 id="0x07-DNS分析"><a href="#0x07-DNS分析" class="headerlink" title="0x07 DNS分析"></a>0x07 DNS分析</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>域名系统（DNS）是一种用于TCP/IP应用程序的分布式数据库，它提供主机名字和IP地址之间的转换及有关电子邮件的选路信息，DNS服务器存储了一个有着IP地址和DNS名字映射资源记录的数据库，并将其和客户端与其它DNS服务器共享</p>
 <h3 id="DNS报文格式"><a href="#DNS报文格式" class="headerlink" title="DNS报文格式"></a>DNS报文格式</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DNS.png" alt="DNS"></p>
 <p><strong>DNS ID号（DNS ID Number）：</strong>用来对应DNS查询和DNS响应</p>
 <p><strong>查询/响应（Query/Response）：</strong>用于知名报文是DNS查询还是响应</p>
@@ -853,7 +935,7 @@ arp -d 或 arp -d *
 <h3 id="DNS记录类型"><a href="#DNS记录类型" class="headerlink" title="DNS记录类型"></a>DNS记录类型</h3><p>DNS查询和响应中所使用的类型域，指明了这个查询或者响应的资源记录类型</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/DNS%E7%B1%BB%E5%9E%8B.png" alt="DNS"></p>
 <h3 id="DNS递归分析"><a href="#DNS递归分析" class="headerlink" title="DNS递归分析"></a>DNS递归分析</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png" alt="递归"></p>
-<h3 id="DNS区域传送"><a href="#DNS区域传送" class="headerlink" title="DNS区域传送"></a>DNS区域传送</h3><hr>
+<hr>
 <h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
 <li><p><a href="https://wiki.wireshark.org/" title="Wireshark Wiki" target="_blank" rel="noopener">Wireshark Wiki</a></p>
 </li>
@@ -1048,7 +1130,7 @@ arp -d 或 arp -d *
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议基础及原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 协议基础及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ARP协议包捕获及分析"><span class="nav-number">1.2.</span> <span class="nav-text">2. ARP协议包捕获及分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-IP协议"><span class="nav-number">2.</span> <span class="nav-text">0x02 IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议原理及基础"><span class="nav-number">2.1.</span> <span class="nav-text">1. 协议原理及基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-IP数据报捕获及分析"><span class="nav-number">2.2.</span> <span class="nav-text">2. IP数据报捕获及分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ICMP协议"><span class="nav-number">3.</span> <span class="nav-text">0x03 ICMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议原理及基础-1"><span class="nav-number">3.1.</span> <span class="nav-text">1. 协议原理及基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ICMP协议包捕获"><span class="nav-number">3.2.</span> <span class="nav-text">2. ICMP协议包捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-ICMP报文类型"><span class="nav-number">3.3.</span> <span class="nav-text">3. ICMP报文类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ICMP数据包分析"><span class="nav-number">3.4.</span> <span class="nav-text">4. ICMP数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-TCP协议"><span class="nav-number">4.</span> <span class="nav-text">0x04 TCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议基础及简述"><span class="nav-number">4.1.</span> <span class="nav-text">1. 协议基础及简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-TCP数据包捕获"><span class="nav-number">4.2.</span> <span class="nav-text">2. TCP数据包捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-TCP数据包分析"><span class="nav-number">4.3.</span> <span class="nav-text">3. TCP数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-UDP协议分析"><span class="nav-number">5.</span> <span class="nav-text">0x05 UDP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">5.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UDP头"><span class="nav-number">5.2.</span> <span class="nav-text">UDP头</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例分析"><span class="nav-number">5.3.</span> <span class="nav-text">实例分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-DHCP协议分析"><span class="nav-number">6.</span> <span class="nav-text">0x06 DHCP协议分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-1"><span class="nav-number">6.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP头结构"><span class="nav-number">6.2.</span> <span class="nav-text">DHCP头结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP续租过程"><span class="nav-number">6.3.</span> <span class="nav-text">DHCP续租过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项和消息类型"><span class="nav-number">6.4.</span> <span class="nav-text">选项和消息类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DNS分析"><span class="nav-number">7.</span> <span class="nav-text">0x07 DNS分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述-2"><span class="nav-number">7.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS报文格式"><span class="nav-number">7.2.</span> <span class="nav-text">DNS报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单DNS查询"><span class="nav-number">7.3.</span> <span class="nav-text">简单DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录类型"><span class="nav-number">7.4.</span> <span class="nav-text">DNS记录类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS递归分析"><span class="nav-number">7.5.</span> <span class="nav-text">DNS递归分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS区域传送"><span class="nav-number">7.6.</span> <span class="nav-text">DNS区域传送</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">8.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-ARP协议"><span class="nav-number">1.</span> <span class="nav-text">0x01 ARP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议基础及原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 协议基础及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ARP协议包捕获及分析"><span class="nav-number">1.2.</span> <span class="nav-text">2. ARP协议包捕获及分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-IP协议"><span class="nav-number">2.</span> <span class="nav-text">0x02 IP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议原理及基础"><span class="nav-number">2.1.</span> <span class="nav-text">1. 协议原理及基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-IP数据报捕获及分析"><span class="nav-number">2.2.</span> <span class="nav-text">2. IP数据报捕获及分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ICMP协议"><span class="nav-number">3.</span> <span class="nav-text">0x03 ICMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议原理及基础-1"><span class="nav-number">3.1.</span> <span class="nav-text">1. 协议原理及基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ICMP协议包捕获"><span class="nav-number">3.2.</span> <span class="nav-text">2. ICMP协议包捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-ICMP报文类型"><span class="nav-number">3.3.</span> <span class="nav-text">3. ICMP报文类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-ICMP数据包分析"><span class="nav-number">3.4.</span> <span class="nav-text">4. ICMP数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-TCP协议"><span class="nav-number">4.</span> <span class="nav-text">0x04 TCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-协议基础及简述"><span class="nav-number">4.1.</span> <span class="nav-text">1. 协议基础及简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-TCP数据包捕获"><span class="nav-number">4.2.</span> <span class="nav-text">2. TCP数据包捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-TCP数据包分析"><span class="nav-number">4.3.</span> <span class="nav-text">3. TCP数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-UDP协议"><span class="nav-number">5.</span> <span class="nav-text">0x05 UDP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-UDP协议概述"><span class="nav-number">5.1.</span> <span class="nav-text">1. UDP协议概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-UDP数据包捕获"><span class="nav-number">5.2.</span> <span class="nav-text">2. UDP数据包捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-UDP数据包分析"><span class="nav-number">5.3.</span> <span class="nav-text">3. UDP数据包分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-DHCP协议"><span class="nav-number">6.</span> <span class="nav-text">0x06 DHCP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DHCP协议简述"><span class="nav-number">6.1.</span> <span class="nav-text">1. DHCP协议简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP头结构"><span class="nav-number">6.2.</span> <span class="nav-text">DHCP头结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DNS分析"><span class="nav-number">7.</span> <span class="nav-text">0x07 DNS分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简述"><span class="nav-number">7.1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS报文格式"><span class="nav-number">7.2.</span> <span class="nav-text">DNS报文格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单DNS查询"><span class="nav-number">7.3.</span> <span class="nav-text">简单DNS查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录类型"><span class="nav-number">7.4.</span> <span class="nav-text">DNS记录类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS递归分析"><span class="nav-number">7.5.</span> <span class="nav-text">DNS递归分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">8.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
             
 
           </div>
