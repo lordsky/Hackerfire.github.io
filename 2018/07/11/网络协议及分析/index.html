@@ -142,7 +142,7 @@
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E7%B1%BB%E5%9E%8B.png">
 <meta property="og:image" content="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png">
-<meta property="og:updated_time" content="2018-08-13T05:30:06.910Z">
+<meta property="og:updated_time" content="2018-08-13T05:41:30.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP网络协议及分析">
 <meta name="twitter:description" content="本文对常用TCP/IP网络协议进行简要总结，并用Wireshark——一个免费开源的网络数据包分析工具对其进行分析">
@@ -871,21 +871,34 @@ arp -d 或 arp -d *
 
 3. 手动配置(Manual Allocation)：由用户手动为客户端指定IP地址
 </code></pre><h3 id="DHCP头结构"><a href="#DHCP头结构" class="headerlink" title="DHCP头结构"></a>DHCP头结构</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DHCP%E6%8A%A5%E6%96%87.png" alt="DHCP"></p>
-<p><strong>操作代码（OpCode）：</strong>用来指出这个数据包时DHCP请求还是DHCP回复</p>
-<p><strong>硬件类型（Hardware Type）：</strong>硬件地址类型（10MB以太网，IEEE802，ATM以及其他）</p>
-<p><strong>跳数（Hops）：</strong>中继代理用来帮助寻找DHCP服务器</p>
-<p><strong>事物ID（Transaction ID）：</strong>用来匹配请求和响应的一个随机数</p>
-<p><strong>消耗时间（Seconds Elasped）：</strong>客户端第一次向DHCP服务器发出地址请求后时间</p>
-<p><strong>标记（Flags）：</strong>DHCP能够接受的流量类型（单播，广播及其他）</p>
-<p><strong>客户端IP地址（Client IP Address）：</strong>客户端的IP地址（由“你的”IP地址域派生）</p>
-<p><strong>“你的”IP地址（Your IP Address）：</strong>DHCP服务器提供的地址（最终成为客户端IP地址域的值）</p>
-<p><strong>服务器IP地址（Server IP Address）：</strong>DHCP服务器的IP地址</p>
-<p><strong>网关IP地址（Gateway IP Address）：</strong>网络默认网关的IP地址</p>
-<p><strong>客户端硬件地址（Client Hardware Address）：</strong>客户端的MAC地址</p>
-<p><strong>服务器主机名（Server Host Name）：</strong>服务器主机名（可选）</p>
-<p><strong>启动文件（Boot File）：</strong>DHCP所使用的启动文件（可选）</p>
-<p><strong>选项（Options）：</strong>用来对DHCP数据包进行扩展，一提供更多功能</p>
-<p><strong>(4) DHCP工作流程</strong></p>
+<pre><code>操作代码（OpCode）：用来指出这个数据包时DHCP请求还是DHCP回复
+
+硬件类型（Hardware Type）：硬件地址类型（10MB以太网，IEEE802，ATM以及其他）
+
+跳数（Hops）：中继代理用来帮助寻找DHCP服务器
+
+事物ID（Transaction ID）：用来匹配请求和响应的一个随机数
+
+消耗时间（Seconds Elasped）：客户端第一次向DHCP服务器发出地址请求后时间
+
+标记（Flags）：DHCP能够接受的流量类型（单播，广播及其他）
+
+客户端IP地址（Client IP Address）：客户端的IP地址（由“你的”IP地址域派生）
+
+&quot;你的&quot;IP地址（Your IP Address）：DHCP服务器提供的地址（最终成为客户端IP地址域的值）
+
+服务器IP地址（Server IP Address）：DHCP服务器的IP地址
+
+网关IP地址（Gateway IP Address）：网络默认网关的IP地址
+
+客户端硬件地址（Client Hardware Address）：客户端的MAC地址
+
+服务器主机名（Server Host Name）：服务器主机名（可选）
+
+启动文件（Boot File）：DHCP所使用的启动文件（可选）
+
+选项（Options）：用来对DHCP数据包进行扩展，一提供更多功能
+</code></pre><p><strong>(4) DHCP工作流程</strong></p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/DHCP%E6%B5%81%E7%A8%8B.png" alt=""></p>
 <p>DHCP最主要的任务就是在续租过程中向客户端分配IP地址，续租过程在一个客户端与DHCP服务器之间进行。DHCP的续租过程通常被成为DORA过程，它使用了4种类型的DHCP数据包：发现（Dicover），提供（Offer），请求（Request）和确认（Acknowledgement）</p>
 <ol>
@@ -914,24 +927,40 @@ arp -d 或 arp -d *
 <hr>
 <h2 id="0x07-DNS分析"><a href="#0x07-DNS分析" class="headerlink" title="0x07 DNS分析"></a>0x07 DNS分析</h2><h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>域名系统（DNS）是一种用于TCP/IP应用程序的分布式数据库，它提供主机名字和IP地址之间的转换及有关电子邮件的选路信息，DNS服务器存储了一个有着IP地址和DNS名字映射资源记录的数据库，并将其和客户端与其它DNS服务器共享</p>
 <h3 id="DNS报文格式"><a href="#DNS报文格式" class="headerlink" title="DNS报文格式"></a>DNS报文格式</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DNS.png" alt="DNS"></p>
-<p><strong>DNS ID号（DNS ID Number）：</strong>用来对应DNS查询和DNS响应</p>
-<p><strong>查询/响应（Query/Response）：</strong>用于知名报文是DNS查询还是响应</p>
-<p><strong>操作代码（OpCode）：</strong>用于定义消息中请求的类型</p>
-<p><strong>权威应答（Authoritative Answer，AA）：</strong>若设定此值，则说明此响应是由域内权威域名服务器发出的</p>
-<p><strong>截断（Truncation，TC）：</strong>用于说明由于此响应太长，无法装入数据包而被截断</p>
-<p><strong>期望递归（Recursion Desired，RD）：</strong>当请求中设定此值，则说明DNS客户端在目标域名服务器不含有请求消息的情况下，要求进行递归查询</p>
-<p><strong>可用递归（Recurision Availiable，RA）：</strong>当响应中设定此值，说明域名服务器支持递归查询</p>
-<p><strong>保留（Z）：</strong>全设为0，有时会用作RCode域的扩展</p>
-<p><strong>响应代码（Response Code）：</strong>在DNS响应中用来指明错误</p>
-<p><strong>问题计数（Question Count）：</strong>在问题区段中的条目数</p>
-<p><strong>回答计数（Answer Count）：</strong>在回答区段中的条目数</p>
-<p><strong>域名服务器计数（Name Server Count）：</strong>在权威区段的域名资源记录数</p>
-<p><strong>额外记录计数（Additional Records Count）：</strong>在额外信息区段中其他资源记录数</p>
-<p><strong>问题区段（Question section）：</strong>大小可变，包含有被发送带DNS服务器的一条或多条的信息查询的部分</p>
-<p><strong>回答区段（Answer section）：</strong>大小可变，含有用来回答查询的额一条或多条资源记录</p>
-<p><strong>权威区段（Authority section）：</strong>大小可变，包含指向权威域名服务器的资源记录，用以继续解析过程</p>
-<p><strong>额外信息区段（Additional Information section）：</strong>包含资源记录且大小可变的区段，这些资源记录用来存储完全没有必要回答的查询相关的额外信息</p>
-<h3 id="简单DNS查询"><a href="#简单DNS查询" class="headerlink" title="简单DNS查询"></a>简单DNS查询</h3><p>DNS以查询/响应的模式工作，当一个客户端轩昂要讲一个DNS名字解析成IP地址，它向DNS服务器发送一个查询，然后服务器会在响应中提供所请求的信息，最简单情况下，这个过程包含两个数据包</p>
+<pre><code>DNS ID号（DNS ID Number）：用来对应DNS查询和DNS响应
+
+查询/响应（Query/Response）：用于知名报文是DNS查询还是响应
+
+操作代码（OpCode）：用于定义消息中请求的类型
+
+权威应答（Authoritative Answer，AA）：若设定此值，则说明此响应是由域内权威域名服务器发出的
+
+截断（Truncation，TC）：用于说明由于此响应太长，无法装入数据包而被截断
+
+期望递归（Recursion Desired，RD）：当请求中设定此值，则说明DNS客户端在目标域名服务器不含有请求消息的情况下，要求进行递归查询
+
+可用递归（Recurision Availiable，RA）：当响应中设定此值，说明域名服务器支持递归查询
+
+保留（Z）：全设为0，有时会用作RCode域的扩展
+
+响应代码（Response Code）：在DNS响应中用来指明错误
+
+问题计数（Question Count）：在问题区段中的条目数
+
+回答计数（Answer Count）：在回答区段中的条目数
+
+域名服务器计数（Name Server Count）：在权威区段的域名资源记录数
+
+额外记录计数（Additional Records Count）：在额外信息区段中其他资源记录数
+
+问题区段（Question section）：大小可变，包含有被发送带DNS服务器的一条或多条的信息查询的部分
+
+回答区段（Answer section）：大小可变，含有用来回答查询的额一条或多条资源记录
+
+权威区段（Authority section）：大小可变，包含指向权威域名服务器的资源记录，用以继续解析过程
+
+额外信息区段（Additional Information section）：包含资源记录且大小可变的区段，这些资源记录用来存储完全没有必要回答的查询相关的额外信息
+</code></pre><h3 id="简单DNS查询"><a href="#简单DNS查询" class="headerlink" title="简单DNS查询"></a>简单DNS查询</h3><p>DNS以查询/响应的模式工作，当一个客户端轩昂要讲一个DNS名字解析成IP地址，它向DNS服务器发送一个查询，然后服务器会在响应中提供所请求的信息，最简单情况下，这个过程包含两个数据包</p>
 <h3 id="DNS记录类型"><a href="#DNS记录类型" class="headerlink" title="DNS记录类型"></a>DNS记录类型</h3><p>DNS查询和响应中所使用的类型域，指明了这个查询或者响应的资源记录类型</p>
 <p><img src="http://paivdtahr.bkt.clouddn.com/DNS%E7%B1%BB%E5%9E%8B.png" alt="DNS"></p>
 <h3 id="DNS递归分析"><a href="#DNS递归分析" class="headerlink" title="DNS递归分析"></a>DNS递归分析</h3><p><img src="http://paivdtahr.bkt.clouddn.com/DNS%E9%80%92%E5%BD%92.png" alt="递归"></p>
