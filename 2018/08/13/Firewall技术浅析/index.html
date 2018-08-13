@@ -94,10 +94,19 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="防火墙(firewall)是一种保护计算机网络安全的技术性措施，它通过在网络边界上建立相应的网络通信监控系统来隔离内部和外部网络，以阻挡来自外部的网络入侵。本文对防火墙技术及其发展进行简要分析与总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T10:24:19.249Z">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E5%8F%91%E5%B1%95.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E9%9D%99%E6%80%81.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E5%8A%A8%E6%80%81.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E7%94%B5%E8%B7%AF%E7%BA%A7.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E7%94%B5%E8%B7%AF%E7%BA%A7%E4%BD%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E5%BA%94%E7%94%A8%E9%80%BB%E8%BE%91.png">
+<meta property="og:updated_time" content="2018-08-13T15:39:58.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Firewall技术浅析">
 <meta name="twitter:description" content="防火墙(firewall)是一种保护计算机网络安全的技术性措施，它通过在网络边界上建立相应的网络通信监控系统来隔离内部和外部网络，以阻挡来自外部的网络入侵。本文对防火墙技术及其发展进行简要分析与总结">
+<meta name="twitter:image" content="http://pdeise3e3.bkt.clouddn.com/%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
 
 
 
@@ -385,7 +394,175 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-
+<h2 id="0x01-概述"><a href="#0x01-概述" class="headerlink" title="0x01 概述"></a>0x01 概述</h2><p><strong>(1) 定义</strong></p>
+<p>防火墙是位于两个(或多个)网络之间执行<strong>访问控制</strong>的软件和硬件系统，它根据访问控制规则对进出网络的数据流进行<strong>过滤</strong></p>
+<p><strong>(2) 示意图</strong></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt=""></p>
+<p>防火墙在逻辑上是一个<strong>分离器</strong>，一个<strong>限制器</strong>，也是一个<strong>分析器</strong>。它有效地监控了内部网和外部网之间的任何网络活动，保证了内部网络的安全</p>
+<p><strong>(3) 数据流处理方式</strong></p>
+<ol>
+<li><p>允许数据流通过</p>
+</li>
+<li><p>拒绝数据流通过：通知发送方</p>
+</li>
+<li><p>将这些数据流丢弃：不通知发送方</p>
+</li>
+</ol>
+<p><strong>(4) firewall 实质</strong></p>
+<p>防火墙就是一种能够<strong>限制网络访问</strong>的设备或软件，许多<strong>网络设备</strong>均含有简单的防火墙功能，如路由器、调制解调器、无线基站、IP交换机等；现代<strong>操作系统</strong>中也含有软件防火墙：Windows 系统和Linux系统均自带了软件防火墙，可以通过策略(或规则)定制相关的功能</p>
+<hr>
+<h2 id="0x02-功能及分类"><a href="#0x02-功能及分类" class="headerlink" title="0x02 功能及分类"></a>0x02 功能及分类</h2><h3 id="1-firewall-功能"><a href="#1-firewall-功能" class="headerlink" title="1. firewall 功能"></a>1. firewall 功能</h3><p><strong>(1) 过滤进、出网络的数据</strong></p>
+<p>检查所有进、出数据的细节，并根据事先定义好的策略允许或禁止这些数据进行通信</p>
+<p><strong>(2) 管理进、出网络的访问行为</strong></p>
+<p>通过将动态的、应用层的过滤能力和认证相结合，实现WWW、FTP和Telnet等广泛的服务的安全支持</p>
+<p><strong>(3) 封堵某些禁止的业务</strong></p>
+<p>禁止存在安全脆弱性的服务进出网络</p>
+<p><strong>(4) 记录通过防火墙的信息内容和活动</strong></p>
+<p>审计并记录所有通过防火墙的重要信息，以发现试图的入侵行为</p>
+<p><strong>(5) 对网络攻击的检测和告警</strong></p>
+<h3 id="2-fierwall-分类"><a href="#2-fierwall-分类" class="headerlink" title="2. fierwall 分类"></a>2. fierwall 分类</h3><p><strong>(1) 按发展历史分类</strong></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E5%8F%91%E5%B1%95.png" alt=""></p>
+<p><strong>(2) 根据网络协议栈中的过滤层次</strong></p>
+<ol>
+<li><p>包过滤防火墙</p>
+</li>
+<li><p>电路级网关防火墙</p>
+</li>
+<li><p>应用级网关防火墙</p>
+</li>
+</ol>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E5%85%B3%E7%B3%BB.png" alt=""></p>
+<p>防火墙工作于OSI模型的<strong>层次越高</strong>，其检查数据包中的<strong>信息就越多</strong>，防火墙所消耗的处理器<strong>工作周期就越长</strong>；防火墙检查的数据包<strong>越靠近OSI模型的上层</strong>，该防火墙结构所提供的<strong>安全保护等级就越高</strong></p>
+<hr>
+<h2 id="0x03-包过滤防火墙"><a href="#0x03-包过滤防火墙" class="headerlink" title="0x03 包过滤防火墙"></a>0x03 包过滤防火墙</h2><h3 id="1-静态包过滤防火墙"><a href="#1-静态包过滤防火墙" class="headerlink" title="1. 静态包过滤防火墙"></a>1. 静态包过滤防火墙</h3><p>静态包过滤防火墙可以采用<strong>路由器上的过滤模块</strong>来实现</p>
+<p><strong>(1) 工作原理</strong></p>
+<p>采用一组<strong>过滤规则</strong>对每个数据包进行<strong>检查</strong>，然后根据检查结果确定是<strong>转发</strong>还是<strong>丢弃</strong>该数据包</p>
+<p><strong>(2) 包过滤处理过程</strong></p>
+<ol>
+<li><p><strong>接收</strong>每个到达的数据包</p>
+</li>
+<li><p>对数据包<strong>采用过滤规则</strong>，对数据包的IP头和传输字段内容进行<strong>检查</strong>。如果数据包的头信息与一组规则匹配，则根据该规则确定是转发还是丢弃该数据包</p>
+</li>
+<li><p>如果没有规则与数据包头信息匹配，则对数据包施加<strong>默认规则</strong> (通常，防火墙首先默认丢弃所有数据包，然后再逐个执行过滤规则，以加强对数据包的过滤)</p>
+</li>
+</ol>
+<p><strong>(3) 网络位置</strong></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E9%9D%99%E6%80%81.png" alt=""></p>
+<ol>
+<li><p>静态数据包过滤发生在<strong>网络层</strong>上，也就是OSI模型的第三层上</p>
+</li>
+<li><p>决定接收还是拒绝一个数据包，取决于对数据包中IP头和协议头等<strong>特定域的检查和判定</strong>。这些特定域包括：①源地址；②目的地址；③应用或协议；④源端口号；⑤目的端口号</p>
+</li>
+</ol>
+<p><strong>(4) ACL (访问控制表单)</strong></p>
+<p>在每个包过滤器上，安全管理员要根据企业的安全策略定义一个表单；该规则库包含许多规则，用来指示防火墙应该拒绝还是接收该数据包。在向前转发某个数据包之前，包过滤器防火墙将IP头和TCP头中的<strong>特定域</strong>与规则库中的<strong>规则</strong>逐条进行<strong>比较</strong>。防火墙按照一定的次序<strong>扫描规则库</strong>，直到包过滤器发现一个特定域满足包过滤规则的<strong>特定要求</strong>时，才对数据包做出“接收”或“丢弃”的判决。如果包过滤器<strong>没有发现</strong>有一个规则与该数据包匹配，那么它将对其施加一个<strong>默认规则</strong>。该默认规则在防火墙的规则库中有明确的定义，一般情况下防火墙将不满足规则的数据包丢弃</p>
+<p><strong>(5) 安全性分析</strong></p>
+<p>决定<strong>包过滤规则的先后次序</strong>是一项很<strong>困难</strong>的事情，包过滤器仅检查数据的IP头和TCP头，它<strong>不能区分真实的IP地址和伪造的IP地址</strong>，若一个伪造的 IP地址满足包过滤规则，并同时满足其他规则的要求，则该数据包将被允许通过</p>
+<p><strong>(6) 优缺点</strong></p>
+<p><strong>优点</strong></p>
+<ol>
+<li><p>对网络性能的影响较小 (只是简单地根据地址、协议和端口进行访问控制)</p>
+</li>
+<li><p>成本较低 (路由器通常集成了简单包过滤的功能)</p>
+</li>
+</ol>
+<p><strong>缺点</strong></p>
+<ol>
+<li><p>安全性较低 （包过滤防火墙仅工作于网络层，不能对数据包进行更高层的分析和过滤）</p>
+</li>
+<li><p>缺少状态感知能力 (一些需要动态分配端口的服务需要防火墙打开许多端口，增大了网络的安全风险)</p>
+</li>
+<li><p>容易遭受IP欺骗攻击 (简单的包过滤功能没有对协议的细节进行分析，可能遭受IP欺骗攻击)</p>
+</li>
+<li><p>创建访问控制规则比较困难 (须严格区分访问控制规则的先后次序)</p>
+</li>
+</ol>
+<h3 id="2-动态包过滤防火墙"><a href="#2-动态包过滤防火墙" class="headerlink" title="2. 动态包过滤防火墙"></a>2. 动态包过滤防火墙</h3><p>动态包过滤器是最<strong>普遍使用</strong>的一种防火墙技术，既具有很高的<strong>安全性</strong>，又具有完全的<strong>透明性</strong>,可根据网络当前的状态检查数据包，即根据当前所交换的信息<strong>动态调整</strong>过滤规则表</p>
+<p><strong>(1) 工作原理</strong></p>
+<ol>
+<li><p>动态(状态)包过滤器是在静态包过滤防火墙的基础上发展而来，它具有<strong>“状态感知”</strong>的能力</p>
+</li>
+<li><p><strong>典型</strong>的动态包过滤防火墙工作在<strong>网络层</strong>，，更<strong>先进</strong>的动态包过滤防火墙可以在OSI的<strong>传输层</strong>(第四层)上工作，可以收集更多的状态信息，从而增加过滤的深度</p>
+</li>
+<li><p>如果数据包满足规则，如数据包的端口号或IP地址是可接受的，则被允许通过。但与普通的包过滤防火墙相比，还有一个不同点：它首先对外出的<strong>数据包身份进行记录</strong>，此后若有相同连接的数据包进入防火墙，它就直接允许这些数据包通过</p>
+</li>
+<li><p>动态包过滤防火墙直接<strong>对“连接”进行处理</strong>，而不是仅对数据包头信息进行检查，可以用来处理UDP和TCP协议</p>
+</li>
+<li><p>动态包过滤防火墙需要对已建连接和规则表进行<strong>动态维护</strong>，因此它是动态的和有状态的</p>
+</li>
+<li><p>典型的动态包过滤防火墙能够感觉到新建连接与已建连接之间的差别。一旦连接建立，它就会将该连接的状态记于RAM中的一个表单中，后续的数据包与RAM表单中的状态信息进行比较</p>
+</li>
+</ol>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E5%8A%A8%E6%80%81.png" alt=""></p>
+<p><strong>(2) 优缺点归纳</strong></p>
+<p><strong>动态包过滤防火墙的优点</strong></p>
+<ol>
+<li><p>动态包过滤防火墙的安全性优于静态包过滤防火墙</p>
+</li>
+<li><p>动态包过滤防火墙的“状态感知”能力也使其性能得到了显著提高</p>
+</li>
+<li><p>如果不考虑所采用的操作系统的成本，动态包过滤防火墙的成本也很低</p>
+</li>
+</ol>
+<p><strong>动态包过滤防火墙的缺点</strong></p>
+<ol>
+<li><p>由于没有对数据包的净荷部分进行过滤，因此仍然只具有较低的安全性</p>
+</li>
+<li><p>工作在网络层，仅检查IP头和TCP头，容易遭受伪装IP地址欺骗攻击</p>
+</li>
+<li><p>难于创建规则，管理员创建规则时必须要考虑规则的先后次序</p>
+</li>
+<li><p>动态包过滤防火墙无法抵抗半开连接攻击，在连接建立时仅使用两次握手，可导致在DoS/DDoS攻击时因耗尽所有资源而停止响应</p>
+</li>
+</ol>
+<hr>
+<h2 id="0x04-电路级网关"><a href="#0x04-电路级网关" class="headerlink" title="0x04 电路级网关"></a>0x04 电路级网关</h2><h3 id="1-工作原理"><a href="#1-工作原理" class="headerlink" title="1. 工作原理"></a>1. 工作原理</h3><p><img src="http://pdeise3e3.bkt.clouddn.com/%E7%94%B5%E8%B7%AF%E7%BA%A7.png" alt=""></p>
+<ol>
+<li><p>电路级网关又称做线路级网关，当两个主机首次建立TCP连接时，电路级网关在两个主机之间建立一道屏障，电路级网关的作用就好像一台中继计算机，用来在两个连接之间来回地复制数据，也可以记录或缓存数据</p>
+</li>
+<li><p>采用C/S结构，网关充当了服务器的角色，而内部网络中的主机充当了客户机的角色。当一个客户机希望连接到某个目标服务器时，它首先要连接到中继主机上；然后，中继主机再连接到目标服务器上。对目标服务器来说，该客户机的名称和IP地址是不可见的</p>
+</li>
+<li><p>当有来自Internet的请求进入时，它作为服务器接收外来请求，并转发请求；当有内部主机请求访问Internet时，它则担当代理服务器的角色。它监视两主机建立连接时的握手信息，如Syn、Ack和序列号等是否合乎逻辑，判定该会话请求是否合法。在有效会话连接建立后，电路级网关仅复制、传递数据，而不进行过滤</p>
+</li>
+</ol>
+<h3 id="2-网络位置"><a href="#2-网络位置" class="headerlink" title="2. 网络位置"></a>2. 网络位置</h3><p><img src="http://pdeise3e3.bkt.clouddn.com/%E7%94%B5%E8%B7%AF%E7%BA%A7%E4%BD%8D%E7%BD%AE.png" alt=""></p>
+<ol>
+<li><p>电路级网关工作于会话层，即OSI模型的第五层</p>
+</li>
+<li><p>电路级网关是包过滤防火墙的一种扩展，它除了进行基本的包过滤检查之外，还要增加对连接建立过程中的握手信息及序列号合法性的验证</p>
+</li>
+<li><p>在打开一条通过防火墙的连接或电路之前，电路级网关要检查和确认TCP及UDP协议会话。因此，电路级网关所检查的数据比静态包过滤防火墙或动态包过滤防火墙所检查的数据更多，安全性也更高</p>
+</li>
+<li><p>判断是接收还是丢弃一个数据包，取决于对数据包的IP头和TCP头的检查。电路级网关检查的数据包括：①源地址；②目的地址；③应用或协议；④源端口号；⑤目的端口号；⑥握手信息及序列号</p>
+</li>
+<li><p>与包过滤防火墙类似，电路级网关在转发一数据包之前，首先将数据包的IP头和 TCP头与由管理员定义的规则表相比较，以确定防火墙是将数据包丢弃还是让数据包通过。在可信客户机与不可信主机之间进行TCP握手通信时，仅当SYN标志、ACK标志及序列号符合逻辑时，电路级网关才判定该会话是合法的</p>
+</li>
+<li><p>如果会话是合法的，包过滤器就开始对规则进行逐条扫描，直到发现其中一条规则与数据包中的有关信息一致。如果包过滤器没有发现适合该数据包的规则，它就会对该数据包施加一条默认规则。在防火墙的规则表中，这条默认规则有明确的定义，通常是指示防火墙将不满足规则的数据包丢弃</p>
+</li>
+</ol>
+<h3 id="3-安全性分析"><a href="#3-安全性分析" class="headerlink" title="3. 安全性分析"></a>3. 安全性分析</h3><ol>
+<li><p>电路级网关它与包过滤防火墙一样，工作于OSI模型的低层上，对网络性能的影响较小</p>
+</li>
+<li><p>一旦电路级网关建立一个连接，任何应用均可以通过该连接运行，电路级网关不能对可信网络与不可信网络之间中继的数据包内容进行检查</p>
+</li>
+</ol>
+<h3 id="4-优缺点归纳"><a href="#4-优缺点归纳" class="headerlink" title="4. 优缺点归纳"></a>4. 优缺点归纳</h3><p><strong>电路级网关优点</strong></p>
+<p>(1) 对网络性能有一定程度的影响</p>
+<p>(2) 切断了外部网络到防火墙后的服务器直接连接</p>
+<p>(3)  比静态或动态包过滤防火墙具有更高的安全性</p>
+<p><strong>电路级网关缺点</strong></p>
+<p>(1) 不能对数据净荷进行检测，无法抵御应用层的攻击等</p>
+<p>(2) 在设计理论上存在局限性，工作层次决定了它无法提供最高的安全性</p>
+<p>(3) 当增加新的内部程序或资源时，往往需要对许多电路级网关的代码进行修改</p>
+<hr>
+<h2 id="0x05-应用级别网关"><a href="#0x05-应用级别网关" class="headerlink" title="0x05 应用级别网关"></a>0x05 应用级别网关</h2><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>应用级网关则只能对特定服务的数据流进行过滤；应用级网关必须为特定的应用服务编写特定的代理程序，这些程序被称为“服务代理”，在网关<br>内部分别扮演客户机代理和服务器代理的角色，当各种类型的应用服务通过网关时，它们必须经过客户机代理和服务器代理的过滤</p>
+<h3 id="2-逻辑结构"><a href="#2-逻辑结构" class="headerlink" title="2. 逻辑结构"></a>2. 逻辑结构</h3><p><img src="http://pdeise3e3.bkt.clouddn.com/%E5%BA%94%E7%94%A8%E9%80%BB%E8%BE%91.png" alt=""></p>
+<h3 id="3-工作原理"><a href="#3-工作原理" class="headerlink" title="3. 工作原理"></a>3. 工作原理</h3><hr>
+<h2 id="0x06-状态检测防火墙"><a href="#0x06-状态检测防火墙" class="headerlink" title="0x06 状态检测防火墙"></a>0x06 状态检测防火墙</h2><hr>
+<h2 id="0x07-切换代理"><a href="#0x07-切换代理" class="headerlink" title="0x07 切换代理"></a>0x07 切换代理</h2><hr>
+<h2 id="0x08-防火墙体系结构"><a href="#0x08-防火墙体系结构" class="headerlink" title="0x08 防火墙体系结构"></a>0x08 防火墙体系结构</h2><hr>
+<h2 id="0x09-防火墙发展及趋势"><a href="#0x09-防火墙发展及趋势" class="headerlink" title="0x09 防火墙发展及趋势"></a>0x09 防火墙发展及趋势</h2><hr>
+<h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2>
       
     </div>
     
@@ -475,8 +652,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,6 +722,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-功能及分类"><span class="nav-number">2.</span> <span class="nav-text">0x02 功能及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-firewall-功能"><span class="nav-number">2.1.</span> <span class="nav-text">1. firewall 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fierwall-分类"><span class="nav-number">2.2.</span> <span class="nav-text">2. fierwall 分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-包过滤防火墙"><span class="nav-number">3.</span> <span class="nav-text">0x03 包过滤防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-静态包过滤防火墙"><span class="nav-number">3.1.</span> <span class="nav-text">1. 静态包过滤防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-动态包过滤防火墙"><span class="nav-number">3.2.</span> <span class="nav-text">2. 动态包过滤防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-电路级网关"><span class="nav-number">4.</span> <span class="nav-text">0x04 电路级网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工作原理"><span class="nav-number">4.1.</span> <span class="nav-text">1. 工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络位置"><span class="nav-number">4.2.</span> <span class="nav-text">2. 网络位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安全性分析"><span class="nav-number">4.3.</span> <span class="nav-text">3. 安全性分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-优缺点归纳"><span class="nav-number">4.4.</span> <span class="nav-text">4. 优缺点归纳</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-应用级别网关"><span class="nav-number">5.</span> <span class="nav-text">0x05 应用级别网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">5.1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-逻辑结构"><span class="nav-number">5.2.</span> <span class="nav-text">2. 逻辑结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-工作原理"><span class="nav-number">5.3.</span> <span class="nav-text">3. 工作原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-状态检测防火墙"><span class="nav-number">6.</span> <span class="nav-text">0x06 状态检测防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-切换代理"><span class="nav-number">7.</span> <span class="nav-text">0x07 切换代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-防火墙体系结构"><span class="nav-number">8.</span> <span class="nav-text">0x08 防火墙体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-防火墙发展及趋势"><span class="nav-number">9.</span> <span class="nav-text">0x09 防火墙发展及趋势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">10.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
