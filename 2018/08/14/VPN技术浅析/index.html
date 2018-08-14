@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="VPN," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="VPN（Virtual Private Network）即“虚拟专用网络”，是企业网在因特网(或其他公共网络)上的扩展，VPN在因特网上开辟一条安全的隧道，以保证两个端点（或两个局域网）之间的安全通信。本文对网络边界安全技术-VPN进行简要分析与总结">
+<meta name="keywords" content="VPN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VPN技术浅析">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/VPN技术浅析/index.html">
+<meta property="og:site_name" content="Firehacker">
+<meta property="og:description" content="VPN（Virtual Private Network）即“虚拟专用网络”，是企业网在因特网(或其他公共网络)上的扩展，VPN在因特网上开辟一条安全的隧道，以保证两个端点（或两个局域网）之间的安全通信。本文对网络边界安全技术-VPN进行简要分析与总结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%B8%80.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%BA%8C.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/PPTP%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/AH%E4%BC%A0%E8%BE%93.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/AH%E9%9A%A7%E9%81%93.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/AH%E5%A4%B4%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E4%BC%A0%E8%BE%93ESP.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93ESP.png">
+<meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/ESP%E6%95%B0%E6%8D%AE%E6%8A%A5.png">
+<meta property="og:updated_time" content="2018-08-14T15:05:23.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VPN技术浅析">
+<meta name="twitter:description" content="VPN（Virtual Private Network）即“虚拟专用网络”，是企业网在因特网(或其他公共网络)上的扩展，VPN在因特网上开辟一条安全的隧道，以保证两个端点（或两个局域网）之间的安全通信。本文对网络边界安全技术-VPN进行简要分析与总结">
+<meta name="twitter:image" content="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%B8%80.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/14/VPN技术浅析/"/>
+
+
+
+
+
+  <title>VPN技术浅析 | Firehacker</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Firehacker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            links
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/VPN技术浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Firehacker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Firehacker">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VPN技术浅析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T20:48:07+08:00">
+                2018-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/" itemprop="url" rel="index">
+                    <span itemprop="name">安全技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>VPN（Virtual Private Network）即“虚拟专用网络”，是企业网在因特网(或其他公共网络)上的扩展，VPN在因特网上开辟一条安全的隧道，以保证两个端点（或两个局域网）之间的安全通信。本文对网络边界安全技术-VPN进行简要分析与总结<br><a id="more"></a></p>
+</blockquote>
+<hr>
+<h2 id="0x01-VPN概述"><a href="#0x01-VPN概述" class="headerlink" title="0x01 VPN概述"></a>0x01 VPN概述</h2><h3 id="1-功能和原理"><a href="#1-功能和原理" class="headerlink" title="1. 功能和原理"></a>1. 功能和原理</h3><p><strong>(1) VPN 功能</strong></p>
+<p>将因特网虚拟成路由器，将物理位置分散的局域网和主机<strong>虚拟</strong>成一个统一的虚拟企业网。VPN综合利用了隧道技术、加密技术、鉴别技术和密钥管理等技术，在公共网络之上建立一个虚拟的安全通道，实现两个网络或两台主机之间的安全连接</p>
+<p><strong>(2) VPN 典型模式</strong></p>
+<ol>
+<li>远程用户访问企业内网</li>
+</ol>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%B8%80.png" alt=""></p>
+<ol start="2">
+<li>企业分支机构之间的局域网互联</li>
+</ol>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%BA%8C.png" alt=""></p>
+<hr>
+<h3 id="2-VPN-分类"><a href="#2-VPN-分类" class="headerlink" title="2. VPN 分类"></a>2. VPN 分类</h3><p><strong>(1) 从应用角度分类</strong></p>
+<p><strong>1 远程访问 VPN</strong></p>
+<p>它是为企业员工从外地访问企业内网而提供的VPN解决方案，当公司的员工出差到外地需要访问企业内网的机密信息时，为了避免信息传输过程中的泄密，他们的主机首先以VPN客户端的方式连接到企业的远程访问VPN服务器，此后远程主机到内网主机的通信将加密，从而保证了通信的安全性</p>
+<p><strong>2 网关—网关 VPN</strong></p>
+<p>通过不安全的因特网实现两个或多个局域网的安全互联。在每个局域网的出口处设置VPN服务器，当局域网之间需要交换信息时，两个VPN服务器之间建立一条安全的隧道，保证其中的通信安全。这种方式适合企业各分支机构、商业合作伙伴之间的网络互联</p>
+<p><strong>(2) 按隧道协议分类</strong></p>
+<p><strong>隧道协议（Tunneling Protocol）</strong>是一个网络协议的载体。使用隧道的原因是在不兼容的网络上传输数据，或在不安全网络上提供一个安全路径。隧道协议可能使用<strong>数据加密</strong>技术来保护所传输的数据</p>
+<p><strong>1 第2层隧道协议</strong></p>
+<p>主要包括点到点隧道协议(<strong>PPTP</strong>)、第二层转发协议(<strong>L2F</strong>)、第2层隧道协议(<strong>L2TP</strong>)。主要用于实现远程访问VPN</p>
+<p><strong>2 第3层隧道协议</strong></p>
+<p>主要是IP安全(<strong>IPSec</strong>)，用于在<strong>网络层</strong>实现数据包的安全封装。IPSec主要用于实现网关—网关VPN，也可以实现主机—主机的安全连接</p>
+<p><strong>3 第4层隧道协议(SSL)</strong></p>
+<p>在<strong>传输层</strong>上实现数据的安全封装，主要用于保护两台主机的两个进程间的安全通信。安全的Web、安全的电子邮件等均使用了第4层隧道协议</p>
+<p><strong>4 基于第2、3层隧道协议</strong></p>
+<p>也称为2.5层隧道协议，是利用<strong>MPLS路由器</strong>的标签特性实现的VPN</p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93%E5%8D%8F%E8%AE%AE.png" alt=""></p>
+<hr>
+<h2 id="0x03-PPTP-L2TP-VPN"><a href="#0x03-PPTP-L2TP-VPN" class="headerlink" title="0x03 PPTP/L2TP VPN"></a>0x03 PPTP/L2TP VPN</h2><h3 id="1-PPTP协议"><a href="#1-PPTP协议" class="headerlink" title="1. PPTP协议"></a>1. PPTP协议</h3><p>(1) 点对点隧道协议（Point to Point Tunneling Protocol ，缩写为 PPTP ）是实现虚拟专用网（VPN）的方式之一</p>
+<p>(2) PPTP使用传输控制协议（TCP）创建控制通道来传送控制命令，以及利用通用路由封装（GRE）通道来封装点对点协议（PPP）数据包以传送数据</p>
+<p>(3) PPTP的协议规范本身并未描述加密或身份验证的部份，它依靠点对点协议（PPP）来实现这些安全性功能</p>
+<p>(4) PPTP以通用路由封装（GRE）协议向对方作一般的点对点传输。通过TCP 1723端口来发起和管理GRE状态</p>
+<h3 id="2-PPTP帧的封装格式"><a href="#2-PPTP帧的封装格式" class="headerlink" title="2. PPTP帧的封装格式"></a>2. PPTP帧的封装格式</h3><p><img src="http://pcdbq4c2i.bkt.clouddn.com/PPTP%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<h3 id="3-L2TP-VPN"><a href="#3-L2TP-VPN" class="headerlink" title="3.  L2TP VPN"></a>3.  L2TP VPN</h3><p>(1) 第二层隧道协议（ Layer Two Tunneling Protocol，缩写为L2TP) 是一种由RFC 2661定义的数据链路层隧道协议，是一种虚拟隧道协议，通常用于虚拟专用网络</p>
+<p>(2) L2TP协议自身不提供加密与可靠性验证的功能，可以和安全协议搭配使用，从而实现数据的加密传输。经常与L2TP协议搭配的加密协议是IPsec，当这两个协议搭配使用时，通常合称L2TP/IPsec</p>
+<p>(3) L2TP支持包括IP、ATM、帧中继、X.25在内的多种网络。在IP网络中，L2TP协议使用了UDP 1701端口</p>
+<hr>
+<h2 id="0x04-IPSec-VPN"><a href="#0x04-IPSec-VPN" class="headerlink" title="0x04 IPSec VPN"></a>0x04 IPSec VPN</h2><h3 id="1-IPSec-概述"><a href="#1-IPSec-概述" class="headerlink" title="1. IPSec 概述"></a>1. IPSec 概述</h3><p>(1) 互联网安全协议（Internet Protocol Security，缩写为 IPsec），是通过对IP协议（互联网协议）的分组进行加密和认证来保护IP协议的网络传输协议族</p>
+<p>(2) IPsec协议工作在OSI 模型的第三层（网络层或TCP/IP模型的IP层），使其在单独使用时适于保护基于TCP或UDP的协议。与传输层或更高层的协议相比，IPsec协议必须处理可靠性和分片的问题，这同时也增加了它的复杂性和处理开销</p>
+<h3 id="2-IPSec-组成"><a href="#2-IPSec-组成" class="headerlink" title="2. IPSec 组成"></a>2. IPSec 组成</h3><p>IPSec是一个开放的标准，由一序列的协议组成，其中最重要的协议有三个 ：认证头 <strong>AH</strong>(Authentication Headers)、封装安全有效载荷<strong>ESP</strong>(Encapsulating Security Payloads)和安全联盟<strong>SA</strong>(Security Associations)</p>
+<p><strong>(1) 认证头AH (Authentication Headers)</strong></p>
+<p>AH为IP数据报实现无连接的完整性和数据源认证功能，并能抵抗重放攻击</p>
+<p><strong>(2) 封装安全有效载荷ESP(EncapsulatingSecurity Payloads)</strong></p>
+<p>ESP实现保密性、数据源认证、无连接的完整性、抵抗重放攻击的服务(一种形式的部分序列完整性)和有限的网络流的保密性</p>
+<p><strong>(3) 安全联盟SA (Security Associations)</strong></p>
+<p>SA给出算法和数据的集合，以向AH或ESP的操作提供必须的参数。安全联盟和密钥管理协议ISAKMP(Internet Security Association and Key ManagementProtocol)提供了认证和密钥交换的框架</p>
+<h3 id="3-IPSec工作模式"><a href="#3-IPSec工作模式" class="headerlink" title="3. IPSec工作模式"></a>3. IPSec工作模式</h3><p><strong>(1) 传输模式：</strong>用于两台主机之间的连接，在IP层封装主机—主机的分组</p>
+<p><strong>(2) 隧道模式：</strong>用于两个网关之间的连接，在IP层封装网关—网关的分组，可穿过公共网络（如Internet）实现局域网之间的互联</p>
+<h3 id="4-认证协议AH"><a href="#4-认证协议AH" class="headerlink" title="4. 认证协议AH"></a>4. 认证协议AH</h3><p><strong>(1) 概述</strong></p>
+<ol>
+<li><p>IP认证头AH（IP Authentication Header）定义在RFC4302中，实现IP数据报的认证、完整性和抗重放攻击</p>
+</li>
+<li><p>AH数据报直接封装在IP数据报中，如果IP数据包的协议字段为51，表明IP头之后是一个AH头</p>
+</li>
+<li><p>AH和ESP同时保护数据时，在顺序上，AH头在ESP头之后</p>
+</li>
+</ol>
+<p><strong>(2) AH 传输模式</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/AH%E4%BC%A0%E8%BE%93.png" alt=""></p>
+<p><strong>(3) AH 隧道模式</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/AH%E9%9A%A7%E9%81%93.png" alt=""></p>
+<p><strong>(4) AH 头格式</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/AH%E5%A4%B4%E6%A0%BC%E5%BC%8F.png" alt=""></p>
+<pre><code>1. 下一个头(Next Header)：8-bits，标识AH头后的载荷（协议）类型。在传输模式下可为6(TCP)或17 (UDP);在隧道模式下将是4(IPv4)或41(IPv6)
+
+2. 载荷长度(Payload Length)：8-bits，表示AH头本身的长度，以32-bits为单位
+
+3. 保留(Reserved)：16-bits，保留字段，未使用时必须设为0
+
+4. 安全参数索引SPI(Security Parameters Index)：32-bits，接收方用于标识对应的安全关联(SA)
+
+5. 序列号(Sequence Number)：32-bits，是一个单向递增的计数器，提供抗重播功能（anti-replay）
+
+6. 完整性验证数据ICV（Integrity Check Value）：这是一个可变长度（必须是32比特的整数倍）的域，长度由具体的验证算法决定。完整性验证数据ICV验证IP数据包的完整性，因此ICV的计算包含了整个IP数据包
+</code></pre><h3 id="5-封装安全载荷ESP"><a href="#5-封装安全载荷ESP" class="headerlink" title="5. 封装安全载荷ESP"></a>5. 封装安全载荷ESP</h3><p><strong>(1) 概述</strong></p>
+<ol>
+<li><p>IP封装安全载荷ESP （IP Encapsulating SecurityPayload）定义在RFC 4303中，实现IP数据报的认证、完整性、抗重放攻击和加密</p>
+</li>
+<li><p>与AH协议一样，ESP的数据报也直接封装在IP数据报中，如果IP数据包的协议字段为50，表明IP头之后是一个ESP数据报。ESP数据报由四部分组成，分别是：头部、加密数据（包括ESP尾）和ESP验证数据</p>
+</li>
+</ol>
+<p><strong>(2) 传输模式 ESP</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E4%BC%A0%E8%BE%93ESP.png" alt=""></p>
+<p><strong>(3) 隧道模式 ESP</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93ESP.png" alt=""></p>
+<p><strong>(4) ESP 数据报格式</strong></p>
+<p><img src="http://pcdbq4c2i.bkt.clouddn.com/ESP%E6%95%B0%E6%8D%AE%E6%8A%A5.png" alt=""></p>
+<pre><code>1. 安全参数索引SPI(32-bits)：在IKE交换过中由目标主机选定，与IP头之前的目标地址以及协议结合在一起，用来标识用于处理数据包的特定的那个安全关联。SPI经过验证，但并未加密
+
+2. 序列号(32-bits)：它是一个唯一的单向递增的计数器，与AH类似，提供抵抗重播攻击的能力
+
+3. 填充项(0～255 bytes)：由具体的加密算法决定
+
+4. 填充长度(8-bits)：接收端可以据此恢复载荷数据的真实长度
+
+5. 下一头部(8-bits)：标识受ESP保护的载荷的（协议）类型。在传输模式下拷贝自原IP数据报头中的协议值；在隧道模式下可为4(IPv4)或41 (IPv6)
+
+6. 验证数据(完整性校验值ICV)：一个经过密钥处理的散列值，验证范围包括ESP头部、被保护的数据以及ESP尾部。其长度与具体的验证算法有关，但必须是32bits的整数倍
+</code></pre><h3 id="6-安全关联与安全策略"><a href="#6-安全关联与安全策略" class="headerlink" title="6. 安全关联与安全策略"></a>6. 安全关联与安全策略</h3><p><strong>(1) 安全关联与安全关联数据库</strong></p>
+<ol>
+<li><p>安全关联(SA) 是两个通信实体协商建立起来的一种安全协定</p>
+</li>
+<li><p>SA是通过IKE密钥管理协议在通信双方之间来协商的，协商完成后，通信双方都会在它们的安全关联数据库( SAD)中存储该SA参数</p>
+</li>
+</ol>
+<p><strong>(2) 安全关联确定参数</strong></p>
+<ol>
+<li><p><strong>安全参数索引号(SPI)</strong>：一个与SA相关的位串，由AH和ESP携带，使得接收方能选择合适的SA处理数据包</p>
+</li>
+<li><p><strong>IP目的地址</strong>：目前只允许使用单一地址，表示SA的目的地址</p>
+</li>
+<li><p><strong>安全协议标识</strong>：标识该SA是AH安全关联或ESP安全关联</p>
+</li>
+</ol>
+<p><strong>(3) SA 其他参数</strong></p>
+<pre><code>1. 序列号计数器：一个32位的值，用于生成AH或ESP头中的序号字段，在数据包的“外出”处理时使用
+
+2. 序列号溢出：用于输出包处理，并在序列号溢出的时候加以设置，安全策略决定了一个SA是否仍可用来处理其余的包
+
+3. 抗重放窗口：用于确定一个入栈的AH或ESP包是否是重放
+
+4. AH信息：AH认证算法、密钥、密钥生存期和其他AH的相关参数
+
+5. ESP信息：ESP认证和加密算法、密钥、初始值、密钥生存期和其他ESP的相关参数
+
+6. SA的生存期：一个SA最长能存在的时间。到时间后，一个SA必须用一个新的 SA替换或终止
+
+7. IPSec协议模式：隧道、传输、通配符（隧道模式、传输模式均可）
+
+8. 路径MTU：在隧道模式下使用IPSec时，必须维持正确的PMTU信息，以便对这个数据包进行相应的分段
+</code></pre><p><strong>(4) 安全策略和安全策略数据库SPD</strong></p>
+<ol>
+<li><p>安全策略决定了为一个数据包提供的安全服务，它保存在安全策略数据库SPD中。SPD中的每一个安全策略条目由一组IP和上层协议字段值组成，即下面提到的选择符</p>
+</li>
+<li><p>安全策略数据库(SPD)记录了对IP数据流（根据源IP、目的IP、上层协议以及流入还是流出）采取的安全策略。每一安全策略条目可能对应零条或多条SA条目，通过使用一个或多个选择符来确定某一个SA条目</p>
+</li>
+</ol>
+<p><strong>(5) IPSec允许的选择符</strong></p>
+<pre><code>1. 目的IP地址：可以是主机地址、地址范围或者通配符
+
+2. 源IP地址：可以是主机地址、地址范围或者通配符
+
+3. 源/目的端口
+
+4. 用户ID：操作系统中的用户标识
+
+5. 数据敏感级别
+
+6. 传输层协议
+
+7. IPSec协议(AH，ESP，AH/ESP)
+
+8. 服务类型(TOS)
+</code></pre><hr>
+<h2 id="0XFF-参考资源"><a href="#0XFF-参考资源" class="headerlink" title="0XFF 参考资源"></a>0XFF 参考资源</h2><ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Virtual_private_network</a></p>
+</li>
+<li><p><a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E7%BD%91%E7%BB%9C/8747869?fromtitle=VPN%E6%8A%80%E6%9C%AF&amp;fromid=1897662" target="_blank" rel="noopener">https://baike.baidu.com/item/Virtual_private_network</a></p>
+</li>
+<li><p><a href="http://staff.ustc.edu.cn/~billzeng/ns/ns04.pdf" target="_blank" rel="noopener">http://staff.ustc.edu.cn/~billzeng/ns/ns04.pdf</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VPN/" rel="tag"><i class="fa fa-tag"></i> VPN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/13/Firewall技术浅析/" rel="next" title="Firewall技术浅析">
+                <i class="fa fa-chevron-left"></i> Firewall技术浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Firehacker</p>
+              <p class="site-description motion-element" itemprop="description">安全思维，技术，实践，分享</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-VPN概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 VPN概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-功能和原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 功能和原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-VPN-分类"><span class="nav-number">1.2.</span> <span class="nav-text">2. VPN 分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-PPTP-L2TP-VPN"><span class="nav-number">2.</span> <span class="nav-text">0x03 PPTP/L2TP VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-PPTP协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. PPTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-PPTP帧的封装格式"><span class="nav-number">2.2.</span> <span class="nav-text">2. PPTP帧的封装格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-L2TP-VPN"><span class="nav-number">2.3.</span> <span class="nav-text">3.  L2TP VPN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-IPSec-VPN"><span class="nav-number">3.</span> <span class="nav-text">0x04 IPSec VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IPSec-概述"><span class="nav-number">3.1.</span> <span class="nav-text">1. IPSec 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-IPSec-组成"><span class="nav-number">3.2.</span> <span class="nav-text">2. IPSec 组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-IPSec工作模式"><span class="nav-number">3.3.</span> <span class="nav-text">3. IPSec工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-认证协议AH"><span class="nav-number">3.4.</span> <span class="nav-text">4. 认证协议AH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-封装安全载荷ESP"><span class="nav-number">3.5.</span> <span class="nav-text">5. 封装安全载荷ESP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-安全关联与安全策略"><span class="nav-number">3.6.</span> <span class="nav-text">6. 安全关联与安全策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0XFF-参考资源"><span class="nav-number">4.</span> <span class="nav-text">0XFF 参考资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Firehacker</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
