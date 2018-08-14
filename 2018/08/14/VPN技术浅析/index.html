@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E4%BC%A0%E8%BE%93ESP.png">
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93ESP.png">
 <meta property="og:image" content="http://pcdbq4c2i.bkt.clouddn.com/ESP%E6%95%B0%E6%8D%AE%E6%8A%A5.png">
-<meta property="og:updated_time" content="2018-08-14T15:05:23.052Z">
+<meta property="og:updated_time" content="2018-08-14T15:09:51.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VPN技术浅析">
 <meta name="twitter:description" content="VPN（Virtual Private Network）即“虚拟专用网络”，是企业网在因特网(或其他公共网络)上的扩展，VPN在因特网上开辟一条安全的隧道，以保证两个端点（或两个局域网）之间的安全通信。本文对网络边界安全技术-VPN进行简要分析与总结">
@@ -406,7 +406,6 @@
 <li>企业分支机构之间的局域网互联</li>
 </ol>
 <p><img src="http://pcdbq4c2i.bkt.clouddn.com/VPN%E6%A8%A1%E5%BC%8F%E4%BA%8C.png" alt=""></p>
-<hr>
 <h3 id="2-VPN-分类"><a href="#2-VPN-分类" class="headerlink" title="2. VPN 分类"></a>2. VPN 分类</h3><p><strong>(1) 从应用角度分类</strong></p>
 <p><strong>1 远程访问 VPN</strong></p>
 <p>它是为企业员工从外地访问企业内网而提供的VPN解决方案，当公司的员工出差到外地需要访问企业内网的机密信息时，为了避免信息传输过程中的泄密，他们的主机首先以VPN客户端的方式连接到企业的远程访问VPN服务器，此后远程主机到内网主机的通信将加密，从而保证了通信的安全性</p>
@@ -424,7 +423,7 @@
 <p>也称为2.5层隧道协议，是利用<strong>MPLS路由器</strong>的标签特性实现的VPN</p>
 <p><img src="http://pcdbq4c2i.bkt.clouddn.com/%E9%9A%A7%E9%81%93%E5%8D%8F%E8%AE%AE.png" alt=""></p>
 <hr>
-<h2 id="0x03-PPTP-L2TP-VPN"><a href="#0x03-PPTP-L2TP-VPN" class="headerlink" title="0x03 PPTP/L2TP VPN"></a>0x03 PPTP/L2TP VPN</h2><h3 id="1-PPTP协议"><a href="#1-PPTP协议" class="headerlink" title="1. PPTP协议"></a>1. PPTP协议</h3><p>(1) 点对点隧道协议（Point to Point Tunneling Protocol ，缩写为 PPTP ）是实现虚拟专用网（VPN）的方式之一</p>
+<h2 id="0x02-PPTP-L2TP-VPN"><a href="#0x02-PPTP-L2TP-VPN" class="headerlink" title="0x02 PPTP/L2TP VPN"></a>0x02 PPTP/L2TP VPN</h2><h3 id="1-PPTP协议"><a href="#1-PPTP协议" class="headerlink" title="1. PPTP协议"></a>1. PPTP协议</h3><p>(1) 点对点隧道协议（Point to Point Tunneling Protocol ，缩写为 PPTP ）是实现虚拟专用网（VPN）的方式之一</p>
 <p>(2) PPTP使用传输控制协议（TCP）创建控制通道来传送控制命令，以及利用通用路由封装（GRE）通道来封装点对点协议（PPP）数据包以传送数据</p>
 <p>(3) PPTP的协议规范本身并未描述加密或身份验证的部份，它依靠点对点协议（PPP）来实现这些安全性功能</p>
 <p>(4) PPTP以通用路由封装（GRE）协议向对方作一般的点对点传输。通过TCP 1723端口来发起和管理GRE状态</p>
@@ -433,7 +432,7 @@
 <p>(2) L2TP协议自身不提供加密与可靠性验证的功能，可以和安全协议搭配使用，从而实现数据的加密传输。经常与L2TP协议搭配的加密协议是IPsec，当这两个协议搭配使用时，通常合称L2TP/IPsec</p>
 <p>(3) L2TP支持包括IP、ATM、帧中继、X.25在内的多种网络。在IP网络中，L2TP协议使用了UDP 1701端口</p>
 <hr>
-<h2 id="0x04-IPSec-VPN"><a href="#0x04-IPSec-VPN" class="headerlink" title="0x04 IPSec VPN"></a>0x04 IPSec VPN</h2><h3 id="1-IPSec-概述"><a href="#1-IPSec-概述" class="headerlink" title="1. IPSec 概述"></a>1. IPSec 概述</h3><p>(1) 互联网安全协议（Internet Protocol Security，缩写为 IPsec），是通过对IP协议（互联网协议）的分组进行加密和认证来保护IP协议的网络传输协议族</p>
+<h2 id="0x03-IPSec-VPN"><a href="#0x03-IPSec-VPN" class="headerlink" title="0x03 IPSec VPN"></a>0x03 IPSec VPN</h2><h3 id="1-IPSec-概述"><a href="#1-IPSec-概述" class="headerlink" title="1. IPSec 概述"></a>1. IPSec 概述</h3><p>(1) 互联网安全协议（Internet Protocol Security，缩写为 IPsec），是通过对IP协议（互联网协议）的分组进行加密和认证来保护IP协议的网络传输协议族</p>
 <p>(2) IPsec协议工作在OSI 模型的第三层（网络层或TCP/IP模型的IP层），使其在单独使用时适于保护基于TCP或UDP的协议。与传输层或更高层的协议相比，IPsec协议必须处理可靠性和分片的问题，这同时也增加了它的复杂性和处理开销</p>
 <h3 id="2-IPSec-组成"><a href="#2-IPSec-组成" class="headerlink" title="2. IPSec 组成"></a>2. IPSec 组成</h3><p>IPSec是一个开放的标准，由一序列的协议组成，其中最重要的协议有三个 ：认证头 <strong>AH</strong>(Authentication Headers)、封装安全有效载荷<strong>ESP</strong>(Encapsulating Security Payloads)和安全联盟<strong>SA</strong>(Security Associations)</p>
 <p><strong>(1) 认证头AH (Authentication Headers)</strong></p>
@@ -728,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-VPN概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 VPN概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-功能和原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 功能和原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-VPN-分类"><span class="nav-number">1.2.</span> <span class="nav-text">2. VPN 分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-PPTP-L2TP-VPN"><span class="nav-number">2.</span> <span class="nav-text">0x03 PPTP/L2TP VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-PPTP协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. PPTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-PPTP帧的封装格式"><span class="nav-number">2.2.</span> <span class="nav-text">2. PPTP帧的封装格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-L2TP-VPN"><span class="nav-number">2.3.</span> <span class="nav-text">3.  L2TP VPN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-IPSec-VPN"><span class="nav-number">3.</span> <span class="nav-text">0x04 IPSec VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IPSec-概述"><span class="nav-number">3.1.</span> <span class="nav-text">1. IPSec 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-IPSec-组成"><span class="nav-number">3.2.</span> <span class="nav-text">2. IPSec 组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-IPSec工作模式"><span class="nav-number">3.3.</span> <span class="nav-text">3. IPSec工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-认证协议AH"><span class="nav-number">3.4.</span> <span class="nav-text">4. 认证协议AH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-封装安全载荷ESP"><span class="nav-number">3.5.</span> <span class="nav-text">5. 封装安全载荷ESP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-安全关联与安全策略"><span class="nav-number">3.6.</span> <span class="nav-text">6. 安全关联与安全策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0XFF-参考资源"><span class="nav-number">4.</span> <span class="nav-text">0XFF 参考资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-VPN概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 VPN概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-功能和原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 功能和原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-VPN-分类"><span class="nav-number">1.2.</span> <span class="nav-text">2. VPN 分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-PPTP-L2TP-VPN"><span class="nav-number">2.</span> <span class="nav-text">0x02 PPTP/L2TP VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-PPTP协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. PPTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-PPTP帧的封装格式"><span class="nav-number">2.2.</span> <span class="nav-text">2. PPTP帧的封装格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-L2TP-VPN"><span class="nav-number">2.3.</span> <span class="nav-text">3.  L2TP VPN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-IPSec-VPN"><span class="nav-number">3.</span> <span class="nav-text">0x03 IPSec VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IPSec-概述"><span class="nav-number">3.1.</span> <span class="nav-text">1. IPSec 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-IPSec-组成"><span class="nav-number">3.2.</span> <span class="nav-text">2. IPSec 组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-IPSec工作模式"><span class="nav-number">3.3.</span> <span class="nav-text">3. IPSec工作模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-认证协议AH"><span class="nav-number">3.4.</span> <span class="nav-text">4. 认证协议AH</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-封装安全载荷ESP"><span class="nav-number">3.5.</span> <span class="nav-text">5. 封装安全载荷ESP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-安全关联与安全策略"><span class="nav-number">3.6.</span> <span class="nav-text">6. 安全关联与安全策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0XFF-参考资源"><span class="nav-number">4.</span> <span class="nav-text">0XFF 参考资源</span></a></li></ol></div>
             
 
           </div>
