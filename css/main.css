@@ -189,7 +189,7 @@ body {
   font-size: 14px;
   line-height: 2;
   color: #555;
-  background: #f5f7f9;
+  background: #0684bd;
 }
 @media (max-width: 767px) {
   body {
@@ -1059,7 +1059,7 @@ pre .javascript .function {
 .back-to-top {
   display: none;
   margin: 20px -10px -20px;
-  background: #f5f7f9;
+  background: #0684bd;
   font-size: 12px;
   opacity: 0.6;
   cursor: pointer;
@@ -1827,7 +1827,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #86ffff;
+  background: #4b90a4;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2705,7 +2705,7 @@ pre .javascript .function {
   float: left;
   margin-top: 300px;
   width: 240px;
-  background: #f5f7f9;
+  background: #0684bd;
   box-shadow: none;
 }
 @media (min-width: 768px) and (max-width: 991px) {
