@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -122,7 +122,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
@@ -869,17 +869,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -969,22 +960,6 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-概述"><span class="nav-number">1.</span> <span class="nav-text">0x01 概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-功能及分类"><span class="nav-number">2.</span> <span class="nav-text">0x02 功能及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-firewall-功能"><span class="nav-number">2.1.</span> <span class="nav-text">1. firewall 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-fierwall-分类"><span class="nav-number">2.2.</span> <span class="nav-text">2. fierwall 分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-包过滤防火墙"><span class="nav-number">3.</span> <span class="nav-text">0x03 包过滤防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-静态包过滤防火墙"><span class="nav-number">3.1.</span> <span class="nav-text">1. 静态包过滤防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-动态包过滤防火墙"><span class="nav-number">3.2.</span> <span class="nav-text">2. 动态包过滤防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-电路级网关"><span class="nav-number">4.</span> <span class="nav-text">0x04 电路级网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工作原理"><span class="nav-number">4.1.</span> <span class="nav-text">1. 工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络位置"><span class="nav-number">4.2.</span> <span class="nav-text">2. 网络位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安全性分析"><span class="nav-number">4.3.</span> <span class="nav-text">3. 安全性分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-优缺点归纳"><span class="nav-number">4.4.</span> <span class="nav-text">4. 优缺点归纳</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-应用级别网关"><span class="nav-number">5.</span> <span class="nav-text">0x05 应用级别网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">5.1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-逻辑结构"><span class="nav-number">5.2.</span> <span class="nav-text">2. 逻辑结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-工作原理"><span class="nav-number">5.3.</span> <span class="nav-text">3. 工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安全性讨论"><span class="nav-number">5.4.</span> <span class="nav-text">4. 安全性讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-状态检测防火墙"><span class="nav-number">6.</span> <span class="nav-text">0x06 状态检测防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述-1"><span class="nav-number">6.1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-工作原理"><span class="nav-number">6.2.</span> <span class="nav-text">2. 工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安全性讨论"><span class="nav-number">6.3.</span> <span class="nav-text">3. 安全性讨论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-切换代理"><span class="nav-number">7.</span> <span class="nav-text">0x07 切换代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-工作原理-1"><span class="nav-number">7.1.</span> <span class="nav-text">1. 工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-工作过程"><span class="nav-number">7.2.</span> <span class="nav-text">2. 工作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安全性讨论-1"><span class="nav-number">7.3.</span> <span class="nav-text">3. 安全性讨论</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-优点与缺陷"><span class="nav-number">7.4.</span> <span class="nav-text">4. 优点与缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-防火墙体系结构"><span class="nav-number">8.</span> <span class="nav-text">0x08 防火墙体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-堡垒主机-Bastion-Host"><span class="nav-number">8.1.</span> <span class="nav-text">1. 堡垒主机(Bastion Host)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-典型体系结构"><span class="nav-number">8.2.</span> <span class="nav-text">2. 典型体系结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-防火墙缺陷及发展"><span class="nav-number">9.</span> <span class="nav-text">0x09 防火墙缺陷及发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-防火墙缺陷"><span class="nav-number">9.1.</span> <span class="nav-text">1. 防火墙缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-发展趋势"><span class="nav-number">9.2.</span> <span class="nav-text">2. 发展趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-趋势总结"><span class="nav-number">9.3.</span> <span class="nav-text">3. 趋势总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0A-防火墙设计及配置"><span class="nav-number">10.</span> <span class="nav-text">0x0A 防火墙设计及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Firewall-Windows"><span class="nav-number">10.1.</span> <span class="nav-text">1. Firewall-Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Firewall-Linux"><span class="nav-number">10.2.</span> <span class="nav-text">2. Firewall-Linux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">11.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
 
       
         <div class="back-to-top">
@@ -1030,7 +1005,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 -->
 
 
@@ -1133,13 +1108,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
