@@ -1663,7 +1663,7 @@ pre .javascript .function {
   font-family: UKIJ Ekran;
 }
 .sidebar {
-  position: left;
+  position: right;
   right: 0;
   top: 0;
   bottom: 0;
@@ -1826,7 +1826,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ed2dff;
+  background: #af2906;
 }
 .links-of-blogroll {
   font-size: 13px;
