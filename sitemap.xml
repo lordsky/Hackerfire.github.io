@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2018-08-27T03:04:46.256Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/AISec/index.html</loc>
     
     <lastmod>2018-08-25T08:53:34.789Z</lastmod>
@@ -152,13 +159,6 @@
     <loc>http://yoursite.com/2018/07/03/web%E5%AE%89%E5%85%A8%E8%A7%82/</loc>
     
     <lastmod>2018-08-18T03:51:34.157Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2018-08-18T02:36:59.877Z</lastmod>
     
   </url>
   
