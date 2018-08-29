@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-24T14:46:13.549Z</updated>
+  <updated>2018-08-29T04:03:28.793Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Metasploit渗透笔记</title>
+    <link href="http://yoursite.com/2018/08/29/Metasploit%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2018/08/29/Metasploit渗透笔记/</id>
+    <published>2018-08-29T03:46:11.000Z</published>
+    <updated>2018-08-29T04:03:28.793Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.metasploit.com/" target="_blank" rel="noopener">Metasploit</a>—世界上最新流行的渗透测试框架之一，本文参考<a href="https://www.offensive-security.com/metasploit-unleashed/" target="_blank" rel="noopener">Offensive-Security-metasploit</a> 及 <a href="https://github.com/Urinx/Books/blob/master/metasploit/Metasploit%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.pdf" target="_blank" rel="noopener">The Penetration Tester’s Guide</a>对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力</p></blockquote><a id="more"></a><hr>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.metasploit.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Metasploit&lt;/a&gt;—世界上最新流行的渗透测试框架之一，本文参考&lt;a href=&quot;https://www.offensive-security.com/metasploit-unleashed/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Offensive-Security-metasploit&lt;/a&gt; 及 &lt;a href=&quot;https://github.com/Urinx/Books/blob/master/metasploit/Metasploit%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%8C%87%E5%8D%97.pdf&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;The Penetration Tester’s Guide&lt;/a&gt;对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="渗透测试" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="Metasploit" scheme="http://yoursite.com/tags/Metasploit/"/>
+    
+      <category term="Pentest" scheme="http://yoursite.com/tags/Pentest/"/>
+    
+  </entry>
   
   <entry>
     <title>安全与计算机工具导航</title>
