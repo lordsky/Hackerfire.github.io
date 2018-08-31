@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="Metasploit—世界上最新流行的渗透测试框架之一，本文参考Offensive-Security-metasploit 及 The Penetration Tester’s Guide对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-29T04:03:28.793Z">
+<meta property="og:updated_time" content="2018-08-31T05:37:47.064Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Metasploit渗透笔记">
 <meta name="twitter:description" content="Metasploit—世界上最新流行的渗透测试框架之一，本文参考Offensive-Security-metasploit 及 The Penetration Tester’s Guide对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力">
@@ -430,7 +430,85 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-
+<h2 id="0x01-Metasploit基础"><a href="#0x01-Metasploit基础" class="headerlink" title="0x01 Metasploit基础"></a>0x01 Metasploit基础</h2><h3 id="1-专业术语"><a href="#1-专业术语" class="headerlink" title="1. 专业术语"></a>1. 专业术语</h3><p><strong>(1) 渗透攻击(Exploit)</strong></p>
+<p>由攻击者或渗透测试者利用一个系统，应用或服务中的安全漏洞，所进行的攻击行为</p>
+<p><strong>(2) 攻击载荷(Payload)</strong></p>
+<p>目标系统被渗透攻击之后期望去执行的代码，在MSF中可以自由选择，传送和植入</p>
+<p><strong>(3) Shellcode</strong></p>
+<p>在渗透攻击时作为攻击载荷运行的一组机器指令，常用汇编语言编写</p>
+<p><strong>(4) 模块(Moudle)</strong></p>
+<p>指Metasploit框架中所使用的一段软件代码组件</p>
+<p><strong>(5) 监听器(Listener)</strong></p>
+<p>Metasploit中用来等待连入网络连接的组件</p>
+<h3 id="2-用户接口"><a href="#2-用户接口" class="headerlink" title="2. 用户接口"></a>2. 用户接口</h3><p><strong>(1) MSF终端</strong></p>
+<p>一种用户友好的模式提供交互方式，用于访问软件所有的功能特性</p>
+<pre><code>msfconsole
+</code></pre><p><strong>(2) MSF命令行 </strong></p>
+<p><code>msfcli</code>考虑用脚本处理和玉其他命令行工具的互操作性，新版本不再支持，使用<code>msfconsole -x</code>代替</p>
+<p><strong>(3) Armitage</strong></p>
+<p><code>armitage</code>组件是一个完全交互式的图形化用户接口</p>
+<pre><code>armitage
+</code></pre><h3 id="3-Metasploit功能程序"><a href="#3-Metasploit功能程序" class="headerlink" title="3. Metasploit功能程序"></a>3. Metasploit功能程序</h3><p><strong>(1) MSF攻击载荷生成器</strong></p>
+<p>能够生成<code>shellcode</code>，可执行代码，可以在框架软件之外的渗透代码中进行使用，<code>msfpayload</code>已弃用，由<code>msfvenom</code>工具代替</p>
+<p><strong>(2) MSF编码器</strong></p>
+<p>通过对原始攻击载荷进行编码，来避免坏字符，以及逃避杀毒软件和IDS的检测，<code>msfencode</code>由<code>msfvenom</code>取代</p>
+<p><strong>(3) Nasm Shell</strong></p>
+<p><code>nasm_shell.rb</code>功能程序可对给定的汇编命令找出其opcode操作码</p>
+<h2 id="0x02-情报收集"><a href="#0x02-情报收集" class="headerlink" title="0x02 情报收集"></a>0x02 情报收集</h2><h3 id="1-被动信息收集"><a href="#1-被动信息收集" class="headerlink" title="1. 被动信息收集"></a>1. 被动信息收集</h3><p>在不接触目标系统的情况下挖掘目标信息，<strong>公开情报渠道(OSINT)</strong>是一类对公开和已知信息来检索和筛选就可以获取到的目标情报集合</p>
+<p><strong>(1) whois 查询</strong></p>
+<pre><code>msf &gt; whois 域名
+</code></pre><p><strong>(2) Netcraft</strong></p>
+<p><a href="https://searchdns.netcraft.com/" target="_blank" rel="noopener">Netcraft</a>一个网页界面的工具，可以发现承载某个特定网站的服务器IP地址</p>
+<pre><code>msf &gt; whois IP
+</code></pre><p><strong>(3) NSLookup</strong></p>
+<p>可以用于获取关于服务器的附加信息</p>
+<pre><code>root@kali:~# nslookup
+&gt; 域名
+</code></pre><h3 id="2-主动信息收集"><a href="#2-主动信息收集" class="headerlink" title="2. 主动信息收集"></a>2. 主动信息收集</h3><p>与目标系统直接交互，从而对其进行更深入的了解；注意可能被IDS或IPS发现</p>
+<p><strong>(1) Nmap 端口扫描</strong></p>
+<pre><code>root@kali:~# nmap -sS -Pn IP
+</code></pre><p><code>-sS</code>选项用于执行一次隐秘的TCP扫描，以确定某个特定的TCP端口是否开放；</p>
+<p><code>-Pn</code>选项告诉nmap不使用ping命令预先判断主机是否存活，默认所有主机处于存活状态，大多数网络不允许ping命令的ICMP通行，避免漏掉许多实际存活的主机</p>
+<p><strong>(2) 在Metasploit中使用数据库</strong></p>
+<p>Metasploit 支持 MySQL，PostgreSQL 和 SQLite3 数据库</p>
+<p>使用init.d脚本启动数据库子系统</p>
+<pre><code>root@kali~# /etc/init.d/postgresql start
+</code></pre><p>Metasploit 框架连接数据库实例</p>
+<pre><code>msf &gt; db_connect postgres:toor@127.0.0.1/msfbook
+</code></pre><p>PostgreSQL默认用户名为postgres，口令为toor，使用msfbook作为数据库名</p>
+<p>数据库连接状态查看</p>
+<pre><code>msf &gt; db_status
+</code></pre><p>A. <strong> 将Nmap输出的结果导入Metasploit</strong></p>
+<p>使用<code>-oX</code>选项进行扫描，生成名为<code>subnet.xml</code>的文件</p>
+<pre><code>nmap -Pn -sS -A -oX submet 192.168.1.0/24
+</code></pre><p>使用<code>db_import</code>命令将文件导入到数据库中；完毕后，可使用<code>db_hosts</code>命令合适导入的结果(显示数据库中所有已保存的主机信息)</p>
+<pre><code>msf &gt; db_connect postgres:passwd@127.0.0.1/msf3
+msf &gt; db_import sbumet.xml
+msf &gt; hosts -c address
+</code></pre><p>B. <strong>高级 Nmap 技巧: TCP 空闲扫描</strong></p>
+<p>TCP 空闲扫描：冒充网络上另一台主机的IP地址，对目标进行隐秘的扫描；可使用Meatsploit框架中的<em>scanner/ip/ipidseq</em>模块，寻找满足TCP空闲扫描要求的空闲主机</p>
+<pre><code>msf &gt; use auxiliary/scanner/ip/ipidseq
+msf auxiliary(ipidseq) &gt; show options
+</code></pre><p>列表显示了执行<em>ipidseq</em>扫描所需的所有参数；<code>RHOST</code>-此参数可使用IP地址段，CIDR地址快，逗号分隔的多个CIDR地址块；<code>THREAD</code>-此参数设定扫描线程数，默认为1，增加参数值可提高扫描速度，降低参数值可减少网络上的数据流量</p>
+<p>设定好参数并执行扫描模块</p>
+<pre><code>msf auxiliary(ipidseq) &gt; set RHOSTS 192.168.1.0/24
+RHOSTS =&gt; 192.168.1.0/24
+msf auxiliary(ipidseq) &gt; set THREADS 50
+THREADS =&gt; 50
+msf auxiliary(ipidseq) &gt; run
+</code></pre><p>尝试在nmap中使用-sI选项指定特定IP作为空闲主机(<code>Incremental</code>)对目标主机进行扫描</p>
+<pre><code>msf auxiliary(ipidseq) &gt; nmap -PN -sI 空闲IP 目标IP
+</code></pre><p>C. <strong> 在 MSF 终端中运行 Nmap</strong></p>
+<p>连接到数据库</p>
+<pre><code>msf &gt; db_connect postgres:passwd@127.0.0.1/msf3
+</code></pre><p>输入<code>db_nmap</code>命令，在MSF终端中运行nmap，并自动将nmap结果存储在数据库中</p>
+<pre><code>msf &gt; db_nmap -sS -A 192.168.1.0/24
+</code></pre><p>执行 <code>db_services</code> 命令查看数据库中的关于系统上运行服务的扫描结果</p>
+<pre><code>msf &gt; services
+</code></pre><p><strong>(3) 使用Metasploit进行端口扫描</strong></p>
+<p>查看Metasploit框架中提供的端口扫描工具</p>
+<pre><code>msf &gt; search portscan
+</code></pre>
       
     </div>
     
@@ -525,8 +603,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +702,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Metasploit基础"><span class="nav-number">1.</span> <span class="nav-text">0x01 Metasploit基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-专业术语"><span class="nav-number">1.1.</span> <span class="nav-text">1. 专业术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户接口"><span class="nav-number">1.2.</span> <span class="nav-text">2. 用户接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Metasploit功能程序"><span class="nav-number">1.3.</span> <span class="nav-text">3. Metasploit功能程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-情报收集"><span class="nav-number">2.</span> <span class="nav-text">0x02 情报收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-被动信息收集"><span class="nav-number">2.1.</span> <span class="nav-text">1. 被动信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主动信息收集"><span class="nav-number">2.2.</span> <span class="nav-text">2. 主动信息收集</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
