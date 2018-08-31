@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="Metasploit—世界上最新流行的渗透测试框架之一，本文参考Offensive-Security-metasploit 及 The Penetration Tester’s Guide对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-31T10:04:55.553Z">
+<meta property="og:updated_time" content="2018-08-31T12:54:21.239Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Metasploit渗透笔记">
 <meta name="twitter:description" content="Metasploit—世界上最新流行的渗透测试框架之一，本文参考Offensive-Security-metasploit 及 The Penetration Tester’s Guide对Metasploit框架相关技术及渗透测试流程进行分析总结，然后通过实践体验Metasploit的魅力">
@@ -598,7 +598,43 @@ RHOSTS =&gt; 192.168.139.0/24
 msf auxiliary(scanner/snmp/snmp_login) &gt; set THREADS 50
 THREADS =&gt; 50
 msf auxiliary(scanner/snmp/snmp_login) &gt; run
-</code></pre>
+</code></pre><hr>
+<h2 id="0x04-漏洞扫描"><a href="#0x04-漏洞扫描" class="headerlink" title="0x04 漏洞扫描"></a>0x04 漏洞扫描</h2><h3 id="1-基本漏洞扫描"><a href="#1-基本漏洞扫描" class="headerlink" title="1. 基本漏洞扫描"></a>1. 基本漏洞扫描</h3><p><strong>旗标攫取：</strong>连接到一个远程网络服务，并读取该服务独特的标识</p>
+<p>使用<code>netcat</code>获取目标IP的旗标</p>
+<pre><code>root@kali:~# nc IP port
+</code></pre><h3 id="2-使用-NeXpose-进行扫描"><a href="#2-使用-NeXpose-进行扫描" class="headerlink" title="2. 使用 NeXpose 进行扫描"></a>2. 使用 NeXpose 进行扫描</h3><p>通过对网络进行扫描，查找出网络上正在运行的设备，最终识别出操作系统和应用程序上的安全漏洞</p>
+<h3 id="3-使用-Nessus-进行扫描"><a href="#3-使用-Nessus-进行扫描" class="headerlink" title="3. 使用 Nessus 进行扫描"></a>3. 使用 Nessus 进行扫描</h3><p>Nessus 漏洞扫描器是世界上使用最广泛的漏洞扫描器之一</p>
+<h3 id="4-专用漏洞扫描器"><a href="#4-专用漏洞扫描器" class="headerlink" title="4. 专用漏洞扫描器"></a>4. 专用漏洞扫描器</h3><p><strong>(1) 验证 SMB 登录</strong></p>
+<p><strong>(2) 扫描开放的 VNC 空口令</strong></p>
+<p><strong>(3) 扫描开放的 X11 服务器</strong></p>
+<h3 id="5-自动化攻击"><a href="#5-自动化攻击" class="headerlink" title="5. 自动化攻击"></a>5. 自动化攻击</h3><hr>
+<h2 id="0x05-渗透攻击"><a href="#0x05-渗透攻击" class="headerlink" title="0x05 渗透攻击"></a>0x05 渗透攻击</h2><h3 id="1-渗透攻击基础"><a href="#1-渗透攻击基础" class="headerlink" title="1. 渗透攻击基础"></a>1. 渗透攻击基础</h3><p><strong>(1) msf &gt; show exploits</strong></p>
+<p>显示 Metasploit 框架中所有可用的<strong>渗透攻击模块</strong>，在 MSF终端中，针对渗透测试中发现的安全漏洞来实施相应的渗透攻击</p>
+<p><strong>(2) msf &gt; show auxiliary</strong></p>
+<p>显示所有的<strong>辅助模块</strong>及其用途，可以是扫描器，拒绝服务攻击工具，Fuzz测试器，以及其他类型工具</p>
+<p><strong>(3) msf &gt; show options</strong></p>
+<p>列出模块所需的各种参数，未选择模块时，显示所有的全局参数</p>
+<p><strong>back 命令：</strong>返回 Metasploit 的上一个状态 </p>
+<p><strong>search 命令：</strong>查找某个特定的渗透攻击，辅助或者攻击在和模块</p>
+<p><strong>use 命令：</strong>加载模块，此时终端中输入的命令在此攻击模块环境中运行</p>
+<p><strong>show options：</strong>在已选择模块的命令下，显示模块所需的参数</p>
+<p><strong>(4) msf &gt; show payloads</strong></p>
+<p>将与当前模块兼容的攻击载荷显示出来</p>
+<p><strong>serach 模块 —&gt; use 模块 —&gt; show payloads —&gt; set payload 攻击载荷 —&gt; show options —&gt; payload 利用</strong></p>
+<p><strong>(5) msf &gt; show targets</strong></p>
+<p>渗透攻击模块可列出受到漏洞影响目标系统的类型</p>
+<p><strong>use exploit —&gt; show targets</strong></p>
+<p><strong>(6) info</strong></p>
+<p><strong>exploit &gt; info / info exploit：</strong>显示模块的详细信息，参数说明以及所有可用的目标操作系统</p>
+<p><strong>(7) set 和 unset</strong></p>
+<p>参数状态：设置(<strong>set</strong>)或未设置(<strong>unset</strong>)，有些参数被标记为必填项(required)，使用时需经过手工设置并处于启用状态</p>
+<p><strong>set</strong> 命令：对某个参数进行设置(同时启用该参数)；<strong>unset</strong> 命令：禁用相关参数</p>
+<p><strong>(8) setg 和 unsetg</strong></p>
+<p>对全局参数进行设置或清楚，对常用且很少改变的参数设置方便</p>
+<p><strong>(9) save</strong></p>
+<p>使用setg命令对全局参数进行设置胡，可使用save命令将当前设置值保存下来，下次启用依然使用</p>
+<p>设置值保存在<code>/root/.msf4/config</code>，将此文件删除或移动，可恢复原始设置</p>
+
       
     </div>
     
@@ -802,7 +838,7 @@ msf auxiliary(scanner/snmp/snmp_login) &gt; run
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Metasploit基础"><span class="nav-number">1.</span> <span class="nav-text">0x01 Metasploit基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-专业术语"><span class="nav-number">1.1.</span> <span class="nav-text">1. 专业术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户接口"><span class="nav-number">1.2.</span> <span class="nav-text">2. 用户接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-功能程序"><span class="nav-number">1.3.</span> <span class="nav-text">3. 功能程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-情报收集"><span class="nav-number">2.</span> <span class="nav-text">0x02 情报收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-被动信息收集"><span class="nav-number">2.1.</span> <span class="nav-text">1. 被动信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主动信息收集"><span class="nav-number">2.2.</span> <span class="nav-text">2. 主动信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-针对性扫描"><span class="nav-number">2.3.</span> <span class="nav-text">3. 针对性扫描</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Metasploit基础"><span class="nav-number">1.</span> <span class="nav-text">0x01 Metasploit基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-专业术语"><span class="nav-number">1.1.</span> <span class="nav-text">1. 专业术语</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户接口"><span class="nav-number">1.2.</span> <span class="nav-text">2. 用户接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-功能程序"><span class="nav-number">1.3.</span> <span class="nav-text">3. 功能程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-情报收集"><span class="nav-number">2.</span> <span class="nav-text">0x02 情报收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-被动信息收集"><span class="nav-number">2.1.</span> <span class="nav-text">1. 被动信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-主动信息收集"><span class="nav-number">2.2.</span> <span class="nav-text">2. 主动信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-针对性扫描"><span class="nav-number">2.3.</span> <span class="nav-text">3. 针对性扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-漏洞扫描"><span class="nav-number">3.</span> <span class="nav-text">0x04 漏洞扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本漏洞扫描"><span class="nav-number">3.1.</span> <span class="nav-text">1. 基本漏洞扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-使用-NeXpose-进行扫描"><span class="nav-number">3.2.</span> <span class="nav-text">2. 使用 NeXpose 进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用-Nessus-进行扫描"><span class="nav-number">3.3.</span> <span class="nav-text">3. 使用 Nessus 进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-专用漏洞扫描器"><span class="nav-number">3.4.</span> <span class="nav-text">4. 专用漏洞扫描器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-自动化攻击"><span class="nav-number">3.5.</span> <span class="nav-text">5. 自动化攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-渗透攻击"><span class="nav-number">4.</span> <span class="nav-text">0x05 渗透攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-渗透攻击基础"><span class="nav-number">4.1.</span> <span class="nav-text">1. 渗透攻击基础</span></a></li></ol></li></ol></div>
             
 
           </div>
