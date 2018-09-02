@@ -89,18 +89,18 @@
 
 
 
-<meta name="description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技=技术">
+<meta name="description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
 <meta name="keywords" content="SecTools,Nmap,NSE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nmap技术详解">
 <meta property="og:url" content="http://yoursite.com/2018/09/02/Nmap技术详解/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技=技术">
+<meta property="og:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-02T07:06:54.832Z">
+<meta property="og:updated_time" content="2018-09-02T07:54:16.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nmap技术详解">
-<meta name="twitter:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技=技术">
+<meta name="twitter:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
 
 
 
@@ -426,10 +426,36 @@
 
       
         <blockquote>
-<p>本文参考<a href="http://www.tup.tsinghua.edu.cn/bookscenter/book_07230301.html" target="_blank" rel="noopener">诸神之眼</a>，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技=技术</p>
+<p>本文参考<a href="http://www.tup.tsinghua.edu.cn/bookscenter/book_07230301.html" target="_blank" rel="noopener">诸神之眼</a>，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术</p>
 </blockquote>
 <a id="more"></a>
 <hr>
+<h2 id="0x01-Nmap-扫描范围"><a href="#0x01-Nmap-扫描范围" class="headerlink" title="0x01 Nmap 扫描范围"></a>0x01 Nmap 扫描范围</h2><h3 id="1-对连续范围内主机进行扫描"><a href="#1-对连续范围内主机进行扫描" class="headerlink" title="1. 对连续范围内主机进行扫描"></a>1. 对连续范围内主机进行扫描</h3><p><em>命令语法：Nmap [IP地址范围]</em></p>
+<p>扫描范围为192.168.0.1~192.168.0.255 的主机</p>
+<pre><code>Nmap -sn 192.168.0.1-255
+</code></pre><h3 id="2-对整个子网进行扫描"><a href="#2-对整个子网进行扫描" class="headerlink" title="2. 对整个子网进行扫描"></a>2. 对整个子网进行扫描</h3><p>Nmap 使用 <strong>CIDR</strong> (Classless Inter-Domain Routing，无类别域间路由)方式扫描整个子网</p>
+<p><em>命令语法：Nmap [IP地址/掩码位数]</em></p>
+<p>扫描范围为192.168.0.1~192.168.0.255子网范围内的主机</p>
+<pre><code>Nmap -sn 192.168.0.1/24
+</code></pre><h3 id="3-对多个不连续的主机进行扫描"><a href="#3-对多个不连续的主机进行扫描" class="headerlink" title="3. 对多个不连续的主机进行扫描"></a>3. 对多个不连续的主机进行扫描</h3><p>将目标地址用空格分隔开来同时扫描选定主机</p>
+<p><em>语法命令：Nmap [扫描目标1 扫描目标2 … 扫描目标n]</em></p>
+<p>对192.168.0.1，192.168.2.1，192.168.128.1进行扫描</p>
+<pre><code>Nmap -sn 192.168.0.1 192.168.2.1 192.168.128.1
+</code></pre><h3 id="4-排除指定目标扫描主机"><a href="#4-排除指定目标扫描主机" class="headerlink" title="4. 排除指定目标扫描主机"></a>4. 排除指定目标扫描主机</h3><p><em>命令语法：Nmap [目标] –exclude [目标]</em></p>
+<p>扫描192.168.0.0/24 子网时，不对192.168.0.2进行扫描</p>
+<pre><code>Nmap -sn 192.168.0.0/24 --exclude 192.168.0.2
+</code></pre><h3 id="5-对文本文件中的地址进行扫描"><a href="#5-对文本文件中的地址进行扫描" class="headerlink" title="5. 对文本文件中的地址进行扫描"></a>5. 对文本文件中的地址进行扫描</h3><p><em>命令语法：Nmap -iL [文本文件]</em></p>
+<p>使用命令对 list.txt 中的地址进行扫描</p>
+<pre><code>Nmap -sn -iL list.txt
+</code></pre><p><em>-sn 选项：快速扫描，仅确定目标是否是存活主机</em></p>
+<h3 id="6-随机确定扫描目标"><a href="#6-随机确定扫描目标" class="headerlink" title="6. 随机确定扫描目标"></a>6. 随机确定扫描目标</h3><p><em>命令语法：Nmap -iR [目标数量]</em></p>
+<p>随机在互联网上对80个IP地址进行扫描</p>
+<pre><code>Nmap -sn -iR 80
+</code></pre><hr>
+<h2 id="0x02-活跃主机发现"><a href="#0x02-活跃主机发现" class="headerlink" title="0x02 活跃主机发现"></a>0x02 活跃主机发现</h2><h3 id="1-基于APR协议"><a href="#1-基于APR协议" class="headerlink" title="1. 基于APR协议"></a>1. 基于APR协议</h3><p><strong>(1) 原理</strong></p>
+<p>若想知道处在<strong>同一网段</strong>中IP地址为#.#.#.#的主机是否为活跃主机，先构造一个ARP请求数据包，并广播出去，如果得到回应，则说明该主机为活跃主机</p>
+<p><strong>(2) Nmap 选项</strong></p>
+<p><em>命令语法：Nmap -PR [目标]</em></p>
 
       
     </div>
@@ -527,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -617,6 +652,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Nmap-扫描范围"><span class="nav-number">1.</span> <span class="nav-text">0x01 Nmap 扫描范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对连续范围内主机进行扫描"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对连续范围内主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对整个子网进行扫描"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对整个子网进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对多个不连续的主机进行扫描"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对多个不连续的主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排除指定目标扫描主机"><span class="nav-number">1.4.</span> <span class="nav-text">4. 排除指定目标扫描主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对文本文件中的地址进行扫描"><span class="nav-number">1.5.</span> <span class="nav-text">5. 对文本文件中的地址进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-随机确定扫描目标"><span class="nav-number">1.6.</span> <span class="nav-text">6. 随机确定扫描目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-活跃主机发现"><span class="nav-number">2.</span> <span class="nav-text">0x02 活跃主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基于APR协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基于APR协议</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
