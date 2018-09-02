@@ -89,18 +89,18 @@
 
 
 
-<meta name="description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
+<meta name="description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以本文是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 <meta name="keywords" content="SecTools,Nmap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="扫描-Nmap">
+<meta property="og:title" content="Nmap 参考指南">
 <meta property="og:url" content="http://yoursite.com/2018/07/10/扫描-Nmap/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
+<meta property="og:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以本文是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-18T03:55:53.320Z">
+<meta property="og:updated_time" content="2018-09-02T06:48:37.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="扫描-Nmap">
-<meta name="twitter:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
+<meta name="twitter:title" content="Nmap 参考指南">
+<meta name="twitter:description" content="Nmap（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以本文是关于Nmap扫描原理及基本用法的分析与总结（参考自Nmap参考指南，kali 平台下键入man nmap亦可阅览）">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title>扫描-Nmap | Firehacker</title>
+  <title>Nmap 参考指南 | Firehacker</title>
   
 
 
@@ -332,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">扫描-Nmap</h2>
+          <h2 class="post-title" itemprop="name headline">Nmap 参考指南</h2>
         
 
         <div class="post-meta">
@@ -426,7 +426,7 @@
 
       
         <blockquote>
-<p><a href="https://nmap.org/" title="Nmap" target="_blank" rel="noopener">Nmap</a>（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以下是关于Nmap扫描原理及基本用法的分析与总结（参考自<a href="https://nmap.org/man/zh/index.html" title="Nmap参考指南" target="_blank" rel="noopener">Nmap参考指南</a>，kali 平台下键入<code>man nmap</code>亦可阅览）<br><a id="more"></a></p>
+<p><a href="https://nmap.org/" title="Nmap" target="_blank" rel="noopener">Nmap</a>（网络映射器）是一款用于网络发现和安全审计的开源扫描工具，集主机发现，端口扫描，版本探测等诸多功能于一身，是信息收集不可或缺的扫描神器，以本文是关于Nmap扫描原理及基本用法的分析与总结（参考自<a href="https://nmap.org/man/zh/index.html" title="Nmap参考指南" target="_blank" rel="noopener">Nmap参考指南</a>，kali 平台下键入<code>man nmap</code>亦可阅览）<br><a id="more"></a></p>
 </blockquote>
 <hr>
 <h2 id="0x01-选项概要"><a href="#0x01-选项概要" class="headerlink" title="0x01 选项概要"></a>0x01 选项概要</h2><h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ul>
