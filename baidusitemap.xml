@@ -4,6 +4,33 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/09/03/NSE%E8%84%9A%E6%9C%AC%E6%B5%85%E6%9E%90/</loc>
+    <lastmod>2018-09-03T14:46:10.250Z</lastmod>
+    <data>
+        <display>
+        <title>NSE脚本浅析</title>
+        <pubTime>2018-09-03T13:32:04.000Z</pubTime>
+        
+        <tag>SecTools</tag>
+         
+        <tag>Nmap</tag>
+         
+        <tag>NSE</tag>
+         
+         
+           
+             
+              <breadCrumb title="0x02 安全技术" url="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+          
+             
+              <breadCrumb title="安全工具" url="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2018/08/29/Metasploit%E6%B8%97%E9%80%8F%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2018-09-03T13:28:29.347Z</lastmod>
     <data>

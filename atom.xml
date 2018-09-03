@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-03T13:23:27.020Z</updated>
+  <updated>2018-09-03T14:46:10.250Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>NSE脚本浅析</title>
+    <link href="http://yoursite.com/2018/09/03/NSE%E8%84%9A%E6%9C%AC%E6%B5%85%E6%9E%90/"/>
+    <id>http://yoursite.com/2018/09/03/NSE脚本浅析/</id>
+    <published>2018-09-03T13:32:04.000Z</published>
+    <updated>2018-09-03T14:46:10.250Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://nmap.org/book/nse.html" target="_blank" rel="noopener">NSE</a>(Nmap 脚本引擎)是Nmap最强大最灵活的特性之一，可以用于增强主机发现、端口扫描、版本侦测和操作系统侦测等功能，还可以用来扩展高级的功能如web扫描、漏洞发现和漏洞利用等。本文对NSE技术及Lua语言进行分析与总结</p></blockquote><a id="more"></a><hr><h2 id="0x01-NSE-基础"><a href="#0x01-NSE-基础" class="headerlink" title="0x01 NSE 基础"></a>0x01 NSE 基础</h2><h3 id="1-NSE-脚本运行"><a href="#1-NSE-脚本运行" class="headerlink" title="1. NSE 脚本运行"></a>1. NSE 脚本运行</h3><pre><code>Namp -sV -sC scanme.Nmap.org</code></pre><p>-sV：对目标系统上的服务进行检测</p><p>-sC：使用默认(default)分类中所有脚本对目标进行检测</p><p><strong>Default 分类中的脚本</strong></p><table><thead><tr><th>脚本</th><th>描述</th></tr></thead><tbody><tr><td>banner.NSE</td><td>收集目标banner信息，会连接到目标开放TCP端口，输出任何5s内收到的数据</td></tr><tr><td>broadcast-ping.NSE</td><td>使用广播ping来发现网络中的主机</td></tr><tr><td>dns-recursion.NSE</td><td>检测一个DNS服务器是否允许第三方的查询，允许此查询可导致服务器受到DNS放大攻击</td></tr><tr><td>upnp-info.NSE</td><td>尝试通过UPnP服务来提取系统信息</td></tr><tr><td>Firewalk.NSE</td><td>使用IP协议中的TTL过期机制来发现防火墙设备</td></tr></tbody></table><h3 id="2-NSE-脚本分类"><a href="#2-NSE-脚本分类" class="headerlink" title="2. NSE 脚本分类"></a>2. NSE 脚本分类</h3><table><thead><tr><th>分类</th><th>描述</th></tr></thead><tbody><tr><td>auth</td><td>负责处理鉴权证书的脚本</td></tr><tr><td>broadcast</td><td>在局域网内探查更多服务开启状况，如CHCP,DNS，SQL Server等服务</td></tr><tr><td>brute</td><td>暴力破解密码脚本</td></tr><tr><td>default</td><td>使用-sC或-A参数扫描时默认脚本，提供基本脚本扫描能力</td></tr><tr><td>discovery</td><td>网络信息收集脚本，如SMB枚举，SNMP查询</td></tr><tr><td>dos</td><td>用于发起拒绝服务攻击</td></tr><tr><td>exploit</td><td>用来完成对目标系统安全漏洞渗透</td></tr><tr><td>external</td><td>针对第三方服务的脚本</td></tr><tr><td>fuzzer</td><td>进行模糊测试的脚本，发送异常包到目标机，探测出潜在漏洞</td></tr><tr><td>instrusive</td><td>可能引起目标系统崩溃或对目标网络造成极大负担的脚本</td></tr><tr><td>malware</td><td>用于检测恶意软件</td></tr><tr><td>safe</td><td>任何情况下安全无害的脚本</td></tr><tr><td>version</td><td>负责增强服务和版本扫描</td></tr><tr><td>vuln</td><td>检查目标主机是否有常见漏洞</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://nmap.org/book/nse.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;NSE&lt;/a&gt;(Nmap 脚本引擎)是Nmap最强大最灵活的特性之一，可以用于增强主机发现、端口扫描、版本侦测和操作系统侦测等功能，还可以用来扩展高级的功能如web扫描、漏洞发现和漏洞利用等。本文对NSE技术及Lua语言进行分析与总结&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="安全工具" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E5%AE%89%E5%85%A8%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="SecTools" scheme="http://yoursite.com/tags/SecTools/"/>
+    
+      <category term="Nmap" scheme="http://yoursite.com/tags/Nmap/"/>
+    
+      <category term="NSE" scheme="http://yoursite.com/tags/NSE/"/>
+    
+  </entry>
   
   <entry>
     <title>Nmap基础详解</title>
@@ -509,29 +539,6 @@
     
     
       <category term="WebSecurity" scheme="http://yoursite.com/tags/WebSecurity/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hexo基本用法</title>
-    <link href="http://yoursite.com/2018/06/11/hexo/"/>
-    <id>http://yoursite.com/2018/06/11/hexo/</id>
-    <published>2018-06-11T13:48:48.309Z</published>
-    <updated>2018-08-24T03:24:23.344Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>一些Hexo<a href="https://hexo.io/" target="_blank" rel="noopener">基本用法</a>及<a href="http://shenzekun.cn/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B.html" title="个性化设置" target="_blank" rel="noopener">个性化设置</a>，详情参见<a href="https://hexo.io/docs/index.html" title="hexo" target="_blank" rel="noopener">Document</a>!如果在使用Hexo遇到问题可以访问 <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a>  或者在 <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>寻找答案<br><a id="more"></a></p></blockquote><h2 id="0x01-快速开始"><a href="#0x01-快速开始" class="headerlink" title="0x01 快速开始"></a>0x01 快速开始</h2><h3 id="创建一个新帖子"><a href="#创建一个新帖子" class="headerlink" title="创建一个新帖子"></a>创建一个新帖子</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo n <span class="string">"New Post"</span> =&gt; hexo new <span class="string">"New Post"</span></span><br></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="清除缓存"><a href="#清除缓存" class="headerlink" title="清除缓存"></a>清除缓存</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br></pre></td></tr></table></figure><h3 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s =&gt; hexo server</span><br></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g =&gt; hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="部署到远程站点"><a href="#部署到远程站点" class="headerlink" title="部署到远程站点"></a>部署到远程站点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d =&gt; hexo deploy</span><br></pre></td></tr></table></figure><p>更多信息: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p><h2 id="0x02-分类与标签"><a href="#0x02-分类与标签" class="headerlink" title="0x02 分类与标签"></a>0x02 分类与标签</h2><h3 id="创建分类"><a href="#创建分类" class="headerlink" title="创建分类"></a>创建分类</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new<span class="built_in"> page </span>categories</span><br></pre></td></tr></table></figure><h3 id="添加type至index-md"><a href="#添加type至index-md" class="headerlink" title="添加type至index.md"></a>添加type至index.md</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span></span>: <span class="string">"categories"</span></span><br></pre></td></tr></table></figure><h3 id="添加文章至分类"><a href="#添加文章至分类" class="headerlink" title="添加文章至分类"></a>添加文章至分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">categories：- 分类名</span><br></pre></td></tr></table></figure><h3 id="创建标签"><a href="#创建标签" class="headerlink" title="创建标签"></a>创建标签</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new<span class="built_in"> page </span>tags</span><br></pre></td></tr></table></figure><h3 id="添加type至index-md-1"><a href="#添加type至index-md-1" class="headerlink" title="添加type至index.md"></a>添加type至index.md</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span></span>:<span class="string">"tags"</span></span><br></pre></td></tr></table></figure><h3 id="给文章添加”tags”属性"><a href="#给文章添加”tags”属性" class="headerlink" title="给文章添加”tags”属性"></a>给文章添加”tags”属性</h3><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">tags:</span>- 标签名</span><br></pre></td></tr></table></figure><h2 id="0x03-摘要与统计"><a href="#0x03-摘要与统计" class="headerlink" title="0x03 摘要与统计"></a>0x03 摘要与统计</h2><h3 id="显示文章摘要"><a href="#显示文章摘要" class="headerlink" title="显示文章摘要"></a>显示文章摘要</h3><p><img src="http://pbcifaykn.bkt.clouddn.com/%E6%91%98%E8%A6%81.png" alt="摘要"></p><h3 id="隐藏底部信息"><a href="#隐藏底部信息" class="headerlink" title="隐藏底部信息"></a>隐藏底部信息</h3><ul><li>打开themes/next/layout/_partials/footer.swig,隐藏指定代码（!– code –）</li></ul><p><img src="http://pbcifaykn.bkt.clouddn.com/%E9%9A%90%E8%97%8F2.png" alt="隐藏"></p><h3 id="访问量统计"><a href="#访问量统计" class="headerlink" title="访问量统计"></a>访问量统计</h3><ul><li>打开\themes\next\layout_partials\footer.swig文件，添加指定代码<br><img src="http://pbcifaykn.bkt.clouddn.com/%E7%BB%9F%E8%AE%A1.png" alt="统计"></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;一些Hexo&lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;基本用法&lt;/a&gt;及&lt;a href=&quot;http://shenzekun.cn/hexo%E7%9A%84next%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E9%85%8D%E7%BD%AE%E6%95%99%E7%A8%8B.html&quot; title=&quot;个性化设置&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;个性化设置&lt;/a&gt;，详情参见&lt;a href=&quot;https://hexo.io/docs/index.html&quot; title=&quot;hexo&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Document&lt;/a&gt;!如果在使用Hexo遇到问题可以访问 &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt;  或者在 &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;寻找答案&lt;br&gt;
-    
-    </summary>
-    
-      <category term="0x04 拓展梳理" scheme="http://yoursite.com/categories/0x04-%E6%8B%93%E5%B1%95%E6%A2%B3%E7%90%86/"/>
-    
-      <category term="个人博客" scheme="http://yoursite.com/categories/0x04-%E6%8B%93%E5%B1%95%E6%A2%B3%E7%90%86/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
-    
     
   </entry>
   
