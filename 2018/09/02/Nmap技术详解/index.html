@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="SecTools,Nmap,NSE," />
+  <meta name="keywords" content="SecTools,Nmap," />
 
 
 
@@ -89,18 +89,18 @@
 
 
 
-<meta name="description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
-<meta name="keywords" content="SecTools,Nmap,NSE">
+<meta name="description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，远程操作系统和服务检测等技术">
+<meta name="keywords" content="SecTools,Nmap">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nmap技术详解">
+<meta property="og:title" content="Nmap基础详解">
 <meta property="og:url" content="http://yoursite.com/2018/09/02/Nmap技术详解/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
+<meta property="og:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，远程操作系统和服务检测等技术">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T02:09:54.390Z">
+<meta property="og:updated_time" content="2018-09-03T13:23:27.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nmap技术详解">
-<meta name="twitter:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
+<meta name="twitter:title" content="Nmap基础详解">
+<meta name="twitter:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，远程操作系统和服务检测等技术">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title>Nmap技术详解 | Firehacker</title>
+  <title>Nmap基础详解 | Firehacker</title>
   
 
 
@@ -332,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Nmap技术详解</h2>
+          <h2 class="post-title" itemprop="name headline">Nmap基础详解</h2>
         
 
         <div class="post-meta">
@@ -426,7 +426,7 @@
 
       
         <blockquote>
-<p>本文参考<a href="http://www.tup.tsinghua.edu.cn/bookscenter/book_07230301.html" target="_blank" rel="noopener">诸神之眼</a>，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术</p>
+<p>本文参考<a href="http://www.tup.tsinghua.edu.cn/bookscenter/book_07230301.html" target="_blank" rel="noopener">诸神之眼</a>，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，远程操作系统和服务检测等技术</p>
 </blockquote>
 <a id="more"></a>
 <hr>
@@ -521,6 +521,104 @@
 <p><em>命令语法：Nmap -R [目标IP]</em></p>
 <p>取消域名转换，适用于大规模网络扫描</p>
 <p><em>命令语法：Nmap -n [目标IP]</em></p>
+<hr>
+<h2 id="0x03-端口扫描技术"><a href="#0x03-端口扫描技术" class="headerlink" title="0x03 端口扫描技术"></a>0x03 端口扫描技术</h2><h3 id="1-SYN-扫描"><a href="#1-SYN-扫描" class="headerlink" title="1. SYN 扫描"></a>1. SYN 扫描</h3><p>Nmap 默认扫描方式，扫描速度快，不易被网络安全设备发现</p>
+<pre><code>1. Nmap想目标主机的一个端口发送请求连接的SYN数据包
+
+2. 目标计算机在接收这个SYN数据包之后会以SYN/ACK进行应答
+
+3. Nmap在收到SYN/ACK后发送RST包请求断开连接而不是ACK应答
+</code></pre><p>三四握手没有完成，无法建立正常的TCP连接，扫描不会被记录到系统日志中</p>
+<p><em>扫描语法：nmap -sS [target]</em></p>
+<h3 id="2-Connect扫描"><a href="#2-Connect扫描" class="headerlink" title="2. Connect扫描"></a>2. Connect扫描</h3><p><em>语法：nmap -sT [target]</em></p>
+<p>这种扫描方式完成了TCP三次握手，无需rooy/administrator 权限</p>
+<h3 id="3-UDP-扫描"><a href="#3-UDP-扫描" class="headerlink" title="3. UDP 扫描"></a>3. UDP 扫描</h3><p><em>语法：nmap -sU [target]</em></p>
+<p>UDP 扫描速度较慢，UDP程序不会对Nmap所发送的空数据包做出回应</p>
+<h3 id="4-TCP-FIN-扫描"><a href="#4-TCP-FIN-扫描" class="headerlink" title="4. TCP FIN 扫描"></a>4. TCP FIN 扫描</h3><p><em>语法：nmap -sF [target]</em></p>
+<p>TCP FIN 扫描方法向目标端口发送一个FIN数据包，对于关闭的端口，目标系统返回RST标志</p>
+<h3 id="5-NULL-扫描"><a href="#5-NULL-扫描" class="headerlink" title="5. NULL 扫描"></a>5. NULL 扫描</h3><p><em>语法：nmap -sN [target]</em></p>
+<p>TCP NULL 扫描方法向目标端口发送一个不包含任何标志的数据包，对于关闭的端口，目标系统返回RST标志</p>
+<h3 id="6-Xmas-Tree-扫描"><a href="#6-Xmas-Tree-扫描" class="headerlink" title="6. Xmas Tree 扫描"></a>6. Xmas Tree 扫描</h3><p><em>语法：nmap -sX [target]</em></p>
+<p>TCP Xmas Tree 扫描方法是向目标端口发送一个含有FIN,URG,PUSH 标志的数据包，对于关闭的端口，目标系统返回RST标志</p>
+<h3 id="7-idle-扫描"><a href="#7-idle-扫描" class="headerlink" title="7. idle 扫描"></a>7. idle 扫描</h3><p>伪造一个源地址为第三方的数据包，可以帮助使用者隐藏自己的身份，目标主机日志中记录下来的是第三方地址</p>
+<p>可以绕开网络中的一些安全机制，如路由器中的访问控制列表(ACL)</p>
+<p><strong>扫描原理</strong></p>
+<pre><code>1. 检测第三方的IP ID 值并记录下来
+
+2. 在本机上伪造一个源地址为第三方主机的数据包，将其发送给目标主机端口，根据端口状态的不同，目标主机可能会导致第三方主机IP ID值增加
+
+3. 再回来检查第三方主机的IP ID值，比较两次值
+</code></pre><p>如果第三方IP ID值增加了1，说明在此期间没有向外发送数据包，则目标主机端口关闭；如果增加了2，说明再次期间第三方主机向外发送了数据包，则目标主机端口开放</p>
+<pre><code>Nmap -Pn -p- -sI A B
+</code></pre><p>使用sI参数指定A作为第三方主机，然后对B进行扫描</p>
+<h3 id="8-指定扫描端口"><a href="#8-指定扫描端口" class="headerlink" title="8. 指定扫描端口"></a>8. 指定扫描端口</h3><pre><code>1. 扫描常见的100个端口
+
+    nmap -F [target]
+
+2. 指定某一个端口
+
+    nmap -p [port] [target]
+
+3. 使用名字来指定扫描端口
+
+    nmap -p [port name(s)] [target]
+
+4. 使用协议指定扫描端口
+
+    nmap -p U:[UDP ports]，T:[TCP ports] [target]
+
+5. 扫描所有端口
+
+    nmap -p * [target]
+
+6. 扫描常用端口
+
+    nmap --top-ports [number] [target]
+</code></pre><hr>
+<h2 id="0x04-系统与服务检测"><a href="#0x04-系统与服务检测" class="headerlink" title="0x04 系统与服务检测"></a>0x04 系统与服务检测</h2><h3 id="1-操作系统判断"><a href="#1-操作系统判断" class="headerlink" title="1. 操作系统判断"></a>1. 操作系统判断</h3><p>通过向目标发送探针，然后根据目标的回应来猜测系统，进行识别的探针和响应对应的关系保存在Nmap-os-db文件中</p>
+<p><em>nmap -O [target]</em></p>
+<p>猜测最接近目标的匹配操作系统类型</p>
+<pre><code>nmap -sV -F --fuzzy --oscan-guess 目标IP
+</code></pre><h3 id="2-服务及版本发现"><a href="#2-服务及版本发现" class="headerlink" title="2. 服务及版本发现"></a>2. 服务及版本发现</h3><p>版本检测程序会将探测结果与<code>Nmap-service-probes</code>数据库中的内容进行比较，如果匹配成功，就可以确认目标端口运行的具体服务</p>
+<pre><code>-sV(版本探测)
+
+--allports(不为版本探测排除任何端口)
+
+--version-intensity &lt;intensity&gt; (设置版本扫描强度)
+
+--version-light(打开轻量级模式，扫描速度加快)
+
+--version-all(尝试每个探测)
+
+--version-trace(跟踪版本扫描活动)
+
+-sR(RPC扫描)
+</code></pre><hr>
+<h2 id="0x05-高级技术及防御"><a href="#0x05-高级技术及防御" class="headerlink" title="0x05 高级技术及防御"></a>0x05 高级技术及防御</h2><h3 id="1-Nmap-伪装技术"><a href="#1-Nmap-伪装技术" class="headerlink" title="1. Nmap 伪装技术"></a>1. Nmap 伪装技术</h3><p><strong>(1) Nmap -f 目标</strong></p>
+<p>对 Nmap 发送的探测数据包进行<strong>分段</strong>(数据包含有 <code>Fragmentedd IP protocol</code>标识)，使目标网络防御机制例如包过滤，防火墙等在对数据包进行检测时更加困难</p>
+<p><strong>(2) -mtu (使用制定的MTU)</strong></p>
+<pre><code>Nmap --mtu 目标
+</code></pre><p><strong>(3) -D (decoy1[,decoy2][,ME],…)</strong></p>
+<p>使用诱饵主机隐蔽扫描，逗号分隔每个诱饵IP地址，自己的IP地址可以用ME选项</p>
+<p><strong>(4) –source-port (portnumber)；-g (portnumber) </strong></p>
+<p>源端口欺骗，Nmap可以利用被目标检测机制遗忘的端口发送数据</p>
+<p><strong>(5) –data-length [number]</strong></p>
+<p>发送报文时附加随机数据，避免内容为空的报文被目标网络检测机制发现</p>
+<p><strong>(6) –ttl [value]</strong></p>
+<p>设置IP time-to-live域，指定特定的ttl</p>
+<p><strong>(7) –spoof-mac [mac address，prefix，or vendor name]</strong></p>
+<p>人为指定Nmap在扫描时发送以太网帧的MAC地址</p>
+<h3 id="2-系统扫描防范"><a href="#2-系统扫描防范" class="headerlink" title="2. 系统扫描防范"></a>2. 系统扫描防范</h3><p>补丁，安装更新，防火墙，蜜罐技术等网络安全防护</p>
+<p><strong>(1) Morph</strong></p>
+<p>可将操作系统模拟为其他类型的操作系统，改变原来操作系统对TCP,UDP,ICMP数据包的响应</p>
+<p><strong>(2) IP Personality</strong></p>
+<p>利用iptables来处理TCP和UDP的请求，隐藏操作系统</p>
+<h3 id="3-格式化输出"><a href="#3-格式化输出" class="headerlink" title="3. 格式化输出"></a>3. 格式化输出</h3><p><strong>(1) 文本文件</strong></p>
+<p><em>语法：nmap -oN [#.txt] [target]</em></p>
+<p><strong>(2) xml 格式</strong></p>
+<p><em>语法：nmap -oX [#.xml] [target]</em></p>
+<p><strong>(3) grep 文件</strong></p>
+<p><em>语法：nmap -oX [#.grep] [target]</em></p>
 
       
     </div>
@@ -541,8 +639,6 @@
             <a href="/tags/SecTools/" rel="tag"><i class="fa fa-tag"></i> SecTools</a>
           
             <a href="/tags/Nmap/" rel="tag"><i class="fa fa-tag"></i> Nmap</a>
-          
-            <a href="/tags/NSE/" rel="tag"><i class="fa fa-tag"></i> NSE</a>
           
         </div>
       
@@ -665,7 +761,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -727,7 +823,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Nmap-扫描范围"><span class="nav-number">1.</span> <span class="nav-text">0x01 Nmap 扫描范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对连续范围内主机进行扫描"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对连续范围内主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对整个子网进行扫描"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对整个子网进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对多个不连续的主机进行扫描"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对多个不连续的主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排除指定目标扫描主机"><span class="nav-number">1.4.</span> <span class="nav-text">4. 排除指定目标扫描主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对文本文件中的地址进行扫描"><span class="nav-number">1.5.</span> <span class="nav-text">5. 对文本文件中的地址进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-随机确定扫描目标"><span class="nav-number">1.6.</span> <span class="nav-text">6. 随机确定扫描目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-活跃主机发现"><span class="nav-number">2.</span> <span class="nav-text">0x02 活跃主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基于APR协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基于APR协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基于ICMP协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 基于ICMP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基于TCP协议"><span class="nav-number">2.3.</span> <span class="nav-text">3. 基于TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-基于UDP协议"><span class="nav-number">2.4.</span> <span class="nav-text">4. 基于UDP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-基于SCTP协议"><span class="nav-number">2.5.</span> <span class="nav-text">5. 基于SCTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-基于IP协议"><span class="nav-number">2.6.</span> <span class="nav-text">6. 基于IP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-基于DNS协议"><span class="nav-number">2.7.</span> <span class="nav-text">7. 基于DNS协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Nmap-扫描范围"><span class="nav-number">1.</span> <span class="nav-text">0x01 Nmap 扫描范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对连续范围内主机进行扫描"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对连续范围内主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对整个子网进行扫描"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对整个子网进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对多个不连续的主机进行扫描"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对多个不连续的主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排除指定目标扫描主机"><span class="nav-number">1.4.</span> <span class="nav-text">4. 排除指定目标扫描主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对文本文件中的地址进行扫描"><span class="nav-number">1.5.</span> <span class="nav-text">5. 对文本文件中的地址进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-随机确定扫描目标"><span class="nav-number">1.6.</span> <span class="nav-text">6. 随机确定扫描目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-活跃主机发现"><span class="nav-number">2.</span> <span class="nav-text">0x02 活跃主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基于APR协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基于APR协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基于ICMP协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 基于ICMP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基于TCP协议"><span class="nav-number">2.3.</span> <span class="nav-text">3. 基于TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-基于UDP协议"><span class="nav-number">2.4.</span> <span class="nav-text">4. 基于UDP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-基于SCTP协议"><span class="nav-number">2.5.</span> <span class="nav-text">5. 基于SCTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-基于IP协议"><span class="nav-number">2.6.</span> <span class="nav-text">6. 基于IP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-基于DNS协议"><span class="nav-number">2.7.</span> <span class="nav-text">7. 基于DNS协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-端口扫描技术"><span class="nav-number">3.</span> <span class="nav-text">0x03 端口扫描技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SYN-扫描"><span class="nav-number">3.1.</span> <span class="nav-text">1. SYN 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Connect扫描"><span class="nav-number">3.2.</span> <span class="nav-text">2. Connect扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-UDP-扫描"><span class="nav-number">3.3.</span> <span class="nav-text">3. UDP 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-TCP-FIN-扫描"><span class="nav-number">3.4.</span> <span class="nav-text">4. TCP FIN 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-NULL-扫描"><span class="nav-number">3.5.</span> <span class="nav-text">5. NULL 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Xmas-Tree-扫描"><span class="nav-number">3.6.</span> <span class="nav-text">6. Xmas Tree 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-idle-扫描"><span class="nav-number">3.7.</span> <span class="nav-text">7. idle 扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-指定扫描端口"><span class="nav-number">3.8.</span> <span class="nav-text">8. 指定扫描端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-系统与服务检测"><span class="nav-number">4.</span> <span class="nav-text">0x04 系统与服务检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-操作系统判断"><span class="nav-number">4.1.</span> <span class="nav-text">1. 操作系统判断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-服务及版本发现"><span class="nav-number">4.2.</span> <span class="nav-text">2. 服务及版本发现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-高级技术及防御"><span class="nav-number">5.</span> <span class="nav-text">0x05 高级技术及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Nmap-伪装技术"><span class="nav-number">5.1.</span> <span class="nav-text">1. Nmap 伪装技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-系统扫描防范"><span class="nav-number">5.2.</span> <span class="nav-text">2. 系统扫描防范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-格式化输出"><span class="nav-number">5.3.</span> <span class="nav-text">3. 格式化输出</span></a></li></ol></li></ol></div>
             
 
           </div>

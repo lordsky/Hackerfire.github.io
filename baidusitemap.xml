@@ -5,17 +5,15 @@
     
   <url>
     <loc>http://yoursite.com/2018/09/02/Nmap%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</loc>
-    <lastmod>2018-09-03T02:09:54.390Z</lastmod>
+    <lastmod>2018-09-03T13:23:27.020Z</lastmod>
     <data>
         <display>
-        <title>Nmap技术详解</title>
+        <title>Nmap基础详解</title>
         <pubTime>2018-09-02T06:55:31.000Z</pubTime>
         
         <tag>SecTools</tag>
          
         <tag>Nmap</tag>
-         
-        <tag>NSE</tag>
          
          
            
