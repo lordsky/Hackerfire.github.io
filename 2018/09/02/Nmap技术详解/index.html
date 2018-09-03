@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-02T14:05:39.016Z">
+<meta property="og:updated_time" content="2018-09-03T02:09:54.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nmap技术详解">
 <meta name="twitter:description" content="本文参考诸神之眼，由浅入深剖析Nmap进行网络安全审计技术，涉及活跃主机发现，端口扫描，Zenmap，NSE脚本开发等技术">
@@ -481,6 +481,46 @@
 <p>C. 通过ICMP地址掩码请求和应答进行主机发现</p>
 <p><em>命令语法：Nmap -PM [目标]</em></p>
 <p>发送的数据包 Type 字段为 <em>Type：17(Address mask request)</em> ，实际中多用于无盘系统</p>
+<h3 id="3-基于TCP协议"><a href="#3-基于TCP协议" class="headerlink" title="3. 基于TCP协议"></a>3. 基于TCP协议</h3><p><strong>(1)TCP协议解析</strong></p>
+<p>TCP 是一种面向连接，可靠的，基于字节流的传输控制协议，使用三次握手协议建立连接。当主动方发出 SYN 连接请求后，等待对方回答TCP的三次握手 SYN+ACK ，并最终对对方的SYN执行ACK确认</p>
+<p><strong>TCP三次握手过程</strong></p>
+<pre><code>1. 客户端发送SYN(SEQ=x)报文给服务端，进入SYN_SEND状态
+
+2. 服务端接收SYN报文，回应一个SYN(SEQ=y) ACK(ACK=x+1) 报文，进入SYN_RECV状态
+
+3. 客户端收到服务器端的SYN报文，回应一个ACK(ACK=y+1)报文，进入Established状态
+</code></pre><p><strong>(2) 主机发现</strong></p>
+<p>A. <strong>TCP SYN扫描</strong></p>
+<p><em>命令语法：Nmap -PS [端口1，端口2，…] [目标]</em></p>
+<p>使用-PS选项想目标主机发送一个设置了SYN标志的数据包，内容部分为空。默认目标端口为80端口</p>
+<p>目标主机收到Nmap发送的SYN数据包之后，认为其要和自己的一个端口建立连接，如果端口开放，目标主机会按照三次握手规定，返回一个SYN/ACK数据包，表示同意连接</p>
+<p>如果端口关闭，目标主机会拒绝此次连接，向Nmap所在主机发送一个RST数据包</p>
+<p>主机发现阶段，只要收到数据包，无论是SYN/ACK数据包还是RST数据包，意味目标主机活跃</p>
+<p>B. <strong>TCP ACK扫描</strong></p>
+<p>Nmap发送的数据包中使用TCP/ACK标志位，不是SYN标志位</p>
+<p><em>命令语法：Nmap -PA [目标]</em></p>
+<h3 id="4-基于UDP协议"><a href="#4-基于UDP协议" class="headerlink" title="4. 基于UDP协议"></a>4. 基于UDP协议</h3><p><strong>(1) UDP 协议解析</strong></p>
+<p>UDP协议面向非连接，端口扫描可靠性不高；当一个UDP端口收到一个UDP数据包时，如果它是<strong>关闭</strong>的，会给源端返回一个<strong>ICMP端口不可达数据包</strong>；如果它是开放的，就会忽略此数据包，将其丢弃不反悔任何信息(可能是传输过程中数据包丢失，扫描时间超过限制)</p>
+<p><strong>(2) 主机发现</strong></p>
+<p><em>命令语法：Nmap -PU [目标]</em></p>
+<p>UDP需要扫描的是目标主机关闭的端口，扫描过程需要避开常用UDP协议端口，选用比较大的端口</p>
+<h3 id="5-基于SCTP协议"><a href="#5-基于SCTP协议" class="headerlink" title="5. 基于SCTP协议"></a>5. 基于SCTP协议</h3><p><strong>(1) SCTP协议解析</strong></p>
+<p>SCTP与TCP同为传输层上的协议，完成任务相同，差别对别如下</p>
+<p>A. TCP协议一般用于单地址连接，SCTP可用于多地址连接</p>
+<p>B. TCP协议基于字节流，支持一个流；SCTP协议基于消息流，可支持多个流</p>
+<p>C. TCP连接的建立通过三次握手实现，SCTP连接建立通过四次握手机制实现，可有效避免攻击</p>
+<p>在STCP中，客户端使用一个<code>INIT</code>报文发起连接，服务器端使用<code>INIT-ACK</code>报文进行应答，其中包括<code>cookie</code>(连接的唯一标识)。然后客户端使用一个<code>COOKIE-ECHO</code>报文进行响应，其中包含服务气短所发送的cookie。服务器端要为这个链接分配资源，并通过向客户端发送一个<code>COOKIE-ACK</code>报文对其进行响应</p>
+<p><strong>(2) 主机发现</strong></p>
+<p><em>命令语法：Nmap -PY [端口1，端口2，…] [目标]</em></p>
+<p>多数目标主机不支持SCTP协议，此方法作为备用手段</p>
+<h3 id="6-基于IP协议"><a href="#6-基于IP协议" class="headerlink" title="6. 基于IP协议"></a>6. 基于IP协议</h3><p>Nmap中允许想目标主机发送IP数据包来检测目标主机是否活跃，可用<code>-PO</code>选项制定协议编号进行扫描，默认为ICMP-1，IGMP-2，IP-in-IP-4，TCP-6，UDP-17，GRE-47，ESP-50</p>
+<p><em>命令语法：Nmap -sP -PO 协议编号 [目标]</em></p>
+<p>此情形数据包内容为空，容易被检测，可使用–data-length参数来发送添加了随机数据的数据包</p>
+<pre><code>Nmap --data-length 25 192.168.0.1
+</code></pre><h3 id="7-基于DNS协议"><a href="#7-基于DNS协议" class="headerlink" title="7. 基于DNS协议"></a>7. 基于DNS协议</h3><p>将所有目标IP(无论是否活跃)对应的域名列出</p>
+<p><em>命令语法：Nmap -R [目标IP]</em></p>
+<p>取消域名转换，适用于大规模网络扫描</p>
+<p><em>命令语法：Nmap -n [目标IP]</em></p>
 
       
     </div>
@@ -687,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Nmap-扫描范围"><span class="nav-number">1.</span> <span class="nav-text">0x01 Nmap 扫描范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对连续范围内主机进行扫描"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对连续范围内主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对整个子网进行扫描"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对整个子网进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对多个不连续的主机进行扫描"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对多个不连续的主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排除指定目标扫描主机"><span class="nav-number">1.4.</span> <span class="nav-text">4. 排除指定目标扫描主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对文本文件中的地址进行扫描"><span class="nav-number">1.5.</span> <span class="nav-text">5. 对文本文件中的地址进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-随机确定扫描目标"><span class="nav-number">1.6.</span> <span class="nav-text">6. 随机确定扫描目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-活跃主机发现"><span class="nav-number">2.</span> <span class="nav-text">0x02 活跃主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基于APR协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基于APR协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基于ICMP协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 基于ICMP协议</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Nmap-扫描范围"><span class="nav-number">1.</span> <span class="nav-text">0x01 Nmap 扫描范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-对连续范围内主机进行扫描"><span class="nav-number">1.1.</span> <span class="nav-text">1. 对连续范围内主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对整个子网进行扫描"><span class="nav-number">1.2.</span> <span class="nav-text">2. 对整个子网进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对多个不连续的主机进行扫描"><span class="nav-number">1.3.</span> <span class="nav-text">3. 对多个不连续的主机进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-排除指定目标扫描主机"><span class="nav-number">1.4.</span> <span class="nav-text">4. 排除指定目标扫描主机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-对文本文件中的地址进行扫描"><span class="nav-number">1.5.</span> <span class="nav-text">5. 对文本文件中的地址进行扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-随机确定扫描目标"><span class="nav-number">1.6.</span> <span class="nav-text">6. 随机确定扫描目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-活跃主机发现"><span class="nav-number">2.</span> <span class="nav-text">0x02 活跃主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基于APR协议"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基于APR协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-基于ICMP协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 基于ICMP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-基于TCP协议"><span class="nav-number">2.3.</span> <span class="nav-text">3. 基于TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-基于UDP协议"><span class="nav-number">2.4.</span> <span class="nav-text">4. 基于UDP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-基于SCTP协议"><span class="nav-number">2.5.</span> <span class="nav-text">5. 基于SCTP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-基于IP协议"><span class="nav-number">2.6.</span> <span class="nav-text">6. 基于IP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-基于DNS协议"><span class="nav-number">2.7.</span> <span class="nav-text">7. 基于DNS协议</span></a></li></ol></li></ol></div>
             
 
           </div>
