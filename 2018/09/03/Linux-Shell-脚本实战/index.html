@@ -89,18 +89,22 @@
 
 
 
-<meta name="description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析">
+<meta name="description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析   0X01 Bash 脚本基础1. 符号标识shell 脚本以 #!起始，通过分号或者换行符分隔，注释部分以#起始，延申至行尾 2. 终端打印(1) echo 命令 echo 每次调用后会添加一个换行符 echo 文本内容  ;前后均被视为命令  echo &amp;quo">
 <meta name="keywords" content="Shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux Shell 脚本实战">
 <meta property="og:url" content="http://yoursite.com/2018/09/03/Linux-Shell-脚本实战/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析">
+<meta property="og:description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析   0X01 Bash 脚本基础1. 符号标识shell 脚本以 #!起始，通过分号或者换行符分隔，注释部分以#起始，延申至行尾 2. 终端打印(1) echo 命令 echo 每次调用后会添加一个换行符 echo 文本内容  ;前后均被视为命令  echo &amp;quo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T15:37:13.428Z">
+<meta property="og:image" content="http://peiv3bs5y.bkt.clouddn.com/%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2.png">
+<meta property="og:image" content="http://peiv3bs5y.bkt.clouddn.com/%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2.png">
+<meta property="og:image" content="http://peiv3bs5y.bkt.clouddn.com/%E7%89%B9%E8%89%B2%E5%8A%9F%E8%83%BD.png">
+<meta property="og:updated_time" content="2018-09-04T10:26:12.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Shell 脚本实战">
-<meta name="twitter:description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析">
+<meta name="twitter:description" content="Shell脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用命令及Shell脚本编程进行总结与分析   0X01 Bash 脚本基础1. 符号标识shell 脚本以 #!起始，通过分号或者换行符分隔，注释部分以#起始，延申至行尾 2. 终端打印(1) echo 命令 echo 每次调用后会添加一个换行符 echo 文本内容  ;前后均被视为命令  echo &amp;quo">
+<meta name="twitter:image" content="http://peiv3bs5y.bkt.clouddn.com/%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2.png">
 
 
 
@@ -428,6 +432,107 @@
         <blockquote>
 <p><a href="https://www.shellscript.sh/index.html" target="_blank" rel="noopener">Shell</a>脚本，简单而强大，短短数行脚本即可完成大量工作，本文从实战角度对Linux 常用<a href="http://man.linuxde.net/" target="_blank" rel="noopener">命令</a>及<a href="https://www.shellscript.sh/index.html" target="_blank" rel="noopener">Shell</a>脚本编程进行总结与分析</p>
 </blockquote>
+<hr>
+<h2 id="0X01-Bash-脚本基础"><a href="#0X01-Bash-脚本基础" class="headerlink" title="0X01 Bash 脚本基础"></a>0X01 Bash 脚本基础</h2><h3 id="1-符号标识"><a href="#1-符号标识" class="headerlink" title="1. 符号标识"></a>1. 符号标识</h3><p>shell 脚本以 <code>#!</code>起始，通过分号或者换行符分隔，注释部分以<code>#</code>起始，延申至行尾</p>
+<h3 id="2-终端打印"><a href="#2-终端打印" class="headerlink" title="2. 终端打印"></a>2. 终端打印</h3><p><strong>(1) echo 命令</strong></p>
+<p>echo 每次调用后会添加一个换行符</p>
+<pre><code>echo 文本内容  ;前后均被视为命令
+
+echo &quot;文本内容&quot; 使用！等符号时，需要转义字符(\)
+
+echo &apos;文本内容&apos; 单引号，不会变量求值，原样输出
+</code></pre><p><strong>(2) printf 命令</strong></p>
+<p>可使用格式化字符串(%s,%c,%d,%f等)，指定字符串宽度，左右对齐方式等，换行时需手动添加<code>\n</code></p>
+<p><strong>(3) 特殊用法</strong></p>
+<p>A. <strong>echo 中转义换行符</strong></p>
+<p><em>echo -e “含转义序列的字符串”</em></p>
+<p>B. <strong>打印彩色输出</strong></p>
+<p><strong>字体颜色（30-37）</strong></p>
+<p><img src="http://peiv3bs5y.bkt.clouddn.com/%E5%AD%97%E4%BD%93%E9%A2%9C%E8%89%B2.png" alt=""></p>
+<pre><code>echo -e &quot;\e[1;31m This is red text \e[0m&quot;
+</code></pre><p><code>\e[1;31m</code> 将颜色设为红色；<code>\e[0m</code> 将颜色重新置回</p>
+<p><strong>主页背景颜色(40-47)</strong></p>
+<p><img src="http://peiv3bs5y.bkt.clouddn.com/%E8%83%8C%E6%99%AF%E9%A2%9C%E8%89%B2.png" alt=""></p>
+<p><strong>特殊功能</strong></p>
+<p><img src="http://peiv3bs5y.bkt.clouddn.com/%E7%89%B9%E8%89%B2%E5%8A%9F%E8%83%BD.png" alt=""></p>
+<h3 id="3-变量与环境变量"><a href="#3-变量与环境变量" class="headerlink" title="3. 变量与环境变量"></a>3. 变量与环境变量</h3><p><strong>(1) 环境变量</strong></p>
+<p>获取目标进程IP</p>
+<pre><code>pgrep 目标程序名
+</code></pre><p>查看进程环境变量</p>
+<pre><code>cat /proc/$PID/environ 
+</code></pre><p>格式化换行输出</p>
+<pre><code>cat /proc/$PID/environ | tr &apos;\0&apos; &apos;\n&apos;
+</code></pre><p>环境变量设置</p>
+<pre><code>export PATH=&quot;$PATH:路径&quot;
+</code></pre><p><strong>(2) 变量及赋值</strong></p>
+<p><em>赋值方式：var=value</em></p>
+<p><em>var = value</em> 是相等操作，不同于赋值</p>
+<p><em>变量打印：echo $var / echo ${var}</em></p>
+<p><strong>(3) 拓展用法</strong></p>
+<p>A. 获取字符串长度</p>
+<pre><code>length=${#var}
+echo ${#var}
+</code></pre><p>B. 识别当前shell版本</p>
+<pre><code>echo $SHELL / echo $0
+</code></pre><p>C. 检查是否是超级用户</p>
+<pre><code>if [ $UID -ne 0 ]；then
+echo Non root user
+else
+echo &quot;Root User&quot;
+fi
+</code></pre><p>root 用户 UID 为0</p>
+<h3 id="4-数学运算"><a href="#4-数学运算" class="headerlink" title="4. 数学运算"></a>4. 数学运算</h3><p><strong>(1) let 命令</strong></p>
+<p>普通变量赋值方法定义数值，会被存储为字符串；let命令可执行算术操作</p>
+<pre><code>#！/bin/bash
+a=4
+b=5
+let result=a+b
+echo $result
+</code></pre><p>A. 自加操作</p>
+<pre><code>$ let a++
+</code></pre><p>B. 自减操作</p>
+<pre><code>let b--
+</code></pre><p>C. 简写形式</p>
+<pre><code>$ let a+=5
+</code></pre><p><strong>(2) (())或 []</strong></p>
+<pre><code>result=$[a+b]
+
+result=$((a+b))
+</code></pre><p><strong>(3) 高级操作</strong></p>
+<p>A. <strong>expr 工具</strong></p>
+<pre><code>result=`expr 3 + 4` 反引号
+
+result=$(expr $a + 5)
+</code></pre><p>只能用于整数运算，不支持浮点数运算</p>
+<p>B. <strong>bc 工具</strong></p>
+<p>用于数学运算的高级工具，精密计算</p>
+<p><strong>浮点数运算</strong></p>
+<pre><code>echo &quot;2.5 * 3.68&quot; | bc
+</code></pre><p><strong>设置小数精度</strong></p>
+<pre><code>echo &quot;scale=2；3/8&quot; | bc
+</code></pre><p><code>scale=2</code> 将小数位个数设置为2</p>
+<p><strong>进制转换</strong></p>
+<pre><code>#！/bin/bash
+# 数字转换
+
+# 十进制转为二进制
+no=100
+echo &quot;obase=2;$no&quot; | bc
+1100100
+
+# 二进制转为十进制
+no=1100100
+echo &quot;obase=10;ibase=2;$no&quot; | bc
+100
+</code></pre><p><strong>计算平方及平方根</strong></p>
+<pre><code>echo &quot;sqrt(100)&quot; | bc #Square root
+
+echo &quot;10^10&quot; | bc #Square
+</code></pre><h3 id="5-文件描述符-重定向"><a href="#5-文件描述符-重定向" class="headerlink" title="5. 文件描述符/重定向"></a>5. 文件描述符/重定向</h3><p><strong>(1) 文件描述符</strong></p>
+<p>常见文件描述符：stdin—0，stdout—1，stderr—2</p>
+<p><strong>(2) 重定向</strong></p>
+<p><strong>将输出文本重定向至特定文件</strong></p>
+<p>echo “This is a sample text” &gt; temp.txt</p>
 
       
     </div>
@@ -525,8 +630,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +729,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0X01-Bash-脚本基础"><span class="nav-number">1.</span> <span class="nav-text">0X01 Bash 脚本基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-符号标识"><span class="nav-number">1.1.</span> <span class="nav-text">1. 符号标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-终端打印"><span class="nav-number">1.2.</span> <span class="nav-text">2. 终端打印</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-变量与环境变量"><span class="nav-number">1.3.</span> <span class="nav-text">3. 变量与环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-数学运算"><span class="nav-number">1.4.</span> <span class="nav-text">4. 数学运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文件描述符-重定向"><span class="nav-number">1.5.</span> <span class="nav-text">5. 文件描述符/重定向</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
