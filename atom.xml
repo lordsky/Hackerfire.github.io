@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-03T23:29:50.167Z</updated>
+  <updated>2018-09-04T00:01:30.439Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,12 +21,24 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E4%B8%83-%EF%BC%9A%E5%85%8D%E6%9D%80%E7%AF%87/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-七-：免杀篇/</id>
     <published>2018-09-03T23:29:50.000Z</published>
-    <updated>2018-09-03T23:29:50.167Z</updated>
+    <updated>2018-09-04T00:01:30.439Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列七 规避免杀篇：使用构建一个躲避杀毒系统的恶意软件，上传恶意软件到在线的杀毒系统扫描</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列七 规避免杀篇：使用构建一个躲避杀毒系统的恶意软件，上传恶意软件到在线的杀毒系统扫描&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
@@ -35,12 +47,24 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E5%85%AD-%EF%BC%9AWeb-%E4%BE%A6%E5%AF%9F/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-六-：Web-侦察/</id>
     <published>2018-09-03T23:29:11.000Z</published>
-    <updated>2018-09-03T23:29:11.899Z</updated>
+    <updated>2018-09-04T00:01:24.563Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列六 Web侦察篇：使用Python侦查Web信息，脚本实例包含用Python匿名访问web网站，试探流行的媒体网站，发送钓鱼邮件</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列六 Web侦察篇：使用Python侦查Web信息，脚本实例包含用Python匿名访问web网站，试探流行的媒体网站，发送钓鱼邮件&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
@@ -49,12 +73,27 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E4%BA%94-%EF%BC%9A%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-五-：无线网络攻击/</id>
     <published>2018-09-03T23:27:16.000Z</published>
-    <updated>2018-09-03T23:27:16.888Z</updated>
+    <updated>2018-09-04T00:00:41.472Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列五 无线网络攻击篇：介绍无线网络和蓝牙设备攻击，实例将演示怎样嗅探和解析无线网络流量，构建一个无线网络记录器，发现隐藏的无线网络，确认恶意的无线网络工具的使用，追踪蓝牙接收器，攻击蓝牙漏洞</p></blockquote>]]></content>
     
     <summary type="html">
     
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列五 无线网络攻击篇：介绍无线网络和蓝牙设备攻击，实例将演示怎样嗅探和解析无线网络流量，构建一个无线网络记录器，发现隐藏的无线网络，确认恶意的无线网络工具的使用，追踪蓝牙接收器，攻击蓝牙漏洞&lt;/p&gt;
+&lt;/bl
+      
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
@@ -63,26 +102,50 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E5%9B%9B-%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-四-：网络流量分析/</id>
     <published>2018-09-03T23:26:46.000Z</published>
-    <updated>2018-09-03T23:26:46.878Z</updated>
+    <updated>2018-09-04T00:01:43.111Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列四 网络流量分析篇：使用Python进行网络流量分析，脚本演示了从捕获的数据包中定位IP地址，探讨流行的DDOS攻击工具，发现潜藏的扫描，分析僵尸网络流量，挫败入侵检测系统</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列四 网络流量分析篇：使用Python进行网络流量分析，脚本演示了从捕获的数据包中定位IP地址，探讨流行的DDOS攻击工具，发现潜藏的扫描，分析僵尸网络流量，挫败入侵检测系统&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
   <entry>
-    <title>Violent Python 系列(三)：取证调查</title>
+    <title>Violent Python 系列(三)：调查取证</title>
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E4%B8%89-%EF%BC%9A%E5%8F%96%E8%AF%81%E8%B0%83%E6%9F%A5/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-三-：取证调查/</id>
     <published>2018-09-03T23:26:13.000Z</published>
-    <updated>2018-09-03T23:26:13.030Z</updated>
+    <updated>2018-09-04T00:01:37.319Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列三 调查取证篇：利用Python进行数字调查取证，实例包括个人地理定位，数据恢复，从windows注册表，文档元数据，镜像中提取痕迹，调查应用程序和移动设备的痕迹</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列三 调查取证篇：利用Python进行数字调查取证，实例包括个人地理定位，数据恢复，从windows注册表，文档元数据，镜像中提取痕迹，调查应用程序和移动设备的痕迹&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
@@ -91,12 +154,24 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E4%BA%8C-%EF%BC%9A%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-二-：渗透测试/</id>
     <published>2018-09-03T23:25:48.000Z</published>
-    <updated>2018-09-03T23:25:48.425Z</updated>
+    <updated>2018-09-04T00:01:17.611Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文是《Violent Python》系列二 渗透测试篇：介绍了Python脚本用于渗透测试的内容，例子包含建立一个端口扫描器，构建一个SSH的僵尸网络，降伏FTP，编写病毒和漏洞利用代码</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;本文是《Violent Python》系列二 渗透测试篇：介绍了Python脚本用于渗透测试的内容，例子包含建立一个端口扫描器，构建一个SSH的僵尸网络，降伏FTP，编写病毒和漏洞利用代码&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
@@ -105,12 +180,24 @@
     <link href="http://yoursite.com/2018/09/04/Violent-Python-%E7%B3%BB%E5%88%97-%E4%B8%80-%EF%BC%9A%E5%9F%BA%E7%A1%80%E7%AF%87/"/>
     <id>http://yoursite.com/2018/09/04/Violent-Python-系列-一-：基础篇/</id>
     <published>2018-09-03T23:24:45.000Z</published>
-    <updated>2018-09-03T23:24:45.029Z</updated>
+    <updated>2018-09-04T00:01:09.173Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://books.google.com/books/elsevier?id=2XliiK7FKoEC&amp;dq=violent+python&amp;ei=zL66UNT7N4XYkgTBt4DoDg&amp;hl=zh-CN" target="_blank" rel="noopener">Violent Python</a>: A Cookbook for Hackers, Forensic Analysts, Penetration Testers and Security Engineers。本文是《Violent Python》 系列一 基础篇：涉及Python背景，语法，函数，迭代器等语法</p></blockquote><a id="more"></a><hr>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://books.google.com/books/elsevier?id=2XliiK7FKoEC&amp;amp;dq=violent+python&amp;amp;ei=zL66UNT7N4XYkgTBt4DoDg&amp;amp;hl=zh-CN&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Violent Python&lt;/a&gt;: A Cookbook for Hackers, Forensic Analysts, Penetration Testers and Security Engineers。本文是《Violent Python》 系列一 基础篇：涉及Python背景，语法，函数，迭代器等语法&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
     
+      <category term="0x02 安全技术" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="脚本编程" scheme="http://yoursite.com/categories/0x02-%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E8%84%9A%E6%9C%AC%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Violent Python" scheme="http://yoursite.com/tags/Violent-Python/"/>
     
   </entry>
   
