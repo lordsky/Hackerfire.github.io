@@ -97,10 +97,15 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-07T01:47:51.634Z">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E8%BE%93%E5%85%A5.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E5%8A%9F%E8%83%BD.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E6%9E%B6%E6%9E%84.png">
+<meta property="og:updated_time" content="2018-09-07T04:29:49.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="新型安全技术简析">
 <meta name="twitter:description" content="伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结">
+<meta name="twitter:image" content="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg">
 
 
 
@@ -430,6 +435,68 @@
 </blockquote>
 <a id="more"></a>
 <hr>
+<h2 id="0x01-自适应安全架构-ASA"><a href="#0x01-自适应安全架构-ASA" class="headerlink" title="0x01 自适应安全架构(ASA)"></a>0x01 自适应安全架构(ASA)</h2><h3 id="1-阶段"><a href="#1-阶段" class="headerlink" title="1. 阶段"></a>1. 阶段</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg" alt=""></p>
+<p><strong>(1) 预测 Predictive</strong></p>
+<p>使安全系统可从外部监控下的黑客行动中学习，以主动锁定对现有系统和信息具有威胁的新型攻击，并对漏洞划定优先级和定位。该情报将反馈到预防和检测功能，从而构成整个处理流程的闭环</p>
+<p><strong>(2) 防御 Preventive</strong></p>
+<p>指一系列策略集、产品和服务可以用于防御攻击。这个方面的关键目标是通过减少被攻击面来提升攻击门槛，并在受影响前拦截攻击动作</p>
+<p><strong>(3) 监控 Detective</strong></p>
+<p>用于发现那些逃过防御网络的攻击，该方面的关键目标是降低威胁造成的“停摆时间”以及其他潜在的损失。检测能力非常关键，因为企业应该假设自己已处在被攻击状态中</p>
+<p><strong>(4) 回溯 Restrospective</strong></p>
+<p>用于高效调查和补救被检测分析功能(或外部服务)查出的事务，以提供入侵认证和攻击来源分析，并产生新的预防手段来避免未来事故</p>
+<h3 id="2-核心思想"><a href="#2-核心思想" class="headerlink" title="2. 核心思想"></a>2. 核心思想</h3><p><strong>(1) 安全防护是一项持续处理过程</strong></p>
+<p>在持续攻击时代，企业需要完成对安全思维的根本性切换，从“应急响应”到“持续响应”，前者认为攻击是偶发的，一次性的事故，而后者则认为攻击是不间断的，黑客渗透系统和信息的努力是不可能完全拦截的，系统应承认自己时刻处于被攻击中</p>
+<p><strong>(2) 持续监控和分析是自适应安全架构的核心</strong></p>
+<p>下一代安全防护程序的核心一定是持续的，主动监控和可视化将持续分析攻击痕迹，这将生成大量数据。可以用多种分析手段来处理这些数据，包括启发性方法、统计方法、推理建模、机器学习、聚类分析、贝叶斯建模</p>
+<h3 id="3-关键输入"><a href="#3-关键输入" class="headerlink" title="3. 关键输入"></a>3. 关键输入</h3><p><img src="http://par628i4r.bkt.clouddn.com/%E8%BE%93%E5%85%A5.jpg" alt=""></p>
+<p><strong>(1) 威胁情报</strong></p>
+<p>危险情报的核心是那些提供可信有价值的主题源，如IP地址、域、URLs、文件、应用等等。然而，高级威胁情报服务还应提供给企业关于攻击者/机构的组织方式攻击目标等情报；服务商还应该提供相应的指导，帮助企业针对性防护这些攻击</p>
+<p><strong>(2) 社区智慧</strong></p>
+<p>为更好地应对高级威胁，信息应该是聚合的，可通过基于云的社区进行分析和分享的，理想的情况下，还应该拥有在相似行业和地区进行信息聚合及分析的能力。这种“众包”智能可以提升所有参与者的整体防护能力</p>
+<p><strong>(3) 供应商实验室</strong></p>
+<p>大多数安全防护平台厂商提供最新的信息来支持他们的防护解决方案——例如，为提供对最新发现的威胁进行保护，黑白名单以及规则和模式都会更新</p>
+<p><strong>(4) 策略</strong></p>
+<p>用于定义和描述各项组织需求包括系统配置、补丁需求、网络活动、哪些应用允许执行，哪些应被禁止，反病毒扫描的频率、敏感数据保护、应急响应等等</p>
+<p><strong>(5) 漏洞分析</strong></p>
+<p>该信息提供给企业对其所用到的设备、系统、应用和接口中的漏洞进行分析。除了包括一致的漏洞，分析还包括存在于企业客户和第三方应用中的一些未知的漏洞，可通过主动测试其应用、库和接口来完成</p>
+<p><strong>(6) 场景</strong></p>
+<p>基于当前条件的信息(如地点、时间、漏洞状态等)，场景感知使用额外信息提升信息安全决策正确性。对于分辨哪些攻击逃过传统安全防护机制，以及帮助确定有意义的偏离正常行为而不需要增加大量误报率时，对场景的利用非常关键</p>
+<h3 id="4-关键功能"><a href="#4-关键功能" class="headerlink" title="4. 关键功能"></a>4. 关键功能</h3><p><img src="http://par628i4r.bkt.clouddn.com/%E5%8A%9F%E8%83%BD.jpg" alt=""></p>
+<p><img src="http://par628i4r.bkt.clouddn.com/%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>(1) 预测阶段</strong></p>
+<ul>
+<li><p><strong>基线系统</strong>：系统会不停地进行变动;新的系统(如移动设备和云服务)也将不断被引入;用户账户不停的新建和撤销;新的漏洞不断地披露;新应用部署;针对新威胁的适应改造也一直进行着，所以，我们也应该持续对终端设备、服务器端系统、云服务、漏洞、关系和典型接口进行重定基线以及挖掘发现</p>
+</li>
+<li><p><strong>攻击预测</strong>：该领域正处于前沿而且日益重要。通过检测黑客的意图，关注黑客市场和公告板;对垂直行业的兴趣;以及对保护信息的类别和敏感度，这一领域内的功能在于主动预测未来的攻击和目标，使企业可以随之调整安全防护策略来应对</p>
+</li>
+<li><p><strong>主动探索分析</strong>：随着内外情报的收集，需要对企业资产进行探索和风险评估以预测威胁，同时也许需要对企业策略和控制的调整</p>
+</li>
+</ul>
+<p><strong>(2) 防护阶段</strong></p>
+<ul>
+<li><strong>加固和隔离系统：</strong>任何信息安全架构的初始功能都是采用多种技术降低攻击面，限制黑客接触系统、发现漏洞和执行恶意代码的能力</li>
+</ul>
+<ul>
+<li><p><strong> 漏洞以及补丁管理</strong>：用于识别和关闭漏洞的漏洞及路径管理功能也可以纳入此类。结合端点隔离和沙盒技术，可主动限制网络/系统/进程/应用相互接口的能力，也是此类的另一种方式(见“面向高级攻击的虚拟化和控制系统技术概览”)</p>
+</li>
+<li><p><strong>转移攻击：</strong>简单来说，该领域功能可是企业在黑客攻防中获得时间上的非对称优势，通过多种技术使攻击者难以定位真正的系统核心以及可利用漏洞，以及隐藏\混淆系统接口\信息(如创建虚假系统、漏洞和信息)</p>
+</li>
+</ul>
+<p><strong>(3) 检测阶段</strong></p>
+<p>-<strong> 事故预防</strong>：该类别覆盖多种成熟的预防方式防止黑客未授权而进入系统，包括传统的“黑白名单式”的反恶意病毒扫描以及基于网络\主机的入侵预防系统。“行为特征” 也是这方面的另一层应用——例如，为防止系统和控制中心交流，可使用来自第三方知名发布的服务信息和情报并整合进入网络、网管或者基于主机的控制器</p>
+<ul>
+<li><strong>事故检测</strong>：一些攻击者不可避免地会绕过传统的拦截和预防机制，这时最重要的事情就是在尽可能短的时间里检测到入侵，将黑客造成损害和泄露敏感的信息最小化</li>
+</ul>
+<p>-<strong> 风险确认和排序</strong>：一旦潜在问题被检测到，就需要在不同实体中将攻击的标志关联起来进行确认，例如，首先观察在沙盒环境中基于网络的威胁检测系统所观察到进程、行为和注册实体等，然后将其和实际端口中的情况相比</p>
+<p><strong>(4) 回溯分析</strong></p>
+<ul>
+<li><p><strong>事故隔离</strong>：一旦事故被识别、确认和排序，这个类别的工作将迅速隔离被感染系统和账户，防止其阻碍其他系统。常用的隔离能力包括，端点隔离、账户封锁、网络层隔离、系统进程关闭，以及立即预防其他系统执行同样的恶意软件或访问同样的被感染信息</p>
+</li>
+<li><p><strong>调查/取证</strong>：当被感染的系统和账户被隔离好之后，通过回顾分析事件完整过程，利用持续监控所获取的数据，根本原因和全部缺口都终将解决</p>
+</li>
+<li><p><strong>设计/模式改变</strong>：为预防新攻击或系统重受感染，需要更改某些策略和控制——例如，关闭漏洞、关闭网络端口、特征升级、系统配置升级、用户权限修改、用户培训修改或者提升信息防护选项的强度</p>
+</li>
+</ul>
 
       
     </div>
@@ -525,8 +592,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -615,6 +691,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-自适应安全架构-ASA"><span class="nav-number">1.</span> <span class="nav-text">0x01 自适应安全架构(ASA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-阶段"><span class="nav-number">1.1.</span> <span class="nav-text">1. 阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心思想"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-关键输入"><span class="nav-number">1.3.</span> <span class="nav-text">3. 关键输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-关键功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. 关键功能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
