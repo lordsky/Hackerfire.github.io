@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-07T01:46:40.523Z</updated>
+  <updated>2018-09-07T01:47:51.634Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2018/09/07/%E6%96%B0%E5%9E%8B%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E7%AE%80%E6%9E%90/"/>
     <id>http://yoursite.com/2018/09/07/新型安全技术简析/</id>
     <published>2018-09-07T01:27:15.000Z</published>
-    <updated>2018-09-07T01:46:40.523Z</updated>
+    <updated>2018-09-07T01:47:51.634Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结</p></blockquote><a id="more"></a><hr>]]></content>
     
@@ -39,6 +39,8 @@
     
     
       <category term="ASA" scheme="http://yoursite.com/tags/ASA/"/>
+    
+      <category term="SeeSec" scheme="http://yoursite.com/tags/SeeSec/"/>
     
   </entry>
   
