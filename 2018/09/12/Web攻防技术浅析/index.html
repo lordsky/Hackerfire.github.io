@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="WebSecurity,Injection,XSS,CSRF,SSRF,DDOS,HTTPS," />
 
 
 
@@ -89,17 +89,33 @@
 
 
 
-<meta name="description" content="Talk is cheap，follow heart and just do it ……">
+<meta name="description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等   0x00  Web安全基础1. Web安全漏洞 图片来自：绿盟科技博客 2. 安全编码规范OWASP 安全编码规范快速参考指南   3. Web应用架构三层架构  四层架构  图">
+<meta name="keywords" content="WebSecurity,Injection,XSS,CSRF,SSRF,DDOS,HTTPS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Web攻防技术浅析">
 <meta property="og:url" content="http://yoursite.com/2018/09/12/Web攻防技术浅析/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="Talk is cheap，follow heart and just do it ……">
+<meta property="og:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等   0x00  Web安全基础1. Web安全漏洞 图片来自：绿盟科技博客 2. 安全编码规范OWASP 安全编码规范快速参考指南   3. Web应用架构三层架构  四层架构  图">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-12T02:24:51.211Z">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/web%E6%BC%8F%E6%B4%9E.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BE%93%E5%87%BA%E7%BC%96%E7%A0%81.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/web%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/web%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E4%BF%A1%E6%81%AF%E6%B5%81.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%99%E8%AF%AF.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E5%86%85%E8%81%94%E6%B3%A8%E5%85%A5.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E8%81%94.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E5%AD%97%E5%86%85%E8%81%94.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E7%BB%88%E6%AD%A2%E6%B3%A8%E5%85%A5.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BF%87%E6%BB%A4%E5%99%A8.png">
+<meta property="og:updated_time" content="2018-09-12T13:54:26.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web攻防技术浅析">
-<meta name="twitter:description" content="Talk is cheap，follow heart and just do it ……">
+<meta name="twitter:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等   0x00  Web安全基础1. Web安全漏洞 图片来自：绿盟科技博客 2. 安全编码规范OWASP 安全编码规范快速参考指南   3. Web应用架构三层架构  四层架构  图">
+<meta name="twitter:image" content="http://pbegz2k88.bkt.clouddn.com/web%E6%BC%8F%E6%B4%9E.png">
 
 
 
@@ -354,6 +370,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x02-安全技术/" itemprop="url" rel="index">
+                    <span itemprop="name">0x02 安全技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x02-安全技术/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -391,7 +440,238 @@
       
 
       
-        
+        <blockquote>
+<p>本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等</p>
+</blockquote>
+<hr>
+<h2 id="0x00-Web安全基础"><a href="#0x00-Web安全基础" class="headerlink" title="0x00  Web安全基础"></a>0x00  Web安全基础</h2><h3 id="1-Web安全漏洞"><a href="#1-Web安全漏洞" class="headerlink" title="1. Web安全漏洞"></a>1. Web安全漏洞</h3><p><img src="http://pbegz2k88.bkt.clouddn.com/web%E6%BC%8F%E6%B4%9E.png" alt=""></p>
+<p><em>图片来自：绿盟科技博客</em></p>
+<h3 id="2-安全编码规范"><a href="#2-安全编码规范" class="headerlink" title="2. 安全编码规范"></a>2. 安全编码规范</h3><p><a href="http://www.owasp.org.cn/owasp-project/download/OWASP_SCP_Quick_Reference_GuideChinese.pdf" target="_blank" rel="noopener">OWASP 安全编码规范快速参考指南</a></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E8%BE%93%E5%85%A5%E9%AA%8C%E8%AF%81.png" alt=""></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E8%BE%93%E5%87%BA%E7%BC%96%E7%A0%81.png" alt=""></p>
+<h3 id="3-Web应用架构"><a href="#3-Web应用架构" class="headerlink" title="3. Web应用架构"></a>3. Web应用架构</h3><p><strong>三层架构</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/web%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>四层架构</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/web%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><em>图片参考自：《SQL Injection Attacks and Defense》</em></p>
+<hr>
+<h2 id="0x01-SQL注入及防御"><a href="#0x01-SQL注入及防御" class="headerlink" title="0x01 SQL注入及防御"></a>0x01 SQL注入及防御</h2><h3 id="1-本质及原理"><a href="#1-本质及原理" class="headerlink" title="1. 本质及原理"></a>1. 本质及原理</h3><p><strong>(1) 定义</strong></p>
+<p>SQL注入式一种通过操纵输入来修改后台SQL语句以达到利用攻击代码进行攻击的技术</p>
+<p><strong>(2) 本质</strong></p>
+<p>对于输入检查不充分，导致SQL语句将用户提交的非法数据当作语句的一部分来执行</p>
+<p><strong>(3) 产生原理</strong></p>
+<p>SQL是访问<em>Microsoft SQL Server,Oracle,MySQL，Sybase 和Informix</em>等数据库服务器的标准语言，大多数Web应用都要与数据库进行交互，并且多数Web应用编程语言(<em>ASP,C#,.NET,Java和PHP</em>)均提供可编程的方法与数据库相连并进行交互，当从Web表单，cookie及输入参数等收到的值传递给SQL查询(该查询在数据库服务器上执行)之前未对其进行验证，则会出现SQL注入漏洞</p>
+<p><strong>(4) 引发因素</strong></p>
+<p><strong>A. 转义字符处理不当</strong></p>
+<p>SQL数据库将<em>单引号字符</em>(‘)解析成字符串分隔符，作为代码与数据间的分界线，利用单引号可构造查询加以执行，判断Web站点是否会受到SQL注入攻击；Oracle中，空格，双竖线，逗号，点号，双引号等均有特殊含义</p>
+<p><strong>B. 类型处理不当</strong></p>
+<p><strong><em>LOAD_FILE</em></strong> 函数：能够读取文件并将文件内容作为字符串返回，读取的文件须位于数据库服务器主机上，如下可获取系统用户的属性和用户名</p>
+<pre><code>UNION ALL SELECT LOAD_FILE(&apos;/etc/passwd&apos;)--
+</code></pre><p><strong><em>SELECT INTO OUTFILE</em></strong> 内置命令：可用来创建系统文件并进行写操作，受攻击用户须拥有FILE权限，如下可向Web根目录写入一个Web shell 以便安装可远程交互访问的Web shell</p>
+<pre><code>UNION SELECT &quot;&lt;?system($_request[&apos;cmd&apos;]);?&gt;&quot; INTO OUFILE &quot;/var/www/html/victim.com/cmd.php&quot;--
+</code></pre><p><strong>C. 查询集处理不当</strong></p>
+<p><strong>D. 错误处理不当</strong></p>
+<p>可能将详细的内部错误消息(如数据库转储，错误代码等)显示给用户或者攻击者，造成消息泄露</p>
+<p><strong>E. 多个提交处理不当</strong></p>
+<p><strong>F. 不安全的数据库配置</strong></p>
+<p>数据库默认的用户预安装内容，用户权限，访问控制模型等也可能存在风险</p>
+<h3 id="2-攻击及方式"><a href="#2-攻击及方式" class="headerlink" title="2. 攻击及方式"></a>2. 攻击及方式</h3><p><strong>(1) 寻找 SQL 注入点</strong></p>
+<p>通过操纵用户数据输入并分析服务器响应来寻找SQL注入漏洞</p>
+<p><strong>A. 通过发送意外数据来触发异常</strong></p>
+<p><strong>a 识别数据输入</strong></p>
+<p><strong><em>GEI请求：</em></strong> 一种请求服务器的HTTP方法，使用该方法时，信息显示在URL中，GET请求对用户是透明的；点击一个链接时，一般用此方法</p>
+<p><strong><em>POST请求：</em></strong>一种向Web服务器发送信息的HTTP方法，在浏览器器中填写表单并点击提交按钮时通常使用该方法</p>
+<p><strong><em>其他注入型数据</em></strong></p>
+<p><em>Cookie：</em>被发送给用户端浏览器，并在每个请求中自动回发给服务器；一般用于验证，会话控制和保存用户特定信息</p>
+<p><em>主机头：</em>指定请求资源的 Internet主机和端口号</p>
+<p><em>referer：</em>指定获取当前请求的资源</p>
+<p><em>用户代理头：</em>确定用户使用的Web浏览器</p>
+<p><strong><em>绕过浏览器限制修改数据</em></strong></p>
+<p><em>使用浏览器修改扩展插件：</em>如Web Developer，Tamper Data等</p>
+<p><em>使用本地代理：</em>介于浏览器与服务器之间的软件，代理负责拦截发给Web服务器的请求，用户可随意修改请求的内容</p>
+<p><strong>b 操纵数据分析响应异常</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E4%BF%A1%E6%81%AF%E6%B5%81.png" alt=""></p>
+<pre><code>1. 用户向Web服务器发送请求
+
+2. Web服务器检索用户数据，创建包含用户输入的SQL语句，然后向数据库服务器发送查询
+
+3. 数据库服务器执行SQL查询语句并将结果返回给Web服务器
+
+4. Web服务器根据数据库响应动态创建HTML页面 
+</code></pre><p><strong>B. 数据库错误</strong></p>
+<p>后台数据库执行查询失败时应用汇返回相应错误类型</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%99%E8%AF%AF.png" alt=""></p>
+<pre><code>1. 用户发送请求，尝试识别SQL注入漏洞，如发送带单引号的值
+
+2. Web服务器检索用户数据并向数据库服务器发送SQL查询
+
+3. 数据库服务器接收格式不正确的SQL查询并向Web服务器返回一条错误消息
+
+4. Web服务器接收来自数据库的错误并向用户发送HTML响应
+</code></pre><p><strong>C. 应用响应</strong></p>
+<p>一些不直接在浏览器响应的错误示例</p>
+<p><strong>a 通用错误</strong></p>
+<p>不管遇到何种错误，应用均返回一个通用的错误页面，可以通过向参数插入不会触发应用错误的SQL代码来进行测试</p>
+<p>如<strong><em>构造恒真表达式</em></strong>，将数据注入到一个用单引号引起来的字符串中，查询的结果会包含表中所有记录，当记录较多，查询执行时间很长且耗费数据库和Web服务器大量资源</p>
+<p>故可构造永假表达式进行测试</p>
+<p><strong>b http返回码错误</strong></p>
+<p>HTTP包含很多返回给Web浏览器的代码，用来指定请求的结果或客户端需要执行的操作</p>
+<p><strong><em>HTTP 500：</em></strong> web服务器在呈现请求的web源时，发现错误</p>
+<p><strong><em>HTTP 302：</em></strong>重定向到主页/自定义错误页面</p>
+<p><strong>c 不同的响应大小</strong></p>
+<p>适用于不显示任何结果或差异不明显的情况</p>
+<p><strong>D. SQL盲注</strong></p>
+<p>在服务器没有错误回显是采用的注入攻击方式，构造条件语句，根据页面是否发生变化，来判断SQL语句是否执行</p>
+<p><strong>(2) 实施 SQL 注入</strong></p>
+<p>构造有效的SQL语句来实施利用SQL注入漏洞</p>
+<p><strong>A. 区分数字和字符串</strong></p>
+<p><strong><em>数字：</em></strong>不需要使用单引号来表示</p>
+<p><strong><em>字符串：</em></strong>使用单引号来表示</p>
+<p>数字字母混合值用单引号引起来</p>
+<p><strong>B. 内联SQL注入</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%86%85%E8%81%94%E6%B3%A8%E5%85%A5.png" alt=""></p>
+<p><strong><em>Inline SQL Injection：</em></strong>向查询注入一些SQL代码后，原来的查询依然会全部执行</p>
+<p><strong>a 字符串内联注入</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E8%81%94.png" alt=""></p>
+<p><strong>b 数字内联注入</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E5%AD%97%E5%86%85%E8%81%94.png" alt=""></p>
+<p><strong>C. 终止式SQL注入</strong></p>
+<p>注释剩下的查询语句来成功结束该语句</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E7%BB%88%E6%AD%A2%E6%B3%A8%E5%85%A5.png" alt=""></p>
+<p><strong>a 数据库注释语法</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png" alt=""></p>
+<p><strong>b 注释常用特征值</strong></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png" alt=""></p>
+<p><strong>D. 时间延迟攻击</strong></p>
+<p><strong><em>Timing Attack：</em></strong>当Web应用未显示任何错误时，可向数据库注入时间延迟并检查服务器响应是否延迟实施注入</p>
+<p><strong><em>Microsoft SQL 服务器</em></strong></p>
+<pre><code>WAITFOR DELAY &apos;hours:minutes:seconds&apos;
+</code></pre><p><strong><em>MySQL 数据库</em></strong></p>
+<pre><code>mysql&gt; SELECT BENCHMARK(100000,ENCODE(&apos;hello&apos;,&apos;world&apos;));
+</code></pre><p><em>BENCHMARK</em>函数将一条表达式执行多次，来引入延迟</p>
+<h3 id="3-防御及思路"><a href="#3-防御及思路" class="headerlink" title="3. 防御及思路"></a>3. 防御及思路</h3><p><strong>(1) 代码层防御</strong></p>
+<p><strong>A. 使用参数化语句</strong></p>
+<p><strong><em>避免使用动态SQL来阻止SQL注入</em></strong></p>
+<p>使用占位符或绑定变量来向SQL查询提供参数(而非直接对用户输入进行操作)，替换动态字符串构造，不会修改传递给数据库的内容</p>
+<p>但如果正在调用的数据库功能在存储过程或函数实现使用了<strong>动态SQL</strong>(将SQL查询创建成字符串然后发给数据库执行)，仍会出现SQL注入</p>
+<p>只能参数化数据值，不能参数化SQL标识符或关键字</p>
+<p><strong>B. 输入验证</strong></p>
+<p><strong>a 白名单验证</strong></p>
+<p>只接收已记录在案的良好输入的操作，验证输入是否符合所期望的<strong><em>数据类型，数据大小，数据范围</em></strong>和<strong><em>数据内容</em></strong>等</p>
+<p>白名单验证功能更强大，适用于带大字符集的语言来实现本地化的应用；对于存在复杂输入或难以确定所有可能的输入集合石，实现叫困难</p>
+<p><strong>b 黑名单</strong></p>
+<p>拒绝已记录在案的不良输入操作，通过浏览输入的内容查找是否存在已知的不良字符，字符串或模式</p>
+<p>验证功能较弱，潜在的不良字符列表较大，检索较慢；很难及时更新列表，对安全性未知的列表无法判断</p>
+<p>常使用正则表达式实现，附加一个禁止使用的字符串列表</p>
+<p><strong>C. 编码输出</strong></p>
+<p>对在应用的不同模块或部分间传递的内容进行编码，保证内容被正确处理，尤其是对于未经严格验证或审查以及来自第三方的数据源</p>
+<p><strong>D. 规范化</strong></p>
+<p>未规范的编码方法，依赖于所使用的特定条件，很难预测应用是否会按照这种方式进行解释，规范化指将输入简化成标准形式</p>
+<p><strong>E. 设计优化</strong></p>
+<p>使用存储过程以便在数据库层拥有较细粒度的许可</p>
+<p>使用数据访问抽象层来对整个应用世家安全的数据访问</p>
+<p>设计时，考虑对敏感信息进行附加的控制</p>
+<p><strong>(2) 平台层防御</strong></p>
+<p><strong>A. 运行时保护</strong></p>
+<p><strong>a WAF-Web应用防火墙</strong></p>
+<p>WAF的标准是开源的 <a href="https://www.modsecurity.org" target="_blank" rel="noopener">ModSecurity</a>-被开发为Apache的一个模块，可实现攻击预防，监控，入侵检测和一般应用加固</p>
+<pre><code>1. 可配置规则集
+
+2. 请求覆盖范围
+
+3. 请求标准化
+
+4. 响应分析
+
+5. 入侵检测能力
+</code></pre><p><strong>b 截断过滤器</strong></p>
+<p>过滤器是一系列独立的模块，可跨应用重用，适用于输入验证，将请求/响应记录到日志以及转换输出响应等安全功能</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E8%BF%87%E6%BB%A4%E5%99%A8.png" alt=""></p>
+<p><strong><em>Web服务器过滤器</em></strong></p>
+<p>将过滤器实现成Web服务器模块/插件，能对核心请求和响应进行扩展以便处理Web服务器平台的API；不针对特定的Web应用框架或编程语言</p>
+<p><strong><em>应用过滤器</em></strong></p>
+<p>使用Web应用的编程语言或框架来实现过滤器，适用于实时保护，部署速度快</p>
+<p><strong>c URL策略/页面层策略</strong></p>
+<ol>
+<li><p>页面覆写</p>
+</li>
+<li><p>URL 重写</p>
+</li>
+<li><p>资源代理/封装</p>
+</li>
+</ol>
+<p><strong>d 应用入侵检测系统</strong></p>
+<p><strong>e 数据库防火墙</strong></p>
+<p><strong>B. 确保数据库安全</strong></p>
+<p><strong>a 锁定应用数据</strong></p>
+<p>确保应用数据的安全</p>
+<pre><code>1. 使用较低权限的数据库登录
+
+2. 撤销 PUBLIC 许可
+
+3. 使用存储过程
+
+4. 使用高安全性的加密技术来保护存储的敏感数据
+
+5. 维护审查跟踪
+</code></pre><p><strong>b 锁定数据库服务器</strong></p>
+<p>强化数据库服务器自身安全，最低权限原则</p>
+<pre><code>1. 额外的系统对象锁定
+
+2. 约束即席查询(ad hoc querying)
+
+3. 增强对验证周边的控制
+
+4. 在最低权限的操作系统语境中运行
+
+5. 及时更新补丁
+</code></pre><p><strong>C 其他防护措施</strong></p>
+<p><strong>a 最小化不必要信息的泄露</strong></p>
+<pre><code>1. 隐藏错误消息
+
+2. 使用空的默认Web站点
+
+3. 为DNS反向查询使用虚拟主机名称
+
+4. 使用通配符SSL证书
+
+5. 限制通过搜索引擎Hacking得到的发现
+
+6. 禁止WSDL信息
+</code></pre><p><strong>b 提高Web服务器日志的冗余</strong></p>
+<p><strong>c 配置网络访问控制</strong></p>
+<h3 id="4-语法备忘单"><a href="#4-语法备忘单" class="headerlink" title="4. 语法备忘单"></a>4. 语法备忘单</h3><p><a href="https://websec.ca/kb/sql_injection" target="_blank" rel="noopener">websec.ca/kb/sql_injection</a>  <em>MySQL，MSSQL,ORACLE等数据库注入语法速查</em></p>
+<hr>
+<h2 id="0x02-XSS-攻击及防御"><a href="#0x02-XSS-攻击及防御" class="headerlink" title="0x02 XSS 攻击及防御"></a>0x02 XSS 攻击及防御</h2><hr>
+<h2 id="0x03-CSRF-SSRF原理及异同"><a href="#0x03-CSRF-SSRF原理及异同" class="headerlink" title="0x03 CSRF/SSRF原理及异同"></a>0x03 CSRF/SSRF原理及异同</h2><hr>
+<h2 id="0x04-文件上传及防御"><a href="#0x04-文件上传及防御" class="headerlink" title="0x04 文件上传及防御"></a>0x04 文件上传及防御</h2><hr>
+<h2 id="0x05-越权漏洞及防御"><a href="#0x05-越权漏洞及防御" class="headerlink" title="0x05 越权漏洞及防御"></a>0x05 越权漏洞及防御</h2><hr>
+<h2 id="0x06-XXE攻击及防御"><a href="#0x06-XXE攻击及防御" class="headerlink" title="0x06 XXE攻击及防御"></a>0x06 XXE攻击及防御</h2><hr>
+<h2 id="0x07-应用层DDOS攻击"><a href="#0x07-应用层DDOS攻击" class="headerlink" title="0x07 应用层DDOS攻击"></a>0x07 应用层DDOS攻击</h2><hr>
+<h2 id="0x08-Java反序列化漏洞"><a href="#0x08-Java反序列化漏洞" class="headerlink" title="0x08 Java反序列化漏洞"></a>0x08 Java反序列化漏洞</h2><hr>
+<h2 id="0x08-点击劫持原理及防御"><a href="#0x08-点击劫持原理及防御" class="headerlink" title="0x08 点击劫持原理及防御"></a>0x08 点击劫持原理及防御</h2><hr>
+<h2 id="0x09-HTTPS中间人攻击及防御"><a href="#0x09-HTTPS中间人攻击及防御" class="headerlink" title="0x09 HTTPS中间人攻击及防御"></a>0x09 HTTPS中间人攻击及防御</h2><hr>
+<p>0xFF 参考及学习资源</p>
+<ul>
+<li><p><a href="https://www.owasp.org/images/d/dc/OWASP_Top_10_2017_%E4%B8%AD%E6%96%87%E7%89%88v1.3.pdf" target="_blank" rel="noopener">OWAP Top-10 </a></p>
+</li>
+<li><p><a href="http://drops.mayter.cn/#!/" target="_blank" rel="noopener">WooYun知识库</a></p>
+</li>
+<li><p><a href="https://paper.seebug.org/category/web-security/" target="_blank" rel="noopener">Seebug Paper-Web安全</a></p>
+</li>
+<li><p><a href="http://blog.nsfocus.net/web-vulnerability-analysis-coding-security/" target="_blank" rel="noopener">绿盟科技博客-安全分享</a></p>
+</li>
+<li><p><a href="https://pan.baidu.com/s/11s6gn5LCstLiU6u8koWWqg" target="_blank" rel="noopener">《XSS跨站脚本攻击》</a></p>
+</li>
+<li><p><a href="https://pan.baidu.com/s/1lpIFKMVDbpJOyAggA3bwpg" title="《白帽子讲Web安全》" target="_blank" rel="noopener">《白帽子讲Web安全》</a></p>
+</li>
+<li><p><a href="https://pan.baidu.com/s/1OJ_xK8TDa3jVWoHhQRb9Yw" target="_blank" rel="noopener">《SQL注入攻击与防御》</a></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://pan.baidu.com/s/1ckkllzRAJdnEOHLSdQfovA" title="《黑客攻防技术宝典：Web实战篇》" target="_blank" rel="noopener">《黑客攻防技术宝典：Web实战篇》</a> </li>
+</ul>
+
       
     </div>
     
@@ -405,6 +685,24 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WebSecurity/" rel="tag"><i class="fa fa-tag"></i> WebSecurity</a>
+          
+            <a href="/tags/Injection/" rel="tag"><i class="fa fa-tag"></i> Injection</a>
+          
+            <a href="/tags/XSS/" rel="tag"><i class="fa fa-tag"></i> XSS</a>
+          
+            <a href="/tags/CSRF/" rel="tag"><i class="fa fa-tag"></i> CSRF</a>
+          
+            <a href="/tags/SSRF/" rel="tag"><i class="fa fa-tag"></i> SSRF</a>
+          
+            <a href="/tags/DDOS/" rel="tag"><i class="fa fa-tag"></i> DDOS</a>
+          
+            <a href="/tags/HTTPS/" rel="tag"><i class="fa fa-tag"></i> HTTPS</a>
+          
+        </div>
       
 
       
@@ -478,8 +776,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -516,7 +823,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -568,6 +875,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-应用层DDOS攻击"><span class="nav-number">8.</span> <span class="nav-text">0x07 应用层DDOS攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
