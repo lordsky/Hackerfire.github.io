@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BF%87%E6%BB%A4%E5%99%A8.png">
-<meta property="og:updated_time" content="2018-09-12T13:54:26.012Z">
+<meta property="og:updated_time" content="2018-09-12T15:25:28.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web攻防技术浅析">
 <meta name="twitter:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等   0x00  Web安全基础1. Web安全漏洞 图片来自：绿盟科技博客 2. 安全编码规范OWASP 安全编码规范快速参考指南   3. Web应用架构三层架构  四层架构  图">
@@ -647,7 +647,46 @@
 <h2 id="0x04-文件上传及防御"><a href="#0x04-文件上传及防御" class="headerlink" title="0x04 文件上传及防御"></a>0x04 文件上传及防御</h2><hr>
 <h2 id="0x05-越权漏洞及防御"><a href="#0x05-越权漏洞及防御" class="headerlink" title="0x05 越权漏洞及防御"></a>0x05 越权漏洞及防御</h2><hr>
 <h2 id="0x06-XXE攻击及防御"><a href="#0x06-XXE攻击及防御" class="headerlink" title="0x06 XXE攻击及防御"></a>0x06 XXE攻击及防御</h2><hr>
-<h2 id="0x07-应用层DDOS攻击"><a href="#0x07-应用层DDOS攻击" class="headerlink" title="0x07 应用层DDOS攻击"></a>0x07 应用层DDOS攻击</h2><hr>
+<h2 id="0x07-DDoS攻击与防御"><a href="#0x07-DDoS攻击与防御" class="headerlink" title="0x07 DDoS攻击与防御"></a>0x07 DDoS攻击与防御</h2><h3 id="1-DDoS简介"><a href="#1-DDoS简介" class="headerlink" title="1. DDoS简介"></a>1. DDoS简介</h3><p>全称Distributed Denial of Service，分布式拒绝服务，利用DDoS造成的攻击称为拒绝服务攻击，其原理就是利用大量的请求造成资源过载，导致服务不可用。<br>　　<br>DDoS攻击从层次上可分为<strong><em>网络层</em></strong>攻击与<strong><em>应用层</em></strong>攻击，从攻击手法上可分为快型流量攻击与慢型流量攻击，但其原理都是造成资源过载，导致服务不可用</p>
+<h3 id="2-网络层DDoS攻击"><a href="#2-网络层DDoS攻击" class="headerlink" title="2. 网络层DDoS攻击"></a>2. 网络层DDoS攻击</h3><p>网络层DDos攻击包括<strong><em>SYN flood、UDP flood、ICMP flood</em></strong>等</p>
+<p><strong>(1) SYN flood攻击</strong></p>
+<p>SYN flood攻击主要利用了TCP三次握手过程中的缺陷，我们知道TCP三次握手过程是要建立连接的双方发送SYN，SYN+ACK，ACK数据包，而当攻击方随意构造源ip去发送SYN包时，服务器返回的SYN+ACK就不能得到应答（因为ip是随意构造的），此时服务器就会尝试重新发送，并且会有至少30s的等待时间，导致资源饱和服务不可用，此攻击属于<strong><em>慢型dos攻击</em></strong></p>
+<p><strong>(2)UDP flood攻击 </strong></p>
+<p>udp是一种无连接的协议，因此攻击者可以伪造大量的源IP地址去发送udp包，此种攻击属于<strong><em>大流量攻击</em></strong>。正常应用情况下，UDP包双向流量会基本相等，因此在消耗对方资源的时候也在消耗自己的资源</p>
+<p><strong>(3) ICMP flood攻击</strong></p>
+<p>此攻击属于<strong><em>大流量攻击</em></strong>，其原理就是不断发送不正常的ICMP包（所谓不正常就是ICMP包内容很大），导致目标带宽被占用，但其本身资源也会被消耗。并且目前很多服务器都是禁ping的（在防火墙在可以屏蔽icmp包）</p>
+<h3 id="3-网络层DDoS防御"><a href="#3-网络层DDoS防御" class="headerlink" title="3. 网络层DDoS防御"></a>3. 网络层DDoS防御</h3><p>(1) 网络架构上做好优化，提升带宽，采用负载均衡分流</p>
+<p>(2) 添加抗DDos设备，流量清洗</p>
+<p>(3) 限制单ip请求频率</p>
+<p>(4) 防火墙等防护设置禁止icmp包等</p>
+<h3 id="4-应用层DDoS攻击"><a href="#4-应用层DDoS攻击" class="headerlink" title="4. 应用层DDoS攻击"></a>4. 应用层DDoS攻击</h3><p>应用层DDoS攻击不同于网络层DDoS，发生在TCP建立握手成功之后，应用程序处理请求的时候</p>
+<p><strong>(1) CC 攻击</strong></p>
+<p>“CC攻击”的前身是一个叫fatboy的攻击程序，当时绿盟为了防御DDos攻击研发了一款产品，叫做“Collapasar”，能够有效的防御SYN flood攻击。而黑客为了挑衅，研发了一款Challenge Collapasar工具（简称CC），意指在黑洞的防御下，仍能有效完成拒绝服务攻击</p>
+<p>CC攻击的原理，就是针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽。因此在发送CC攻击前，我们需要寻找加载比较慢，消耗资源比较多的网页，比如需要查询数据库的页面、读写硬盘文件的等。通过cc攻击，使用爬虫对某些加载需要消耗大量资源的页面发起http请求</p>
+<p><strong>(2) Slowlories 攻击</strong></p>
+<p>由于webserver中间件漏洞引发的拒绝服务攻击，其原理是以极低的速度往服务器发送HTTP请求。apache等中间件默认会设置最大并发链接数，而这种攻击就是会持续保持连接，导致服务饱和不可用。slowloris有点类似基于HTTP协议的SYN flood攻击</p>
+<p><strong><em>构造畸形http请求包</em></strong></p>
+<pre><code>GET / HTTP/1.1\r\n
+Host: Victim host\r\n
+User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.503l3; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; MSOffice 12)\r\n
+Content-Length: 42\r\n
+</code></pre><p>完整的http请求头结尾应该是两次的\r\n\r\n，这里少了一次，因此服务器将会一直等待</p>
+<p><strong>(3) HTTP POST DOS</strong></p>
+<p>原理是在发送HTTP POST包时，指定一个非常大的Content-Length值，然后以极低的速度发包，保持连接不断，导致服务饱和不可用</p>
+<p><strong>(4) Slow Read attack</strong></p>
+<p>Slow Read attack攻击方式是采用调整TCP协议中的滑动窗口大小，来对服务器单次发送发送的数据大小进行控制，使得服务器需要对一个回应分成很多个包来发送</p>
+<p><strong>(5) Server Limit Dos</strong></p>
+<p>这是由于cookie导致的dos攻击，当然其原理还是基于webserver的特性。apache默认最大的http包头长度为8192字节，如果超出此长度，则会返回4xx错误。如果我们利用存储型xss漏洞，将一个超长的cookie写入客户端页面，则用户再访问此页面后，由于请求头加载了恶意的超长cookie，导致其不能访问该站的页面（除非清空cookie）</p>
+<p><strong>(6) ReDos</strong></p>
+<p>这是由于代码写得有缺陷，导致使用正则时，会出现大量占用资源的情况，导致服务不可用，这是利用了正则表达式在匹配时的某些特性决定的</p>
+<h3 id="5-应用层DDoS防御"><a href="#5-应用层DDoS防御" class="headerlink" title="5. 应用层DDoS防御"></a>5. 应用层DDoS防御</h3><p>(1) 判断User-Agent字段（不可靠，因为可以随意构造）</p>
+<p>(2) 网页中镶嵌js代码（不可靠，因为爬虫也可携带浏览器引擎，或者执行js代码）</p>
+<p>(3) 针对ip+cookie，限制访问频率（由于cookie可以更改，ip可以使用代理，或者肉鸡，也不可靠)</p>
+<p>(4) 关闭apache最大连接数等，合理配置中间件，缓解ddos攻击</p>
+<p>(5)页面中添加验证码，比如搜索数据库时</p>
+<p>(6) 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作</p>
+<p>应用层的防御有时比网络层的更难，因为导致应用层被dos攻击的因素非常多，有时往往是因为程序员的失误，导致某个页面加载需要消耗大量资源，有时是因为中间件配置不当等等。而应用层DDos防御的核心就是区分人与机器（爬虫），因为大量的请求不可能是人为的，肯定是机器构造的。因此如果能有效的区分人与爬虫行为，则可以很好地防御此攻击</p>
+<hr>
 <h2 id="0x08-Java反序列化漏洞"><a href="#0x08-Java反序列化漏洞" class="headerlink" title="0x08 Java反序列化漏洞"></a>0x08 Java反序列化漏洞</h2><hr>
 <h2 id="0x08-点击劫持原理及防御"><a href="#0x08-点击劫持原理及防御" class="headerlink" title="0x08 点击劫持原理及防御"></a>0x08 点击劫持原理及防御</h2><hr>
 <h2 id="0x09-HTTPS中间人攻击及防御"><a href="#0x09-HTTPS中间人攻击及防御" class="headerlink" title="0x09 HTTPS中间人攻击及防御"></a>0x09 HTTPS中间人攻击及防御</h2><hr>
@@ -885,7 +924,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-应用层DDOS攻击"><span class="nav-number">8.</span> <span class="nav-text">0x07 应用层DDOS攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DDoS攻击与防御"><span class="nav-number">8.</span> <span class="nav-text">0x07 DDoS攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. DDoS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络层DDoS攻击"><span class="nav-number">8.2.</span> <span class="nav-text">2. 网络层DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络层DDoS防御"><span class="nav-number">8.3.</span> <span class="nav-text">3. 网络层DDoS防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-应用层DDoS攻击"><span class="nav-number">8.4.</span> <span class="nav-text">4. 应用层DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-应用层DDoS防御"><span class="nav-number">8.5.</span> <span class="nav-text">5. 应用层DDoS防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
             
 
           </div>
