@@ -111,7 +111,15 @@
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BF%87%E6%BB%A4%E5%99%A8.png">
-<meta property="og:updated_time" content="2018-09-13T04:46:56.388Z">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/XSS%E5%8D%B1%E5%AE%B3.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E5%8F%8D%E5%B0%84XSS.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E5%AD%98%E5%82%A8XSS.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/DOM%20XSS.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/XSS%E9%98%B2%E5%BE%A1.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E9%98%B2%E5%BE%A1XSS.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/CSRF.png">
+<meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/XXE%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:updated_time" content="2018-09-13T15:29:11.856Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web攻防技术浅析">
 <meta name="twitter:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等">
@@ -635,11 +643,199 @@
 <p><strong>c 配置网络访问控制</strong></p>
 <h3 id="4-语法备忘单"><a href="#4-语法备忘单" class="headerlink" title="4. 语法备忘单"></a>4. 语法备忘单</h3><p><a href="https://websec.ca/kb/sql_injection" target="_blank" rel="noopener">websec.ca/kb/sql_injection</a>  <em>MySQL，MSSQL,ORACLE等数据库注入语法速查</em></p>
 <hr>
-<h2 id="0x02-XSS-攻击及防御"><a href="#0x02-XSS-攻击及防御" class="headerlink" title="0x02 XSS 攻击及防御"></a>0x02 XSS 攻击及防御</h2><hr>
-<h2 id="0x03-CSRF-SSRF原理及异同"><a href="#0x03-CSRF-SSRF原理及异同" class="headerlink" title="0x03 CSRF/SSRF原理及异同"></a>0x03 CSRF/SSRF原理及异同</h2><hr>
-<h2 id="0x04-文件上传及防御"><a href="#0x04-文件上传及防御" class="headerlink" title="0x04 文件上传及防御"></a>0x04 文件上传及防御</h2><hr>
-<h2 id="0x05-越权漏洞及防御"><a href="#0x05-越权漏洞及防御" class="headerlink" title="0x05 越权漏洞及防御"></a>0x05 越权漏洞及防御</h2><hr>
-<h2 id="0x06-XXE攻击及防御"><a href="#0x06-XXE攻击及防御" class="headerlink" title="0x06 XXE攻击及防御"></a>0x06 XXE攻击及防御</h2><hr>
+<h2 id="0x02-XSS-攻击及防御"><a href="#0x02-XSS-攻击及防御" class="headerlink" title="0x02 XSS 攻击及防御"></a>0x02 XSS 攻击及防御</h2><h3 id="1-原理及危害"><a href="#1-原理及危害" class="headerlink" title="1. 原理及危害"></a>1. 原理及危害</h3><h4 id="1-XSS-简介"><a href="#1-XSS-简介" class="headerlink" title="(1) XSS 简介"></a>(1) XSS 简介</h4><p>跨站脚本攻击(Cross Site Scripting)，避免与层叠样式表(Cascading Style Sheets)混淆，改为XSS</p>
+<p>一种将恶意JavaScript代码插入到其他Web用户页面里执行以达到攻击目的的漏洞；攻击者利用浏览器的动态展示功能，在HTML页面里嵌入恶意代码；当用户浏览该页面时，这些<br>嵌入的恶意代码会被执行，用户浏览器被攻击者控制，从而达到攻击目的，如cookie窃取，账户劫持，拒绝服务攻击等</p>
+<p>####（2） 产生原因</p>
+<p>未经净化的数据直接在HTML页面上展示，这些数据可能来源于http请求，数据库，Http Header，cookie等，直接导致跨站脚本威胁</p>
+<h4 id="3-XSS-危害"><a href="#3-XSS-危害" class="headerlink" title="(3) XSS 危害"></a>(3) XSS 危害</h4><p><img src="http://pbegz2k88.bkt.clouddn.com/XSS%E5%8D%B1%E5%AE%B3.png" alt=""></p>
+<p><em>图片参考自：绿盟科技博客</em></p>
+<h3 id="2-XSS-分类"><a href="#2-XSS-分类" class="headerlink" title="2. XSS 分类"></a>2. XSS 分类</h3><h4 id="1-反射型XSS-Reflected-XSS"><a href="#1-反射型XSS-Reflected-XSS" class="headerlink" title="(1) 反射型XSS(Reflected XSS)"></a>(1) 反射型XSS(Reflected XSS)</h4><p>非持久性XSS，跨站代码一般存在链接中，当受害者请求此链接，跨站代码提交到服务器，服务器解析后在响应内容中出现这段XSS代码，最后浏览器解析执行</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%8F%8D%E5%B0%84XSS.png" alt=""></p>
+<h4 id="2-存储型XSS"><a href="#2-存储型XSS" class="headerlink" title="(2) 存储型XSS"></a>(2) 存储型XSS</h4><p>持久性XSS，相比反射型XSS和DOM型XSS具有更高的隐蔽性，危害更大，不需要用户手动触发。 允许用户存储数据的web程序都可能存在存储型XSS漏洞，当攻击者提交一段XSS代码后，被服务器端接收并存储，当所有浏览者访问某个页面时都会被XSS，其中最典型的例子就是留言板</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%AD%98%E5%82%A8XSS.png" alt=""></p>
+<h4 id="3-DOM-XSS"><a href="#3-DOM-XSS" class="headerlink" title="(3) DOM XSS"></a>(3) DOM XSS</h4><p>一种基于DOM的跨站，由于客户端脚本自身解析不正确导致的安全问题</p>
+<p>DOM即文本对象模型，DOM通常代表在html、xhtml和xml中的对象，使用DOM可以允许程序和脚本动态的访问和更新文档的内容、结构和样式。它不需要服务器解析响应的直接参与，触发XSS靠的是浏览器端的DOM解析</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/DOM%20XSS.png" alt=""></p>
+<h3 id="3-发现及防御"><a href="#3-发现及防御" class="headerlink" title="3. 发现及防御"></a>3. 发现及防御</h3><h4 id="1-出现位置"><a href="#1-出现位置" class="headerlink" title="(1) 出现位置"></a>(1) 出现位置</h4><pre><code>1. 直接插入到SCRIPT标签里
+
+2. 插入到HTML注释，HTML标签属性名，HTML标签属性值
+
+3. 作为HTML标签的名字
+
+4. 直接插入到CSS里
+
+5. 所有可以提交参数并能在页面返回的位置上(URL中参数，URL自身，表单，搜索框)
+</code></pre><h4 id="（2）防御方案"><a href="#（2）防御方案" class="headerlink" title="（2）防御方案"></a>（2）防御方案</h4><p><img src="http://pbegz2k88.bkt.clouddn.com/XSS%E9%98%B2%E5%BE%A1.png" alt=""></p>
+<p><em>图片来自：绿盟科技博客</em></p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/%E9%98%B2%E5%BE%A1XSS.png" alt=""></p>
+<p><em>参考自：《白帽子讲Web安全》</em></p>
+<h3 id="4-XSS-参考资源"><a href="#4-XSS-参考资源" class="headerlink" title="4. XSS 参考资源"></a>4. XSS 参考资源</h3><ul>
+<li><a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting" target="_blank" rel="noopener">OWQSP-XSS 预防备忘单</a></li>
+</ul>
+<ul>
+<li><a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet" target="_blank" rel="noopener">OWASP-XSS攻击备忘单</a></li>
+</ul>
+<ul>
+<li><a href="https://wizardforcel.gitbooks.io/xss-naxienian/content/" target="_blank" rel="noopener">那些年我们一起学XSS</a></li>
+</ul>
+<h3 id="5-XSS-攻击平台"><a href="#5-XSS-攻击平台" class="headerlink" title="5.XSS 攻击平台"></a>5.XSS 攻击平台</h3><p><a href="https://beefproject.com" target="_blank" rel="noopener">BeEF</a> <em>一款专注于Web浏览器的渗透框架，最好的XSS演示平台之一</em></p>
+<p><a href="https://www.owasp.org/index.php/OWASP_XSSER" target="_blank" rel="noopener">OWASP_XSSER</a> <em>跨站点脚本框架，用于检测，利用和报告基于Web的应用程序中的XSS漏洞</em></p>
+<p><a href="http://xss-proxy.sourceforge.net/" target="_blank" rel="noopener">XSS-Proxy</a> <em>一款轻量级XSS攻击平台，通过嵌套iframe实时远程控制被攻击的浏览器</em></p>
+<hr>
+<h2 id="0x03-CSRF-SSRF原理及异同"><a href="#0x03-CSRF-SSRF原理及异同" class="headerlink" title="0x03 CSRF/SSRF原理及异同"></a>0x03 CSRF/SSRF原理及异同</h2><h3 id="1-CSRF-跨站请求伪造"><a href="#1-CSRF-跨站请求伪造" class="headerlink" title="1. CSRF 跨站请求伪造"></a>1. CSRF 跨站请求伪造</h3><h4 id="1-CSRF-简述"><a href="#1-CSRF-简述" class="headerlink" title="(1) CSRF 简述"></a>(1) CSRF 简述</h4><p>CSRF，全名 <strong><em>Cross Site Request Forgery</em></strong>，跨站请求伪造。一个是“跨站点”，另一个是“伪造”。前者说明了CSRF攻击发生时所伴随的请求的来源，后者说明了该请求的产生方式。所谓伪造即该请求并不是用户本身的意愿，而是由攻击者构造，由受害者被动发出的</p>
+<p><strong>XSS</strong>利用站点内的<strong>信任用户</strong>，而<strong>CSRF</strong>则通过<strong>伪装</strong>来自受信任用户的请求来利用受信任的网站。与XSS攻击相比，CSRF攻击往往不大流行（因此对其进行防范的资源也相当稀少）和难以防范，所以被认为比XSS更具危险性</p>
+<h4 id="2-攻击过程"><a href="#2-攻击过程" class="headerlink" title="(2) 攻击过程"></a>(2) 攻击过程</h4><p><img src="http://pbegz2k88.bkt.clouddn.com/CSRF.png" alt=""></p>
+<p><em>图片来自：Wooyun 知识库</em></p>
+<h4 id="3-攻击方式"><a href="#3-攻击方式" class="headerlink" title="(3) 攻击方式"></a>(3) 攻击方式</h4><p><strong>A. HTML CSRF 攻击</strong></p>
+<p>利用HTML元素发出GET请求（带src属性的HTML标签都可以跨域发起GET请求</p>
+<pre><code>#!html
+&lt;link href=&quot;…&quot;&gt;
+&lt;img src=&quot;…&quot;&gt;
+&lt;iframe src=&quot;…&quot;&gt;
+&lt;meta http-equiv=&quot;refresh&quot; content=&quot;0; url=…&quot;&gt;
+&lt;script src=&quot;…&quot;&gt;
+&lt;video src=&quot;…&quot;&gt;
+&lt;audio src=&quot;…&quot;&gt;
+&lt;a href=&quot;…&quot;&gt;
+&lt;table background=&quot;…&quot;&gt;
+…
+</code></pre><p>若要构造POST请求，则必须用表单提交的方式</p>
+<pre><code>&lt;form action=&quot;http://www.a.com/register&quot; id=&quot;register&quot; method=&quot;post&quot;&gt;
+  &lt;input type=text name=&quot;username&quot; value=&quot;&quot; /&gt;
+  &lt;input type=password name=&quot;password&quot; value=&quot;&quot; /&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  var f = document.getElementById(&quot;register&quot;);
+  f.inputs[0].value = &quot;test&quot;;
+  f.inputs[1].value = &quot;passwd&quot;;
+  f.submit();
+&lt;/script&gt;
+</code></pre><p><strong>Flash CSRF</strong></p>
+<p>Flash 也有各种方式可以发起网络请求，包括 POST</p>
+<pre><code>import flash.net.URLRequest;
+import flash.system.Security;
+var url = new URLRequest(&quot;http://target/page&quot;);
+var param = new URLVariables();
+param = &quot;test=123&quot;;
+url.method = &quot;POST&quot;;
+url.data = param;
+sendToURL(url);
+stop();
+</code></pre><p>Flash 中还可以使用 getURL、loadVars 等方式发起请求</p>
+<pre><code>req = new LoadVars();
+req.addRequestHeader(&quot;foo&quot;, &quot;bar&quot;);
+req.send(&quot;http://target/page?v1=123&amp;v2=222&quot;, &quot;_blank&quot;, &quot;GET&quot;);
+</code></pre><h4 id="4-CSRF-危害"><a href="#4-CSRF-危害" class="headerlink" title="(4) CSRF 危害"></a>(4) CSRF 危害</h4><pre><code>1. 篡改目标网站上的用户数据
+2. 盗取用户隐私数据
+3. 作为其他攻击向量的辅助攻击手法
+4. 传播CSRF蠕虫
+</code></pre><h4 id="5-CSRF-防御"><a href="#5-CSRF-防御" class="headerlink" title="(5) CSRF 防御"></a>(5) CSRF 防御</h4><p><strong>A. 针对跨域</strong></p>
+<p>CSRF攻击的请求都是跨域的，针对这一特点，可以<strong><em>在服务端对HTTP请求头部的Referer字段进行检查</em></strong>。一般情况下，用户提交的都是站内的请求，其Referer中的来源地址应该是站内的地址，而前端的JavaScript无法修改Referer字段</p>
+<p><strong>B 针对请求伪造</strong></p>
+<p>请求中所有参数的值都是可以预测的，如果出现了攻击者无法预测的参数值，那么将无法伪造请求，CSRF攻击也不会发生</p>
+<ol>
+<li>添加验证码：核心作用是区分人和机器，而CSRF攻击中的请求是在受害者上当的情况下由浏览器自动发出的，属于机器发出的请求，攻击者无法预知验证码的值，所以使用验证码可以很好地防御CSRF攻击，但会一定程度地影响用户体验</li>
+</ol>
+<ol start="2">
+<li>使用一次性token：一段字母数字随机值，当我们提交表单时，token会作为一个参数提交到服务端进行验证。在这个请求过程中，token的值也是攻击者无法预知的，而且由于同源策略的限制，攻击者也无法使用JavaScript获取其他域的token值，所以这种方法可以成功防御CSRF攻击</li>
+</ol>
+<p><strong>C 限制Session生命周期</strong></p>
+<p>缩短Session的有效时间等等，可能一定程度上会降低CSRF攻击的成功率</p>
+<h3 id="2-SSRF-服务端请求伪造"><a href="#2-SSRF-服务端请求伪造" class="headerlink" title="2. SSRF 服务端请求伪造"></a>2. SSRF 服务端请求伪造</h3><h4 id="1-SSRF-简介"><a href="#1-SSRF-简介" class="headerlink" title="(1) SSRF 简介"></a>(1) SSRF 简介</h4><p>SRF，<strong><em>Server-Side Request Forgery</em></strong>，服务端请求伪造，是一种由攻击者构造形成由服务器端发起请求的一个漏洞。一般情况下，SSRF 攻击的目标是从外网无法访问的内部系统</p>
+<h4 id="2-形成原因"><a href="#2-形成原因" class="headerlink" title="(2) 形成原因"></a>(2) 形成原因</h4><p>大都是由于服务端提供了从其他服务器应用获取数据的功能且没有对目标地址做过滤与限制。比如从指定URL地址获取网页文本内容、加载指定地址的图片、下载等</p>
+<h4 id="3-攻击类型"><a href="#3-攻击类型" class="headerlink" title="(3) 攻击类型"></a>(3) 攻击类型</h4><pre><code>1.可以对外网、服务器所在内网、本地进行端口扫描，获取一些服务的banner信息
+
+2.攻击运行在内网或本地的应用程序(比如溢出)
+
+3.对内网web应用进行指纹识别，通过访问默认文件实现
+
+4.攻击内外网的web应用，主要是使用get参数就可以实现的攻击(比如struts2，sqli等)
+
+5.利用file协议读取本地文件等
+</code></pre><h4 id="4-绕过方式"><a href="#4-绕过方式" class="headerlink" title="(4) 绕过方式"></a>(4) 绕过方式</h4><ol>
+<li><p>使用@：<a href="http://A.com@10.10.10.10" target="_blank" rel="noopener">http://A.com@10.10.10.10</a></p>
+</li>
+<li><p>ip地址转换成进制：115.239.210.26 ＝ 16373751032</p>
+</li>
+<li><p>使用短地址来生成内网地址：<a href="http://t.cn/RwbLKDx" target="_blank" rel="noopener">http://t.cn/RwbLKDx</a></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>端口绕过</p>
+</li>
+<li><p>xip.io</p>
+</li>
+<li><p>通过js跳转</p>
+</li>
+</ol>
+<h4 id="5-防御方案"><a href="#5-防御方案" class="headerlink" title="(5) 防御方案"></a>(5) 防御方案</h4><pre><code>1.过滤返回信息，验证远程服务器对请求的响应是比较容易的方法。如果web应用是去获取某一种类型的文件。那么在把返回结果展示给用户之前先验证返回的信息是否符合标准
+
+2.统一错误信息，避免用户可以根据错误信息来判断远端服务器的端口状态
+
+3.限制请求的端口为http常用的端口，比如，80、443、8080、8090
+
+4.黑名单内网ip。避免应用被用来获取获取内网数据，攻击内网
+
+5.禁用不需要的协议。仅仅允许http和https请求
+</code></pre><h3 id="3-XSS-CSRF-SSRF-异同"><a href="#3-XSS-CSRF-SSRF-异同" class="headerlink" title="3. XSS/CSRF/SSRF 异同"></a>3. XSS/CSRF/SSRF 异同</h3><p><strong><em>相同点</em></strong></p>
+<p>XSS，CSRF,SSRF三种常见的Web服务端漏洞均是由于服务器端对用户提供的可控数据过于信任或者过滤不严导致的</p>
+<p><strong><em>不同点</em></strong></p>
+<p>XSS是服务器对用户输入的数据没有进行足够的过滤，导致客户端浏览器在渲染服务器返回的html页面时，出现了预期值之外的脚本语句被执行</p>
+<p>CSRF是服务器端没有对用户提交的数据进行随机值校验，且对http请求包内的refer字段校验不严，导致攻击者可以利用用户的Cookie信息伪造用户请求发送至服务器  </p>
+<p>SSRF是服务器对用户提供的可控URL过于信任，没有对攻击者提供的RUL进行地址限制和足够的检测，导致攻击者可以以此为跳板攻击内网或其他服务器</p>
+<h3 id="4-参考资源"><a href="#4-参考资源" class="headerlink" title="4. 参考资源"></a>4. 参考资源</h3><p><a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF" target="_blank" rel="noopener">OWASP-Cross-Site_Request_Forgery_(CSRF)</a>)</p>
+<p><a href="http://drops.mayter.cn/#!/drops/1189.%E9%82%AA%E6%81%B6%E7%9A%84CSRF" target="_blank" rel="noopener">Wooyun 知识库-邪恶的CSRF</a></p>
+<p><a href="http://blog.nsfocus.net/fix-summary-csrf/" target="_blank" rel="noopener">绿盟科技博客-安全分享之CSRF</a></p>
+<p><a href="http://www.freebuf.com/articles/web/20407.html" target="_blank" rel="noopener">Freebuf-SSRF攻击实例解析</a></p>
+<hr>
+<h2 id="0x04-文件上传及防御"><a href="#0x04-文件上传及防御" class="headerlink" title="0x04 文件上传及防御"></a>0x04 文件上传及防御</h2><h3 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h3><p>使用到网站的文件上传的功能时，未对被上传的文件进行限制或者限制被绕过，该功能便有可能会被利用于上传可执行文件、脚本到服务器上，进而进一步导致服务器沦陷</p>
+<h3 id="2-漏洞成因"><a href="#2-漏洞成因" class="headerlink" title="2. 漏洞成因"></a>2. 漏洞成因</h3><h4 id="1-服务器配置不当"><a href="#1-服务器配置不当" class="headerlink" title="(1) 服务器配置不当"></a>(1) 服务器配置不当</h4><p>当服务器配置不当时，在不需要上传页面的情况下便可导致任意文件上传，如 <strong>*HTTP PUT</strong> *方法：向指定资源位置上传其最新内容</p>
+<h4 id="2-开源编辑器上传漏洞"><a href="#2-开源编辑器上传漏洞" class="headerlink" title="(2) 开源编辑器上传漏洞"></a>(2) 开源编辑器上传漏洞</h4><p>很多开源的编辑器历史上都有不同的上传漏洞，如 <a href="http://wiki.secbug.net/web_fck-editor.html" target="_blank" rel="noopener">CKEditor</a> 的文件上传漏洞</p>
+<h4 id="3-本地文件上传限制被绕过"><a href="#3-本地文件上传限制被绕过" class="headerlink" title="(3) 本地文件上传限制被绕过"></a>(3) 本地文件上传限制被绕过</h4><p>只在客户端浏览器上做了文件限制而没有在远程的服务器上做限制，只需要修改数据包就可以轻松绕过限制</p>
+<h4 id="4-过滤不严或被绕过"><a href="#4-过滤不严或被绕过" class="headerlink" title="(4) 过滤不严或被绕过"></a>(4) 过滤不严或被绕过</h4><p>有些网站上使用了黑名单过滤掉了一些关键的可执行文件脚本后缀等，但黑名单不全或者被绕过，导致可执行脚本文件被上传到服务器上，执行</p>
+<h4 id="5-文件解析漏洞导致文件执行"><a href="#5-文件解析漏洞导致文件执行" class="headerlink" title="(5) 文件解析漏洞导致文件执行"></a>(5) 文件解析漏洞导致文件执行</h4><p>当服务器上存在 <a href="http://wiki.secbug.net/server_resolve.html" target="_blank" rel="noopener">文件解析漏洞</a> 时，合法的文件名便可导致带有恶意代码的文件被执行</p>
+<h4 id="6-文件路径截断"><a href="#6-文件路径截断" class="headerlink" title="(6) 文件路径截断"></a>(6) 文件路径截断</h4><p>在上传的文件中使用一些特殊的符号，使得文件被上传到服务器中时路径被截断从而控制文件路径</p>
+<h3 id="3-防御措施"><a href="#3-防御措施" class="headerlink" title="3. 防御措施"></a>3. 防御措施</h3><pre><code>1. 重新配置好服务器
+
+2. 若新版编辑器已修复漏洞，请更新编辑器版本
+
+3. 在服务器后端对上传的文件进行过滤
+
+4. 使用白名单的方法对文件进行过滤
+
+5. 使用随机数改写文件名和文件路径,不要使用用户定义的文件名和文件路径
+
+6. 被上传的文件限制在某一路径下，并在文件上传目录禁止脚本解析
+</code></pre><hr>
+<h2 id="0x05-越权漏洞及防御"><a href="#0x05-越权漏洞及防御" class="headerlink" title="0x05 越权漏洞及防御"></a>0x05 越权漏洞及防御</h2><h3 id="1-定义及分类"><a href="#1-定义及分类" class="headerlink" title="1. 定义及分类"></a>1. 定义及分类</h3><h4 id="1-垂直越权漏洞"><a href="#1-垂直越权漏洞" class="headerlink" title="(1) 垂直越权漏洞"></a>(1) 垂直越权漏洞</h4><p>也称权限提升，是一种“基于URL的访问控制”设计缺陷引起的漏洞。由于Web应用程序没有做权限控制或者仅在菜单上做了权限控制，导致恶意用户只要猜测其他管理页面的URL，就可以访问或控制其他角色拥有的数据或页面，达到权限提升的目的</p>
+<h4 id="2-水平越权漏洞"><a href="#2-水平越权漏洞" class="headerlink" title="(2) 水平越权漏洞"></a>(2) 水平越权漏洞</h4><p>一种“基于数据的访问控制”设计缺陷引起的漏洞。由于服务器端在接收到请求数据进行操作时没有判断数据的所属人而导致的越权数据访问漏洞。如服务器端从客户端提交的request参数（用户能够控制的数据）中获取用户id，恶意攻击者通过变换请求ID的值，查看或修改不属于本人的数据</p>
+<h3 id="2-越权漏洞防护"><a href="#2-越权漏洞防护" class="headerlink" title="2. 越权漏洞防护"></a>2. 越权漏洞防护</h3><h4 id="1-垂直越权漏洞防护"><a href="#1-垂直越权漏洞防护" class="headerlink" title="(1) 垂直越权漏洞防护"></a>(1) 垂直越权漏洞防护</h4><p>在调用功能之前，验证当前用户身份是否有权限调用相关功能（推荐使用过滤器，进行统一权限验证）</p>
+<p>通过全局过滤器来检测用户是否登录，是否对资源具有访问权限</p>
+<h4 id="2-水平越权漏洞-1"><a href="#2-水平越权漏洞-1" class="headerlink" title="(2) 水平越权漏洞"></a>(2) 水平越权漏洞</h4><p>在用户进行操作时，从session中获取用户id，将传入的参数与用户的身份做绑定校验</p>
+<hr>
+<h2 id="0x06-XXE攻击及防御"><a href="#0x06-XXE攻击及防御" class="headerlink" title="0x06 XXE攻击及防御"></a>0x06 XXE攻击及防御</h2><h3 id="1-XML-简介"><a href="#1-XML-简介" class="headerlink" title="1. XML 简介"></a>1. XML 简介</h3><p>可扩展标记语言（eXtensible Markup Language，XML）是一种标记语言，被设计用来传输和存储数据，应用较为广泛</p>
+<pre><code>* 普通列表项目文档格式：OOXML，ODF，PDF，RSS……
+* 图片格式：SVG，EXIF Headers……
+* 网络协议：WebDAV，CalDAV，XMLRPC，SOAP，REST，XMPP，SAML，XACML……
+* 配置文件：Spring配置文件，Struts2配置文件……
+</code></pre><p>在XML 1.0标准中定义了实体的概念，实体是用于定义引用普通文本或特殊字符的快捷方式的变量，实体可在内部或外部进行声明</p>
+<h3 id="2-XXE-攻击"><a href="#2-XXE-攻击" class="headerlink" title="2. XXE 攻击"></a>2. XXE 攻击</h3><p>XML外部实体（XML External Entity，XXE）攻击是一种常见的Web安全漏洞，攻击者可以通过XML的外部实体获取服务器中本应被保护的数据</p>
+<h3 id="3-XXE-成因"><a href="#3-XXE-成因" class="headerlink" title="3. XXE 成因"></a>3. XXE 成因</h3><p>XML解析器解析外部实体时支持多种协议</p>
+<p><img src="http://pbegz2k88.bkt.clouddn.com/XXE%E5%8D%8F%E8%AE%AE.png" alt=""></p>
+<p>如使用file协议可以读取本地文件内容、使用http协议可以获取Web资源等，因此攻击者可构造恶意的外部实体，当解析器解析了包含“恶意”外部实体的XML类型文件时，便会导致被XXE攻击</p>
+<h3 id="4-攻击方式"><a href="#4-攻击方式" class="headerlink" title="4. 攻击方式"></a>4. 攻击方式</h3><h4 id="A-显示攻击"><a href="#A-显示攻击" class="headerlink" title="A. 显示攻击"></a>A. 显示攻击</h4><p>攻击者通过正常的回显将外部实体里的内容读取出来</p>
+<h4 id="B-盲攻击"><a href="#B-盲攻击" class="headerlink" title="B. 盲攻击"></a>B. 盲攻击</h4><p>利用参数实体将本地文件内容读出来后，作为URL中的参数向其指定服务器发起请求，然后在其指定服务器的日志（Apache日志）中读出文件的内容</p>
+<h3 id="5-XXE-危害"><a href="#5-XXE-危害" class="headerlink" title="5. XXE 危害"></a>5. XXE 危害</h3><p>(1) 读取任意文件</p>
+<p>(2) 执行系统命令</p>
+<p>(3) 探测内网端口</p>
+<p>(4) 攻击内网网站</p>
+<h3 id="6-XXE-防御"><a href="#6-XXE-防御" class="headerlink" title="6. XXE 防御"></a>6. XXE 防御</h3><p>(1) 使用开发语言提供的禁用外部实体的方法</p>
+<p>(2) 过滤用户提交的XML数据</p>
+<p>(3) 在默认情况下关闭内联DTD解析（Inline DTD parsing）、外部实体、实体，使用白名单来控制允许实用的协议</p>
+<h3 id="7-参考资源"><a href="#7-参考资源" class="headerlink" title="7. 参考资源"></a>7. 参考资源</h3><p><a href="https://www.owasp.org/images/5/5d/XML_Exteral_Entity_Attack.pdf" target="_blank" rel="noopener">OWASP-XML_Exteral_Entity_Attack</a></p>
+<p><a href="https://www.owasp.org/index.php/XML_External_Entity_(XXE" target="_blank" rel="noopener">OWASP- XXE预防备忘单</a></p>
+<p><a href="https://security.tencent.com/index.php/blog/msg/69" target="_blank" rel="noopener">未知攻焉知防——XXE漏洞攻防</a></p>
+<hr>
 <h2 id="0x07-DDoS攻击与防御"><a href="#0x07-DDoS攻击与防御" class="headerlink" title="0x07 DDoS攻击与防御"></a>0x07 DDoS攻击与防御</h2><h3 id="1-DDoS简介"><a href="#1-DDoS简介" class="headerlink" title="1. DDoS简介"></a>1. DDoS简介</h3><p>全称Distributed Denial of Service，分布式拒绝服务，利用DDoS造成的攻击称为拒绝服务攻击，其原理就是利用大量的请求造成资源过载，导致服务不可用。<br>　　<br>DDoS攻击从层次上可分为<strong><em>网络层</em></strong>攻击与<strong><em>应用层</em></strong>攻击，从攻击手法上可分为快型流量攻击与慢型流量攻击，但其原理都是造成资源过载，导致服务不可用</p>
 <h3 id="2-网络层DDoS攻击"><a href="#2-网络层DDoS攻击" class="headerlink" title="2. 网络层DDoS攻击"></a>2. 网络层DDoS攻击</h3><p>网络层DDos攻击包括<strong><em>SYN flood、UDP flood、ICMP flood</em></strong>等</p>
 <h4 id="1-SYN-flood攻击"><a href="#1-SYN-flood攻击" class="headerlink" title="(1) SYN flood攻击"></a><strong>(1) SYN flood攻击</strong></h4><p>SYN flood攻击主要利用了TCP三次握手过程中的缺陷，我们知道TCP三次握手过程是要建立连接的双方发送SYN，SYN+ACK，ACK数据包，而当攻击方随意构造源ip去发送SYN包时，服务器返回的SYN+ACK就不能得到应答（因为ip是随意构造的），此时服务器就会尝试重新发送，并且会有至少30s的等待时间，导致资源饱和服务不可用，此攻击属于<strong><em>慢型dos攻击</em></strong></p>
@@ -672,16 +868,19 @@ Content-Length: 42\r\n
 <p>(6) 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作</p>
 <p>应用层的防御有时比网络层的更难，因为导致应用层被dos攻击的因素非常多，有时往往是因为程序员的失误，导致某个页面加载需要消耗大量资源，有时是因为中间件配置不当等等。而应用层DDos防御的核心就是区分人与机器（爬虫），因为大量的请求不可能是人为的，肯定是机器构造的。因此如果能有效的区分人与爬虫行为，则可以很好地防御此攻击</p>
 <hr>
-<h2 id="0x08-Java反序列化漏洞"><a href="#0x08-Java反序列化漏洞" class="headerlink" title="0x08 Java反序列化漏洞"></a>0x08 Java反序列化漏洞</h2><hr>
-<h2 id="0x08-点击劫持原理及防御"><a href="#0x08-点击劫持原理及防御" class="headerlink" title="0x08 点击劫持原理及防御"></a>0x08 点击劫持原理及防御</h2><hr>
-<h2 id="0x09-HTTPS中间人攻击及防御"><a href="#0x09-HTTPS中间人攻击及防御" class="headerlink" title="0x09 HTTPS中间人攻击及防御"></a>0x09 HTTPS中间人攻击及防御</h2><hr>
 <p>0xFF 参考及学习资源</p>
 <ul>
 <li><p><a href="https://www.owasp.org/images/d/dc/OWASP_Top_10_2017_%E4%B8%AD%E6%96%87%E7%89%88v1.3.pdf" target="_blank" rel="noopener">OWAP Top-10 </a></p>
 </li>
 <li><p><a href="http://drops.mayter.cn/#!/" target="_blank" rel="noopener">WooYun知识库</a></p>
 </li>
+</ul>
+<ul>
+<li><p><a href="https://ctf-wiki.github.io/ctf-wiki/web/introduction/" target="_blank" rel="noopener">CTF-Wiki Web篇</a></p>
+</li>
 <li><p><a href="https://paper.seebug.org/category/web-security/" target="_blank" rel="noopener">Seebug Paper-Web安全</a></p>
+</li>
+<li><p><a href="http://wiki.secbug.net/enterprise_web.html" target="_blank" rel="noopener">WooYun Wiki-WEB应用</a></p>
 </li>
 <li><p><a href="http://blog.nsfocus.net/web-vulnerability-analysis-coding-security/" target="_blank" rel="noopener">绿盟科技博客-安全分享</a></p>
 </li>
@@ -909,7 +1108,7 @@ Content-Length: 42\r\n
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">(1) 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-本质"><span class="nav-number">2.1.2.</span> <span class="nav-text">(2) 本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-产生原理"><span class="nav-number">2.1.3.</span> <span class="nav-text">(3) 产生原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-引发因素"><span class="nav-number">2.1.4.</span> <span class="nav-text">(4) 引发因素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-寻找-SQL-注入点"><span class="nav-number">2.2.1.</span> <span class="nav-text">(1) 寻找 SQL 注入点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-实施-SQL-注入"><span class="nav-number">2.2.2.</span> <span class="nav-text">(2) 实施 SQL 注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-代码层防御"><span class="nav-number">2.3.1.</span> <span class="nav-text">(1) 代码层防御</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-平台层防御"><span class="nav-number">2.3.2.</span> <span class="nav-text">(2) 平台层防御</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DDoS攻击与防御"><span class="nav-number">8.</span> <span class="nav-text">0x07 DDoS攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. DDoS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络层DDoS攻击"><span class="nav-number">8.2.</span> <span class="nav-text">2. 网络层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SYN-flood攻击"><span class="nav-number">8.2.1.</span> <span class="nav-text">(1) SYN flood攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-UDP-flood攻击"><span class="nav-number">8.2.2.</span> <span class="nav-text">(2)UDP flood攻击 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ICMP-flood攻击"><span class="nav-number">8.2.3.</span> <span class="nav-text">(3) ICMP flood攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络层DDoS防御"><span class="nav-number">8.3.</span> <span class="nav-text">3. 网络层DDoS防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-应用层DDoS攻击"><span class="nav-number">8.4.</span> <span class="nav-text">4. 应用层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CC-攻击"><span class="nav-number">8.4.1.</span> <span class="nav-text">(1) CC 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Slowlories-攻击"><span class="nav-number">8.4.2.</span> <span class="nav-text">(2) Slowlories 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP-POST-DOS"><span class="nav-number">8.4.3.</span> <span class="nav-text">(3) HTTP POST DOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Slow-Read-attack"><span class="nav-number">8.4.4.</span> <span class="nav-text">(4) Slow Read attack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-ReDos"><span class="nav-number">8.4.5.</span> <span class="nav-text">(6) ReDos</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-应用层DDoS防御"><span class="nav-number">8.5.</span> <span class="nav-text">5. 应用层DDoS防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">(1) 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-本质"><span class="nav-number">2.1.2.</span> <span class="nav-text">(2) 本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-产生原理"><span class="nav-number">2.1.3.</span> <span class="nav-text">(3) 产生原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-引发因素"><span class="nav-number">2.1.4.</span> <span class="nav-text">(4) 引发因素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-寻找-SQL-注入点"><span class="nav-number">2.2.1.</span> <span class="nav-text">(1) 寻找 SQL 注入点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-实施-SQL-注入"><span class="nav-number">2.2.2.</span> <span class="nav-text">(2) 实施 SQL 注入</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-代码层防御"><span class="nav-number">2.3.1.</span> <span class="nav-text">(1) 代码层防御</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-平台层防御"><span class="nav-number">2.3.2.</span> <span class="nav-text">(2) 平台层防御</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-原理及危害"><span class="nav-number">3.1.</span> <span class="nav-text">1. 原理及危害</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-XSS-简介"><span class="nav-number">3.1.1.</span> <span class="nav-text">(1) XSS 简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-XSS-危害"><span class="nav-number">3.1.2.</span> <span class="nav-text">(3) XSS 危害</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-XSS-分类"><span class="nav-number">3.2.</span> <span class="nav-text">2. XSS 分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-反射型XSS-Reflected-XSS"><span class="nav-number">3.2.1.</span> <span class="nav-text">(1) 反射型XSS(Reflected XSS)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-存储型XSS"><span class="nav-number">3.2.2.</span> <span class="nav-text">(2) 存储型XSS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-DOM-XSS"><span class="nav-number">3.2.3.</span> <span class="nav-text">(3) DOM XSS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-发现及防御"><span class="nav-number">3.3.</span> <span class="nav-text">3. 发现及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-出现位置"><span class="nav-number">3.3.1.</span> <span class="nav-text">(1) 出现位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）防御方案"><span class="nav-number">3.3.2.</span> <span class="nav-text">（2）防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-XSS-参考资源"><span class="nav-number">3.4.</span> <span class="nav-text">4. XSS 参考资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-XSS-攻击平台"><span class="nav-number">3.5.</span> <span class="nav-text">5.XSS 攻击平台</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-CSRF-跨站请求伪造"><span class="nav-number">4.1.</span> <span class="nav-text">1. CSRF 跨站请求伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CSRF-简述"><span class="nav-number">4.1.1.</span> <span class="nav-text">(1) CSRF 简述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-攻击过程"><span class="nav-number">4.1.2.</span> <span class="nav-text">(2) 攻击过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-攻击方式"><span class="nav-number">4.1.3.</span> <span class="nav-text">(3) 攻击方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-CSRF-危害"><span class="nav-number">4.1.4.</span> <span class="nav-text">(4) CSRF 危害</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-CSRF-防御"><span class="nav-number">4.1.5.</span> <span class="nav-text">(5) CSRF 防御</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SSRF-服务端请求伪造"><span class="nav-number">4.2.</span> <span class="nav-text">2. SSRF 服务端请求伪造</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SSRF-简介"><span class="nav-number">4.2.1.</span> <span class="nav-text">(1) SSRF 简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-形成原因"><span class="nav-number">4.2.2.</span> <span class="nav-text">(2) 形成原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-攻击类型"><span class="nav-number">4.2.3.</span> <span class="nav-text">(3) 攻击类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-绕过方式"><span class="nav-number">4.2.4.</span> <span class="nav-text">(4) 绕过方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-防御方案"><span class="nav-number">4.2.5.</span> <span class="nav-text">(5) 防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-XSS-CSRF-SSRF-异同"><span class="nav-number">4.3.</span> <span class="nav-text">3. XSS/CSRF/SSRF 异同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考资源"><span class="nav-number">4.4.</span> <span class="nav-text">4. 参考资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-背景"><span class="nav-number">5.1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-漏洞成因"><span class="nav-number">5.2.</span> <span class="nav-text">2. 漏洞成因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-服务器配置不当"><span class="nav-number">5.2.1.</span> <span class="nav-text">(1) 服务器配置不当</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-开源编辑器上传漏洞"><span class="nav-number">5.2.2.</span> <span class="nav-text">(2) 开源编辑器上传漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-本地文件上传限制被绕过"><span class="nav-number">5.2.3.</span> <span class="nav-text">(3) 本地文件上传限制被绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-过滤不严或被绕过"><span class="nav-number">5.2.4.</span> <span class="nav-text">(4) 过滤不严或被绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-文件解析漏洞导致文件执行"><span class="nav-number">5.2.5.</span> <span class="nav-text">(5) 文件解析漏洞导致文件执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-文件路径截断"><span class="nav-number">5.2.6.</span> <span class="nav-text">(6) 文件路径截断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御措施"><span class="nav-number">5.3.</span> <span class="nav-text">3. 防御措施</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义及分类"><span class="nav-number">6.1.</span> <span class="nav-text">1. 定义及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-垂直越权漏洞"><span class="nav-number">6.1.1.</span> <span class="nav-text">(1) 垂直越权漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-水平越权漏洞"><span class="nav-number">6.1.2.</span> <span class="nav-text">(2) 水平越权漏洞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-越权漏洞防护"><span class="nav-number">6.2.</span> <span class="nav-text">2. 越权漏洞防护</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-垂直越权漏洞防护"><span class="nav-number">6.2.1.</span> <span class="nav-text">(1) 垂直越权漏洞防护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-水平越权漏洞-1"><span class="nav-number">6.2.2.</span> <span class="nav-text">(2) 水平越权漏洞</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-XML-简介"><span class="nav-number">7.1.</span> <span class="nav-text">1. XML 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-XXE-攻击"><span class="nav-number">7.2.</span> <span class="nav-text">2. XXE 攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-XXE-成因"><span class="nav-number">7.3.</span> <span class="nav-text">3. XXE 成因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-攻击方式"><span class="nav-number">7.4.</span> <span class="nav-text">4. 攻击方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-显示攻击"><span class="nav-number">7.4.1.</span> <span class="nav-text">A. 显示攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#B-盲攻击"><span class="nav-number">7.4.2.</span> <span class="nav-text">B. 盲攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-XXE-危害"><span class="nav-number">7.5.</span> <span class="nav-text">5. XXE 危害</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-XXE-防御"><span class="nav-number">7.6.</span> <span class="nav-text">6. XXE 防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-参考资源"><span class="nav-number">7.7.</span> <span class="nav-text">7. 参考资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DDoS攻击与防御"><span class="nav-number">8.</span> <span class="nav-text">0x07 DDoS攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. DDoS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络层DDoS攻击"><span class="nav-number">8.2.</span> <span class="nav-text">2. 网络层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SYN-flood攻击"><span class="nav-number">8.2.1.</span> <span class="nav-text">(1) SYN flood攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-UDP-flood攻击"><span class="nav-number">8.2.2.</span> <span class="nav-text">(2)UDP flood攻击 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ICMP-flood攻击"><span class="nav-number">8.2.3.</span> <span class="nav-text">(3) ICMP flood攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络层DDoS防御"><span class="nav-number">8.3.</span> <span class="nav-text">3. 网络层DDoS防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-应用层DDoS攻击"><span class="nav-number">8.4.</span> <span class="nav-text">4. 应用层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CC-攻击"><span class="nav-number">8.4.1.</span> <span class="nav-text">(1) CC 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Slowlories-攻击"><span class="nav-number">8.4.2.</span> <span class="nav-text">(2) Slowlories 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP-POST-DOS"><span class="nav-number">8.4.3.</span> <span class="nav-text">(3) HTTP POST DOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Slow-Read-attack"><span class="nav-number">8.4.4.</span> <span class="nav-text">(4) Slow Read attack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-ReDos"><span class="nav-number">8.4.5.</span> <span class="nav-text">(6) ReDos</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-应用层DDoS防御"><span class="nav-number">8.5.</span> <span class="nav-text">5. 应用层DDoS防御</span></a></li></ol></li></ol></div>
             
 
           </div>
