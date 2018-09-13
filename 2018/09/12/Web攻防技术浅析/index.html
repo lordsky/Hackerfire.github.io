@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E8%BF%87%E6%BB%A4%E5%99%A8.png">
-<meta property="og:updated_time" content="2018-09-12T15:43:31.676Z">
+<meta property="og:updated_time" content="2018-09-13T04:07:01.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web攻防技术浅析">
 <meta name="twitter:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，HTTPS中间人攻击及防御，文件上传漏洞，应用层DDOS，Java反序列化漏洞利用及防御等">
@@ -456,30 +456,18 @@
 <p><img src="http://pbegz2k88.bkt.clouddn.com/web%E5%9B%9B%E5%B1%82%E6%9E%B6%E6%9E%84.png" alt=""></p>
 <p><em>图片参考自：《SQL Injection Attacks and Defense》</em></p>
 <hr>
-<h2 id="0x01-SQL注入及防御"><a href="#0x01-SQL注入及防御" class="headerlink" title="0x01 SQL注入及防御"></a>0x01 SQL注入及防御</h2><h3 id="1-本质及原理"><a href="#1-本质及原理" class="headerlink" title="1. 本质及原理"></a>1. 本质及原理</h3><p><strong>(1) 定义</strong></p>
-<p>SQL注入式一种通过操纵输入来修改后台SQL语句以达到利用攻击代码进行攻击的技术</p>
-<p><strong>(2) 本质</strong></p>
-<p>对于输入检查不充分，导致SQL语句将用户提交的非法数据当作语句的一部分来执行</p>
-<p><strong>(3) 产生原理</strong></p>
-<p>SQL是访问<em>Microsoft SQL Server,Oracle,MySQL，Sybase 和Informix</em>等数据库服务器的标准语言，大多数Web应用都要与数据库进行交互，并且多数Web应用编程语言(<em>ASP,C#,.NET,Java和PHP</em>)均提供可编程的方法与数据库相连并进行交互，当从Web表单，cookie及输入参数等收到的值传递给SQL查询(该查询在数据库服务器上执行)之前未对其进行验证，则会出现SQL注入漏洞</p>
-<p><strong>(4) 引发因素</strong></p>
-<p><strong>A. 转义字符处理不当</strong></p>
-<p>SQL数据库将<em>单引号字符</em>(‘)解析成字符串分隔符，作为代码与数据间的分界线，利用单引号可构造查询加以执行，判断Web站点是否会受到SQL注入攻击；Oracle中，空格，双竖线，逗号，点号，双引号等均有特殊含义</p>
-<p><strong>B. 类型处理不当</strong></p>
-<p><strong><em>LOAD_FILE</em></strong> 函数：能够读取文件并将文件内容作为字符串返回，读取的文件须位于数据库服务器主机上，如下可获取系统用户的属性和用户名</p>
+<h2 id="0x01-SQL注入及防御"><a href="#0x01-SQL注入及防御" class="headerlink" title="0x01 SQL注入及防御"></a>0x01 SQL注入及防御</h2><h3 id="1-本质及原理"><a href="#1-本质及原理" class="headerlink" title="1. 本质及原理"></a>1. 本质及原理</h3><h4 id="1-定义"><a href="#1-定义" class="headerlink" title="(1) 定义"></a><strong>(1) 定义</strong></h4><p>SQL注入式一种通过操纵输入来修改后台SQL语句以达到利用攻击代码进行攻击的技术</p>
+<h4 id="2-本质"><a href="#2-本质" class="headerlink" title="(2) 本质"></a><strong>(2) 本质</strong></h4><p>对于输入检查不充分，导致SQL语句将用户提交的非法数据当作语句的一部分来执行</p>
+<h4 id="3-产生原理"><a href="#3-产生原理" class="headerlink" title="(3) 产生原理"></a><strong>(3) 产生原理</strong></h4><p>SQL是访问<em>Microsoft SQL Server,Oracle,MySQL，Sybase 和Informix</em>等数据库服务器的标准语言，大多数Web应用都要与数据库进行交互，并且多数Web应用编程语言(<em>ASP,C#,.NET,Java和PHP</em>)均提供可编程的方法与数据库相连并进行交互，当从Web表单，cookie及输入参数等收到的值传递给SQL查询(该查询在数据库服务器上执行)之前未对其进行验证，则会出现SQL注入漏洞</p>
+<h4 id="4-引发因素"><a href="#4-引发因素" class="headerlink" title="(4) 引发因素"></a><strong>(4) 引发因素</strong></h4><h5 id="A-转义字符处理不当"><a href="#A-转义字符处理不当" class="headerlink" title="A. 转义字符处理不当"></a><strong>A. 转义字符处理不当</strong></h5><p>SQL数据库将<em>单引号字符</em>(‘)解析成字符串分隔符，作为代码与数据间的分界线，利用单引号可构造查询加以执行，判断Web站点是否会受到SQL注入攻击；Oracle中，空格，双竖线，逗号，点号，双引号等均有特殊含义</p>
+<h5 id="B-类型处理不当"><a href="#B-类型处理不当" class="headerlink" title="B. 类型处理不当"></a><strong>B. 类型处理不当</strong></h5><p><strong><em>LOAD_FILE</em></strong> 函数：能够读取文件并将文件内容作为字符串返回，读取的文件须位于数据库服务器主机上，如下可获取系统用户的属性和用户名</p>
 <pre><code>UNION ALL SELECT LOAD_FILE(&apos;/etc/passwd&apos;)--
 </code></pre><p><strong><em>SELECT INTO OUTFILE</em></strong> 内置命令：可用来创建系统文件并进行写操作，受攻击用户须拥有FILE权限，如下可向Web根目录写入一个Web shell 以便安装可远程交互访问的Web shell</p>
 <pre><code>UNION SELECT &quot;&lt;?system($_request[&apos;cmd&apos;]);?&gt;&quot; INTO OUFILE &quot;/var/www/html/victim.com/cmd.php&quot;--
-</code></pre><p><strong>C. 查询集处理不当</strong></p>
-<p><strong>D. 错误处理不当</strong></p>
-<p>可能将详细的内部错误消息(如数据库转储，错误代码等)显示给用户或者攻击者，造成消息泄露</p>
-<p><strong>E. 多个提交处理不当</strong></p>
-<p><strong>F. 不安全的数据库配置</strong></p>
-<p>数据库默认的用户预安装内容，用户权限，访问控制模型等也可能存在风险</p>
-<h3 id="2-攻击及方式"><a href="#2-攻击及方式" class="headerlink" title="2. 攻击及方式"></a>2. 攻击及方式</h3><p><strong>(1) 寻找 SQL 注入点</strong></p>
-<p>通过操纵用户数据输入并分析服务器响应来寻找SQL注入漏洞</p>
-<p><strong>A. 通过发送意外数据来触发异常</strong></p>
-<p><strong>a 识别数据输入</strong></p>
+</code></pre><h5 id="C-查询集处理不当"><a href="#C-查询集处理不当" class="headerlink" title="C. 查询集处理不当"></a><strong>C. 查询集处理不当</strong></h5><h5 id="D-错误处理不当"><a href="#D-错误处理不当" class="headerlink" title="D. 错误处理不当"></a><strong>D. 错误处理不当</strong></h5><p>可能将详细的内部错误消息(如数据库转储，错误代码等)显示给用户或者攻击者，造成消息泄露</p>
+<h5 id="E-多个提交处理不当"><a href="#E-多个提交处理不当" class="headerlink" title="E. 多个提交处理不当"></a><strong>E. 多个提交处理不当</strong></h5><h5 id="F-不安全的数据库配置"><a href="#F-不安全的数据库配置" class="headerlink" title="F. 不安全的数据库配置"></a><strong>F. 不安全的数据库配置</strong></h5><p>数据库默认的用户预安装内容，用户权限，访问控制模型等也可能存在风险</p>
+<h3 id="2-攻击及方式"><a href="#2-攻击及方式" class="headerlink" title="2. 攻击及方式"></a>2. 攻击及方式</h3><h4 id="1-寻找-SQL-注入点"><a href="#1-寻找-SQL-注入点" class="headerlink" title="(1) 寻找 SQL 注入点"></a><strong>(1) 寻找 SQL 注入点</strong></h4><p>通过操纵用户数据输入并分析服务器响应来寻找SQL注入漏洞</p>
+<h6 id="A-通过发送意外数据来触发异常"><a href="#A-通过发送意外数据来触发异常" class="headerlink" title="A. 通过发送意外数据来触发异常"></a><strong>A. 通过发送意外数据来触发异常</strong></h6><p><strong>a 识别数据输入</strong></p>
 <p><strong><em>GEI请求：</em></strong> 一种请求服务器的HTTP方法，使用该方法时，信息显示在URL中，GET请求对用户是透明的；点击一个链接时，一般用此方法</p>
 <p><strong><em>POST请求：</em></strong>一种向Web服务器发送信息的HTTP方法，在浏览器器中填写表单并点击提交按钮时通常使用该方法</p>
 <p><strong><em>其他注入型数据</em></strong></p>
@@ -499,8 +487,7 @@
 3. 数据库服务器执行SQL查询语句并将结果返回给Web服务器
 
 4. Web服务器根据数据库响应动态创建HTML页面 
-</code></pre><p><strong>B. 数据库错误</strong></p>
-<p>后台数据库执行查询失败时应用汇返回相应错误类型</p>
+</code></pre><h5 id="B-数据库错误"><a href="#B-数据库错误" class="headerlink" title="B. 数据库错误"></a><strong>B. 数据库错误</strong></h5><p>后台数据库执行查询失败时应用汇返回相应错误类型</p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%94%99%E8%AF%AF.png" alt=""></p>
 <pre><code>1. 用户发送请求，尝试识别SQL注入漏洞，如发送带单引号的值
 
@@ -509,8 +496,7 @@
 3. 数据库服务器接收格式不正确的SQL查询并向Web服务器返回一条错误消息
 
 4. Web服务器接收来自数据库的错误并向用户发送HTML响应
-</code></pre><p><strong>C. 应用响应</strong></p>
-<p>一些不直接在浏览器响应的错误示例</p>
+</code></pre><h5 id="C-应用响应"><a href="#C-应用响应" class="headerlink" title="C. 应用响应"></a><strong>C. 应用响应</strong></h5><p>一些不直接在浏览器响应的错误示例</p>
 <p><strong>a 通用错误</strong></p>
 <p>不管遇到何种错误，应用均返回一个通用的错误页面，可以通过向参数插入不会触发应用错误的SQL代码来进行测试</p>
 <p>如<strong><em>构造恒真表达式</em></strong>，将数据注入到一个用单引号引起来的字符串中，查询的结果会包含表中所有记录，当记录较多，查询执行时间很长且耗费数据库和Web服务器大量资源</p>
@@ -521,60 +507,46 @@
 <p><strong><em>HTTP 302：</em></strong>重定向到主页/自定义错误页面</p>
 <p><strong>c 不同的响应大小</strong></p>
 <p>适用于不显示任何结果或差异不明显的情况</p>
-<p><strong>D. SQL盲注</strong></p>
-<p>在服务器没有错误回显是采用的注入攻击方式，构造条件语句，根据页面是否发生变化，来判断SQL语句是否执行</p>
-<p><strong>(2) 实施 SQL 注入</strong></p>
-<p>构造有效的SQL语句来实施利用SQL注入漏洞</p>
-<p><strong>A. 区分数字和字符串</strong></p>
-<p><strong><em>数字：</em></strong>不需要使用单引号来表示</p>
+<h5 id="D-SQL盲注"><a href="#D-SQL盲注" class="headerlink" title="D. SQL盲注"></a><strong>D. SQL盲注</strong></h5><p>在服务器没有错误回显是采用的注入攻击方式，构造条件语句，根据页面是否发生变化，来判断SQL语句是否执行</p>
+<h4 id="2-实施-SQL-注入"><a href="#2-实施-SQL-注入" class="headerlink" title="(2) 实施 SQL 注入"></a><strong>(2) 实施 SQL 注入</strong></h4><p>构造有效的SQL语句来实施利用SQL注入漏洞</p>
+<h5 id="A-区分数字和字符串"><a href="#A-区分数字和字符串" class="headerlink" title="A. 区分数字和字符串"></a><strong>A. 区分数字和字符串</strong></h5><p><strong><em>数字：</em></strong>不需要使用单引号来表示</p>
 <p><strong><em>字符串：</em></strong>使用单引号来表示</p>
 <p>数字字母混合值用单引号引起来</p>
-<p><strong>B. 内联SQL注入</strong></p>
-<p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%86%85%E8%81%94%E6%B3%A8%E5%85%A5.png" alt=""></p>
+<h5 id="B-内联SQL注入"><a href="#B-内联SQL注入" class="headerlink" title="B. 内联SQL注入"></a><strong>B. 内联SQL注入</strong></h5><p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%86%85%E8%81%94%E6%B3%A8%E5%85%A5.png" alt=""></p>
 <p><strong><em>Inline SQL Injection：</em></strong>向查询注入一些SQL代码后，原来的查询依然会全部执行</p>
 <p><strong>a 字符串内联注入</strong></p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E8%81%94.png" alt=""></p>
 <p><strong>b 数字内联注入</strong></p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E5%AD%97%E5%86%85%E8%81%94.png" alt=""></p>
-<p><strong>C. 终止式SQL注入</strong></p>
-<p>注释剩下的查询语句来成功结束该语句</p>
+<h5 id="C-终止式SQL注入"><a href="#C-终止式SQL注入" class="headerlink" title="C. 终止式SQL注入"></a><strong>C. 终止式SQL注入</strong></h5><p>注释剩下的查询语句来成功结束该语句</p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E7%BB%88%E6%AD%A2%E6%B3%A8%E5%85%A5.png" alt=""></p>
 <p><strong>a 数据库注释语法</strong></p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%95%B0%E6%8D%AE%E5%BA%93%E6%B3%A8%E9%87%8A.png" alt=""></p>
 <p><strong>b 注释常用特征值</strong></p>
 <p><img src="http://pbegz2k88.bkt.clouddn.com/%E6%B3%A8%E9%87%8A%E7%89%B9%E5%BE%81%E5%80%BC.png" alt=""></p>
-<p><strong>D. 时间延迟攻击</strong></p>
-<p><strong><em>Timing Attack：</em></strong>当Web应用未显示任何错误时，可向数据库注入时间延迟并检查服务器响应是否延迟实施注入</p>
+<h5 id="D-时间延迟攻击"><a href="#D-时间延迟攻击" class="headerlink" title="D. 时间延迟攻击"></a><strong>D. 时间延迟攻击</strong></h5><p><strong><em>Timing Attack：</em></strong>当Web应用未显示任何错误时，可向数据库注入时间延迟并检查服务器响应是否延迟实施注入</p>
 <p><strong><em>Microsoft SQL 服务器</em></strong></p>
 <pre><code>WAITFOR DELAY &apos;hours:minutes:seconds&apos;
 </code></pre><p><strong><em>MySQL 数据库</em></strong></p>
 <pre><code>mysql&gt; SELECT BENCHMARK(100000,ENCODE(&apos;hello&apos;,&apos;world&apos;));
 </code></pre><p><em>BENCHMARK</em>函数将一条表达式执行多次，来引入延迟</p>
-<h3 id="3-防御及思路"><a href="#3-防御及思路" class="headerlink" title="3. 防御及思路"></a>3. 防御及思路</h3><p><strong>(1) 代码层防御</strong></p>
-<p><strong>A. 使用参数化语句</strong></p>
-<p><strong><em>避免使用动态SQL来阻止SQL注入</em></strong></p>
+<h3 id="3-防御及思路"><a href="#3-防御及思路" class="headerlink" title="3. 防御及思路"></a>3. 防御及思路</h3><h4 id="1-代码层防御"><a href="#1-代码层防御" class="headerlink" title="(1) 代码层防御"></a><strong>(1) 代码层防御</strong></h4><h5 id="A-使用参数化语句"><a href="#A-使用参数化语句" class="headerlink" title="A. 使用参数化语句"></a><strong>A. 使用参数化语句</strong></h5><p><strong><em>避免使用动态SQL来阻止SQL注入</em></strong></p>
 <p>使用占位符或绑定变量来向SQL查询提供参数(而非直接对用户输入进行操作)，替换动态字符串构造，不会修改传递给数据库的内容</p>
 <p>但如果正在调用的数据库功能在存储过程或函数实现使用了<strong>动态SQL</strong>(将SQL查询创建成字符串然后发给数据库执行)，仍会出现SQL注入</p>
 <p>只能参数化数据值，不能参数化SQL标识符或关键字</p>
-<p><strong>B. 输入验证</strong></p>
-<p><strong>a 白名单验证</strong></p>
+<h5 id="B-输入验证"><a href="#B-输入验证" class="headerlink" title="B. 输入验证"></a><strong>B. 输入验证</strong></h5><p><strong>a 白名单验证</strong></p>
 <p>只接收已记录在案的良好输入的操作，验证输入是否符合所期望的<strong><em>数据类型，数据大小，数据范围</em></strong>和<strong><em>数据内容</em></strong>等</p>
 <p>白名单验证功能更强大，适用于带大字符集的语言来实现本地化的应用；对于存在复杂输入或难以确定所有可能的输入集合石，实现叫困难</p>
 <p><strong>b 黑名单</strong></p>
 <p>拒绝已记录在案的不良输入操作，通过浏览输入的内容查找是否存在已知的不良字符，字符串或模式</p>
 <p>验证功能较弱，潜在的不良字符列表较大，检索较慢；很难及时更新列表，对安全性未知的列表无法判断</p>
 <p>常使用正则表达式实现，附加一个禁止使用的字符串列表</p>
-<p><strong>C. 编码输出</strong></p>
-<p>对在应用的不同模块或部分间传递的内容进行编码，保证内容被正确处理，尤其是对于未经严格验证或审查以及来自第三方的数据源</p>
-<p><strong>D. 规范化</strong></p>
-<p>未规范的编码方法，依赖于所使用的特定条件，很难预测应用是否会按照这种方式进行解释，规范化指将输入简化成标准形式</p>
-<p><strong>E. 设计优化</strong></p>
-<p>使用存储过程以便在数据库层拥有较细粒度的许可</p>
+<h5 id="C-编码输出"><a href="#C-编码输出" class="headerlink" title="C. 编码输出"></a><strong>C. 编码输出</strong></h5><p>对在应用的不同模块或部分间传递的内容进行编码，保证内容被正确处理，尤其是对于未经严格验证或审查以及来自第三方的数据源</p>
+<h5 id="D-规范化"><a href="#D-规范化" class="headerlink" title="D. 规范化"></a><strong>D. 规范化</strong></h5><p>未规范的编码方法，依赖于所使用的特定条件，很难预测应用是否会按照这种方式进行解释，规范化指将输入简化成标准形式</p>
+<h5 id="E-设计优化"><a href="#E-设计优化" class="headerlink" title="E. 设计优化"></a><strong>E. 设计优化</strong></h5><p>使用存储过程以便在数据库层拥有较细粒度的许可</p>
 <p>使用数据访问抽象层来对整个应用世家安全的数据访问</p>
 <p>设计时，考虑对敏感信息进行附加的控制</p>
-<p><strong>(2) 平台层防御</strong></p>
-<p><strong>A. 运行时保护</strong></p>
-<p><strong>a WAF-Web应用防火墙</strong></p>
+<h4 id="2-平台层防御"><a href="#2-平台层防御" class="headerlink" title="(2) 平台层防御"></a><strong>(2) 平台层防御</strong></h4><h5 id="A-运行时保护"><a href="#A-运行时保护" class="headerlink" title="A. 运行时保护"></a><strong>A. 运行时保护</strong></h5><p><strong>a WAF-Web应用防火墙</strong></p>
 <p>WAF的标准是开源的 <a href="https://www.modsecurity.org" target="_blank" rel="noopener">ModSecurity</a>-被开发为Apache的一个模块，可实现攻击预防，监控，入侵检测和一般应用加固</p>
 <pre><code>1. 可配置规则集
 
@@ -603,8 +575,7 @@
 </ol>
 <p><strong>d 应用入侵检测系统</strong></p>
 <p><strong>e 数据库防火墙</strong></p>
-<p><strong>B. 确保数据库安全</strong></p>
-<p><strong>a 锁定应用数据</strong></p>
+<h5 id="B-确保数据库安全"><a href="#B-确保数据库安全" class="headerlink" title="B. 确保数据库安全"></a><strong>B. 确保数据库安全</strong></h5><p><strong>a 锁定应用数据</strong></p>
 <p>确保应用数据的安全</p>
 <pre><code>1. 使用较低权限的数据库登录
 
@@ -626,8 +597,7 @@
 4. 在最低权限的操作系统语境中运行
 
 5. 及时更新补丁
-</code></pre><p><strong>C 其他防护措施</strong></p>
-<p><strong>a 最小化不必要信息的泄露</strong></p>
+</code></pre><h5 id="C-其他防护措施"><a href="#C-其他防护措施" class="headerlink" title="C 其他防护措施"></a><strong>C 其他防护措施</strong></h5><p><strong>a 最小化不必要信息的泄露</strong></p>
 <pre><code>1. 隐藏错误消息
 
 2. 使用空的默认Web站点
@@ -650,36 +620,28 @@
 <h2 id="0x06-XXE攻击及防御"><a href="#0x06-XXE攻击及防御" class="headerlink" title="0x06 XXE攻击及防御"></a>0x06 XXE攻击及防御</h2><hr>
 <h2 id="0x07-DDoS攻击与防御"><a href="#0x07-DDoS攻击与防御" class="headerlink" title="0x07 DDoS攻击与防御"></a>0x07 DDoS攻击与防御</h2><h3 id="1-DDoS简介"><a href="#1-DDoS简介" class="headerlink" title="1. DDoS简介"></a>1. DDoS简介</h3><p>全称Distributed Denial of Service，分布式拒绝服务，利用DDoS造成的攻击称为拒绝服务攻击，其原理就是利用大量的请求造成资源过载，导致服务不可用。<br>　　<br>DDoS攻击从层次上可分为<strong><em>网络层</em></strong>攻击与<strong><em>应用层</em></strong>攻击，从攻击手法上可分为快型流量攻击与慢型流量攻击，但其原理都是造成资源过载，导致服务不可用</p>
 <h3 id="2-网络层DDoS攻击"><a href="#2-网络层DDoS攻击" class="headerlink" title="2. 网络层DDoS攻击"></a>2. 网络层DDoS攻击</h3><p>网络层DDos攻击包括<strong><em>SYN flood、UDP flood、ICMP flood</em></strong>等</p>
-<p><strong>(1) SYN flood攻击</strong></p>
-<p>SYN flood攻击主要利用了TCP三次握手过程中的缺陷，我们知道TCP三次握手过程是要建立连接的双方发送SYN，SYN+ACK，ACK数据包，而当攻击方随意构造源ip去发送SYN包时，服务器返回的SYN+ACK就不能得到应答（因为ip是随意构造的），此时服务器就会尝试重新发送，并且会有至少30s的等待时间，导致资源饱和服务不可用，此攻击属于<strong><em>慢型dos攻击</em></strong></p>
-<p><strong>(2)UDP flood攻击 </strong></p>
-<p>udp是一种无连接的协议，因此攻击者可以伪造大量的源IP地址去发送udp包，此种攻击属于<strong><em>大流量攻击</em></strong>。正常应用情况下，UDP包双向流量会基本相等，因此在消耗对方资源的时候也在消耗自己的资源</p>
-<p><strong>(3) ICMP flood攻击</strong></p>
-<p>此攻击属于<strong><em>大流量攻击</em></strong>，其原理就是不断发送不正常的ICMP包（所谓不正常就是ICMP包内容很大），导致目标带宽被占用，但其本身资源也会被消耗。并且目前很多服务器都是禁ping的（在防火墙在可以屏蔽icmp包）</p>
+<h4 id="1-SYN-flood攻击"><a href="#1-SYN-flood攻击" class="headerlink" title="(1) SYN flood攻击"></a><strong>(1) SYN flood攻击</strong></h4><p>SYN flood攻击主要利用了TCP三次握手过程中的缺陷，我们知道TCP三次握手过程是要建立连接的双方发送SYN，SYN+ACK，ACK数据包，而当攻击方随意构造源ip去发送SYN包时，服务器返回的SYN+ACK就不能得到应答（因为ip是随意构造的），此时服务器就会尝试重新发送，并且会有至少30s的等待时间，导致资源饱和服务不可用，此攻击属于<strong><em>慢型dos攻击</em></strong></p>
+<h4 id="2-UDP-flood攻击"><a href="#2-UDP-flood攻击" class="headerlink" title="(2)UDP flood攻击 "></a><strong>(2)UDP flood攻击 </strong></h4><p>udp是一种无连接的协议，因此攻击者可以伪造大量的源IP地址去发送udp包，此种攻击属于<strong><em>大流量攻击</em></strong>。正常应用情况下，UDP包双向流量会基本相等，因此在消耗对方资源的时候也在消耗自己的资源</p>
+<h4 id="3-ICMP-flood攻击"><a href="#3-ICMP-flood攻击" class="headerlink" title="(3) ICMP flood攻击"></a><strong>(3) ICMP flood攻击</strong></h4><p>此攻击属于<strong><em>大流量攻击</em></strong>，其原理就是不断发送不正常的ICMP包（所谓不正常就是ICMP包内容很大），导致目标带宽被占用，但其本身资源也会被消耗。并且目前很多服务器都是禁ping的（在防火墙在可以屏蔽icmp包）</p>
 <h3 id="3-网络层DDoS防御"><a href="#3-网络层DDoS防御" class="headerlink" title="3. 网络层DDoS防御"></a>3. 网络层DDoS防御</h3><p>(1) 网络架构上做好优化，提升带宽，采用负载均衡分流</p>
 <p>(2) 添加抗DDos设备，流量清洗</p>
 <p>(3) 限制单ip请求频率</p>
 <p>(4) 防火墙等防护设置禁止icmp包等</p>
 <h3 id="4-应用层DDoS攻击"><a href="#4-应用层DDoS攻击" class="headerlink" title="4. 应用层DDoS攻击"></a>4. 应用层DDoS攻击</h3><p>应用层DDoS攻击不同于网络层DDoS，发生在TCP建立握手成功之后，应用程序处理请求的时候</p>
-<p><strong>(1) CC 攻击</strong></p>
-<p>“CC攻击”的前身是一个叫fatboy的攻击程序，当时绿盟为了防御DDos攻击研发了一款产品，叫做“Collapasar”，能够有效的防御SYN flood攻击。而黑客为了挑衅，研发了一款Challenge Collapasar工具（简称CC），意指在黑洞的防御下，仍能有效完成拒绝服务攻击</p>
+<h4 id="1-CC-攻击"><a href="#1-CC-攻击" class="headerlink" title="(1) CC 攻击"></a><strong>(1) CC 攻击</strong></h4><p>“CC攻击”的前身是一个叫fatboy的攻击程序，当时绿盟为了防御DDos攻击研发了一款产品，叫做“Collapasar”，能够有效的防御SYN flood攻击。而黑客为了挑衅，研发了一款Challenge Collapasar工具（简称CC），意指在黑洞的防御下，仍能有效完成拒绝服务攻击</p>
 <p>CC攻击的原理，就是针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽。因此在发送CC攻击前，我们需要寻找加载比较慢，消耗资源比较多的网页，比如需要查询数据库的页面、读写硬盘文件的等。通过cc攻击，使用爬虫对某些加载需要消耗大量资源的页面发起http请求</p>
-<p><strong>(2) Slowlories 攻击</strong></p>
-<p>由于webserver中间件漏洞引发的拒绝服务攻击，其原理是以极低的速度往服务器发送HTTP请求。apache等中间件默认会设置最大并发链接数，而这种攻击就是会持续保持连接，导致服务饱和不可用。slowloris有点类似基于HTTP协议的SYN flood攻击</p>
+<h4 id="2-Slowlories-攻击"><a href="#2-Slowlories-攻击" class="headerlink" title="(2) Slowlories 攻击"></a><strong>(2) Slowlories 攻击</strong></h4><p>由于webserver中间件漏洞引发的拒绝服务攻击，其原理是以极低的速度往服务器发送HTTP请求。apache等中间件默认会设置最大并发链接数，而这种攻击就是会持续保持连接，导致服务饱和不可用。slowloris有点类似基于HTTP协议的SYN flood攻击</p>
 <p><strong><em>构造畸形http请求包</em></strong></p>
 <pre><code>GET / HTTP/1.1\r\n
 Host: Victim host\r\n
 User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 2.0.503l3; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; MSOffice 12)\r\n
 Content-Length: 42\r\n
 </code></pre><p>完整的http请求头结尾应该是两次的\r\n\r\n，这里少了一次，因此服务器将会一直等待</p>
-<p><strong>(3) HTTP POST DOS</strong></p>
-<p>原理是在发送HTTP POST包时，指定一个非常大的Content-Length值，然后以极低的速度发包，保持连接不断，导致服务饱和不可用</p>
-<p><strong>(4) Slow Read attack</strong></p>
-<p>Slow Read attack攻击方式是采用调整TCP协议中的滑动窗口大小，来对服务器单次发送发送的数据大小进行控制，使得服务器需要对一个回应分成很多个包来发送</p>
+<h4 id="3-HTTP-POST-DOS"><a href="#3-HTTP-POST-DOS" class="headerlink" title="(3) HTTP POST DOS"></a><strong>(3) HTTP POST DOS</strong></h4><p>原理是在发送HTTP POST包时，指定一个非常大的Content-Length值，然后以极低的速度发包，保持连接不断，导致服务饱和不可用</p>
+<h4 id="4-Slow-Read-attack"><a href="#4-Slow-Read-attack" class="headerlink" title="(4) Slow Read attack"></a><strong>(4) Slow Read attack</strong></h4><p>Slow Read attack攻击方式是采用调整TCP协议中的滑动窗口大小，来对服务器单次发送发送的数据大小进行控制，使得服务器需要对一个回应分成很多个包来发送</p>
 <p><strong>(5) Server Limit Dos</strong></p>
 <p>这是由于cookie导致的dos攻击，当然其原理还是基于webserver的特性。apache默认最大的http包头长度为8192字节，如果超出此长度，则会返回4xx错误。如果我们利用存储型xss漏洞，将一个超长的cookie写入客户端页面，则用户再访问此页面后，由于请求头加载了恶意的超长cookie，导致其不能访问该站的页面（除非清空cookie）</p>
-<p><strong>(6) ReDos</strong></p>
-<p>这是由于代码写得有缺陷，导致使用正则时，会出现大量占用资源的情况，导致服务不可用，这是利用了正则表达式在匹配时的某些特性决定的</p>
+<h4 id="6-ReDos"><a href="#6-ReDos" class="headerlink" title="(6) ReDos"></a><strong>(6) ReDos</strong></h4><p>这是由于代码写得有缺陷，导致使用正则时，会出现大量占用资源的情况，导致服务不可用，这是利用了正则表达式在匹配时的某些特性决定的</p>
 <h3 id="5-应用层DDoS防御"><a href="#5-应用层DDoS防御" class="headerlink" title="5. 应用层DDoS防御"></a>5. 应用层DDoS防御</h3><p>(1) 判断User-Agent字段（不可靠，因为可以随意构造）</p>
 <p>(2) 网页中镶嵌js代码（不可靠，因为爬虫也可携带浏览器引擎，或者执行js代码）</p>
 <p>(3) 针对ip+cookie，限制访问频率（由于cookie可以更改，ip可以使用代理，或者肉鸡，也不可靠)</p>
@@ -925,7 +887,7 @@ Content-Length: 42\r\n
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DDoS攻击与防御"><span class="nav-number">8.</span> <span class="nav-text">0x07 DDoS攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. DDoS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络层DDoS攻击"><span class="nav-number">8.2.</span> <span class="nav-text">2. 网络层DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络层DDoS防御"><span class="nav-number">8.3.</span> <span class="nav-text">3. 网络层DDoS防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-应用层DDoS攻击"><span class="nav-number">8.4.</span> <span class="nav-text">4. 应用层DDoS攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-应用层DDoS防御"><span class="nav-number">8.5.</span> <span class="nav-text">5. 应用层DDoS防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-Web安全基础"><span class="nav-number">1.</span> <span class="nav-text">0x00  Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Web安全漏洞"><span class="nav-number">1.1.</span> <span class="nav-text">1. Web安全漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安全编码规范"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安全编码规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Web应用架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. Web应用架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SQL注入及防御"><span class="nav-number">2.</span> <span class="nav-text">0x01 SQL注入及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-本质及原理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 本质及原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">(1) 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-本质"><span class="nav-number">2.1.2.</span> <span class="nav-text">(2) 本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-产生原理"><span class="nav-number">2.1.3.</span> <span class="nav-text">(3) 产生原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-引发因素"><span class="nav-number">2.1.4.</span> <span class="nav-text">(4) 引发因素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-转义字符处理不当"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">A. 转义字符处理不当</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-类型处理不当"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">B. 类型处理不当</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-查询集处理不当"><span class="nav-number">2.1.4.3.</span> <span class="nav-text">C. 查询集处理不当</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#D-错误处理不当"><span class="nav-number">2.1.4.4.</span> <span class="nav-text">D. 错误处理不当</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#E-多个提交处理不当"><span class="nav-number">2.1.4.5.</span> <span class="nav-text">E. 多个提交处理不当</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#F-不安全的数据库配置"><span class="nav-number">2.1.4.6.</span> <span class="nav-text">F. 不安全的数据库配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-攻击及方式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 攻击及方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-寻找-SQL-注入点"><span class="nav-number">2.2.1.</span> <span class="nav-text">(1) 寻找 SQL 注入点</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#A-通过发送意外数据来触发异常"><span class="nav-number">2.2.1.0.1.</span> <span class="nav-text">A. 通过发送意外数据来触发异常</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-数据库错误"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">B. 数据库错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-应用响应"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">C. 应用响应</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#D-SQL盲注"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">D. SQL盲注</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-实施-SQL-注入"><span class="nav-number">2.2.2.</span> <span class="nav-text">(2) 实施 SQL 注入</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-区分数字和字符串"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">A. 区分数字和字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-内联SQL注入"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">B. 内联SQL注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-终止式SQL注入"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">C. 终止式SQL注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#D-时间延迟攻击"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">D. 时间延迟攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-防御及思路"><span class="nav-number">2.3.</span> <span class="nav-text">3. 防御及思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-代码层防御"><span class="nav-number">2.3.1.</span> <span class="nav-text">(1) 代码层防御</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-使用参数化语句"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">A. 使用参数化语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-输入验证"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">B. 输入验证</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-编码输出"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">C. 编码输出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#D-规范化"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">D. 规范化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#E-设计优化"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">E. 设计优化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-平台层防御"><span class="nav-number">2.3.2.</span> <span class="nav-text">(2) 平台层防御</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#A-运行时保护"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">A. 运行时保护</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#B-确保数据库安全"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">B. 确保数据库安全</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#C-其他防护措施"><span class="nav-number">2.3.2.3.</span> <span class="nav-text">C 其他防护措施</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-语法备忘单"><span class="nav-number">2.4.</span> <span class="nav-text">4. 语法备忘单</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-XSS-攻击及防御"><span class="nav-number">3.</span> <span class="nav-text">0x02 XSS 攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSRF-SSRF原理及异同"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSRF/SSRF原理及异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-文件上传及防御"><span class="nav-number">5.</span> <span class="nav-text">0x04 文件上传及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-越权漏洞及防御"><span class="nav-number">6.</span> <span class="nav-text">0x05 越权漏洞及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-XXE攻击及防御"><span class="nav-number">7.</span> <span class="nav-text">0x06 XXE攻击及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DDoS攻击与防御"><span class="nav-number">8.</span> <span class="nav-text">0x07 DDoS攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DDoS简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. DDoS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络层DDoS攻击"><span class="nav-number">8.2.</span> <span class="nav-text">2. 网络层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-SYN-flood攻击"><span class="nav-number">8.2.1.</span> <span class="nav-text">(1) SYN flood攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-UDP-flood攻击"><span class="nav-number">8.2.2.</span> <span class="nav-text">(2)UDP flood攻击 </span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-ICMP-flood攻击"><span class="nav-number">8.2.3.</span> <span class="nav-text">(3) ICMP flood攻击</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络层DDoS防御"><span class="nav-number">8.3.</span> <span class="nav-text">3. 网络层DDoS防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-应用层DDoS攻击"><span class="nav-number">8.4.</span> <span class="nav-text">4. 应用层DDoS攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-CC-攻击"><span class="nav-number">8.4.1.</span> <span class="nav-text">(1) CC 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Slowlories-攻击"><span class="nav-number">8.4.2.</span> <span class="nav-text">(2) Slowlories 攻击</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-HTTP-POST-DOS"><span class="nav-number">8.4.3.</span> <span class="nav-text">(3) HTTP POST DOS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Slow-Read-attack"><span class="nav-number">8.4.4.</span> <span class="nav-text">(4) Slow Read attack</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-ReDos"><span class="nav-number">8.4.5.</span> <span class="nav-text">(6) ReDos</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-应用层DDoS防御"><span class="nav-number">8.5.</span> <span class="nav-text">5. 应用层DDoS防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-Java反序列化漏洞"><span class="nav-number">9.</span> <span class="nav-text">0x08 Java反序列化漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-点击劫持原理及防御"><span class="nav-number">10.</span> <span class="nav-text">0x08 点击劫持原理及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-HTTPS中间人攻击及防御"><span class="nav-number">11.</span> <span class="nav-text">0x09 HTTPS中间人攻击及防御</span></a></li></ol></div>
             
 
           </div>
