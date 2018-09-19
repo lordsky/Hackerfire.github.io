@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="google-site-verification" content="wCoNEhJPwtNoql5k0PfiYmMR-rgvliWvNZyGItcI3w0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SecProducts," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Firehacker" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="基础安全设备包含构造业务安全防御系统的常用安全设备，能够搭建深度防御体系的各种安全设备、安全软件。本文先围绕传统业务网络，对其安全防御体系及安全产品与设备（检测告警类，安全防护类，监控评估类）简要分析；然后对各个安全厂商提出的下一代新型安全防御体系进行汇总">
+<meta name="keywords" content="SecProducts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安全防御体系之设备浅析">
+<meta property="og:url" content="http://yoursite.com/2018/09/19/安全防御体系之设备浅析/index.html">
+<meta property="og:site_name" content="Firehacker">
+<meta property="og:description" content="基础安全设备包含构造业务安全防御系统的常用安全设备，能够搭建深度防御体系的各种安全设备、安全软件。本文先围绕传统业务网络，对其安全防御体系及安全产品与设备（检测告警类，安全防护类，监控评估类）简要分析；然后对各个安全厂商提出的下一代新型安全防御体系进行汇总">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E9%AD%94%E5%8A%9B%E8%B1%A1%E9%99%90.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/WAF%E9%AD%94%E6%96%B9.png">
+<meta property="og:updated_time" content="2018-09-19T11:03:33.467Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="安全防御体系之设备浅析">
+<meta name="twitter:description" content="基础安全设备包含构造业务安全防御系统的常用安全设备，能够搭建深度防御体系的各种安全设备、安全软件。本文先围绕传统业务网络，对其安全防御体系及安全产品与设备（检测告警类，安全防护类，监控评估类）简要分析；然后对各个安全厂商提出的下一代新型安全防御体系进行汇总">
+<meta name="twitter:image" content="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E9%AD%94%E5%8A%9B%E8%B1%A1%E9%99%90.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/19/安全防御体系之设备浅析/"/>
+
+
+
+
+
+  <title>安全防御体系之设备浅析 | Firehacker</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Hackerfire" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Firehacker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-aisec">
+          <a href="/AISec/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-eye"></i> <br />
+            
+            AISec
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-community">
+          <a href="/community/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-users"></i> <br />
+            
+            社区
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-wrench"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/19/安全防御体系之设备浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Firehacker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Firehacker">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">安全防御体系之设备浅析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-19T10:46:34+08:00">
+                2018-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x03-实践之道/" itemprop="url" rel="index">
+                    <span itemprop="name">0x03 实践之道</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x03-实践之道/产品运维/" itemprop="url" rel="index">
+                    <span itemprop="name">产品运维</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/19/安全防御体系之设备浅析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/19/安全防御体系之设备浅析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>基础安全设备包含构造业务安全防御系统的常用安全设备，能够搭建深度防御体系的各种安全设备、安全软件。本文先围绕传统业务网络，对其安全防御体系及安全产品与设备（检测告警类，安全防护类，监控评估类）简要分析；然后对各个安全厂商提出的下一代新型安全防御体系进行汇总</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="0x01-安全防御体系"><a href="#0x01-安全防御体系" class="headerlink" title="0x01 安全防御体系"></a>0x01 安全防御体系</h2><p>参考链接：</p>
+<ul>
+<li><a href="https://cloud.tencent.com/developer/article/1043776" target="_blank" rel="noopener">https://cloud.tencent.com/developer/article/1043776</a></li>
+</ul>
+<hr>
+<h2 id="0x02-检测告警类"><a href="#0x02-检测告警类" class="headerlink" title="0x02 检测告警类"></a>0x02 检测告警类</h2><h3 id="1-网络入侵检测"><a href="#1-网络入侵检测" class="headerlink" title="1. 网络入侵检测"></a>1. 网络入侵检测</h3><pre><code>用于检测网络入侵事件，常见部署在核心交换上，用于收集核心交换机的镜像流量，通过检测攻击特征形成告警事件
+</code></pre><ul>
+<li><p>Snort 网络入侵检测（IDS）和入侵防御工具（IPS）的领导者，母公司为Sourcefire</p>
+</li>
+<li><p>OSSEC 一个开源主机入侵检测系统（HIDS），OSSEC客户端能够执行文件完整性监控和rootkit检测，并有实时报警，源自趋势科技</p>
+</li>
+<li><p>Security Onion 用于网络监控和入侵检测的基于Ubuntu的Linux发行版</p>
+</li>
+<li><p>Bro IDS  类似于Security Onion，它使用更多IDS规则来确定攻击来源</p>
+</li>
+<li><p>Suricata 能够与Snort相抗衡，该系统有一个类似Snort的架构，依赖于像 Snort等的签名</p>
+</li>
+<li><p>OpenWIPS-NG 一个免费的无线IDS / IPS，它依赖于服务器、传感器和接口</p>
+</li>
+</ul>
+<p>参考链接：<a href="https://www.aqniu.com/tools-tech/667.html" target="_blank" rel="noopener">https://www.aqniu.com/tools-tech/667.html</a></p>
+<p><strong><em>国内厂商：</em></strong> <em>绿盟  启明星辰  山石网科  华为   H3C</em></p>
+<h3 id="2-网络流量分析"><a href="#2-网络流量分析" class="headerlink" title="2. 网络流量分析"></a>2. 网络流量分析</h3><pre><code>镜像流量分析，通常也是连接到核心交换，可以分析流量，可以回溯流量，遇到分析安全事件的时候可以通过回溯流量分析攻击过程
+</code></pre><p><strong><em>国内厂商：</em></strong> <em>绿盟  科来  恒安嘉新  力合智远</em></p>
+<hr>
+<h2 id="0x03-安全防护类"><a href="#0x03-安全防护类" class="headerlink" title="0x03 安全防护类"></a>0x03 安全防护类</h2><h3 id="1-抗D服务"><a href="#1-抗D服务" class="headerlink" title="1. 抗D服务"></a>1. 抗D服务</h3><pre><code>部署在主链路上，内部网络的抗D设备可以处理低于出口带宽的 DDoS 流量，超过的一般用云抗D服务
+</code></pre><ul>
+<li><p><a href="http://www.nsfocus.com.cn/operations/details_4_280.html" target="_blank" rel="noopener">绿盟ADS</a>：十多年抗D攻防技术积累、专业抗D运营团队、完整的攻击分析平台和技术交付平台</p>
+</li>
+<li><p><a href="http://www.damddos.com/" target="_blank" rel="noopener">中国电信云堤</a>：运营商级的防护能力无疑在对抗超大流量攻击方面具备很强优势</p>
+</li>
+<li><p><a href="https://yundun.aliyun.com/" target="_blank" rel="noopener">阿里云云盾</a>：依托阿里云基础设施，支持BGP和CDN两种引流，并在应用层DDOS方面独具优势</p>
+</li>
+<li><p><a href="https://cloud.tencent.com/product/bad" target="_blank" rel="noopener">腾讯云大禹</a>：来自自身产品防护的长期实践，在一些游戏或社交产品的攻击防护上优势明显</p>
+</li>
+<li><p><a href="https://cloud.360.cn/" target="_blank" rel="noopener">360云安全</a>：通过CDN加速体系来提供抗D服务，符合其“数据驱动安全”的总体思路</p>
+</li>
+</ul>
+<p>参考链接：<a href="https://www.aqniu.com/industry/8116.html" target="_blank" rel="noopener">https://www.aqniu.com/industry/8116.html</a></p>
+<h3 id="2-防火墙"><a href="#2-防火墙" class="headerlink" title="2. 防火墙"></a>2. 防火墙</h3><pre><code>用于做网络边界区分，实际应用中最有用的是网络访问控制。常见部署在核心路由和核心交换机之间，或者在应用服务器和数据库服务器之间，或者不同的业务之间，有边界隔离需求的都可以部署
+</code></pre><p><strong>(1) 企业级防火墙</strong></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E9%AD%94%E5%8A%9B%E8%B1%A1%E9%99%90.png" alt=""></p>
+<p>参考链接：<a href="https://www.aqniu.com/tools-tech/26863.html" target="_blank" rel="noopener">https://www.aqniu.com/tools-tech/26863.html</a></p>
+<p><strong><em>国内厂商：</em></strong> <em>天融信  山石网科  华为  360安全 深信服</em></p>
+<p><strong>(2) 开源防火墙</strong></p>
+<ul>
+<li><p>Iptables：Iptables/Netfilter是基于防火墙的最流行的命令行，它是Linux服务器安全的头道防线</p>
+</li>
+<li><p>IPCop：IPCop的设计界面非常友好，便于管理，它对于小型企业和本地PC非常实用</p>
+</li>
+<li><p>UFW：Uncomplicated Firewall，Ubuntu服务器版本的默认防火墙，配置简单，用户友好</p>
+</li>
+<li><p>ConfigServer Security Firewall：一个跨平台的多用途防火墙，基于状态包检测，几乎支持所有的虚拟化环境</p>
+</li>
+</ul>
+<p>参考链接：</p>
+<ul>
+<li><p>十大Linux开源防火墙：<a href="http://tomcat-oracle.iteye.com/blog/2007409" target="_blank" rel="noopener">http://tomcat-oracle.iteye.com/blog/2007409</a></p>
+</li>
+<li><p>Windows 防火墙概述及实践：<a href="https://yq.aliyun.com/articles/113211" target="_blank" rel="noopener">https://yq.aliyun.com/articles/113211</a></p>
+</li>
+</ul>
+<h3 id="3-WAF"><a href="#3-WAF" class="headerlink" title="3. WAF"></a>3. WAF</h3><pre><code>Web应用防火墙提供了应用层的防护能力，常见部署在应用服务器与核心交换之间，或者核心交换与核心防火墙之间，部分复杂业务系统系统，WAF以旁路镜像流量的方式作为Web的入侵检测设备存在，只检测Web攻击事件
+</code></pre><p><img src="http://pdeise3e3.bkt.clouddn.com/WAF%E9%AD%94%E6%96%B9.png" alt=""></p>
+<ul>
+<li><em>Web应用防火墙魔力象限，资料来源：Gartner（2017年8月）</em></li>
+</ul>
+<p>参考链接：<a href="https://www.secrss.com/articles/4985" target="_blank" rel="noopener">https://www.secrss.com/articles/4985</a></p>
+<p><strong><em>国内厂商：</em></strong> <em>安恒信息  绿盟  长亭科技  盛邦安全   铱迅信息  </em></p>
+<h3 id="4-入侵防御"><a href="#4-入侵防御" class="headerlink" title="4. 入侵防御"></a>4. 入侵防御</h3><pre><code>逻辑是串在主链路上，真用作防御功能的情况还是比较少，需要业务简单，交互情况少的情况下。误报和漏报需要平衡好
+</code></pre><h3 id="5-防病毒"><a href="#5-防病毒" class="headerlink" title="5. 防病毒"></a>5. 防病毒</h3><pre><code>目前普遍部署在企业网络的杀毒软件都是基于 Windows 版的，使用统一管理，可以从整体查看病毒在组织网络中的感染情况。企业网策略比较保守，发现病毒只是告警，不直接删除或清除，有可能导致系统文件出错
+</code></pre><ul>
+<li><p>卡巴斯基(KIS/KAV)：卡巴斯基全功能安全软件(KIS)=卡巴斯基反病毒软件(KAV)+网络防火墙</p>
+</li>
+<li><p>诺顿防病毒软件：赛门铁克公司推出，独创的基于信誉评级的诺顿全球智能云防护</p>
+</li>
+<li><p>微软免费杀毒软件(MSE)：一款通过正版验证的Windows电脑可以免费使用的微软安全防护软件</p>
+</li>
+<li><p>Avira AntiVir Personal(小红伞）：一款个人版本的防病毒软件，它能有效地保护个人电脑以及工作站的使用</p>
+</li>
+<li><p>McAfee VirusScan Plus：让每个人都可以毫无困扰地实现重要的PC保护，使PC免受病毒和间谍软件的侵扰</p>
+</li>
+<li><p>360杀毒：无缝整合了国际知名 BitDefender 病毒查杀引擎，以及360安全中心潜心研发的木马云查杀引擎</p>
+</li>
+<li><p>超级巡警：专门查杀各种木马、流氓软件、Rootkit、后门、恶意代码、间谍软件、蠕虫病毒等</p>
+</li>
+<li><p>微点主动防御软件：第三代反病毒软件，采用主动防御技术能够自主分析判断病毒</p>
+</li>
+<li><p>江民 KV2010：全新动态启发式杀毒引擎，融入指纹加速功能，杀毒功能更强、速度更快</p>
+</li>
+<li><p>金山毒霸2011：世界首款应用”可信云查杀”的杀毒软件，采用本地正常文件白名单快速匹配技术</p>
+</li>
+<li><p>瑞星杀毒软件：一款基于瑞星“云安全”系统设计的新一代杀毒软件，其“整体防御系统”可将所有互联网威胁拦截在用户电脑以外</p>
+</li>
+</ul>
+<p>参考链接：<a href="https://g.pconline.com.cn/x/894/8948669.html" target="_blank" rel="noopener">https://g.pconline.com.cn/x/894/8948669.html</a></p>
+<hr>
+<h2 id="0x04-监管审计类"><a href="#0x04-监管审计类" class="headerlink" title="0x04 监管审计类"></a>0x04 监管审计类</h2><h3 id="1-漏洞扫描"><a href="#1-漏洞扫描" class="headerlink" title="1. 漏洞扫描"></a>1. 漏洞扫描</h3><p><strong>(1) 开源工具</strong></p>
+<ul>
+<li><p>Nessus：目前全世界最多人使用的系统漏洞扫描与分析软件</p>
+</li>
+<li><p>Nikto：一款开源的(GPL)网页服务器扫描器，它可以对网页服务器进行全面的多种扫描</p>
+</li>
+<li><p>Openvas：一个提供漏洞扫描和漏洞管理的多种服务和工具的软件框架</p>
+</li>
+<li><p>parosproxy：一个对Web应用程序的漏洞进行评估的代理程序</p>
+</li>
+<li><p>X-scan：国内著名的完全免费的综合扫描器，由国内著名的民间黑客组织安全焦点出品</p>
+</li>
+<li><p>Wikto：一个Web 服务器评估工具，可以检查Web 服务器中的漏洞，功能丰富</p>
+</li>
+</ul>
+<p><strong>(2) 商业产品</strong></p>
+<ul>
+<li><p>Appscan：IBM公司开发的用于扫描web应用的基础架构，安全渗透行业领军产品</p>
+</li>
+<li><p>AWVS：Acunetix Web Vulnerability Scanner，一款商业级的Web漏洞扫描程序，它可以检查Web应用程序中的漏洞</p>
+</li>
+<li><p>HP WebInspect：一款强大的Web应用程序扫描程序，有助于确认Web应用中已知的和未知的漏洞</p>
+</li>
+<li><p>N-Stealth：ZMT公司出品的一款商业的WEB站点安全扫描软件，升级频率较高</p>
+</li>
+<li><p>绿盟极光：绿盟科技研发的远程安全评估系统，可以进行Web应用、Web 服务及支撑系统等多层次全方位的安全漏洞扫描</p>
+</li>
+<li><p>安恒 MatriXay WebScan：安恒信息研发的明鉴TM系列产品，被作为公安部等级保护测评中心专用应用安全测评工具</p>
+</li>
+<li><p>诺赛科技 Jsky/Pangolin：JSky(竭思)是Web应用安全漏洞扫描器，模拟黑客攻击来评估计算机网站安全</p>
+</li>
+</ul>
+<p>参考链接：</p>
+<ul>
+<li><p><a href="https://zhuanlan.zhihu.com/p/25405238" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25405238</a></p>
+</li>
+<li><p><a href="http://blog.51cto.com/907832555/1868550" target="_blank" rel="noopener">http://blog.51cto.com/907832555/1868550</a></p>
+</li>
+</ul>
+<h3 id="2-配置核查"><a href="#2-配置核查" class="headerlink" title="2. 配置核查"></a>2. 配置核查</h3><pre><code>实现统一的安全配置标准以便规范日常的安全配置操作，快速有效地对网络中种类、数量繁多的设备和软件进行安全配置检测，集中收集核查结果，快速出报告
+</code></pre><h3 id="3-网络安全监控"><a href="#3-网络安全监控" class="headerlink" title="3. 网络安全监控"></a>3. 网络安全监控</h3><pre><code>可以对网站漏洞、网站内容、网站可用性监控的设备，属于主动扫描类的工具
+
+漏扫、配置检查、网站监控都是属于主动扫描的设备
+</code></pre><h3 id="4-堡垒机"><a href="#4-堡垒机" class="headerlink" title="4. 堡垒机"></a>4. 堡垒机</h3><pre><code>也叫运维审计系统，可以配合 Windows 域或其他认证系统，对运维人员的操作进行审计，可用于网络访问控制
+</code></pre><h3 id="5-日志审计"><a href="#5-日志审计" class="headerlink" title="5. 日志审计"></a>5. 日志审计</h3><pre><code>传统日志审计，后台使用关系型数据库的，局限性很大，相当于各种日志数据处理后放到一个数据库中，安全事件发生后可以用作做事件回溯查询。数据量大了后表现就是查询速度很慢。另外一般设备是一个盒子，保存的数据量也有限
+</code></pre><h3 id="6-数据库审计"><a href="#6-数据库审计" class="headerlink" title="6. 数据库审计"></a>6. 数据库审计</h3><pre><code>镜像应用到数据库的流量，可以获得所有的数据库操作请求，通过设定一定的规则也能检测针对数据库的攻击
+</code></pre><hr>
+<h2 id="0x05-新型安全理念"><a href="#0x05-新型安全理念" class="headerlink" title="0x05 新型安全理念"></a>0x05 新型安全理念</h2><ul>
+<li><p><a href="http://www.nsfocus.com.cn/About_NSFOCUS/IntelligentSecurity.html" target="_blank" rel="noopener">绿盟科技</a>：智慧安全2.0</p>
+</li>
+<li><p><a href="https://www.360.net/" target="_blank" rel="noopener">360企业安全</a> ：数据驱动安全</p>
+</li>
+<li><p><a href="https://www.hansight.com/" target="_blank" rel="noopener">HanSight</a>：大数据分析安全</p>
+</li>
+<li><p><a href="https://qingteng.cn/" target="_blank" rel="noopener">青藤云</a>：云时代的自适应安全</p>
+</li>
+<li><p><a href="http://www.dynarose.com/" target="_blank" rel="noopener">蔷薇灵动</a>：自适应微隔离</p>
+</li>
+<li><p><a href="https://threatbook.cn/" target="_blank" rel="noopener">微步在线</a>：安全智能，情报驱动</p>
+</li>
+</ul>
+<hr>
+<h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
+<li><p><a href="https://www.aqniu.com/industry/36011.html" target="_blank" rel="noopener">安全牛-网络安全行业全景图</a></p>
+</li>
+<li><p><a href="https://www.anquanquan.info/anquankaiyuan.html" target="_blank" rel="noopener">安全圈info-安全开源项目</a></p>
+</li>
+</ul>
+<ul>
+<li><a href="https://www.aqniu.com/industry/36011.html" target="_blank" rel="noopener">安全牛-安全行业全景图分析</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SecProducts/" rel="tag"><i class="fa fa-tag"></i> SecProducts</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/12/Web攻防技术浅析/" rel="next" title="Web攻防技术浅析">
+                <i class="fa fa-chevron-left"></i> Web攻防技术浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Firehacker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Hackerfire" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:firehafcker@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://firehacker.top/SecBook" target="_blank" title="Gitbook">
+                      
+                        <i class="fa fa-fw fa-book"></i>Gitbook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安全防御体系"><span class="nav-number">1.</span> <span class="nav-text">0x01 安全防御体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-检测告警类"><span class="nav-number">2.</span> <span class="nav-text">0x02 检测告警类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-网络入侵检测"><span class="nav-number">2.1.</span> <span class="nav-text">1. 网络入侵检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-网络流量分析"><span class="nav-number">2.2.</span> <span class="nav-text">2. 网络流量分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-安全防护类"><span class="nav-number">3.</span> <span class="nav-text">0x03 安全防护类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-抗D服务"><span class="nav-number">3.1.</span> <span class="nav-text">1. 抗D服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-防火墙"><span class="nav-number">3.2.</span> <span class="nav-text">2. 防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-WAF"><span class="nav-number">3.3.</span> <span class="nav-text">3. WAF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-入侵防御"><span class="nav-number">3.4.</span> <span class="nav-text">4. 入侵防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-防病毒"><span class="nav-number">3.5.</span> <span class="nav-text">5. 防病毒</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-监管审计类"><span class="nav-number">4.</span> <span class="nav-text">0x04 监管审计类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-漏洞扫描"><span class="nav-number">4.1.</span> <span class="nav-text">1. 漏洞扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置核查"><span class="nav-number">4.2.</span> <span class="nav-text">2. 配置核查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-网络安全监控"><span class="nav-number">4.3.</span> <span class="nav-text">3. 网络安全监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-堡垒机"><span class="nav-number">4.4.</span> <span class="nav-text">4. 堡垒机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-日志审计"><span class="nav-number">4.5.</span> <span class="nav-text">5. 日志审计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-数据库审计"><span class="nav-number">4.6.</span> <span class="nav-text">6. 数据库审计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-新型安全理念"><span class="nav-number">5.</span> <span class="nav-text">0x05 新型安全理念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">6.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Firehacker</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cQ1pKGTukU9T7wK7hVqrFIy0-gzGzoHsz',
+        appKey: '6l4mVkOTGKucdJoVS2dNCr0R',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
