@@ -10,5 +10,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://firehacker.top/sitemap.xml
-Sitemap: https://firehacker.top/baidusitemap.xml
+Sitemap: http://firehacker.top/sitemap.xml
+Sitemap: http://firehacker.top/baidusitemap.xml
