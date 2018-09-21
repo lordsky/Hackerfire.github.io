@@ -11,4 +11,3 @@ Disallow: /vendors/
 Disallow: /fancybox/
 
 Sitemap: http://firehacker.top/sitemap.xml
-Sitemap: http://firehacker.top/baidusitemap.xml
