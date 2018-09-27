@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.firehacker.top/resources/index.html</loc>
+    
+    <lastmod>2018-09-27T02:50:05.618Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.firehacker.top/links/index.html</loc>
     
     <lastmod>2018-09-24T14:33:11.856Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>http://www.firehacker.top/about/index.html</loc>
     
     <lastmod>2018-08-27T03:04:46.256Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.firehacker.top/AISec/index.html</loc>
-    
-    <lastmod>2018-08-25T08:53:34.789Z</lastmod>
     
   </url>
   
