@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="google-site-verification" content="wCoNEhJPwtNoql5k0PfiYmMR-rgvliWvNZyGItcI3w0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Firehacker" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="近几年，随着互联网技术的发展与计算能力的提升，大数据，云计算，物联网，人工智能等概念越来与火热，那么这概念的诞生，发展，技术背景，以及这些“新技术”之间的关系又怎样？本文对网络上的相关资料(国内的版权意识及环境较差，部分文章出处难以考证)梳理一二，便于查阅与理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据+AI+云+IOT技术浅析">
+<meta property="og:url" content="http://www.firehacker.top/2018/08/18/大数据-AI-云-IOT关系浅析/index.html">
+<meta property="og:site_name" content="Firehacker">
+<meta property="og:description" content="近几年，随着互联网技术的发展与计算能力的提升，大数据，云计算，物联网，人工智能等概念越来与火热，那么这概念的诞生，发展，技术背景，以及这些“新技术”之间的关系又怎样？本文对网络上的相关资料(国内的版权意识及环境较差，部分文章出处难以考证)梳理一二，便于查阅与理解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/IOT%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/CCRA%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%8C%96.png">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/AI%E5%8F%91%E5%B1%95%E5%8F%B2.png">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/AI%E6%A1%86%E6%9E%B6.png">
+<meta property="og:updated_time" content="2018-08-18T09:22:15.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据+AI+云+IOT技术浅析">
+<meta name="twitter:description" content="近几年，随着互联网技术的发展与计算能力的提升，大数据，云计算，物联网，人工智能等概念越来与火热，那么这概念的诞生，发展，技术背景，以及这些“新技术”之间的关系又怎样？本文对网络上的相关资料(国内的版权意识及环境较差，部分文章出处难以考证)梳理一二，便于查阅与理解">
+<meta name="twitter:image" content="http://pdn6x28ho.bkt.clouddn.com/IOT%E6%9E%B6%E6%9E%84.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.firehacker.top/2018/08/18/大数据-AI-云-IOT关系浅析/"/>
+
+
+
+
+
+  <title>大数据+AI+云+IOT技术浅析 | Firehacker</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Hackerfire" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Firehacker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-community">
+          <a href="/community/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-users"></i> <br />
+            
+            社区
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-eye"></i> <br />
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-wrench"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.firehacker.top/2018/08/18/大数据-AI-云-IOT关系浅析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Firehacker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Firehacker">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">大数据+AI+云+IOT技术浅析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T12:50:04+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0X01-思维视角/" itemprop="url" rel="index">
+                    <span itemprop="name">0X01 思维视角</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0X01-思维视角/新兴科技/" itemprop="url" rel="index">
+                    <span itemprop="name">新兴科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/18/大数据-AI-云-IOT关系浅析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/18/大数据-AI-云-IOT关系浅析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>近几年，随着互联网技术的发展与计算能力的提升，大数据，云计算，物联网，人工智能等概念越来与火热，那么这概念的诞生，发展，技术背景，以及这些“新技术”之间的关系又怎样？本文对网络上的相关资料(国内的版权意识及环境较差，部分文章出处难以考证)梳理一二，便于查阅与理解<br><a id="more"></a></p>
+</blockquote>
+<hr>
+<h2 id="0x01-物联网-IOT"><a href="#0x01-物联网-IOT" class="headerlink" title="0x01 物联网 (IOT)"></a>0x01 物联网 (IOT)</h2><h3 id="1-IOT概念"><a href="#1-IOT概念" class="headerlink" title="1. IOT概念"></a>1. IOT概念</h3><p><strong>(1) 早期</strong></p>
+<p>通过射频识别（RFID）、红外线感应器、全球定位系统、激光扫描器、气体感应器等信息传感设备按约定的协议把任何物品与互联网连接起来进行信息交换，以实现智能化识别、定位、跟踪、监控和管理的一种网络，简言之物联网就是“<strong>物物相连</strong>的互联网”</p>
+<p><strong>（2）现今</strong></p>
+<p>当下几乎所有技术与计算机、互联网技术的结合，实现物体与物体之间：环境以及状态信息实时的实时共享以及智能化的收集、传递、处理、执行。广义上说，当下涉及的信息技术的应用，都可以纳入物联网的范畴，所谓的“<strong>万物智联</strong>”- Internet of things</p>
+<h3 id="2-关键技术"><a href="#2-关键技术" class="headerlink" title="2. 关键技术"></a>2. 关键技术</h3><p><strong>（1）传感器技术</strong></p>
+<p>这也是计算机应用中的关键技术。到目前为止绝大部分计算机处理的都是数字信号。自从有计算机以来就需要<strong>传感器</strong>把<strong>模拟信号</strong>转换成<strong>数字信号</strong>计算机才能处理</p>
+<p><strong>（2）RFID标签</strong></p>
+<p>一种传感器技术，RFID技术是融合了<strong>无线射频</strong>技术和<strong>嵌入式</strong>技术为一体的综合技术，RFID在自动识别、物品物流管理有着广阔的应用前景</p>
+<p><strong>（3）嵌入式系统技术</strong></p>
+<p>综合了计算机软硬件、传感器技术、集成电路技术、电子应用技术为一体的复杂技术。经过几十年的演变，以嵌入式系统为特征的智能终端产品随处可见。如果把物联网用人体做一个简单比喻，<strong>传感器</strong>相当于人的眼睛、鼻子、皮肤等<strong>感官</strong>，<strong>网络</strong>就是神经系统用来<strong>传递信息</strong>，<strong>嵌入式系</strong>统则是人的大脑，在接收到信息后要进行<strong>分析处理</strong></p>
+<h3 id="3-体系架构"><a href="#3-体系架构" class="headerlink" title="3. 体系架构"></a>3. 体系架构</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/IOT%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>（1）元素层</strong></p>
+<p>信息科学中的自然现象和效应，是各种基础信息科学的集合，是构建器件层的基础(物联网最基本的技术元素)。包括电学、电磁感应、微波原理、电路理论等等</p>
+<p><strong>（2）器件层</strong></p>
+<p>信息产业中的基本元器件，主要是各类电子元器件、电路模组和功能板件，包括芯片、电路板卡、电源、存储器、信号输出输入设备，传感器和执行器。在这一层，“软件”除了包括电路设计外，还包括嵌入式开发的程序，在电子器件出厂前，其内部的“软件”就基本固定了</p>
+<p><strong>（3）终端和节点层</strong></p>
+<p><strong>物理实体</strong></p>
+<p><strong>A、物联网的终端：</strong>包括非智能终端(也称“哑终端”，一般没有数据处理的能力，只能通过网络上报传感数据，或接受操控数据)、智能终端设备(例如工业机器人)、用户智能终端(手机、笔记本)。</p>
+<p><strong>B、专用的信息处理节点</strong>：网络设备、计算设备、存储设备。虽然这些节点都具备网络接口、计算和存储器件，但是它们通常都提供某一种专用的信息能力。就比如：运营商IP承载网中的路由器(网络)、云计算中的刀片服务器(计算)</p>
+<p><strong>该层“软件”</strong></p>
+<p>主要为各种终端程序，包括嵌入式程序、操作系统、中间件、通用或定制的应用软件等</p>
+<p><strong>（4）资源汇聚层</strong></p>
+<p><strong>信息资源</strong></p>
+<p>主要包括三种核心的信息处理的资源和能力：<strong>网络</strong>(无线网络覆盖、IP骨干网络、互联网及运营商网络的互联)、<strong>计算</strong>(云计算、大数据、机器学习)和<strong>存储</strong>(云存储、数据库)</p>
+<p><strong>该层的“软件”</strong></p>
+<p>除了终端中运行的各种程序以外，还包括各类信息互通的协议标准、流程规范、服务接口等等。在这一层，信息化能力已经具有了语义化的特征，具备了一定的开放性，并持续朝着更加开放、灵活、模块化的方向发展</p>
+<p><strong>（5）平台服务层</strong></p>
+<p><strong>语义化</strong></p>
+<p>在该层，不仅信息技术被语义化地定义，其它行业技术和实体也实现了<strong>语义化</strong></p>
+<p>为了承载各行业领域的数字化转型，物联网所包含的各类信息技术自身就必须做到语义化。在物联网技术领域之外，各行业的资源和能力，也在此处被模块化封装，通过标准化的信息接口向外界提供服务，应用的开发和运营者可以随取随用</p>
+<p><strong>词汇集</strong></p>
+<p>该层也提供软件开发、运营的工具，便于各类行业系统对技术和设施的使用、组合、评测、维护。在平台服务层，形成了物联网应用的词典(词汇集)，各类物联网的资源(设施)是“名词”、各种信息处理功能是“动词”，开发人员将可以将主要精力放置在构建“语句”和“段落”(应用的逻辑功能)上，并最终书写出完整篇章(应用系统、商业体系)</p>
+<p><strong>“软件”及语言</strong></p>
+<p>在这一层中，“软件”包括了物联网服务平台的架构、中间件、接口标准、信息服务规范等等，也融合了各行业中的一些基础性的技术服务(比如平台可以提供气象预测的服务)</p>
+<p>在这一层，各行业的一些已经模块化的技术，能够通过信息产业的(程序化)封装，向外界提供开放式的服务，以形成各行业在物联网中的公共性语言(词汇)</p>
+<p>不过，这种语言并不是服务于“人”的语言，而是“物”与“物”，即设备、系统之间用以信息交流的语言工具。只要掌握了某种物联网应用的“语言”，那么任何设备都可以理解该应用数据的涵义，使用此应用的物联网服务，操作远端设备并获得反馈</p>
+<p><strong>（6）应用层</strong></p>
+<p>对物联网行业应用的<strong>设计、搭建、运营</strong>。开发者和运营者在应用层，选取所需的资源和功能(包括信息技术和行业技术)，通过对下层服务的调用，构建自己的行业应用。在物联网技术层级的体系中，应用层之下的五层，都可以理解为应用层的“硬件”；“软件”则是应用开发者自己编写的应用逻辑</p>
+<p>如果应用软件承载于SAAS(软件即服务)之上，系统底层设备由云计算服务商提供，那么在应用中可能就看不到任何物理实体的“硬件”，取而代之的，是下层模块化、标准化的信息服务和行业功能</p>
+<h3 id="4-IOT两个域"><a href="#4-IOT两个域" class="headerlink" title="4. IOT两个域"></a>4. IOT两个域</h3><p>信息流“接入”和“汇聚”的两种需求，将物联网的技术自然地分成了“<strong>边缘</strong>”和“<strong>云端</strong>”两个“域”</p>
+<p><strong>（1）边缘域</strong></p>
+<p>无数设备需要联网，接近<strong>物理实体</strong>现场的“边缘域”，应用和功能更倾向于需要实时性的反馈操作；<strong>边缘网络</strong>中有各类终端配备传感器——用以感知物理世界，部署各种类型的网络协议，包括了有线网络和无线网络、“对等网络协议”和“非对等网络</p>
+<p><strong>（2）云端域</strong></p>
+<p>远离现实物件，但<strong>信息集中</strong>汇聚的“云端域”，应用更倾向于抽象化的预测分析、海量数据检索等等；<strong>云端网络</strong>中的设备则只有标准的信号输出输入接口，云端域”只有<strong>对等网络</strong>协议，例如IPv4、IPv6</p>
+<hr>
+<h2 id="0x02-云计算"><a href="#0x02-云计算" class="headerlink" title="0x02 云计算"></a>0x02 云计算</h2><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><p><strong>DIS版：</strong>云计算是一种将可伸缩、弹性、共享的物理和虚拟资源池以按需自服务的方式供应和管理，并提供网络访问的模式。云计算模式由关键特征、云计算角色和活动、云能力类型和云服务分类、云部署模型、云计算共同关注点组成</p>
+<p><strong>NIST版：</strong>云计算是一种按使用量付费的模式，这种模式提供可用的、便捷的、按需的网络访问， 进入可配置的计算资源共享池（资源包括网络，服务器，存储，应用软件，服务），这些资源能够被快速提供，只需投入很少的管理工作，或与服务供应商进行很少的交互</p>
+<h3 id="2-部署模式"><a href="#2-部署模式" class="headerlink" title="2. 部署模式"></a>2. 部署模式</h3><p><strong>（1）公有云</strong></p>
+<p>云基础设施对公众或某个很大的业界群组提供云服务</p>
+<p><strong>（2）私有云</strong></p>
+<p>云基础设施特定为某个组织运行服务，可以是该组织或某个第三方负责管理，可以是场内服务（on-premises），也可以是场外服务（off-premises）</p>
+<p><strong>（3）社区云</strong></p>
+<p>云基础设施由若干个组织分享，以支持某个特定的社区。社区是指有共同诉求和追求的团体（，和私有云类似，社区云可以是该组织或某个第三方负责管理，可以是场内服务，也可以是场外服务</p>
+<p><strong>（4）混合云</strong></p>
+<p>云基础设施由两个或多个云（私有云、社区云或公有云）组成，独立存在，但是通过标准的或私有的技术绑定在一起，这些技术可促成数据和应用的可移植性</p>
+<h3 id="3-服务类型"><a href="#3-服务类型" class="headerlink" title="3. 服务类型"></a>3. 服务类型</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/%E4%BA%91%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>（1）Iaas (基础设施即服务)</strong></p>
+<p>根据用户的需求提供计算资源,将硬件设备等有形的<strong>基础设施资源</strong>进行封装,作为服务提供给用户使用。laaS为用户提供了处理、存储、网络等功能和计算资源,用户可以在上面随意运行任何软件。云还提供了弹性的服务资源和动态要求服务质量和能力的功能,因此用户能够根据需求随时动态请求资源服务。laaS为用户提供资源抽象、资源监控、资源部署、负载管理、安全管理、数据管理和计费管理七个功能。laaS主要是为用户提供虚拟机或者其它资源等服务,其主要用户是<strong>系统管理员</strong></p>
+<p><strong>（2）Paas (平台即服务)</strong></p>
+<p>根据用户需求提供基于互联网的应用开发环境和存储服务，主要是将为用户提供一个<strong>开发平台</strong>,方便编写和测试程序,其主要用户是程序<strong>开发人员</strong></p>
+<p><strong>（3）Saas (软件即服务)</strong></p>
+<p>以服务访问的形式访问网络上的软件,为用户提供运行在云基础设施上的<strong>应用软件</strong>，主要为用户提供各种应用,其面对的主要是<strong>普通用户</strong></p>
+<h3 id="4-参考架构-CCRA"><a href="#4-参考架构-CCRA" class="headerlink" title="4. 参考架构 (CCRA)"></a>4. 参考架构 (CCRA)</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/CCRA%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<h3 id="5-支撑技术"><a href="#5-支撑技术" class="headerlink" title="5. 支撑技术"></a>5. 支撑技术</h3><p><strong>（1）系统虚拟化</strong></p>
+<p>系统虚拟化是指将一台物理计算机系统虚拟化为一台或多台虚拟计算机系统。每个虚拟计算机系统（简称虚拟机）都拥有自己的虚拟硬件（如 CPU、内存和设备等），来提供一个独立的虚拟机执行环境。通过虚拟化层的模拟，虚拟机中的操作系统认为自己仍然是独占一个系统在运行。每个虚拟机中的操作系统可以完全不同，并且它们的执行环境是完全独立的。这个虚拟化层被称为虚拟机监控器（Virtual Machine Monitor，简称 VMM）</p>
+<p><img src="http://pdn6x28ho.bkt.clouddn.com/%E7%B3%BB%E7%BB%9F%E8%99%9A%E6%8B%9F%E5%8C%96.png" alt=""></p>
+<p>VMM 对物理资源的虚拟可以归结为三个主要任务：CPU 虚拟化、内存虚拟化和 I/O 虚拟化。CPU 虚拟化是 VMM 中最核心的部分，决定了内存虚拟化和 I/O虚拟化的正确实现。<strong>CPU 虚拟化</strong>包括指令的模拟、中断和异常的模拟及注入和对称多处理器技术的模拟。<strong>内存虚拟化</strong>一方面解决了 VMM 和客户机操作系统对物理内存认识上的差异，另一方面在虚拟机之间、虚拟机和 VMM 之间进行隔离，防止某个虚拟机内部的活动影响到其他的虚拟机甚至是 VMM 本身，从而造成安全上的漏洞。<strong>I/O 虚拟化</strong>主要是为了满足多个客户机操作系统对外围设备的访问需求，通过访问截获、设备模拟和设备共享等方式复用外设</p>
+<p><strong>（2）虚拟化资源管理</strong></p>
+<p>虚拟化资源是云计算中最重要的组成部分之一，对虚拟化资源的管理水平直接影响云计算的可用性、可靠性和安全性。虚拟化资源管理主要包括对虚拟化资源的监控、分配和调度，在虚拟化资源管理调度接口方面，表述性状态转移（Representational State Transfer，简称 <strong>REST</strong>）有能力成为虚拟化资源管理强有力的支撑</p>
+<p>云资源池中应用的需求不断改变，在线服务的请求经常不可预测，这种动态的环境要求云计算的数据中心或计算中心能够对各类资源进行灵活、快速、动态的按需调度</p>
+<p><strong>（3）分布式数据存储</strong></p>
+<p>分布式数据存储技术包含非结构化数据存储和结构化数据存储。其中，非结构化数据存储主要采用文件存储和对象存储技术，而结构化数据存储主要采用分布式数据库技术，特别是 NoSQL 数据库</p>
+<p>A. <strong>分布式文件系统</strong></p>
+<p>为了存储和管理云计算中的海量数据，Google 提出分布式文件系统 <strong>GFS</strong>（Google File System），Apache Hadoop项目的 HDFS 实现了 GFS 的开源版本。GFS/HDFS 非常适于进行以<strong>大文件形式</strong>存储的海量数据的并行处理，但是，当文件系统的文件数量持续上升时，元数据服务器的可扩展性面临极限</p>
+<p>B. <strong>分布式对象存储系统</strong></p>
+<p>与分布式文件系统不同，分布式对象存储系统不包含树状名称空间（Namespace），因此在<strong>数量增长</strong>时可以更有效地将元数据平衡地分布到多个结点上，提供理论上无限的可扩展性</p>
+<p>C. <strong>分布式数据库管理系统</strong></p>
+<p>传统的单机数据库采用“<strong>向上扩展</strong>”的思路来解决计算能力和存储能力的问题，即增加 CPU 处理能力、内存和磁盘数量。这种系统目前最大能够支持几个 TB 数据的存储和处理，远不能满足实际需求。采用<strong>集群设计</strong>的分布式数据库逐步成为主流</p>
+<p><strong>（4）并行计算模式</strong></p>
+<p>并行计算模型是<strong>提高海量数据处理效率</strong>的常用方法。常用的并行计算模型主要包括两类：一类是面向高性能计算的，如 MPI(Message Passing Interface)模型；另一类是面向互联网数据密集型应用的并行编程模型，如 Google 的MapReduce 模型、微软的 Dryad 模型</p>
+<p><strong>（5）用户交互技术</strong></p>
+<p>云计算的逐步普及，浏览器已经不仅仅是一个客户端的软件，而逐步演变为承载着互联网的平台。浏览器与云计算的整合技术主要体现在两个方面：浏览器<strong>网络化</strong>与浏览器<strong>云服务</strong></p>
+<p>目前的浏览器云服务主要体现在 <strong>P2P 下载、视频加速</strong>等单独的客户端软件中，主要的应用研究方向包括：基于浏览器的 P2P 下载、视频加速、分布式计算、多任务协同工作等。在多任务协同工作方面,<strong>AJAX</strong>（Asynchronous JavaScript and XML，异步 JavaScript 和 XML)是一种创建交互式网页应用的网页开发技术，改变了传统网页的交互方式，改进了交互体验</p>
+<p><strong>（6）安全管理</strong></p>
+<p>云计算的多租户、分布性、对网络和服务提供者的依赖性，为安全问题带来新的挑战，数据安全问题及风险(数据存储及访问控制，数据传输保护，数据隐私及敏感信息保护，数据可用性，依从性管理)依旧严峻，相应安全管理技术(数据保护及隐私（Data Protection and Privacy），身份及访问管理（Identity and Access Management,简称 IAM），数据传输（Data Transportation），可用性管理（Availability Management），日志管理（Log Management），审计管理（Audit Management），依从性管理(Compliance Management))的发展为其提供保障</p>
+<hr>
+<h2 id="0x03-大数据-Bigdata"><a href="#0x03-大数据-Bigdata" class="headerlink" title="0x03 大数据 (Bigdata )"></a>0x03 大数据 (Bigdata )</h2><h3 id="1-概念定义"><a href="#1-概念定义" class="headerlink" title="1. 概念定义"></a>1. 概念定义</h3><p>无法在一定时间范围内用常规软件工具进行捕捉、管理和处理的数据集合，是需要新处理模式才能具有更强的决策力、洞察发现力和流程优化能力的海量、高增长率和多样化的信息资产，大数据的主要特点为<strong>数据量大</strong>（Volume），<strong>数据类别复杂</strong>（Variety），<strong>数据处理速度快</strong>（Velocity）和<strong>数据真实性高</strong>（Veracity），合起来被称为4V</p>
+<h3 id="2-大数据分析技术"><a href="#2-大数据分析技术" class="headerlink" title="2. 大数据分析技术"></a>2. 大数据分析技术</h3><p><strong>（1）可视化分析（Analytic Visualization）</strong></p>
+<p>普通消费者常常<strong>可以见到</strong>的一种大数据分析结果的表现形式，可视化分析将大量复杂的数据自动转化成<strong>直观形象</strong>的图表，使其能够更加容易的被普通消费者所接受和理解</p>
+<p><strong>（2）数据挖掘算法（Date Mining Algorithms）</strong></p>
+<p>大数据分析的理论核心，其本质是一组根据<strong>算法</strong>事先定义好的<strong>数学公式</strong>，将收集到的数据作为参数变量带入其中，从而能够从大量复杂的数据中<strong>提取</strong>到有价值的信息。亚马逊的推荐引擎和谷歌的广告系统都大量使用了数据挖掘算法</p>
+<p><strong>（3）预测性分析能力（Predictive Analytic Capabilities）</strong></p>
+<p>大数据分析最重要的应用领域，从大量复杂的数据中挖掘出规律，建立起科学的事件模型，通过将新的数据带入模型，就可以预测未来的事件走向。预测性分析能力常常被应用在金融分析和科学研究领域，用于股票预测或气象预测等</p>
+<p><strong>（4）语义引擎（Semantic Engines）</strong></p>
+<p>通过对大量复杂的数据进行分析，让计算机从中自我学习，可以使计算机能够尽量精确的了解用户输入内容的意思，从而把握住用户的需求，提供更好的用户体验</p>
+<p><strong>（5）数据质量管理（Data Quality Management）</strong></p>
+<p>为了保证大数据分析结果的准确性，需要将大数据中不真实的数据剔除掉，保留最准确的数据。这就需要建立有效的数据质量管理系统，分析收集到的大量复杂的数据，挑选出真实有效的数据</p>
+<h3 id="3-技术基础"><a href="#3-技术基础" class="headerlink" title="3. 技术基础"></a>3. 技术基础</h3><p><strong>（1）分布式计算（Distributed Computing）</strong></p>
+<p><strong>基本概念</strong></p>
+<p>把一组计算机通过网络相互连接组成<strong>分散系统</strong>，然后将需要处理的大量数据分散成多个部分，交由分散系统内的计算机组同时计算，最后将这些计算结果合并得到最终的结果</p>
+<p><strong>模型(Google)</strong></p>
+<p>MapReduce是分布式<strong>计算框架</strong>，GFS（Google File System）是分布式<strong>文件系统</strong>，BigTable是基于Google File System的<strong>数据存储系统</strong></p>
+<p><strong>主流分布式计算系统</strong></p>
+<p>A. <strong>Hadoop</strong></p>
+<p>Apache基金会的开源项目，采用MapReduce分布式计算框架，并根据GFS开发了HDFS分布式文件系统，根据BigTable开发了HBase数据存储系统，常用于<strong>离线</strong>的<strong>复杂</strong>的大数据处理</p>
+<p>B. <strong>Spark</strong></p>
+<p>Apache基金会的开源项目，它由加州大学伯克利分校的实验室开发，在Hadoop的基础上进行了一些架构上的改良。<strong>Hadoop</strong>使用<strong>硬盘</strong>来存储数据，而<strong>Spark</strong>使用<strong>内存</strong>来存储数据，因此Spark可以提供超过Hadoop100倍的运算速度，但是，由于内存断电后会丢失数据，Spark不能用于处理需要长期保存的数据，常用于<strong>离线</strong>的<strong>快速</strong>的大数据处理</p>
+<p>C. <strong>Storm</strong></p>
+<p>Twitter主推的分布式计算系统，它由BackType团队开发，是Apache基金会的孵化项目。它在Hadoop的基础上提供了<strong>实时运算</strong>的特性，可以实时的处理大数据流。不同于Hadoop和Spark，Storm不进行数据的收集和存储工作，它直接通过网络实时的接受数据并且实时的处理数据，然后直接通过网络实时的传回结果。常用于<strong>在线</strong>的<strong>实时</strong>的大数据处理</p>
+<p><strong>（2）服务器集群（Server Cluster）</strong></p>
+<p>服务器集群是一种提升服务器整体计算能力的解决方案。它是由互相连接在一起的服务器群所组成的一个并行式或分布式系统。服务器集群中的服务器运行同一个计算任务。因此，从外部看，这群服务器表现为一台虚拟的服务器，对外提供统一的服务</p>
+<hr>
+<h2 id="0x04-人工智能-AI"><a href="#0x04-人工智能-AI" class="headerlink" title="0x04 人工智能(AI)"></a>0x04 人工智能(AI)</h2><h3 id="1-发展史"><a href="#1-发展史" class="headerlink" title="1. 发展史"></a>1. 发展史</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/AI%E5%8F%91%E5%B1%95%E5%8F%B2.png" alt=""></p>
+<h3 id="2-概念定义"><a href="#2-概念定义" class="headerlink" title="2. 概念定义"></a>2. 概念定义</h3><p><strong>维基百科版</strong></p>
+<p>“人工智能就是机器展现出的智能”，即只要是某种机器，具有某种或某些“智能”的特征或表现，都应该算作“人工智能”</p>
+<p><strong>百度百科版</strong></p>
+<p>人工智能是“研究、开发用于模拟、延伸和扩展人的智能的理论、方法、技术及应用系统的一门新的技术科学”，将其视为计算机科学的一个分支，指出其研究包括机器人、语言识别、图像识别、自然语言处理和专家系统等</p>
+<h3 id="3-分类"><a href="#3-分类" class="headerlink" title="3. 分类"></a>3. 分类</h3><p><strong>（1）弱人工智能</strong></p>
+<p>不能真正实现推理和解决问题的智能机器，<strong>无自主意识</strong>。迄今为止的人工智能系统都还是实现特定功能的专用智能，而不是像人类智能那样能够不断适应复杂的新环境并不断涌现出新的功能，因此都还是弱人工智能。目前的主流研究仍然集中于弱人工智能，并取得了显著进步，如语音识别、图像处理和物体分割、机器翻译等方面取得了重大突破，甚至可以接近或超越人类水平</p>
+<p><strong>（2）强人工智能</strong></p>
+<p>指真正<strong>能思维</strong>的智能机器，并且认为这样的机器是有<strong>知觉</strong>的和<strong>自我意识</strong>的，这类机器可分为类人（机器的思考和推理类似人的思维）与非类人（机器产生了和人完全不一样的知觉和意识，使用和人完全不一样的推理方式）两大类。从一般意义来说，达到人类水平的、能够自适应地应对外界环境挑战的、具有自我意识的人工智能称为“通用人工智能”、“强人工智能”或“类人智能”</p>
+<p><strong>仿真主义</strong></p>
+<ul>
+<li><p>仿真主义可以说是符号主义、连接主义、行为主义和统计主义之后的第五个流派。这条新路线通过制造先进的大脑探测工具从结构上解析大脑，再利用工程技术手段构造出模仿大脑神经网络基元及结构的仿脑装置，最后通过环境刺激和交互训练仿真大脑实现类人智能，简言之，“<strong>先结构，后功能</strong>”</p>
+</li>
+<li><p><strong>经典计算机</strong>是数理逻辑的开关电路实现，采用<strong>冯•诺依曼体系结构</strong>，可以作为逻辑推理等专用智能的实现载体。但要靠经典计算机不可能实现强人工智能。要按仿真主义的路线“仿脑”，就必须设计制造全新的软硬件系统，这就是“<strong>类脑计算机</strong>”，或者更准确地称为“<strong>仿脑机</strong>”。“仿脑机”是“仿真工程”的标志性成果，也是“仿脑工程”通向强人工智能之路的重要里程碑</p>
+</li>
+</ul>
+<h3 id="4-参考框架"><a href="#4-参考框架" class="headerlink" title="4. 参考框架"></a>4. 参考框架</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/AI%E6%A1%86%E6%9E%B6.png" alt=""></p>
+<p>提供了基于<strong>“角色—活动—功能”</strong>的层级分类体系，从“智能信息链”（水平轴）和“IT 价值链”（垂直轴）两个维度阐述了人工智能系统框架。<strong>“智能信息链”</strong>反映从智能信息感知、智能信息表示与形成、智能推理、智能决策、智能执行与输出的一般过程。在这个过程中，智能信息是流动的载体，经历了“数据—信息—知识—智慧”的凝练过程。<strong>“IT 价值链”</strong>从人工智能的底层基础设施、信息（提供和处理技术实现）到系统的产业生态过程，反映人工智能为信息技术产业带来的价值</p>
+<h3 id="5-关键技术"><a href="#5-关键技术" class="headerlink" title="5. 关键技术"></a>5. 关键技术</h3><p><strong>（1）机器学习（Machine Learning）</strong></p>
+<p>研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能的学科技术。基于数据的机器学习是现代智能技术中的重要方法之一，研究从观测数据（样本）出发寻找规律，利用这些规律对未来数据或无法观测的数据进行预测</p>
+<p><strong>分类-根据学习模式</strong></p>
+<p>A. <strong>监督学习</strong></p>
+<p>利用<strong>已标记</strong>的有限训练数据集，通过某种学习策略/方法建立一个模型，实现对新数据/实例的标记（分类）/映射，最典型的监督学习算法包括<strong>回归</strong>和<strong>分类</strong>。监督学习要求训练样本的分类标签已知，分类标签精确度越高，样本越具有代表性，学习模型的准确度越高。监督学习在自然语言处理、信息检索、文本挖掘、手写体辨识、垃圾邮件侦测等领域获得了广泛应用</p>
+<p>B. <strong>无监督学习</strong></p>
+<p>利用<strong>无标记</strong>的有限数据描述隐藏在未标记数据中的结构/规律，最典型的非监督学习算法包括<strong>单类密度估计、单类数据降维、聚类</strong>等。无监督学习不需要训练样本和人工标注数据，便于压缩数据存储、减少计算量、提升算法速度，还可以避免正、负样本偏移引起的分类错误问题。主要用于经济预测、异常检测、数据挖掘、图像处理、模式识别等领域</p>
+<p>C. <strong>强化学习</strong></p>
+<p>智能系统<strong>从环境到行为映射</strong>的学习，以使强化信号函数值最大。强化学习的目标是学习从环境状态到行为的映射，使得智能体选择的行为能够获得环境最大的奖赏，使得外部环境对学习系统在某种意义下的评价为最佳。其在机器人控制、无人驾驶、下棋、工业控制等领域获得成功应用</p>
+<p><strong>分类-根据学习方法</strong></p>
+<p>A. <strong>传统机器学习</strong></p>
+<p>从一些观测（训练）样本出发，试图发现不能通过原理分析获得的规律，实现对未来数据行为或趋势的准确预测。相关算法包括<strong>逻辑回归、隐马尔科夫方法、支持向量机方法、K 近邻方法、三层人工神经网络方法、Adaboost算法</strong>、<strong>贝叶斯方法</strong>以及<strong>决策树方法</strong>等</p>
+<p>传统机器学习平衡了学习结果的<strong>有效性</strong>与学习模型的<strong>可解释性</strong>，为解决有限样本的学习问题提供了一种框架，主要用于<strong>有限样本</strong>情况下的<strong>模式分类、回归分析、概率密度估计</strong>等。传统机器学习方法共同的重要理论基础之一是<strong>统计学</strong>，在自然语言处理、语音识别、图像识别、信息检索和生物信息等许多计算机领域获得了广泛应用</p>
+<p>B. <strong>深度学习</strong></p>
+<p>深度学习是建立<strong>深层结构模型</strong>的学习方法，典型的深度学习算法包括<strong>深度置信网络、卷积神经网络、受限玻尔兹曼机</strong>和<strong>循环神经网络</strong>等</p>
+<p>深度学习又称为深度神经网络（指层数<strong>超过3 层</strong>的神经网络）。深度学习源于<strong>多层神经网络</strong>，其实质是给出了一种将<strong>特征表示和学习合二为一</strong>的方式。深度学习的特点是放弃了可解释性，单纯追求学习的有效性</p>
+<p>经过多年的摸索尝试和研究，已经产生了诸多深度神经网络的模型，其中<strong>卷积神经网络、循环神经网络</strong>是两类典型的模型。卷积神经网络常被应用于空间性分布数据；循环神经网络在神经网络中引入了记忆和反馈，常被应用于时间性分布数据</p>
+<p><strong>深度学习框架</strong>是进行深度学习的基础底层框架，一般包含主流的神经网络算法模型，提供稳定的深度学习 API，支持训练模型在服务器和 GPU、TPU 间的分布式学习，部分框架还具备在包括移动设备、13云平台在内的多种平台上运行的移植能力，从而为深度学习算法带来前所未有的运行速度和实用性。目前主流的开源算法框架有 <strong>TensorFlow、Caffe/Caffe2、CNTK、MXNet、Paddle-paddle、Torch/PyTorch、Theano</strong> 等</p>
+<p><strong>（2）知识图谱</strong></p>
+<p>本质上是<strong>结构化</strong>的<strong>语义知识库</strong>，是一种由节点和边组成的<strong>图</strong>数据结构，以符号形式描述物理世界中的概念及其相互关系，其基本组成单位是<strong>“实体—关系—实体”</strong>三元组，以及实体及其相关“属性—值”对。不同实体之间通过关系相互联结，构成网状的知识结构。在知识图谱中，每个节点表示现实世界的“实体”，每条边为实体与实体之间的“关系”</p>
+<p>知识图谱可用于<strong>反欺诈、不一致性验证、组团欺诈</strong>等公共安全保障领域，需要用到异常分析、静态分析、动态分析等数据挖掘方法</p>
+<p><strong>（3）自然语言处理</strong></p>
+<p>研究能实现人与计算机之间用自然语言进行有效通信的各种理论和方法，涉及的领域较多，主要包括<strong>机器翻译、机器阅读理解</strong>和<strong>问答系统</strong>等</p>
+<p><strong>（4）人机交互</strong></p>
+<p>主要研究人和计算机之间的<strong>信息交</strong>换，主要包括人到计算机和计算机到人的两部分信息交换，是人工智能领域的重要的外围技术。人机交互是与认知心理学、人机工程学、多媒体技术、虚拟现实技术等密切相关的综合学科。人机交互技术除了传统的基本交互和图形交互外，还包括<strong>语音交互、情感交互、体感交互</strong>及<strong>脑机交互</strong>等技术</p>
+<p><strong>（5）计算机视觉</strong></p>
+<p>计算机视觉是使用计算机<strong>模仿人类视觉系统</strong>的科学，让计算机拥有类似人类提取、处理、理解和分析图像以及图像序列的能力。自动驾驶、机器人、智能医疗等领域均需要通过计算机视觉技术从视觉信号中提取并处理信息。近来随着深度学习的发展，预处理、特征提取与算法处理渐渐融合，形成<strong>端到端</strong>的人工智能算法技术。根据解决的问题，计算机视觉可分为<strong>计算成像学、图像理解、三维视觉、动态视觉</strong>和<strong>视频编解码</strong>五大类</p>
+<p><strong>（6）生物特征识别</strong></p>
+<p>生物特征识别技术是指通过个体<strong>生理特征</strong>或<strong>行为特征</strong>对个体身份进行识别<strong>认证</strong>的技术</p>
+<p>从应用流程看，生物特征识别通常分为<strong>注册</strong>和<strong>识别</strong>两个阶段。<strong>注册阶段</strong>通过传感器对人体的生物表征信息进行采集，如利用图像传感器对指纹和人脸等光学信息、麦克风对说话声等声学信息进行采集，利用数据预处理以及特征提取技术对采集的数据进行处理，得到相应的特征进行存储。<strong>识别过程</strong>采用与注册过程一致的信息采集方式对待识别人进行信息采集、数据预处理和特征提取，然后将提取的特征与存储的特征进行比对分析，完成识别。从应用任务看，生物特征识别一般分为辨认与确认两种任务，辨认是指从存储库中确定待识别人身份的过程，是一对多的问题；确认是指将待识别人信息与存储库中特定单人信息进行比对，确定身份的过程，是一对一的问题</p>
+<p>生物特征识别技术涉及的内容十分广泛，包括<strong>指纹、掌纹、人脸、虹膜、指静脉、声纹、步态</strong>等多种生物特征，其识别过程涉及到图像处理、计算机视觉、语音识别、机器学习等多项技术</p>
+<p><strong>（7）虚拟现实/增强现实</strong></p>
+<p>虚拟现实（VR）/增强现实（AR）是以计算机为核心的新型视听技术。结合相关科学技术，在一定范围内生成与真实环境在视觉、听觉、触感等方面高度近似的数字化环境。用户借助必要的装备与数字化环境中的对象进行交互，相互影响，获得近似真实环境的感受和体验，通过显示设备、跟踪定位设备、触力觉交互设备、数据获取设备、专用芯片等实现</p>
+<hr>
+<h2 id="0x05-相互关系"><a href="#0x05-相互关系" class="headerlink" title="0x05 相互关系"></a>0x05 相互关系</h2><ol>
+<li><p><strong>物联网</strong>本质上是互联网大脑的感觉神经系统和运动神经系统，传感器和通过AI控制的智能设备通过互联网线路连接到互联网中枢神经系统供云端的群体智慧和云AI使用(<strong>数据产生和收集器</strong>)</p>
+</li>
+<li><p><strong>云计算</strong>本质上是互联网大脑的中枢神经系统，它通过服务器，网络操作系统，神经元网络（大社交网络），大数据和基于大数据的人工智能算法对互联网大脑的其他组成部分进行控制(<strong>数据存储平台</strong>)</p>
+</li>
+<li><p><strong>大数据</strong>本质上是互联网大脑各神经系统在运转过程中传输和积累的<strong>有价值信息</strong>。因为在过去50年随着互联网的快速进化而急速膨胀，体量极其巨大。是互联网大脑产生智慧智能的基础(<strong>有价值的数据</strong>)</p>
+</li>
+<li><p><strong>人工智能</strong>本质是互联网大脑产生产生智慧智能的动力源泉，人工智能不仅仅通过算法如深度学习，机器学习与大数据结合，也运用到互联网大脑的神经末梢，神经网络和智能终端中。使得互联网大脑各个神经系统同时提升能力（<strong>智能化数据分析</strong>）</p>
+</li>
+</ol>
+<hr>
+<h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
+<li><p><a href="http://imgtec.eetrend.com/blog/10926" target="_blank" rel="noopener">物联网技术矩阵图</a></p>
+</li>
+<li><p><a href="http://www.cac.gov.cn/files/pdf/baipishu/CloudStandardization.pdf" target="_blank" rel="noopener">云计算标准化白皮书 </a></p>
+</li>
+<li><p><a href="http://www.cesi.cn/images/editor/20180124/20180124135528742.pdf" target="_blank" rel="noopener">人工智能标准化白皮书</a></p>
+</li>
+</ul>
+<ul>
+<li><p><a href="https://github.com/mindpin/docs/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86" target="_blank" rel="noopener">https://github.com/mindpin/docs/wiki/Bigdata</a></p>
+</li>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/artificial intelligence</a></p>
+</li>
+<li><p><a href="http://www.duozhishidai.com/article-1858-1.html" target="_blank" rel="noopener">http://www.duozhishidai.com/article-1858-1.html</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/IDS技术简析/" rel="next" title="IDS技术简析">
+                <i class="fa fa-chevron-left"></i> IDS技术简析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/24/安全站点导航/" rel="prev" title="安全站点导航">
+                安全站点导航 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Firehacker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Hackerfire" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:firehafcker@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://firehacker.top/SecBook" target="_blank" title="Gitbook">
+                      
+                        <i class="fa fa-fw fa-book"></i>Gitbook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-物联网-IOT"><span class="nav-number">1.</span> <span class="nav-text">0x01 物联网 (IOT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IOT概念"><span class="nav-number">1.1.</span> <span class="nav-text">1. IOT概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-关键技术"><span class="nav-number">1.2.</span> <span class="nav-text">2. 关键技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-体系架构"><span class="nav-number">1.3.</span> <span class="nav-text">3. 体系架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-IOT两个域"><span class="nav-number">1.4.</span> <span class="nav-text">4. IOT两个域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-云计算"><span class="nav-number">2.</span> <span class="nav-text">0x02 云计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-部署模式"><span class="nav-number">2.2.</span> <span class="nav-text">2. 部署模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-服务类型"><span class="nav-number">2.3.</span> <span class="nav-text">3. 服务类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考架构-CCRA"><span class="nav-number">2.4.</span> <span class="nav-text">4. 参考架构 (CCRA)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-支撑技术"><span class="nav-number">2.5.</span> <span class="nav-text">5. 支撑技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-大数据-Bigdata"><span class="nav-number">3.</span> <span class="nav-text">0x03 大数据 (Bigdata )</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概念定义"><span class="nav-number">3.1.</span> <span class="nav-text">1. 概念定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-大数据分析技术"><span class="nav-number">3.2.</span> <span class="nav-text">2. 大数据分析技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-技术基础"><span class="nav-number">3.3.</span> <span class="nav-text">3. 技术基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-人工智能-AI"><span class="nav-number">4.</span> <span class="nav-text">0x04 人工智能(AI)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-发展史"><span class="nav-number">4.1.</span> <span class="nav-text">1. 发展史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-概念定义"><span class="nav-number">4.2.</span> <span class="nav-text">2. 概念定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-分类"><span class="nav-number">4.3.</span> <span class="nav-text">3. 分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考框架"><span class="nav-number">4.4.</span> <span class="nav-text">4. 参考框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-关键技术"><span class="nav-number">4.5.</span> <span class="nav-text">5. 关键技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-相互关系"><span class="nav-number">5.</span> <span class="nav-text">0x05 相互关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">6.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Firehacker</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cQ1pKGTukU9T7wK7hVqrFIy0-gzGzoHsz',
+        appKey: '6l4mVkOTGKucdJoVS2dNCr0R',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

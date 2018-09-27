@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="google-site-verification" content="wCoNEhJPwtNoql5k0PfiYmMR-rgvliWvNZyGItcI3w0" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ASA,SeeSec," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Firehacker" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结">
+<meta name="keywords" content="ASA,SeeSec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新型安全技术简析">
+<meta property="og:url" content="http://www.firehacker.top/2018/09/07/新型安全技术简析/index.html">
+<meta property="og:site_name" content="Firehacker">
+<meta property="og:description" content="伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E8%BE%93%E5%85%A5.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E5%8A%9F%E8%83%BD.jpg">
+<meta property="og:image" content="http://par628i4r.bkt.clouddn.com/%E6%9E%B6%E6%9E%84.png">
+<meta property="og:updated_time" content="2018-09-19T02:59:18.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新型安全技术简析">
+<meta name="twitter:description" content="伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结">
+<meta name="twitter:image" content="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.firehacker.top/2018/09/07/新型安全技术简析/"/>
+
+
+
+
+
+  <title>新型安全技术简析 | Firehacker</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+	
+	<a href="https://github.com/Hackerfire" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Firehacker</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-community">
+          <a href="/community/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-users"></i> <br />
+            
+            社区
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-resources">
+          <a href="/resources/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-eye"></i> <br />
+            
+            资源
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tools">
+          <a href="/tools/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-wrench"></i> <br />
+            
+            工具
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.firehacker.top/2018/09/07/新型安全技术简析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Firehacker">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Firehacker">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">新型安全技术简析</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T09:27:15+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x02-原理浅析/" itemprop="url" rel="index">
+                    <span itemprop="name">0x02 原理浅析</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/0x02-原理浅析/安全前沿/" itemprop="url" rel="index">
+                    <span itemprop="name">安全前沿</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/07/新型安全技术简析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/07/新型安全技术简析/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>伴随大智云联的兴起与发展，自适应，微隔离，软件定义安全，加密流量分析，MLSec，下一代防火墙等新型安全概念层出不穷，这些安全技术的背景，兴起的原因，以及深层次的技术原理又是什么？本文综合网络上的相关资源，对此进行分析总结</p>
+</blockquote>
+<a id="more"></a>
+<hr>
+<h2 id="0x01-自适应安全架构-ASA"><a href="#0x01-自适应安全架构-ASA" class="headerlink" title="0x01 自适应安全架构(ASA)"></a>0x01 自适应安全架构(ASA)</h2><h3 id="1-阶段"><a href="#1-阶段" class="headerlink" title="1. 阶段"></a>1. 阶段</h3><p><img src="http://pdn6x28ho.bkt.clouddn.com/ASA%E6%9E%B6%E6%9E%84.jpg" alt=""></p>
+<p><strong>(1) 预测 Predictive</strong></p>
+<p>使安全系统可从外部监控下的黑客行动中学习，以主动锁定对现有系统和信息具有威胁的新型攻击，并对漏洞划定优先级和定位。该情报将反馈到预防和检测功能，从而构成整个处理流程的闭环</p>
+<p><strong>(2) 防御 Preventive</strong></p>
+<p>指一系列策略集、产品和服务可以用于防御攻击。这个方面的关键目标是通过减少被攻击面来提升攻击门槛，并在受影响前拦截攻击动作</p>
+<p><strong>(3) 监控 Detective</strong></p>
+<p>用于发现那些逃过防御网络的攻击，该方面的关键目标是降低威胁造成的“停摆时间”以及其他潜在的损失。检测能力非常关键，因为企业应该假设自己已处在被攻击状态中</p>
+<p><strong>(4) 回溯 Restrospective</strong></p>
+<p>用于高效调查和补救被检测分析功能(或外部服务)查出的事务，以提供入侵认证和攻击来源分析，并产生新的预防手段来避免未来事故</p>
+<h3 id="2-核心思想"><a href="#2-核心思想" class="headerlink" title="2. 核心思想"></a>2. 核心思想</h3><p><strong>(1) 安全防护是一项持续处理过程</strong></p>
+<p>在持续攻击时代，企业需要完成对安全思维的根本性切换，从“应急响应”到“持续响应”，前者认为攻击是偶发的，一次性的事故，而后者则认为攻击是不间断的，黑客渗透系统和信息的努力是不可能完全拦截的，系统应承认自己时刻处于被攻击中</p>
+<p><strong>(2) 持续监控和分析是自适应安全架构的核心</strong></p>
+<p>下一代安全防护程序的核心一定是持续的，主动监控和可视化将持续分析攻击痕迹，这将生成大量数据。可以用多种分析手段来处理这些数据，包括启发性方法、统计方法、推理建模、机器学习、聚类分析、贝叶斯建模</p>
+<h3 id="3-关键输入"><a href="#3-关键输入" class="headerlink" title="3. 关键输入"></a>3. 关键输入</h3><p><img src="http://par628i4r.bkt.clouddn.com/%E8%BE%93%E5%85%A5.jpg" alt=""></p>
+<p><strong>(1) 威胁情报</strong></p>
+<p>危险情报的核心是那些提供可信有价值的主题源，如IP地址、域、URLs、文件、应用等等。然而，高级威胁情报服务还应提供给企业关于攻击者/机构的组织方式攻击目标等情报；服务商还应该提供相应的指导，帮助企业针对性防护这些攻击</p>
+<p><strong>(2) 社区智慧</strong></p>
+<p>为更好地应对高级威胁，信息应该是聚合的，可通过基于云的社区进行分析和分享的，理想的情况下，还应该拥有在相似行业和地区进行信息聚合及分析的能力。这种“众包”智能可以提升所有参与者的整体防护能力</p>
+<p><strong>(3) 供应商实验室</strong></p>
+<p>大多数安全防护平台厂商提供最新的信息来支持他们的防护解决方案——例如，为提供对最新发现的威胁进行保护，黑白名单以及规则和模式都会更新</p>
+<p><strong>(4) 策略</strong></p>
+<p>用于定义和描述各项组织需求包括系统配置、补丁需求、网络活动、哪些应用允许执行，哪些应被禁止，反病毒扫描的频率、敏感数据保护、应急响应等等</p>
+<p><strong>(5) 漏洞分析</strong></p>
+<p>该信息提供给企业对其所用到的设备、系统、应用和接口中的漏洞进行分析。除了包括一致的漏洞，分析还包括存在于企业客户和第三方应用中的一些未知的漏洞，可通过主动测试其应用、库和接口来完成</p>
+<p><strong>(6) 场景</strong></p>
+<p>基于当前条件的信息(如地点、时间、漏洞状态等)，场景感知使用额外信息提升信息安全决策正确性。对于分辨哪些攻击逃过传统安全防护机制，以及帮助确定有意义的偏离正常行为而不需要增加大量误报率时，对场景的利用非常关键</p>
+<h3 id="4-关键功能"><a href="#4-关键功能" class="headerlink" title="4. 关键功能"></a>4. 关键功能</h3><p><img src="http://par628i4r.bkt.clouddn.com/%E5%8A%9F%E8%83%BD.jpg" alt=""></p>
+<p><img src="http://par628i4r.bkt.clouddn.com/%E6%9E%B6%E6%9E%84.png" alt=""></p>
+<p><strong>(1) 预测阶段</strong></p>
+<ul>
+<li><p><strong>基线系统</strong>：系统会不停地进行变动;新的系统(如移动设备和云服务)也将不断被引入;用户账户不停的新建和撤销;新的漏洞不断地披露;新应用部署;针对新威胁的适应改造也一直进行着，所以，我们也应该持续对终端设备、服务器端系统、云服务、漏洞、关系和典型接口进行重定基线以及挖掘发现</p>
+</li>
+<li><p><strong>攻击预测</strong>：该领域正处于前沿而且日益重要。通过检测黑客的意图，关注黑客市场和公告板;对垂直行业的兴趣;以及对保护信息的类别和敏感度，这一领域内的功能在于主动预测未来的攻击和目标，使企业可以随之调整安全防护策略来应对</p>
+</li>
+<li><p><strong>主动探索分析</strong>：随着内外情报的收集，需要对企业资产进行探索和风险评估以预测威胁，同时也许需要对企业策略和控制的调整</p>
+</li>
+</ul>
+<p><strong>(2) 防护阶段</strong></p>
+<ul>
+<li><strong>加固和隔离系统：</strong>任何信息安全架构的初始功能都是采用多种技术降低攻击面，限制黑客接触系统、发现漏洞和执行恶意代码的能力</li>
+</ul>
+<ul>
+<li><p><strong> 漏洞以及补丁管理</strong>：用于识别和关闭漏洞的漏洞及路径管理功能也可以纳入此类。结合端点隔离和沙盒技术，可主动限制网络/系统/进程/应用相互接口的能力，也是此类的另一种方式(见“面向高级攻击的虚拟化和控制系统技术概览”)</p>
+</li>
+<li><p><strong>转移攻击：</strong>简单来说，该领域功能可是企业在黑客攻防中获得时间上的非对称优势，通过多种技术使攻击者难以定位真正的系统核心以及可利用漏洞，以及隐藏\混淆系统接口\信息(如创建虚假系统、漏洞和信息)</p>
+</li>
+</ul>
+<p><strong>(3) 检测阶段</strong></p>
+<p>-<strong> 事故预防</strong>：该类别覆盖多种成熟的预防方式防止黑客未授权而进入系统，包括传统的“黑白名单式”的反恶意病毒扫描以及基于网络\主机的入侵预防系统。“行为特征” 也是这方面的另一层应用——例如，为防止系统和控制中心交流，可使用来自第三方知名发布的服务信息和情报并整合进入网络、网管或者基于主机的控制器</p>
+<ul>
+<li><strong>事故检测</strong>：一些攻击者不可避免地会绕过传统的拦截和预防机制，这时最重要的事情就是在尽可能短的时间里检测到入侵，将黑客造成损害和泄露敏感的信息最小化</li>
+</ul>
+<p>-<strong> 风险确认和排序</strong>：一旦潜在问题被检测到，就需要在不同实体中将攻击的标志关联起来进行确认，例如，首先观察在沙盒环境中基于网络的威胁检测系统所观察到进程、行为和注册实体等，然后将其和实际端口中的情况相比</p>
+<p><strong>(4) 回溯分析</strong></p>
+<ul>
+<li><p><strong>事故隔离</strong>：一旦事故被识别、确认和排序，这个类别的工作将迅速隔离被感染系统和账户，防止其阻碍其他系统。常用的隔离能力包括，端点隔离、账户封锁、网络层隔离、系统进程关闭，以及立即预防其他系统执行同样的恶意软件或访问同样的被感染信息</p>
+</li>
+<li><p><strong>调查/取证</strong>：当被感染的系统和账户被隔离好之后，通过回顾分析事件完整过程，利用持续监控所获取的数据，根本原因和全部缺口都终将解决</p>
+</li>
+<li><p><strong>设计/模式改变</strong>：为预防新攻击或系统重受感染，需要更改某些策略和控制——例如，关闭漏洞、关闭网络端口、特征升级、系统配置升级、用户权限修改、用户培训修改或者提升信息防护选项的强度</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ASA/" rel="tag"><i class="fa fa-tag"></i> ASA</a>
+          
+            <a href="/tags/SeeSec/" rel="tag"><i class="fa fa-tag"></i> SeeSec</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/03/NSE脚本浅析/" rel="next" title="NSE脚本浅析">
+                <i class="fa fa-chevron-left"></i> NSE脚本浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/12/Web攻防技术浅析/" rel="prev" title="Web攻防技术浅析">
+                Web攻防技术浅析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Firehacker</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Hackerfire" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:firehafcker@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://firehacker.top/SecBook" target="_blank" title="Gitbook">
+                      
+                        <i class="fa fa-fw fa-book"></i>Gitbook</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-自适应安全架构-ASA"><span class="nav-number">1.</span> <span class="nav-text">0x01 自适应安全架构(ASA)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-阶段"><span class="nav-number">1.1.</span> <span class="nav-text">1. 阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-核心思想"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-关键输入"><span class="nav-number">1.3.</span> <span class="nav-text">3. 关键输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-关键功能"><span class="nav-number">1.4.</span> <span class="nav-text">4. 关键功能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Firehacker</span>
+
+  
+</div>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+  <!-- <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+-->
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'cQ1pKGTukU9T7wK7hVqrFIy0-gzGzoHsz',
+        appKey: '6l4mVkOTGKucdJoVS2dNCr0R',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
