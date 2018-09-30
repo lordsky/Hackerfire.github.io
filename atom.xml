@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.firehacker.top/"/>
-  <updated>2018-09-27T13:07:40.036Z</updated>
+  <updated>2018-09-30T11:37:53.098Z</updated>
   <id>http://www.firehacker.top/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>入侵检测之Snort实战浅析</title>
+    <link href="http://www.firehacker.top/2018/09/30/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E4%B9%8BSnort%E5%AE%9E%E6%88%98%E6%B5%85%E6%9E%90/"/>
+    <id>http://www.firehacker.top/2018/09/30/入侵检测之Snort实战浅析/</id>
+    <published>2018-09-30T11:37:53.000Z</published>
+    <updated>2018-09-30T11:37:53.098Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>安全学习资源导航</title>
@@ -45,7 +59,7 @@
     <link href="http://www.firehacker.top/2018/09/19/%E5%AE%89%E5%85%A8%E9%98%B2%E5%BE%A1%E4%B9%8B%E8%AE%BE%E5%A4%87%E6%B5%85%E6%9E%90/"/>
     <id>http://www.firehacker.top/2018/09/19/安全防御之设备浅析/</id>
     <published>2018-09-19T02:46:34.000Z</published>
-    <updated>2018-09-27T15:39:09.155Z</updated>
+    <updated>2018-09-30T11:35:51.721Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>基础安全设备包含构造业务安全防御系统的常用安全设备，能够搭建深度防御体系的各种安全设备、安全软件。本文安全防御产品与设备（检测告警类，安全防护类，监控评估类）简要分析<br><a id="more"></a></p></blockquote><hr><h2 id="0x01-检测告警类"><a href="#0x01-检测告警类" class="headerlink" title="0x01 检测告警类"></a>0x01 检测告警类</h2><h3 id="1-网络入侵检测"><a href="#1-网络入侵检测" class="headerlink" title="1. 网络入侵检测"></a>1. 网络入侵检测</h3><pre><code>用于检测网络入侵事件，常见部署在核心交换上，用于收集核心交换机的镜像流量，通过检测攻击特征形成告警事件</code></pre><p><strong>(1) 开源工具</strong></p><ul><li><p><a href="https://www.snort.org/" target="_blank" rel="noopener">Snort</a> <em>网络入侵检测（IDS）和入侵防御工具（IPS）的领导者，母公司为Sourcefire</em></p></li><li><p><a href="https://www.ossec.net/" target="_blank" rel="noopener">OSSEC</a> <em>一个开源主机入侵检测系统（HIDS），OSSEC客户端能够执行文件完整性监控和rootkit检测，并有实时报警，源自趋势科技</em></p></li><li><p><a href="https://securityonion.net/" target="_blank" rel="noopener">Security Onion</a> <em>用于网络监控和入侵检测的基于Ubuntu的Linux发行版</em></p></li><li><p><a href="https://www.bro.org/" target="_blank" rel="noopener">Bro IDS</a>  <em>类似于Security Onion，它使用更多IDS规则来确定攻击来源</em></p></li><li><p><a href="https://suricata-ids.org/" target="_blank" rel="noopener">Suricata</a> <em>能够与Snort相抗衡，该系统有一个类似Snort的架构，依赖于像 Snort等的签名</em></p></li><li><p><a href="http://openwips-ng.org/" target="_blank" rel="noopener">OpenWIPS-NG </a> <em>一个免费的无线IDS / IPS，它依赖于服务器、传感器和接口</em></p></li></ul><p><strong>(2) 厂商产品</strong></p><p>参考链接：<a href="https://www.aqniu.com/tools-tech/667.html" target="_blank" rel="noopener">https://www.aqniu.com/tools-tech/667.html</a></p><p><strong><em>国内厂商：</em></strong> <em>绿盟  启明星辰  山石网科  华为   H3C</em></p><h3 id="2-网络流量分析"><a href="#2-网络流量分析" class="headerlink" title="2. 网络流量分析"></a>2. 网络流量分析</h3><pre><code>镜像流量分析，通常也是连接到核心交换，可以分析流量，可以回溯流量，遇到分析安全事件的时候可以通过回溯流量分析攻击过程</code></pre><p><strong><em>国内厂商：</em></strong> <em>绿盟  科来  恒安嘉新  力合智远</em></p><hr><h2 id="0x02-安全防护类"><a href="#0x02-安全防护类" class="headerlink" title="0x02 安全防护类"></a>0x02 安全防护类</h2><h3 id="1-抗D服务"><a href="#1-抗D服务" class="headerlink" title="1. 抗D服务"></a>1. 抗D服务</h3><pre><code>部署在主链路上，内部网络的抗D设备可以处理低于出口带宽的 DDoS 流量，超过的一般用云抗D服务</code></pre><ul><li><p><a href="http://www.nsfocus.com.cn/operations/details_4_280.html" target="_blank" rel="noopener">绿盟ADS</a> <em>十多年抗D攻防技术积累、专业抗D运营团队、完整的攻击分析平台和技术交付平台</em></p></li><li><p><a href="http://www.damddos.com/" target="_blank" rel="noopener">中国电信云堤</a> <em>运营商级的防护能力无疑在对抗超大流量攻击方面具备很强优势</em></p></li><li><p><a href="https://yundun.aliyun.com/" target="_blank" rel="noopener">阿里云云盾</a> <em>依托阿里云基础设施，支持BGP和CDN两种引流，并在应用层DDOS方面独具优势</em></p></li><li><p><a href="https://cloud.tencent.com/product/bad" target="_blank" rel="noopener">腾讯云大禹</a> <em>来自自身产品防护的长期实践，在一些游戏或社交产品的攻击防护上优势明显</em></p></li><li><p><a href="https://cloud.360.cn/" target="_blank" rel="noopener">360云安全</a> <em>通过CDN加速体系来提供抗D服务，符合其“数据驱动安全”的总体思路</em></p></li></ul><p>参考链接：<a href="https://www.aqniu.com/industry/8116.html" target="_blank" rel="noopener">https://www.aqniu.com/industry/8116.html</a></p><h3 id="2-防火墙"><a href="#2-防火墙" class="headerlink" title="2. 防火墙"></a>2. 防火墙</h3><pre><code>用于做网络边界区分，实际应用中最有用的是网络访问控制。常见部署在核心路由和核心交换机之间，或者在应用服务器和数据库服务器之间，或者不同的业务之间，有边界隔离需求的都可以部署</code></pre><p><strong>(1) 企业级防火墙</strong></p><p><img src="http://pdeise3e3.bkt.clouddn.com/%E9%98%B2%E7%81%AB%E5%A2%99%E9%AD%94%E5%8A%9B%E8%B1%A1%E9%99%90.png" alt=""></p><p>参考链接：<a href="https://www.aqniu.com/tools-tech/26863.html" target="_blank" rel="noopener">https://www.aqniu.com/tools-tech/26863.html</a></p><p><strong><em>国内厂商：</em></strong> <em>天融信  山石网科  华为  360安全 深信服</em></p><p><strong>(2) 开源防火墙</strong></p><ul><li><p><a href="https://www.netfilter.org/" target="_blank" rel="noopener">Iptables</a> <em>Iptables/Netfilter是基于防火墙的最流行的命令行，它是Linux服务器安全的头道防线</em></p></li><li><p><a href="http://www.ipcop.org/" target="_blank" rel="noopener">IPCop</a> <em>IPCop的设计界面非常友好，便于管理，它对于小型企业和本地PC非常实用</em></p></li><li><p><a href="https://configserver.com/cp/csf.html" target="_blank" rel="noopener">ConfigServer Security Firewall</a> <em>一个跨平台的多用途防火墙，基于状态包检测，几乎支持所有的虚拟化环境</em></p></li></ul><p>参考链接：</p><ul><li><p>十大Linux开源防火墙：<a href="http://tomcat-oracle.iteye.com/blog/2007409" target="_blank" rel="noopener">http://tomcat-oracle.iteye.com/blog/2007409</a></p></li><li><p>Windows 防火墙概述及实践：<a href="https://yq.aliyun.com/articles/113211" target="_blank" rel="noopener">https://yq.aliyun.com/articles/113211</a></p></li></ul><h3 id="3-WAF"><a href="#3-WAF" class="headerlink" title="3. WAF"></a>3. WAF</h3><pre><code>Web应用防火墙提供了应用层的防护能力，常见部署在应用服务器与核心交换之间，或者核心交换与核心防火墙之间，部分复杂业务系统系统，WAF以旁路镜像流量的方式作为Web的入侵检测设备存在，只检测Web攻击事件</code></pre><p><img src="http://pdeise3e3.bkt.clouddn.com/WAF%E9%AD%94%E6%96%B9.png" alt=""></p><ul><li><em>Web应用防火墙魔力象限，资料来源：Gartner（2017年8月）</em></li></ul><p>参考链接：<a href="https://www.secrss.com/articles/4985" target="_blank" rel="noopener">https://www.secrss.com/articles/4985</a></p><p><strong><em>国内厂商：</em></strong> <em>安恒信息  绿盟  长亭科技  盛邦安全   铱迅信息  </em></p><h3 id="4-入侵防御"><a href="#4-入侵防御" class="headerlink" title="4. 入侵防御"></a>4. 入侵防御</h3><pre><code>逻辑是串在主链路上，真用作防御功能的情况还是比较少，需要业务简单，交互情况少的情况下。误报和漏报需要平衡好</code></pre><h3 id="5-反病毒"><a href="#5-反病毒" class="headerlink" title="5. 反病毒"></a>5. 反病毒</h3><pre><code>目前普遍部署在企业网络的杀毒软件都是基于 Windows 版的，使用统一管理，可以从整体查看病毒在组织网络中的感染情况。企业网策略比较保守，发现病毒只是告警，不直接删除或清除，有可能导致系统文件出错</code></pre><ul><li><p><a href="https://www.kaspersky.com.cn/antivirus" target="_blank" rel="noopener">卡巴斯基(KIS/KAV)</a> <em>卡巴斯基全功能安全软件(KIS)=卡巴斯基反病毒软件(KAV)+网络防火墙</em></p></li><li><p><a href="https://cn.norton.com/antivirus" target="_blank" rel="noopener">诺顿防病毒软件</a> <em>赛门铁克公司推出，独创的基于信誉评级的诺顿全球智能云防护</em></p></li><li><p><a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=5201" target="_blank" rel="noopener">微软免费杀毒软件(MSE)</a> <em>一款通过正版验证的Windows电脑可以免费使用的微软安全防护软件</em></p></li><li><p><a href="https://www.avira.com/zh-cn/download/product/avira-free-antivirus" target="_blank" rel="noopener">Avira AntiVir Personal(小红伞）</a> <em>一款个人版本的防病毒软件，它能有效地保护个人电脑以及工作站的使用</em></p></li><li><p><a href="https://home.mcafee.com/root/landingpage.aspx?affid=101&amp;lpname=14185vsp&amp;cid=39890&amp;culture=en-US&amp;legacylangcd=en-us" target="_blank" rel="noopener">McAfee VirusScan Plus</a> <em>让每个人都可以毫无困扰地实现重要的PC保护，使PC免受病毒和间谍软件的侵扰</em></p></li><li><p><a href="http://sd.360.cn/" target="_blank" rel="noopener">360杀毒</a> <em>无缝整合了国际知名 BitDefender 病毒查杀引擎，以及360安全中心潜心研发的木马云查杀引擎</em></p></li><li><p><a href="https://www.download3k.com/Antivirus-Spyware-Cleaners/Antivirus/Download-free-Antivirus-and-AntiSpyware-MWAV.html" target="_blank" rel="noopener">超级巡警</a> <em>专门查杀各种木马、流氓软件、Rootkit、后门、恶意代码、间谍软件、蠕虫病毒等</em></p></li><li><p><a href="http://shop.micropoint.com.cn/product/" target="_blank" rel="noopener">微点主动防御软件</a> <em>第三代反病毒软件，采用主动防御技术能够自主分析判断病毒</em></p></li><li><p><a href="http://www.jiangmin.com/enterprise/kvnet/" target="_blank" rel="noopener">江民杀毒软件</a> <em>全新动态启发式杀毒引擎，融入指纹加速功能，杀毒功能更强、速度更快</em></p></li><li><p><a href="http://www.duba.net/" target="_blank" rel="noopener">金山毒霸11</a> <em>世界首款应用”可信云查杀”的杀毒软件，采用本地正常文件白名单快速匹配技术</em></p></li><li><p><a href="http://antivirus.rising.com.cn/" target="_blank" rel="noopener">瑞星杀毒软件V17</a> <em>一款基于瑞星“云安全”系统设计的新一代杀毒软件，其“整体防御系统”可将所有互联网威胁拦截在用户电脑以外</em></p></li></ul><p>参考链接：<a href="https://g.pconline.com.cn/x/894/8948669.html" target="_blank" rel="noopener">https://g.pconline.com.cn/x/894/8948669.html</a></p><hr><h2 id="0x03-监管审计类"><a href="#0x03-监管审计类" class="headerlink" title="0x03 监管审计类"></a>0x03 监管审计类</h2><h3 id="1-漏洞扫描"><a href="#1-漏洞扫描" class="headerlink" title="1. 漏洞扫描"></a>1. 漏洞扫描</h3><p><strong>(1) 开源工具</strong></p><ul><li><p><a href="https://www.tenable.com/products/nessus/nessus-professional" target="_blank" rel="noopener">Nessus</a> <em>目前全世界最多人使用的系统漏洞扫描与分析软件</em></p></li><li><p><a href="https://github.com/sullo/nikto" target="_blank" rel="noopener">Nikto</a> <em>一款开源的(GPL)网页服务器扫描器，它可以对网页服务器进行全面的多种扫描</em></p></li><li><p><a href="http://www.openvas.org/" target="_blank" rel="noopener">Openvas</a> <em>一个提供漏洞扫描和漏洞管理的多种服务和工具的软件框架</em></p></li></ul><ul><li><a href="https://github.com/sensepost/wikto" target="_blank" rel="noopener">Wikto</a> <em>一个Web 服务器评估工具，可以检查Web 服务器中的漏洞，功能丰富</em></li></ul><p><strong>(2) 商业产品</strong></p><ul><li><p><a href="https://www.ibm.com/security/application-security/appscan" target="_blank" rel="noopener">Appscan</a> <em>IBM公司开发的用于扫描web应用的基础架构，安全渗透行业领军产品</em></p></li><li><p><a href="https://www.acunetix.com/vulnerability-scanner/" target="_blank" rel="noopener">AWVS</a> <em>Acunetix Web Vulnerability Scanner，一款商业级的Web漏洞扫描程序，它可以检查Web应用程序中的漏洞</em></p></li></ul><ul><li><p><a href="https://www.nstalker.com/nstealth/" target="_blank" rel="noopener">N-Stealth</a>：ZMT公司出品的一款商业的WEB站点安全扫描软件，升级频率较高</p></li><li><p><a href="https://cloud.nsfocus.com/#/krosa/views/initcdr/productandservice?page_id=90" target="_blank" rel="noopener">绿盟极光</a>：绿盟科技研发的远程安全评估系统，可以进行Web应用、Web 服务及支撑系统等多层次全方位的安全漏洞扫描</p></li><li><p><a href="http://www1.dbappsecurity.com.cn/pro_main.aspx?id=98AB5C7F66B78DEE" target="_blank" rel="noopener">安恒 MatriXay WebScan</a>：安恒信息研发的明鉴TM系列产品，被作为公安部等级保护测评中心专用应用安全测评工具</p></li></ul><p>参考链接：</p><ul><li><p><a href="https://zhuanlan.zhihu.com/p/25405238" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/25405238</a></p></li><li><p><a href="http://blog.51cto.com/907832555/1868550" target="_blank" rel="noopener">http://blog.51cto.com/907832555/1868550</a></p></li><li><p><a href="http://www.voidcn.com/article/p-mseotuep-kn.html" target="_blank" rel="noopener">http://www.voidcn.com/article/p-mseotuep-kn.html</a></p></li></ul><h3 id="2-配置核查"><a href="#2-配置核查" class="headerlink" title="2. 配置核查"></a>2. 配置核查</h3><pre><code>实现统一的安全配置标准以便规范日常的安全配置操作，快速有效地对网络中种类、数量繁多的设备和软件进行安全配置检测，集中收集核查结果，快速出报告</code></pre><h3 id="3-网络安全监控"><a href="#3-网络安全监控" class="headerlink" title="3. 网络安全监控"></a>3. 网络安全监控</h3><pre><code>可以对网站漏洞、网站内容、网站可用性监控的设备，属于主动扫描类的工具漏扫、配置检查、网站监控都是属于主动扫描的设备</code></pre><h3 id="4-堡垒机"><a href="#4-堡垒机" class="headerlink" title="4. 堡垒机"></a>4. 堡垒机</h3><pre><code>也叫运维审计系统，可以配合 Windows 域或其他认证系统，对运维人员的操作进行审计，可用于网络访问控制</code></pre><h3 id="5-日志审计"><a href="#5-日志审计" class="headerlink" title="5. 日志审计"></a>5. 日志审计</h3><pre><code>传统日志审计，后台使用关系型数据库的，局限性很大，相当于各种日志数据处理后放到一个数据库中，安全事件发生后可以用作做事件回溯查询。数据量大了后表现就是查询速度很慢。另外一般设备是一个盒子，保存的数据量也有限</code></pre><h3 id="6-数据库审计"><a href="#6-数据库审计" class="headerlink" title="6. 数据库审计"></a>6. 数据库审计</h3><pre><code>镜像应用到数据库的流量，可以获得所有的数据库操作请求，通过设定一定的规则也能检测针对数据库的攻击</code></pre><hr><h2 id="0x04-企业安全理念"><a href="#0x04-企业安全理念" class="headerlink" title="0x04 企业安全理念"></a>0x04 企业安全理念</h2><ul><li><p><a href="http://www.nsfocus.com.cn/About_NSFOCUS/IntelligentSecurity.html" target="_blank" rel="noopener">绿盟科技</a>：智慧安全2.0</p></li><li><p><a href="https://www.360.net/" target="_blank" rel="noopener">360企业安全</a> ：数据驱动安全</p></li><li><p><a href="https://www.hansight.com/" target="_blank" rel="noopener">HanSight</a>：大数据分析安全</p></li><li><p><a href="https://qingteng.cn/" target="_blank" rel="noopener">青藤云</a>：云时代的自适应安全</p></li><li><p><a href="http://www.dynarose.com/" target="_blank" rel="noopener">蔷薇灵动</a>：自适应微隔离</p></li><li><p><a href="https://threatbook.cn/" target="_blank" rel="noopener">微步在线</a>：安全智能，情报驱动</p></li></ul><hr><h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul><li><p><a href="https://www.aqniu.com/industry/36011.html" target="_blank" rel="noopener">安全牛-网络安全行业全景图</a></p></li><li><p><a href="https://www.anquanquan.info/anquankaiyuan.html" target="_blank" rel="noopener">安全圈info-安全开源项目</a></p></li><li><p><a href="https://www.aqniu.com/industry/36011.html" target="_blank" rel="noopener">安全牛-安全行业全景图分析</a></p></li></ul>]]></content>
     
@@ -56,9 +70,9 @@
     
     </summary>
     
-      <category term="0x03 实践之道" scheme="http://www.firehacker.top/categories/0x03-%E5%AE%9E%E8%B7%B5%E4%B9%8B%E9%81%93/"/>
+      <category term="0x03 安全产品" scheme="http://www.firehacker.top/categories/0x03-%E5%AE%89%E5%85%A8%E4%BA%A7%E5%93%81/"/>
     
-      <category term="产品运维" scheme="http://www.firehacker.top/categories/0x03-%E5%AE%9E%E8%B7%B5%E4%B9%8B%E9%81%93/%E4%BA%A7%E5%93%81%E8%BF%90%E7%BB%B4/"/>
+      <category term="产品运维" scheme="http://www.firehacker.top/categories/0x03-%E5%AE%89%E5%85%A8%E4%BA%A7%E5%93%81/%E4%BA%A7%E5%93%81%E8%BF%90%E7%BB%B4/"/>
     
     
       <category term="SecProducts" scheme="http://www.firehacker.top/tags/SecProducts/"/>
@@ -526,33 +540,6 @@
       <category term="WebSecurity" scheme="http://www.firehacker.top/tags/WebSecurity/"/>
     
       <category term="HTTP" scheme="http://www.firehacker.top/tags/HTTP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Web攻防系列（二）：核心防御机制</title>
-    <link href="http://www.firehacker.top/2018/07/07/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6/"/>
-    <id>http://www.firehacker.top/2018/07/07/Web核心防御机制/</id>
-    <published>2018-07-07T07:04:26.000Z</published>
-    <updated>2018-09-19T03:02:54.727Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制<br><a id="more"></a></p></blockquote><h2 id="防御机制简述"><a href="#防御机制简述" class="headerlink" title="防御机制简述"></a>防御机制简述</h2><p><img src="http://pbegz2k88.bkt.clouddn.com/Web%E6%A0%B8%E5%BF%83%E9%98%B2%E5%BE%A1%E6%9C%BA%E5%88%B6.png" alt="防御"></p><p><strong>核心因素</strong></p><ul><li><p>处理用户访问应用程序的数据与功能，防止用户获得未授权访问</p></li><li><p>处理用户对应用程序功能的输入，防止错误输入造成不良行为</p></li><li><p>防范攻击者，确保应用程序在成为直接攻击目标时能够正常运转，并采取适当的防御与攻击措施挫败攻击者</p></li><li><p>管理应用程序本身，帮助管理员监控器行为，配置其功能</p></li></ul><hr><h2 id="处理用户访问"><a href="#处理用户访问" class="headerlink" title="处理用户访问"></a>处理用户访问</h2><h3 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h3><ul><li><p><strong>概念：</strong>身份验证机制是应用程序处理用户访问的最基本机制，验证用户是指确认用户的真实身份</p></li><li><p><strong>传统模型：</strong>用户提交用户名和密码，再由应用程序对其进行核实，确认其合法性</p></li><li><p><strong>安全性验证模型：</strong>使用其他证书与多阶段登录过程强化基本模型；基于客户端证书，智能卡，质询-响应令牌（challenge-response token）的身份验证模型</p></li><li><p><strong>功能支持：</strong>核心登录过程，自我注册，账户恢复，密码修改工具</p></li><li><p><strong>机制缺陷：</strong>如攻击者能够确定其他用户的用户名，推测其密码；可利用逻辑缺陷完全避开登录功能；存在的缺陷往往允许攻击者非法访问敏感数据与功能</p></li></ul><h3 id="会话管理"><a href="#会话管理" class="headerlink" title="会话管理"></a>会话管理</h3><ul><li><p><strong>概述：</strong>处理用户访问的下一项逻辑任务是管理通过验证用户的会话。成功登录应用程序后，用户会访问各种页面和功能，从浏览器提出一系列HTTP请求；与此同时应用程序还会收到各类用户发出的无数请求，为实施有效的访问控制，应用程序需要识别并处理每一名用户提交的各种请求</p></li><li><p><strong>会话机制：</strong>Web应用程序为每一名用户建立一个会话，并向用户发布一个标识会话的令牌。<strong>会话</strong>是一组保存在服务器上的数据结构，用于追踪用户与应用程序的交互状态。<strong>令牌</strong>是一个唯一的字符串，应用程序将其映射到会话中，当用户收到一个令牌时，浏览器会在随后的HTTP请求中将它返回给服务器，帮助应用程序将请求与该用户联系起来。</p></li><li><p><strong>会话令牌传送：</strong>HTTP cookie(常规方法)；使用隐藏表字段（hidden from field）；URL 查询字符串（query string）</p></li><li><p><strong>安全性：</strong>会话机制的安全性取决于其令牌的安全性，令牌被攻破，攻击者就可以伪装成被攻破的用户，冒充为通过验证的用户正常使用应用程序。令牌生成过程中存在的缺陷是主要的漏洞来源，使攻击者能够推测出发布给其他用户的令牌；随后，攻击者再利用令牌中的缺陷截获其他用户的令牌</p></li></ul><h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><ul><li>处理用户访问的最后一个逻辑步骤是做出并实施正确的决策，决定允许或拒绝每一个请求。在前面机制正常运作的基础上，应用程序需要决定是否授权用户执行其请求的操作或访问相关数据。访问控制一般需要实现某种精心设计的逻辑，并考虑各种相关应用程序领域与不同类型的功能</li></ul><hr>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;Web应用程序的基本安全问题致使应用程序实施大量安全机制来抵御攻击，细节与执行效率虽千差万别，但其安全机制之概念大同小异，知己知彼是战争的首要法则，以下为web应用程序采用的核心防御机制&lt;br&gt;
-    
-    </summary>
-    
-      <category term="0x02 原理浅析" scheme="http://www.firehacker.top/categories/0x02-%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90/"/>
-    
-      <category term="Web安全" scheme="http://www.firehacker.top/categories/0x02-%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90/Web%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="WebSecurity" scheme="http://www.firehacker.top/tags/WebSecurity/"/>
-    
-      <category term="Defense" scheme="http://www.firehacker.top/tags/Defense/"/>
     
   </entry>
   
