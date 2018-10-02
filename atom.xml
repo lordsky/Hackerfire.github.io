@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.firehacker.top/"/>
-  <updated>2018-10-02T03:33:16.107Z</updated>
+  <updated>2018-10-02T05:13:02.530Z</updated>
   <id>http://www.firehacker.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.firehacker.top/2018/10/02/%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B9%8BNessus%E8%AF%A6%E8%A7%A3/"/>
     <id>http://www.firehacker.top/2018/10/02/漏洞扫描之Nessus详解/</id>
     <published>2018-10-02T03:19:42.000Z</published>
-    <updated>2018-10-02T03:33:16.107Z</updated>
+    <updated>2018-10-02T05:13:02.530Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://www.tenable.com/products/nessus/nessus-professional" target="_blank" rel="noopener">Nessus</a> 是一款优秀的系统漏洞扫描与分析软件，提供完整的漏洞扫描服务,，并随时更新其漏洞数据库，可同时在本机或远端上摇控, 进行系统的漏洞分析扫描；本文对其扫描原理，基本用法，及高阶功能进行总结分析</p></blockquote><a id="more"></a><hr>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.tenable.com/products/nessus/nessus-professional" target="_blank" rel="noopener">Nessus</a> 是一款优秀的系统漏洞扫描与分析软件，提供完整的漏洞扫描服务,，并随时更新其漏洞数据库，可同时在本机或远端上摇控, 进行系统的漏洞分析扫描；本文对其扫描原理，基本用法，及高阶功能进行总结分析</p></blockquote><a id="more"></a><hr><hr><h2 id="0xFF-学习资源"><a href="#0xFF-学习资源" class="headerlink" title="0xFF 学习资源"></a>0xFF 学习资源</h2><ul><li><p><a href="https://docs.tenable.com/Nessus.htm" target="_blank" rel="noopener">Nessus Official Document</a></p></li><li><p><a href="https://docs.tenable.com/nessus/7_2/Content/Resources/PDF/Nessus_7_2.pdf" target="_blank" rel="noopener">Nessus_7_2 User Guide</a></p></li><li><p><a href="http://static.tenable.com/documentation/nessus_6.8_command_line_reference.pdf" target="_blank" rel="noopener">Nessus 6.8 Command Line Reference</a></p></li><li><p><a href="file:///H:/Book/%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/Kali%20Linux/Nessus%206.3%20%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.pdf" target="_blank" rel="noopener">Nessus 6.3 中文用户指南</a></p></li><li></li></ul>]]></content>
     
     <summary type="html">
     
