@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.firehacker.top/"/>
-  <updated>2018-10-02T10:09:50.778Z</updated>
+  <updated>2018-10-02T12:22:23.018Z</updated>
   <id>http://www.firehacker.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.firehacker.top/2018/10/02/%E9%98%B2%E7%81%AB%E5%A2%99%E4%B9%8BNetfilter%E6%B5%85%E6%9E%90/"/>
     <id>http://www.firehacker.top/2018/10/02/防火墙之Netfilter浅析/</id>
     <published>2018-10-02T10:03:57.000Z</published>
-    <updated>2018-10-02T10:09:50.778Z</updated>
+    <updated>2018-10-02T12:22:23.018Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://www.netfilter.org/index.html" target="_blank" rel="noopener">Netfilter</a> 是Linux内核的包过滤框架，它提供了一系列的钩子（Hook）供其他模块控制包的流动；iptables是一个配置Linux内核防火墙的命令行工具，它基于内核的netfilter机制；本文对 Netfilter 基本原理及 Iptables 用法进行简要总结</p></blockquote><a id="more"></a><hr>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.netfilter.org/index.html" target="_blank" rel="noopener">Netfilter</a> 是Linux内核的包过滤框架，它提供了一系列的钩子（Hook）供其他模块控制包的流动；iptables是一个配置Linux内核防火墙的命令行工具，它基于内核的netfilter机制；本文对 Netfilter 基本原理及 Iptables 用法进行简要总结</p></blockquote><a id="more"></a><hr><hr><h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul><li><p><a href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html" target="_blank" rel="noopener">Iptables Tutorial 1.2.2</a></p></li><li><p><a href="https://netfilter.org/documentation/" target="_blank" rel="noopener">Netfilter - documentation</a></p></li><li><p><a href="https://zh.wikipedia.org/wiki/Iptables" target="_blank" rel="noopener">Wikipedia - Iptables</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/Netfilter" target="_blank" rel="noopener">Wikipedia - Netfilter</a></p></li><li><p><a href="https://wiki.centos.org/zh/HowTos/Network/IPTables" target="_blank" rel="noopener">IPTables - Centos Wiki</a></p></li><li><p><a href="https://help.ubuntu.com/community/IptablesHowTo" target="_blank" rel="noopener">Iptables - Ubuntu Documentation</a></p></li><li><p><a href="http://drops.mayter.cn/#!/drops/226.Iptables%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">Iptables 入门教程 - Wooyun Drops</a></p></li></ul>]]></content>
     
     <summary type="html">
     
