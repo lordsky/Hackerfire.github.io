@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.firehacker.top/"/>
-  <updated>2018-10-04T05:11:31.981Z</updated>
+  <updated>2018-10-04T06:24:50.769Z</updated>
   <id>http://www.firehacker.top/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://www.firehacker.top/2018/10/04/%E8%B7%AF%E7%94%B1-%E4%BA%A4%E6%8D%A2-%E7%BB%84%E7%BD%91%E6%8A%80%E6%9C%AF%E6%B5%85%E6%9E%90/"/>
     <id>http://www.firehacker.top/2018/10/04/路由-交换-组网技术浅析/</id>
     <published>2018-10-04T04:22:44.000Z</published>
-    <updated>2018-10-04T05:11:31.981Z</updated>
+    <updated>2018-10-04T06:24:50.769Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>本文从实践的角度对网络协议，路由交换，组网等技术进行分析，涉及RIP，OSPF，EIGR等路由协议，VLAN，STP，ACL，NAT，DHCP，PPP等网络技术，以及 Cisco ISO 与 Cisco Packet Tracer 的基本命令及用法</p></blockquote><a id="more"></a><hr>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>本文从实践的角度对网络协议，路由交换，组网等技术进行分析，涉及RIP，OSPF，EIGR等路由协议，VLAN，STP，ACL，NAT，DHCP，PPP等网络技术，以及 Cisco ISO 与 Cisco Packet Tracer 的基本命令及用法</p></blockquote><a id="more"></a><hr><hr><h2 id="0xFF-学习资源"><a href="#0xFF-学习资源" class="headerlink" title="0xFF 学习资源"></a>0xFF 学习资源</h2><ul><li><p><a href="https://pan.baidu.com/s/1CRWJpr7OlK1ImrYu6uRlPw" target="_blank" rel="noopener">CCNA 学习指南第七版</a></p></li><li><p><a href="https://pan.baidu.com/s/1NJV9-6An5fgmZeHzHgmNoA" target="_blank" rel="noopener">CCNA 学习指南(ICND1)</a></p></li><li><p><a href="https://pan.baidu.com/s/1LPbWMEku7FIxG9iVmWk1ng" target="_blank" rel="noopener">CCNA 学习指南(ICND2)</a></p></li><li><p><a href="https://pan.baidu.com/s/1_RYcec-4loANcIa9Dv51cw" target="_blank" rel="noopener">CCNP SWITCH 学习指南</a></p></li><li><p><a href="https://pan.baidu.com/s/1AHCw_mHYVnt4GUJzn6RTEg" target="_blank" rel="noopener">CCNP ROUTE 学习指南</a></p></li><li><p><a href="https://pan.baidu.com/s/1vny1Ikv28dJ0UwfL_m2wTg" target="_blank" rel="noopener">CCNP 实验指南</a></p></li><li><p><a href="https://pan.baidu.com/s/1xx1O6gxMycp1jxVMOySpGw" target="_blank" rel="noopener">CCIE 认证考试指南</a></p></li><li><p><a href="https://pan.baidu.com/s/1-bKjuwihSmxEP8zWpTGuhA" target="_blank" rel="noopener">CCIE 路由交换实验指南</a></p></li></ul>]]></content>
     
     <summary type="html">
     
