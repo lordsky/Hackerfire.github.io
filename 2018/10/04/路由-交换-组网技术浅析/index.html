@@ -97,10 +97,14 @@
 <meta property="og:site_name" content="Firehacker">
 <meta property="og:description" content="本文从实践的角度对网络协议，路由交换，组网等技术进行分析，涉及RIP，OSPF，EIGR等路由协议，VLAN，STP，ACL，NAT，DHCP，PPP等网络技术，以及 Cisco ISO 与 Cisco Packet Tracer 的基本命令及用法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-04T06:24:50.769Z">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%9C%AF%E8%AF%AD.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E9%AB%98%E7%BA%A7%E7%BC%96%E8%BE%91.png">
+<meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95.png">
+<meta property="og:updated_time" content="2018-10-04T14:30:18.539Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="路由、交换、组网技术浅析">
 <meta name="twitter:description" content="本文从实践的角度对网络协议，路由交换，组网等技术进行分析，涉及RIP，OSPF，EIGR等路由协议，VLAN，STP，ACL，NAT，DHCP，PPP等网络技术，以及 Cisco ISO 与 Cisco Packet Tracer 的基本命令及用法">
+<meta name="twitter:image" content="http://pdeise3e3.bkt.clouddn.com/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%9C%AF%E8%AF%AD.png">
 
 
 
@@ -420,7 +424,96 @@
 </blockquote>
 <a id="more"></a>
 <hr>
+<h2 id="0x01-Cisco-IOS"><a href="#0x01-Cisco-IOS" class="headerlink" title="0x01 Cisco IOS"></a>0x01 Cisco IOS</h2><h3 id="1-用户界面"><a href="#1-用户界面" class="headerlink" title="1. 用户界面"></a>1. 用户界面</h3><p><em>思科 IOS (Internetwprk Opearting System，互联网操作系统)是一个专用内核，提供路由选择，交换，网络互联和远程通信功能</em></p>
+<p><strong><em>连接配置方式</em></strong></p>
+<pre><code>1. 控制台(console)终端连接：控制台端口通常是一个RJ-45(8针的模块化)街头，位于路由器背面
+
+2. 辅助端口(auxiliary port)连接：可配置调制解调器命令，以便将其连接到路由器
+
+3. Telnet远程连接：带内方式连接，通过网络配置路由器
+</code></pre><h3 id="2-命令行界面"><a href="#2-命令行界面" class="headerlink" title="2. 命令行界面"></a>2. 命令行界面</h3><p><strong><em>(1) 进入 CLI</em></strong></p>
+<p><em>用户EXEC模式：用户模式，用于查看统计信息，进入特权模式的跳板</em></p>
+<p><em>特权EXEC模式：特权模式，用于修改配置Cisco路由器</em></p>
+<pre><code>Router&gt;enable （进入特权模式）
+
+Router# （特权模式）
+
+Router#disable （返回用户模式）
+
+Router&gt; （用户模式）
+
+Router&gt;logout （退出控制台）
+</code></pre><p><strong><em>(2) 路由器模式</em></strong></p>
+<p><em>在CLI中，可对路由器做全局修改，输入<code>configure terminal</code>简写<code>config t</code>，进入全局配置模式，以修改运行配置</em></p>
+<pre><code>Router#config  (特权模式执行config)
+Router(config)#  (全局模式)
+Router(config)#exit or press ctrl-z  （退出全局模式）
+Router#
+</code></pre><p><strong><em>(3) CLI 提示符</em></strong></p>
+<p><em>A. 接口</em></p>
+<p><em>全局配置模式下执行命令interface</em></p>
+<pre><code>Router(config)#interface ?
+Router(config)#interface fastEthernet 0/0
+Router(config-if)# （接口配置模式）
+</code></pre><p><em>B. 子接口</em></p>
+<p><em>子接口允许在路由器中创建逻辑接口</em></p>
+<pre><code>Router(config-if)#interface f0/0.1
+Router(config-sbuif)#  (子接口模式)
+</code></pre><p><em>C. line 命令</em></p>
+<p>配置用户模式密码，执行命令 line，提示符变为<code>Router(config-line)#</code></p>
+<pre><code>Router#config t
+Router(config)#line ?
+</code></pre><p><em>D. 配置路由选择协议</em></p>
+<pre><code>Router#config t
+Rputer(config)#router rip
+Router(config-router)#version 2
+Router(config-router)#
+</code></pre><p><em>E. 路由器术语</em></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E8%B7%AF%E7%94%B1%E5%99%A8%E6%9C%AF%E8%AF%AD.png" alt=""></p>
+<p><strong><em>(4) 编辑/帮助功能</em></strong></p>
+<pre><code>Router#?  (显示提示符下可执行命令列表)
+
+Router#c? （查看某个字母打头的命令）
+
+Router#clock ? （获取命令下一个可能的参数及参数用途）
+</code></pre><p><em>高级编辑命令</em></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E9%AB%98%E7%BA%A7%E7%BC%96%E8%BE%91.png" alt=""></p>
+<p><em>查看路由器命令历史纪录</em></p>
+<p><img src="http://pdeise3e3.bkt.clouddn.com/%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95.png" alt=""></p>
+<p><strong><em>(5) 收集路由选择信息</em></strong></p>
+<p><em>命令<code>show verrsion</code>显示系统硬件的基本配置以及软件版本和启动映像</em></p>
+<p><em>命令<code>show interfacces</code> 和 <code>show ip interfacce brief</code>，可用于验证路由器配置以及排除路由器和网络故障</em></p>
+<h3 id="3-常用配置"><a href="#3-常用配置" class="headerlink" title="3. 常用配置"></a>3. 常用配置</h3><p><strong><em>(1) 配置主机名</em></strong></p>
+<p><em>设置路由器的身份，可使用命令<code>hostname</code>，常根据路由器位置命令</em></p>
+<pre><code>Router#config t
+Router(config)#hostname R1
+R1(config)#hostname R2
+R2(config)#hostname R1
+R1(config)#
+</code></pre><p><strong><em>(2) 配置旗标</em></strong></p>
+<p><em>配置旗标，可给任何试图通过远程登录或拨号连接你的互联网的人发出安全警告</em></p>
+<p><strong><em>4种类型的旗标(banner)</em></strong></p>
+<pre><code>1. EXEC进程创建旗标(exec process creation banner)：
+
+2. 入站终端路线旗标(incoming terminal line banner)：给使用反向Telnet的用户提供操作说明
+
+3. 登录旗标：在motd旗标之后显示，在登录提示出现之前显示，全局禁用使用no banner login将其删除
+
+4. 每日消息旗标：motd，每日消息，向任何连接路由器的人显示一条警告消息
+</code></pre><p><strong><em>(3) 设置密码</em></strong></p>
+<p><em>5种确保路由器安全的密码：控制台密码，辅助端口密码，远程登录密码，启用密码，启用加密密码</em></p>
+<p><em>启用密码，启用加密密码控制用户进入特权模式，其余3种用于进入用户模式</em></p>
+<h3 id="4-实验示例"><a href="#4-实验示例" class="headerlink" title="4. 实验示例"></a>4. 实验示例</h3><p><em>参考链接：</em><a href="https://www.cisco.com/c/en/us/products/ios-nx-os-software/ios-software-releases-listing.html" target="_blank" rel="noopener">Cisco-ios-nx-os-software</a></p>
 <hr>
+<h2 id="0x02-路由协议"><a href="#0x02-路由协议" class="headerlink" title="0x02 路由协议"></a>0x02 路由协议</h2><h3 id="1-路由基础"><a href="#1-路由基础" class="headerlink" title="1. 路由基础"></a>1. 路由基础</h3><h3 id="2-RIP及配置"><a href="#2-RIP及配置" class="headerlink" title="2. RIP及配置"></a>2. RIP及配置</h3><h3 id="3-OSPF及配置"><a href="#3-OSPF及配置" class="headerlink" title="3. OSPF及配置"></a>3. OSPF及配置</h3><h3 id="4-EIGRP及配置"><a href="#4-EIGRP及配置" class="headerlink" title="4. EIGRP及配置"></a>4. EIGRP及配置</h3><h3 id="5-BGP-协议"><a href="#5-BGP-协议" class="headerlink" title="5. BGP 协议"></a>5. BGP 协议</h3><hr>
+<h2 id="0x03-交换技术"><a href="#0x03-交换技术" class="headerlink" title="0x03 交换技术"></a>0x03 交换技术</h2><h3 id="1-交换机基础"><a href="#1-交换机基础" class="headerlink" title="1. 交换机基础"></a>1. 交换机基础</h3><h3 id="2-STP-协议"><a href="#2-STP-协议" class="headerlink" title="2. STP 协议"></a>2. STP 协议</h3><hr>
+<h2 id="0x04-虚拟局域网"><a href="#0x04-虚拟局域网" class="headerlink" title="0x04 虚拟局域网"></a>0x04 虚拟局域网</h2><h3 id="1-VLAN-基础"><a href="#1-VLAN-基础" class="headerlink" title="1. VLAN 基础"></a>1. VLAN 基础</h3><h3 id="2-VLAN-配置"><a href="#2-VLAN-配置" class="headerlink" title="2. VLAN 配置"></a>2. VLAN 配置</h3><hr>
+<h2 id="0x05-访问控制列表"><a href="#0x05-访问控制列表" class="headerlink" title="0x05 访问控制列表"></a>0x05 访问控制列表</h2><h3 id="1-ACL-简介"><a href="#1-ACL-简介" class="headerlink" title="1. ACL 简介"></a>1. ACL 简介</h3><h3 id="2-ACL-配置"><a href="#2-ACL-配置" class="headerlink" title="2. ACL 配置"></a>2. ACL 配置</h3><hr>
+<h2 id="0x06-网络地址转换"><a href="#0x06-网络地址转换" class="headerlink" title="0x06 网络地址转换"></a>0x06 网络地址转换</h2><h3 id="1-NAT-基础"><a href="#1-NAT-基础" class="headerlink" title="1. NAT 基础"></a>1. NAT 基础</h3><h3 id="2-NAT-实验"><a href="#2-NAT-实验" class="headerlink" title="2. NAT 实验"></a>2. NAT 实验</h3><hr>
+<h2 id="0x07-DHCP及配置"><a href="#0x07-DHCP及配置" class="headerlink" title="0x07 DHCP及配置"></a>0x07 DHCP及配置</h2><h3 id="1-DHCP-概述"><a href="#1-DHCP-概述" class="headerlink" title="1. DHCP 概述"></a>1. DHCP 概述</h3><h3 id="2-DHCP-配置"><a href="#2-DHCP-配置" class="headerlink" title="2. DHCP 配置"></a>2. DHCP 配置</h3><hr>
+<h2 id="0x08-广域网技术"><a href="#0x08-广域网技术" class="headerlink" title="0x08 广域网技术"></a>0x08 广域网技术</h2><h3 id="1-WAN-简介"><a href="#1-WAN-简介" class="headerlink" title="1. WAN 简介"></a>1. WAN 简介</h3><h3 id="2-PPP-协议"><a href="#2-PPP-协议" class="headerlink" title="2. PPP 协议"></a>2. PPP 协议</h3><hr>
+<h2 id="0x09-Packet-Tracer"><a href="#0x09-Packet-Tracer" class="headerlink" title="0x09 Packet Tracer"></a>0x09 Packet Tracer</h2><hr>
+<h2 id="0x0A-组网实例"><a href="#0x0A-组网实例" class="headerlink" title="0x0A 组网实例"></a>0x0A 组网实例</h2><hr>
 <h2 id="0xFF-学习资源"><a href="#0xFF-学习资源" class="headerlink" title="0xFF 学习资源"></a>0xFF 学习资源</h2><ul>
 <li><p><a href="https://pan.baidu.com/s/1CRWJpr7OlK1ImrYu6uRlPw" target="_blank" rel="noopener">CCNA 学习指南第七版</a></p>
 </li>
@@ -653,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-学习资源"><span class="nav-number">1.</span> <span class="nav-text">0xFF 学习资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Cisco-IOS"><span class="nav-number">1.</span> <span class="nav-text">0x01 Cisco IOS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-用户界面"><span class="nav-number">1.1.</span> <span class="nav-text">1. 用户界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-命令行界面"><span class="nav-number">1.2.</span> <span class="nav-text">2. 命令行界面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-常用配置"><span class="nav-number">1.3.</span> <span class="nav-text">3. 常用配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-实验示例"><span class="nav-number">1.4.</span> <span class="nav-text">4. 实验示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-路由协议"><span class="nav-number">2.</span> <span class="nav-text">0x02 路由协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-路由基础"><span class="nav-number">2.1.</span> <span class="nav-text">1. 路由基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RIP及配置"><span class="nav-number">2.2.</span> <span class="nav-text">2. RIP及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-OSPF及配置"><span class="nav-number">2.3.</span> <span class="nav-text">3. OSPF及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-EIGRP及配置"><span class="nav-number">2.4.</span> <span class="nav-text">4. EIGRP及配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-BGP-协议"><span class="nav-number">2.5.</span> <span class="nav-text">5. BGP 协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-交换技术"><span class="nav-number">3.</span> <span class="nav-text">0x03 交换技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-交换机基础"><span class="nav-number">3.1.</span> <span class="nav-text">1. 交换机基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-STP-协议"><span class="nav-number">3.2.</span> <span class="nav-text">2. STP 协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-虚拟局域网"><span class="nav-number">4.</span> <span class="nav-text">0x04 虚拟局域网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-VLAN-基础"><span class="nav-number">4.1.</span> <span class="nav-text">1. VLAN 基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-VLAN-配置"><span class="nav-number">4.2.</span> <span class="nav-text">2. VLAN 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-访问控制列表"><span class="nav-number">5.</span> <span class="nav-text">0x05 访问控制列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-ACL-简介"><span class="nav-number">5.1.</span> <span class="nav-text">1. ACL 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-ACL-配置"><span class="nav-number">5.2.</span> <span class="nav-text">2. ACL 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-网络地址转换"><span class="nav-number">6.</span> <span class="nav-text">0x06 网络地址转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-NAT-基础"><span class="nav-number">6.1.</span> <span class="nav-text">1. NAT 基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-NAT-实验"><span class="nav-number">6.2.</span> <span class="nav-text">2. NAT 实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-DHCP及配置"><span class="nav-number">7.</span> <span class="nav-text">0x07 DHCP及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-DHCP-概述"><span class="nav-number">7.1.</span> <span class="nav-text">1. DHCP 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-DHCP-配置"><span class="nav-number">7.2.</span> <span class="nav-text">2. DHCP 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-广域网技术"><span class="nav-number">8.</span> <span class="nav-text">0x08 广域网技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-WAN-简介"><span class="nav-number">8.1.</span> <span class="nav-text">1. WAN 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-PPP-协议"><span class="nav-number">8.2.</span> <span class="nav-text">2. PPP 协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-Packet-Tracer"><span class="nav-number">9.</span> <span class="nav-text">0x09 Packet Tracer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0A-组网实例"><span class="nav-number">10.</span> <span class="nav-text">0x0A 组网实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-学习资源"><span class="nav-number">11.</span> <span class="nav-text">0xFF 学习资源</span></a></li></ol></div>
             
 
           </div>
