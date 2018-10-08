@@ -89,18 +89,18 @@
 
 
 
-<meta name="description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结    0xFF 参考资源 NSFOCUS">
+<meta name="description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结">
 <meta name="keywords" content="Vulnerability">
 <meta property="og:type" content="article">
 <meta property="og:title" content="反序列化漏洞原理及分析">
 <meta property="og:url" content="http://www.firehacker.top/2018/10/07/反序列化漏洞原理及分析/index.html">
 <meta property="og:site_name" content="Firehacker">
-<meta property="og:description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结    0xFF 参考资源 NSFOCUS">
+<meta property="og:description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-08T03:04:53.242Z">
+<meta property="og:updated_time" content="2018-10-08T03:08:00.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="反序列化漏洞原理及分析">
-<meta name="twitter:description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结    0xFF 参考资源 NSFOCUS">
+<meta name="twitter:description" content="序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结">
 
 
 
@@ -415,12 +415,10 @@
       
 
       
-        <a id="more"></a>
-<hr>
-<blockquote>
+        <blockquote>
 <p>序列化是将运行时变量和程序对象转换成可以存储或传输的形式的过程，反序列化是将序列化形式转换回内存变量和程序对象的相反过程；许多高级的语言（如C＃，Java和PHP）都内置了对数据序列化的支持，如果攻击者控制的数据被反序列化，影响内存中的变量和程序对象，那么可以使用这些变量和对象的代码流。本文对序列化/反序列化基本概念，反序列化漏洞原理及利用进行总结</p>
 </blockquote>
-<!-- more -->
+<a id="more"></a>
 <hr>
 <h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
 <li><p><a href="http://blog.nsfocus.net/?s=%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E" target="_blank" rel="noopener">NSFOCUS - 反序列化漏洞系列</a></p>
