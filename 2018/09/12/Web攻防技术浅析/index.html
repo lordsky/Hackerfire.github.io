@@ -119,7 +119,7 @@
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/%E9%98%B2%E5%BE%A1XSS.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/CSRF.png">
 <meta property="og:image" content="http://pbegz2k88.bkt.clouddn.com/XXE%E5%8D%8F%E8%AE%AE.png">
-<meta property="og:updated_time" content="2018-10-02T03:36:12.548Z">
+<meta property="og:updated_time" content="2018-10-16T04:07:32.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web攻防技术浅析">
 <meta name="twitter:description" content="本文对Web常用攻击手段与防御技术进行简要总结，涉及SQL注入与WAF防护，XSS攻击与防御，CSRF/SSRF原理及异同，越权漏洞及防御，文件上传漏洞，应用层DDOS等">
@@ -635,7 +635,7 @@
 <hr>
 <h2 id="0x02-XSS-攻击及防御"><a href="#0x02-XSS-攻击及防御" class="headerlink" title="0x02 XSS 攻击及防御"></a>0x02 XSS 攻击及防御</h2><h3 id="1-原理及危害"><a href="#1-原理及危害" class="headerlink" title="1. 原理及危害"></a>1. 原理及危害</h3><h4 id="1-XSS-简介"><a href="#1-XSS-简介" class="headerlink" title="(1) XSS 简介"></a>(1) XSS 简介</h4><p>跨站脚本攻击(Cross Site Scripting)，避免与层叠样式表(Cascading Style Sheets)混淆，改为XSS</p>
 <p>一种将恶意JavaScript代码插入到其他Web用户页面里执行以达到攻击目的的漏洞；攻击者利用浏览器的动态展示功能，在HTML页面里嵌入恶意代码；当用户浏览该页面时，这些<br>嵌入的恶意代码会被执行，用户浏览器被攻击者控制，从而达到攻击目的，如cookie窃取，账户劫持，拒绝服务攻击等</p>
-<p>####（2） 产生原因</p>
+<p>####（2）产生原因</p>
 <p>未经净化的数据直接在HTML页面上展示，这些数据可能来源于http请求，数据库，Http Header，cookie等，直接导致跨站脚本威胁</p>
 <h4 id="3-XSS-危害"><a href="#3-XSS-危害" class="headerlink" title="(3) XSS 危害"></a>(3) XSS 危害</h4><p><img src="http://pbegz2k88.bkt.clouddn.com/XSS%E5%8D%B1%E5%AE%B3.png" alt=""></p>
 <p><em>图片参考自：绿盟科技博客</em></p>
