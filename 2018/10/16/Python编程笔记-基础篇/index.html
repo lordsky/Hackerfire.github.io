@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://pguklm607.bkt.clouddn.com/isstring.png">
 <meta property="og:image" content="http://pguklm607.bkt.clouddn.com/%E6%9D%A1%E4%BB%B6.png">
 <meta property="og:image" content="http://pguklm607.bkt.clouddn.com/%E5%86%85%E7%BD%AE%E5%BC%82%E5%B8%B8.png">
-<meta property="og:updated_time" content="2018-10-20T15:01:10.028Z">
+<meta property="og:updated_time" content="2018-10-21T03:20:39.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python编程笔记-基础篇">
 <meta name="twitter:description" content="本文对 Python 编程语言的基本用法(列表，元组，列表等基本数据结构，函数，模块，异常处理，文件方法等)进行一二总结，便于查询参阅">
@@ -425,7 +425,7 @@
 </blockquote>
 <a id="more"></a>
 <hr>
-<h2 id="0x01-基础语法"><a href="#0x01-基础语法" class="headerlink" title="0x01 基础语法"></a>0x01 基础语法</h2><h3 id="1-数和表达式"><a href="#1-数和表达式" class="headerlink" title="1. 数和表达式"></a>1. 数和表达式</h3><p><em>(1) 除法运算的结果为小数，即浮点数（float或floating-point number）</em></p>
+<h2 id="0x01-基础用法"><a href="#0x01-基础用法" class="headerlink" title="0x01 基础用法"></a>0x01 基础用法</h2><h3 id="1-数和表达式"><a href="#1-数和表达式" class="headerlink" title="1. 数和表达式"></a>1. 数和表达式</h3><p><em>(1) 除法运算的结果为小数，即浮点数（float或floating-point number）</em></p>
 <pre><code>&gt;&gt;&gt; 1/2
 0.5
 &gt;&gt;&gt; 2/3
@@ -582,6 +582,96 @@ hello, python
 6
 </code></pre><h3 id="9-代码缩进"><a href="#9-代码缩进" class="headerlink" title="9. 代码缩进"></a>9. 代码缩进</h3><p><em>代码块是一组语句，可在满足条件时执行（ if 语句），可执行多次（循环），等等；代码块是通过缩进代码（即在前面加空格）来创建的</em></p>
 <p><em>在Python中，使用冒号<code>（ : ）</code>指出接下来是一个代码块，并将该代码块中的每行代码都缩进相同的程度</em></p>
+<h3 id="10-常用标准库"><a href="#10-常用标准库" class="headerlink" title="10. 常用标准库"></a>10. 常用标准库</h3><p><strong><em>(1) 操作系统接口</em></strong></p>
+<p><em>os模块提供了不少与操作系统相关联的函数</em></p>
+<pre><code>&gt;&gt;&gt; import os
+
+&gt;&gt;&gt; os.getcwd()   # 返回当前工作目录
+&apos;C:\\Users\\Python\\Python36-32&apos;
+
+&gt;&gt;&gt; os.system(&apos;mkdir test&apos;) # 在当前目录下创建文件夹
+0
+
+&gt;&gt;&gt; os.chdir(&apos;H:\Code\Python&apos;) # 修改当前的工作目录       
+&gt;&gt;&gt; os.getcwd()           
+&apos;H:\\Code\\Python&apos;  
+
+&gt;&gt;&gt; dir(os)
+&lt;returns a list of all module functions&gt;
+
+&gt;&gt;&gt; help(os)
+&lt;returns an extensive manual page created from the module&apos;s docstrings&gt;
+</code></pre><p><strong><em>(2) 文件通配符</em></strong></p>
+<p><em>glob模块提供了一个函数用于从目录通配符搜索中生成文件列表</em></p>
+<pre><code>&gt;&gt;&gt; import glob           
+&gt;&gt;&gt; glob.glob(&apos;*.py&apos;)       
+[&apos;class.py&apos;, &apos;except.py&apos;, &apos;for.py&apos;, &apos;if.py&apos;, &apos;ponebook.py&apos;, &apos;while.py&apos;]
+</code></pre><p><strong><em>(3) sys 模块</em></strong></p>
+<p><em>通用工具脚本经常调用命令行参数；这些命令行参数以链表形式存储于 sys 模块的 argv 变量</em></p>
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; print(sys.argv)
+</code></pre><p><em>错误输出重定向和程序终止：sys 还有 stdin，stdout 和 stderr 属性，即使在 stdout 被重定向时，后者也可以用于显示警告和错误信息</em></p>
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.stderr.write(&apos;Warning: log file not found starting a new one\n&apos;)
+Warning: log file not found starting a new one
+</code></pre><p><strong><em>(4) 正则匹配</em></strong></p>
+<p><em>re模块为高级字符串处理提供了正则表达式工具</em></p>
+<pre><code>&gt;&gt;&gt; import re
+&gt;&gt;&gt; re.findall(r&apos;\bf[a-z]*&apos;, &apos;which foot or hand fell fastest&apos;)
+[&apos;foot&apos;, &apos;fell&apos;, &apos;fastest&apos;]
+&gt;&gt;&gt; re.sub(r&apos;(\b[a-z]+) \1&apos;, r&apos;\1&apos;, &apos;cat in the the hat&apos;)
+&apos;cat in the hat&apos;
+</code></pre><p><strong><em>(5) 数学运算</em></strong></p>
+<p><em>math模块为浮点运算提供了对底层C函数库的访问</em></p>
+<pre><code>&gt;&gt;&gt; import math
+&gt;&gt;&gt; math.log2(1024)
+10.0
+</code></pre><p><em>random提供了生成随机数的工具</em></p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>import random<br>random.sample(range(1000),8)  # 选定范围内生成指定数目随机数<br>[955, 279, 56, 855, 217, 631, 326, 162]<br>random.random()  # 生成一个浮点类型的随机数<br>0.2882298308566874</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p><strong><em>(6) 日期时间</em></strong></p>
+<p><em><code>datetime</code>模块为日期和时间处理同时提供了简单和复杂的方法</em></p>
+<pre><code>&gt;&gt;&gt; from datetime import date
+&gt;&gt;&gt; now = date.today()
+&gt;&gt;&gt; now
+datetime.date(2018, 10, 21)
+</code></pre><p><strong><em>(7) 数据压缩</em></strong></p>
+<p><em>以下模块直接支持通用的数据打包和压缩格式：zlib，gzip，bz2，zipfile，以及 tarfile</em></p>
+<pre><code>&gt;&gt;&gt; import zlib
+&gt;&gt;&gt; s = b&apos;witch which has which witches wrist watch&apos;
+&gt;&gt;&gt; len(s)
+41
+&gt;&gt;&gt; t = zlib.compress(s)
+&gt;&gt;&gt; len(t)
+37
+&gt;&gt;&gt; zlib.decompress(t)
+b&apos;witch which has which witches wrist watch&apos;
+&gt;&gt;&gt; zlib.crc32(s)
+226805979
+</code></pre><p><em>参考链接：</em></p>
+<ul>
+<li><p><em><a href="http://www.runoob.com/python3/python3-stdlib.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-stdlib.html</a></em></p>
+</li>
+<li><p><em><a href="http://www.runoob.com/python3/python3-os-file-methods.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-os-file-methods.html</a></em></p>
+</li>
+</ul>
+<h3 id="11-文件方法"><a href="#11-文件方法" class="headerlink" title="11. 文件方法"></a>11. 文件方法</h3><p><strong><em>(1) open() 方法</em></strong></p>
+<p><em>open() 方法用于打开一个文件，并返回文件对象，在对文件进行处理过程都需要使用到这个函数，如果该文件无法被打开，会抛出 OSError</em></p>
+<pre><code>open(file, mode=&apos;r&apos;, buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)
+</code></pre><p><em>参数说明</em></p>
+<pre><code>file: 必需，文件路径（相对或者绝对路径）
+mode: 可选，文件打开模式
+buffering: 设置缓冲
+encoding: 一般使用utf8
+errors: 报错级别
+newline: 区分换行符
+closefd: 传入的file参数类型
+</code></pre><p><em>参考链接：<a href="http://www.runoob.com/python3/python3-file-methods.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-file-methods.html</a></em></p>
 <hr>
 <h2 id="0x02-列表和元组"><a href="#0x02-列表和元组" class="headerlink" title="0x02 列表和元组"></a>0x02 列表和元组</h2><h3 id="1-序列概述"><a href="#1-序列概述" class="headerlink" title="1. 序列概述"></a>1. 序列概述</h3><p><em>Python内置了多种序列，列表，元组，字符串；列表是可以修改的，而元组不可以</em></p>
 <p><em>列表适用于需要中途添加元素的情形，而元组适用于出于某种考虑需要禁止修改序列的情形</em></p>
@@ -1675,6 +1765,44 @@ Traceback (most recent call last):
     File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 UserWarning: Something is very wrong!
 </code></pre><hr>
+<h2 id="0x09-迭代器-生成器"><a href="#0x09-迭代器-生成器" class="headerlink" title="0x09 迭代器/生成器"></a>0x09 迭代器/生成器</h2><h3 id="1-迭代器"><a href="#1-迭代器" class="headerlink" title="1. 迭代器"></a>1. 迭代器</h3><p><em>迭代是是访问集合元素的一种方式，从集合的第一个元素开始访问，直到所有的元素被访问完结束，迭代器只能往前不会后退</em></p>
+<p><em>迭代器有两个基本的方法：iter() 和 next()</em></p>
+<pre><code>&gt;&gt;&gt;list=[1,2,3,4]
+&gt;&gt;&gt; it = iter(list) # 创建迭代器对象
+&gt;&gt;&gt; print (next(it)) # 输出迭代器的下一个元素
+1
+&gt;&gt;&gt; print (next(it))
+2
+
+# 迭代器
+import sys
+list=[1,3,5,7,9]
+it = iter(list)
+while True:
+    try:
+        print(next(it))
+    except StopIteration:
+        sys.exit()
+</code></pre><h3 id="2-生成器"><a href="#2-生成器" class="headerlink" title="2. 生成器"></a>2. 生成器</h3><p><em>使用了 yield 的函数被称为生成器（generator），生成器是一个返回迭代器的函数，只能用于迭代操作</em></p>
+<p><em>在调用生成器运行的过程中，每次遇到 yield 时函数会暂停并保存当前所有的运行信息，返回 yield 的值, 并在下一次执行 next() 方法时从当前位置继续运行</em></p>
+<pre><code>import sys
+
+def fibonacci(n): # 生成器函数 - 斐波那契
+    a, b, counter = 0, 1, 0
+    while True:
+        if (counter &gt; n): 
+            return
+        yield a
+        a, b = b, a + b
+        counter += 1
+f = fibonacci(10) # f 是一个迭代器，由生成器返回生成
+
+while True:
+    try:
+        print (next(f), end=&quot; &quot;)
+    except StopIteration:
+        sys.exit()
+</code></pre><hr>
 <h2 id="0xFF-学习资源"><a href="#0xFF-学习资源" class="headerlink" title="0xFF 学习资源"></a>0xFF 学习资源</h2><ul>
 <li><p><a href="https://pan.baidu.com/s/1d8JZCmzM668yaDLGQy4iSg" target="_blank" rel="noopener">《流畅的Python》</a></p>
 </li>
@@ -1685,6 +1813,8 @@ UserWarning: Something is very wrong!
 <li><p><a href="https://docs.python.org/2.7/" target="_blank" rel="noopener">Python 2.7 documentation </a></p>
 </li>
 <li><p><a href="https://docs.python.org/3.6/" target="_blank" rel="noopener">Python 3.6 documentation</a></p>
+</li>
+<li><p><a href="https://www.w3cschool.cn/search?w=python" target="_blank" rel="noopener">w3cschool python 学习资源</a></p>
 </li>
 <li><p><a href="http://www.runoob.com/python/python-tutorial.html" target="_blank" rel="noopener">runoob - Python 2.x 基础教程</a></p>
 </li>
@@ -1897,7 +2027,7 @@ UserWarning: Something is very wrong!
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基础语法"><span class="nav-number">1.</span> <span class="nav-text">0x01 基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数和表达式"><span class="nav-number">1.1.</span> <span class="nav-text">1. 数和表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-变量和语句"><span class="nav-number">1.2.</span> <span class="nav-text">2. 变量和语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取用户输入"><span class="nav-number">1.3.</span> <span class="nav-text">3. 获取用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-函数与模块"><span class="nav-number">1.4.</span> <span class="nav-text">4. 函数与模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-注释"><span class="nav-number">1.5.</span> <span class="nav-text">5. 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-字符串"><span class="nav-number">1.6.</span> <span class="nav-text">6. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-print与import"><span class="nav-number">1.7.</span> <span class="nav-text">7. print与import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-赋值语句"><span class="nav-number">1.8.</span> <span class="nav-text">8. 赋值语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-代码缩进"><span class="nav-number">1.9.</span> <span class="nav-text">9. 代码缩进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-列表和元组"><span class="nav-number">2.</span> <span class="nav-text">0x02 列表和元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-序列概述"><span class="nav-number">2.1.</span> <span class="nav-text">1. 序列概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-通用序列操作"><span class="nav-number">2.2.</span> <span class="nav-text">2. 通用序列操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-列表及用法"><span class="nav-number">2.3.</span> <span class="nav-text">3. 列表及用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-元组及用法"><span class="nav-number">2.4.</span> <span class="nav-text">4. 元组及用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-字符串"><span class="nav-number">3.</span> <span class="nav-text">0x03 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本操作"><span class="nav-number">3.1.</span> <span class="nav-text">1. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-格式设置"><span class="nav-number">3.2.</span> <span class="nav-text">2. 格式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-字符串方法"><span class="nav-number">3.3.</span> <span class="nav-text">3. 字符串方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-字典及用法"><span class="nav-number">4.</span> <span class="nav-text">0x04 字典及用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-字典用途"><span class="nav-number">4.1.</span> <span class="nav-text">1. 字典用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建使用字典"><span class="nav-number">4.2.</span> <span class="nav-text">2. 创建使用字典</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-条件及循环"><span class="nav-number">5.</span> <span class="nav-text">0x05 条件及循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-条件语句"><span class="nav-number">5.1.</span> <span class="nav-text">1. 条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-循环语句"><span class="nav-number">5.2.</span> <span class="nav-text">2. 循环语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-列表推导"><span class="nav-number">5.3.</span> <span class="nav-text">3. 列表推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-pass、del与exec"><span class="nav-number">5.4.</span> <span class="nav-text">4. pass、del与exec</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-函数与作用域"><span class="nav-number">6.</span> <span class="nav-text">0x06  函数与作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-自定义函数"><span class="nav-number">6.1.</span> <span class="nav-text">1. 自定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-函数参数"><span class="nav-number">6.2.</span> <span class="nav-text">2. 函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-作用域"><span class="nav-number">6.3.</span> <span class="nav-text">3. 作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-面向对象"><span class="nav-number">7.</span> <span class="nav-text">0x07 面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本特性"><span class="nav-number">7.1.</span> <span class="nav-text">1. 基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-类及其用法"><span class="nav-number">7.2.</span> <span class="nav-text">2. 类及其用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-异常及处理"><span class="nav-number">8.</span> <span class="nav-text">0x08 异常及处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-异常"><span class="nav-number">8.1.</span> <span class="nav-text">1. 异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-异常引发"><span class="nav-number">8.2.</span> <span class="nav-text">2. 异常引发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-捕获异常"><span class="nav-number">8.3.</span> <span class="nav-text">3. 捕获异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-异常和函数"><span class="nav-number">8.4.</span> <span class="nav-text">4. 异常和函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-警告提示"><span class="nav-number">8.5.</span> <span class="nav-text">5. 警告提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-学习资源"><span class="nav-number">9.</span> <span class="nav-text">0xFF 学习资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基础用法"><span class="nav-number">1.</span> <span class="nav-text">0x01 基础用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数和表达式"><span class="nav-number">1.1.</span> <span class="nav-text">1. 数和表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-变量和语句"><span class="nav-number">1.2.</span> <span class="nav-text">2. 变量和语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-获取用户输入"><span class="nav-number">1.3.</span> <span class="nav-text">3. 获取用户输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-函数与模块"><span class="nav-number">1.4.</span> <span class="nav-text">4. 函数与模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-注释"><span class="nav-number">1.5.</span> <span class="nav-text">5. 注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-字符串"><span class="nav-number">1.6.</span> <span class="nav-text">6. 字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-print与import"><span class="nav-number">1.7.</span> <span class="nav-text">7. print与import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-赋值语句"><span class="nav-number">1.8.</span> <span class="nav-text">8. 赋值语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-代码缩进"><span class="nav-number">1.9.</span> <span class="nav-text">9. 代码缩进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-常用标准库"><span class="nav-number">1.10.</span> <span class="nav-text">10. 常用标准库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-文件方法"><span class="nav-number">1.11.</span> <span class="nav-text">11. 文件方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-列表和元组"><span class="nav-number">2.</span> <span class="nav-text">0x02 列表和元组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-序列概述"><span class="nav-number">2.1.</span> <span class="nav-text">1. 序列概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-通用序列操作"><span class="nav-number">2.2.</span> <span class="nav-text">2. 通用序列操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-列表及用法"><span class="nav-number">2.3.</span> <span class="nav-text">3. 列表及用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-元组及用法"><span class="nav-number">2.4.</span> <span class="nav-text">4. 元组及用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-字符串"><span class="nav-number">3.</span> <span class="nav-text">0x03 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本操作"><span class="nav-number">3.1.</span> <span class="nav-text">1. 基本操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-格式设置"><span class="nav-number">3.2.</span> <span class="nav-text">2. 格式设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-字符串方法"><span class="nav-number">3.3.</span> <span class="nav-text">3. 字符串方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-字典及用法"><span class="nav-number">4.</span> <span class="nav-text">0x04 字典及用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-字典用途"><span class="nav-number">4.1.</span> <span class="nav-text">1. 字典用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建使用字典"><span class="nav-number">4.2.</span> <span class="nav-text">2. 创建使用字典</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-条件及循环"><span class="nav-number">5.</span> <span class="nav-text">0x05 条件及循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-条件语句"><span class="nav-number">5.1.</span> <span class="nav-text">1. 条件语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-循环语句"><span class="nav-number">5.2.</span> <span class="nav-text">2. 循环语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-列表推导"><span class="nav-number">5.3.</span> <span class="nav-text">3. 列表推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-pass、del与exec"><span class="nav-number">5.4.</span> <span class="nav-text">4. pass、del与exec</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-函数与作用域"><span class="nav-number">6.</span> <span class="nav-text">0x06  函数与作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-自定义函数"><span class="nav-number">6.1.</span> <span class="nav-text">1. 自定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-函数参数"><span class="nav-number">6.2.</span> <span class="nav-text">2. 函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-作用域"><span class="nav-number">6.3.</span> <span class="nav-text">3. 作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-面向对象"><span class="nav-number">7.</span> <span class="nav-text">0x07 面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-基本特性"><span class="nav-number">7.1.</span> <span class="nav-text">1. 基本特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-类及其用法"><span class="nav-number">7.2.</span> <span class="nav-text">2. 类及其用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-异常及处理"><span class="nav-number">8.</span> <span class="nav-text">0x08 异常及处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-异常"><span class="nav-number">8.1.</span> <span class="nav-text">1. 异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-异常引发"><span class="nav-number">8.2.</span> <span class="nav-text">2. 异常引发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-捕获异常"><span class="nav-number">8.3.</span> <span class="nav-text">3. 捕获异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-异常和函数"><span class="nav-number">8.4.</span> <span class="nav-text">4. 异常和函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-警告提示"><span class="nav-number">8.5.</span> <span class="nav-text">5. 警告提示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x09-迭代器-生成器"><span class="nav-number">9.</span> <span class="nav-text">0x09 迭代器/生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-迭代器"><span class="nav-number">9.1.</span> <span class="nav-text">1. 迭代器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-生成器"><span class="nav-number">9.2.</span> <span class="nav-text">2. 生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-学习资源"><span class="nav-number">10.</span> <span class="nav-text">0xFF 学习资源</span></a></li></ol></div>
             
 
           </div>
