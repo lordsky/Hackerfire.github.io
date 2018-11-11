@@ -98,7 +98,7 @@
 <meta property="og:description" content="安全基线，是为了明确网络上的相关设备与系统（操作系统、网络设备、数据库、中间件在内的所有类型的设备）达到最基本的防护能力要求而制定的一系列基准，本文是相关知识的学习与总结">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://pdeise3e3.bkt.clouddn.com/%E5%AE%89%E5%85%A8%E5%9F%BA%E7%BA%BF%20%281%29.png">
-<meta property="og:updated_time" content="2018-11-11T10:01:08.976Z">
+<meta property="og:updated_time" content="2018-11-11T10:08:55.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安全基线检查与配置浅析">
 <meta name="twitter:description" content="安全基线，是为了明确网络上的相关设备与系统（操作系统、网络设备、数据库、中间件在内的所有类型的设备）达到最基本的防护能力要求而制定的一系列基准，本文是相关知识的学习与总结">
@@ -431,6 +431,7 @@
 <h2 id="0x05-SBL-应用软件"><a href="#0x05-SBL-应用软件" class="headerlink" title="0x05 SBL-应用软件"></a>0x05 SBL-应用软件</h2><hr>
 <h2 id="0x06-SBL-虚拟软件"><a href="#0x06-SBL-虚拟软件" class="headerlink" title="0x06 SBL-虚拟软件"></a>0x06 SBL-虚拟软件</h2><hr>
 <h2 id="0x07-SBL-移动设备"><a href="#0x07-SBL-移动设备" class="headerlink" title="0x07 SBL-移动设备"></a>0x07 SBL-移动设备</h2><hr>
+<h2 id="0x08-SBL-自动化检测"><a href="#0x08-SBL-自动化检测" class="headerlink" title="0x08 SBL-自动化检测"></a>0x08 SBL-自动化检测</h2><hr>
 <h2 id="0xFF-参考资源"><a href="#0xFF-参考资源" class="headerlink" title="0xFF 参考资源"></a>0xFF 参考资源</h2><ul>
 <li><p><a href="http://www.owasp.org.cn/owasp-project/jixian" target="_blank" rel="noopener">OWASP - 安全基线项目</a>  </p>
 </li>
@@ -661,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-SBL综述"><span class="nav-number">1.</span> <span class="nav-text">0x00 SBL综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SBL-操作系统"><span class="nav-number">2.</span> <span class="nav-text">0x01 SBL-操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SBL-网络设备"><span class="nav-number">3.</span> <span class="nav-text">0x02 SBL-网络设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-SBL-数据库"><span class="nav-number">4.</span> <span class="nav-text">0x03 SBL-数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SBL-中间件"><span class="nav-number">5.</span> <span class="nav-text">0x04 SBL-中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-SBL-应用软件"><span class="nav-number">6.</span> <span class="nav-text">0x05 SBL-应用软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-SBL-虚拟软件"><span class="nav-number">7.</span> <span class="nav-text">0x06 SBL-虚拟软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-SBL-移动设备"><span class="nav-number">8.</span> <span class="nav-text">0x07 SBL-移动设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">9.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-SBL综述"><span class="nav-number">1.</span> <span class="nav-text">0x00 SBL综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-SBL-操作系统"><span class="nav-number">2.</span> <span class="nav-text">0x01 SBL-操作系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SBL-网络设备"><span class="nav-number">3.</span> <span class="nav-text">0x02 SBL-网络设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-SBL-数据库"><span class="nav-number">4.</span> <span class="nav-text">0x03 SBL-数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SBL-中间件"><span class="nav-number">5.</span> <span class="nav-text">0x04 SBL-中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-SBL-应用软件"><span class="nav-number">6.</span> <span class="nav-text">0x05 SBL-应用软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-SBL-虚拟软件"><span class="nav-number">7.</span> <span class="nav-text">0x06 SBL-虚拟软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-SBL-移动设备"><span class="nav-number">8.</span> <span class="nav-text">0x07 SBL-移动设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-SBL-自动化检测"><span class="nav-number">9.</span> <span class="nav-text">0x08 SBL-自动化检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xFF-参考资源"><span class="nav-number">10.</span> <span class="nav-text">0xFF 参考资源</span></a></li></ol></div>
             
 
           </div>
